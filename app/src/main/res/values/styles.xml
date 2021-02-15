@@ -119,4 +119,8 @@
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/dimen_16sp</item>
     </style>
+
+    <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
 </resources>

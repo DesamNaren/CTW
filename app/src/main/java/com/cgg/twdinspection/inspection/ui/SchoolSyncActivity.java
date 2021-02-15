@@ -79,9 +79,9 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
             public void onChanged(List<SchoolDistrict> schoolDistricts) {
 
                 if (schoolDistricts != null && schoolDistricts.size() > 0) {
-                    binding.btnDmv.setText("Re-Download");
+                    binding.btnDmv.setText(getString(R.string.re_download));
                 } else {
-                    binding.btnDmv.setText("Download");
+                    binding.btnDmv.setText(getString(R.string.download));
                 }
             }
         });
@@ -90,9 +90,9 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
             public void onChanged(List<MasterInstituteInfo> masterInstituteInfos) {
 
                 if (masterInstituteInfos != null && masterInstituteInfos.size() > 0) {
-                    binding.syncBtnYears.setText("Re-Download");
+                    binding.syncBtnYears.setText(getString(R.string.re_download));
                 } else {
-                    binding.syncBtnYears.setText("Download");
+                    binding.syncBtnYears.setText(getString(R.string.download));
                 }
             }
         });
@@ -197,7 +197,6 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     public void handleError(Throwable e, Context context) {
         customProgressDialog.hide();
         String errMsg = ErrorHandler.handleError(e, context);
-        Log.i("MSG", "handleError: " + errMsg);
         callSnackBar(errMsg);
     }
 
@@ -205,7 +204,6 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     public void distCount(int cnt) {
         try {
             if (cnt > 0) {
-                Log.i("D_CNT", "distCount: " + cnt);
                 schoolSyncRepository.insertSchoolMandals(SchoolSyncActivity.this, schoolDMVResponse.getMandals());
             } else {
                 Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_districts));
@@ -219,7 +217,6 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     public void manCount(int cnt) {
         try {
             if (cnt > 0) {
-                Log.i("M_CNT", "manCount: " + cnt);
                 schoolSyncRepository.insertSchoolVillages(SchoolSyncActivity.this, schoolDMVResponse.getVillages());
             } else {
                 Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_mandals));
@@ -233,7 +230,6 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     public void vilCount(int cnt) {
         try {
             if (cnt > 0) {
-                Log.i("V_CNT", "vilCount: " + cnt);
                 customProgressDialog.hide();
                 Utils.customSyncSuccessAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name),
                         getString(R.string.dist_mas_sync));
@@ -250,7 +246,6 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                Log.i("I_CNT", "instCount: " + cnt);
                 Utils.customSyncSuccessAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name),
                         getString(R.string.ins_mas_syn));
             } else {
@@ -271,7 +266,6 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {

@@ -45,22 +45,20 @@ import java.util.List;
 public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerInterface {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private StockViewModel viewModel;
     ActivityDrGodownBinding binding;
     private DrGodowns drGodowns;
     CustomProgressDialog customProgressDialog;
     private StockDetailsResponse stockDetailsResponsemain;
-    private List<String> mFragmentTitleList = new ArrayList<>();
-    private List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> mFragmentTitleList = new ArrayList<>();
+    private final List<Fragment> mFragmentList = new ArrayList<>();
     private boolean dailyreq_flag, emp_flag, ess_flag;
-    private GCCOfflineViewModel gccOfflineViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_godown);
         customProgressDialog = new CustomProgressDialog(this);
-        gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
         stockDetailsResponsemain = null;
         EssentialFragment.commonCommodities = null;
         DailyFragment.commonCommodities = null;
@@ -70,7 +68,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
 
         binding.header.headerTitle.setText(getResources().getString(R.string.gcc_dr_godown));
         binding.header.ivHome.setVisibility(View.GONE);
-        viewModel = new StockViewModel(getApplication(), this);
+        StockViewModel viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
 
@@ -117,9 +115,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
 
                     for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
-//                            String header = stockDetailsResponsemain.getEssential_commodities().get(0).getComHeader();
                             existFlag = true;
-//                            setFragPos(header, z);
                             break;
                         }
                     }
@@ -128,9 +124,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
 
                     for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
-//                            String header = stockDetailsResponsemain.getDialy_requirements().get(0).getComHeader();
                             existFlag = true;
-//                            setFragPos(header, z);
                             break;
                         }
                     }
@@ -141,9 +135,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
 
                     for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
-//                            String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
                             existFlag = true;
-//                            setFragPos(header, z);
                             break;
                         }
                     }

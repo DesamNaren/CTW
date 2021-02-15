@@ -24,7 +24,6 @@ public class GenerateMPINActivity extends AppCompatActivity {
     private Context context;
     private ActivityGenerateMpinBinding binding;
     private SharedPreferences.Editor editor;
-    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,7 @@ public class GenerateMPINActivity extends AppCompatActivity {
         try {
             SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
-            userName = sharedPreferences.getString(AppConstants.OFFICER_NAME, "");
+            String userName = sharedPreferences.getString(AppConstants.OFFICER_NAME, "");
             binding.loggedIn.setText(userName);
         } catch (Exception e) {
             e.printStackTrace();

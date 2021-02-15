@@ -83,10 +83,24 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     public Uri fileUri;
     Bitmap bm;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-    int flag_entrance = 0, flag_ceiling = 0, flag_floor = 0, flag_safety_eq1 = 0, flag_safety_eq2 = 0, flag_office = 0, flag_repair = 0, flag_lpgSupplierInfo = 0;
+    int flag_entrance = 0;
+    int flag_ceiling = 0;
+    int flag_floor = 0;
+    int flag_safety_eq1 = 0;
+    int flag_safety_eq2 = 0;
+    int flag_office = 0;
+    int flag_lpgSupplierInfo = 0;
     File file_repair, file_entrance, file_ceiling, file_floor, file_safety_eq1, file_safety_eq2, file_office;
     String FilePath, repairPath;
-    private String officerID, divId, divName, socId, socName, inchName, suppType, suppId, godId, godName;
+    private String officerID;
+    private String divId;
+    private String divName;
+    private String socId;
+    private String socName;
+    private String inchName;
+    private String suppType;
+    private String suppId;
+    private String godName;
     public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
     public static String IMAGE_DIRECTORY_NAME_MODE;
     private CustomProgressDialog customProgressDialog;
@@ -98,9 +112,11 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     private String randomNum;
     File mediaStorageDir;
     private boolean flag;
-    private GCCOfflineViewModel gccOfflineViewModel;
     private GCCOfflineRepository gccOfflineRepository;
     private GCCSubmitRequest request;
+
+    public LpgPhotoActivity(String godId) {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +131,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
         customProgressDialog = new CustomProgressDialog(this);
 
-        gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
         gccOfflineRepository = new GCCOfflineRepository(getApplication());
         viewModel = ViewModelProviders.of(this,
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
@@ -378,9 +394,6 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 if (!TextUtils.isEmpty(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant())) {
                     lpgCommodities.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()));
                     lpgCommodities.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()) * stockDetailsResponse.getCommonCommodities().get(i).getRate());
-                } else {
-                    //lpgCommodities.setPhysiacalQty(-1.0);
-                    //lpgCommodities.setPhysicalValue(-1.0);
                 }
                 lpgReqCommoditiesList.add(lpgCommodities);
             }
@@ -641,15 +654,22 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     }
 
     private String getRealPathFromURI(String contentURI) {
-        Uri contentUri = Uri.parse(contentURI);
-        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
-        if (cursor == null) {
-            return contentUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(index);
+        Cursor cursor =null;
+        int index=0;
+        try {
+            Uri contentUri = Uri.parse(contentURI);
+           getContentResolver().query(contentUri, null, null, null, null);
+            if (cursor == null) {
+                return contentUri.getPath();
+            } else {
+                cursor.moveToFirst();
+                index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return cursor.getString(index);
     }
 
     public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -693,51 +713,58 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
 
-                if (PIC_TYPE.equals(AppConstants.ENTRANCE)) {
-                    flag_entrance = 1;
-                    binding.ivEntrance.setPadding(0, 0, 0, 0);
-                    binding.ivEntrance.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_entrance = new File(FilePath);
-                    Glide.with(LpgPhotoActivity.this).load(file_entrance).into(binding.ivEntrance);
+                switch (PIC_TYPE) {
+                    case AppConstants.ENTRANCE:
+                        flag_entrance = 1;
+                        binding.ivEntrance.setPadding(0, 0, 0, 0);
+                        binding.ivEntrance.setBackgroundColor(getResources().getColor(R.color.white));
+                        file_entrance = new File(FilePath);
+                        Glide.with(LpgPhotoActivity.this).load(file_entrance).into(binding.ivEntrance);
 
-                } else if (PIC_TYPE.equals(AppConstants.FLOOR)) {
-                    flag_floor = 1;
-                    binding.ivFloor.setPadding(0, 0, 0, 0);
-                    binding.ivFloor.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_floor = new File(FilePath);
-                    Glide.with(LpgPhotoActivity.this).load(file_floor).into(binding.ivFloor);
-                } else if (PIC_TYPE.equals(AppConstants.CEILING)) {
-                    flag_ceiling = 1;
-                    binding.ivCeiling.setPadding(0, 0, 0, 0);
-                    binding.ivCeiling.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_ceiling = new File(FilePath);
-                    Glide.with(LpgPhotoActivity.this).load(file_ceiling).into(binding.ivCeiling);
-                } else if (PIC_TYPE.equals(AppConstants.SAFETY_EQUIPMENT1)) {
-                    flag_safety_eq1 = 1;
-                    binding.ivSafetyEqui1.setPadding(0, 0, 0, 0);
-                    binding.ivSafetyEqui1.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_safety_eq1 = new File(FilePath);
-                    Glide.with(LpgPhotoActivity.this).load(file_safety_eq1).into(binding.ivSafetyEqui1);
-                } else if (PIC_TYPE.equals(AppConstants.SAFETY_EQUIPMENT2)) {
-                    flag_safety_eq2 = 1;
-                    binding.ivSafetyEqui2.setPadding(0, 0, 0, 0);
-                    binding.ivSafetyEqui2.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_safety_eq2 = new File(FilePath);
-                    Glide.with(LpgPhotoActivity.this).load(file_safety_eq2).into(binding.ivSafetyEqui2);
-                } else if (PIC_TYPE.equals(AppConstants.OFFICE)) {
-                    flag_office = 1;
-                    binding.ivOffice.setPadding(0, 0, 0, 0);
-                    binding.ivOffice.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_office = new File(FilePath);
-                    Glide.with(LpgPhotoActivity.this).load(file_office).into(binding.ivOffice);
+                        break;
+                    case AppConstants.FLOOR:
+                        flag_floor = 1;
+                        binding.ivFloor.setPadding(0, 0, 0, 0);
+                        binding.ivFloor.setBackgroundColor(getResources().getColor(R.color.white));
+                        file_floor = new File(FilePath);
+                        Glide.with(LpgPhotoActivity.this).load(file_floor).into(binding.ivFloor);
+                        break;
+                    case AppConstants.CEILING:
+                        flag_ceiling = 1;
+                        binding.ivCeiling.setPadding(0, 0, 0, 0);
+                        binding.ivCeiling.setBackgroundColor(getResources().getColor(R.color.white));
+                        file_ceiling = new File(FilePath);
+                        Glide.with(LpgPhotoActivity.this).load(file_ceiling).into(binding.ivCeiling);
+                        break;
+                    case AppConstants.SAFETY_EQUIPMENT1:
+                        flag_safety_eq1 = 1;
+                        binding.ivSafetyEqui1.setPadding(0, 0, 0, 0);
+                        binding.ivSafetyEqui1.setBackgroundColor(getResources().getColor(R.color.white));
+                        file_safety_eq1 = new File(FilePath);
+                        Glide.with(LpgPhotoActivity.this).load(file_safety_eq1).into(binding.ivSafetyEqui1);
+                        break;
+                    case AppConstants.SAFETY_EQUIPMENT2:
+                        flag_safety_eq2 = 1;
+                        binding.ivSafetyEqui2.setPadding(0, 0, 0, 0);
+                        binding.ivSafetyEqui2.setBackgroundColor(getResources().getColor(R.color.white));
+                        file_safety_eq2 = new File(FilePath);
+                        Glide.with(LpgPhotoActivity.this).load(file_safety_eq2).into(binding.ivSafetyEqui2);
+                        break;
+                    case AppConstants.OFFICE:
+                        flag_office = 1;
+                        binding.ivOffice.setPadding(0, 0, 0, 0);
+                        binding.ivOffice.setBackgroundColor(getResources().getColor(R.color.white));
+                        file_office = new File(FilePath);
+                        Glide.with(LpgPhotoActivity.this).load(file_office).into(binding.ivOffice);
+                        break;
                 }
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        getString(R.string.user_cancelled_cap), Toast.LENGTH_SHORT)
                         .show();
             } else {
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        getString(R.string.sorry_failed_to_cap), Toast.LENGTH_SHORT)
                         .show();
             }
         }

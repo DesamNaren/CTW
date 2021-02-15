@@ -39,15 +39,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandlerInterface {
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private StockViewModel viewModel;
     ActivityPetrolPumpBinding binding;
     private PetrolSupplierInfo petrolSupplierInfo;
     CustomProgressDialog customProgressDialog;
     private PetrolStockDetailsResponse petrolStockDetailsResponseMain;
-    private List<String> mFragmentTitleList = new ArrayList<>();
-    private List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> mFragmentTitleList = new ArrayList<>();
+    private final List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +57,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
 
         binding.header.headerTitle.setText(getResources().getString(R.string.gcc_petrol_pump));
         binding.header.ivHome.setVisibility(View.GONE);
-        viewModel = new StockViewModel(getApplication(), this);
+        StockViewModel viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
 
@@ -76,7 +74,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
         });
 
         try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
+            SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
             Gson gson = new Gson();
             String str = sharedPreferences.getString(AppConstants.PETROL_PUMP_DATA, "");
             petrolSupplierInfo = gson.fromJson(str, PetrolSupplierInfo.class);
@@ -117,8 +115,6 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
                     for (int z = 0; z < petrolStockDetailsResponseMain.getCommonCommodities().size(); z++) {
                         if (!TextUtils.isEmpty(petrolStockDetailsResponseMain.getCommonCommodities().get(z).getPhyQuant())) {
                             existFlag = true;
-//                            String header = petrolStockDetailsResponseMain.getCommonCommodities().get(0).getComHeader();
-//                            setFragPos(header, z);
                             break;
                         }
                     }
@@ -170,7 +166,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
                                     Bundle bundle = new Bundle();
                                     bundle.putString(AppConstants.petComm, petrolComm);
                                     plpgFragment.setArguments(bundle);
-                                    adapter.addFrag(plpgFragment, "Petrol Commodities");
+                                    adapter.addFrag(plpgFragment);
                                 } else {
                                     binding.viewPager.setVisibility(View.GONE);
                                     binding.tabs.setVisibility(View.GONE);
@@ -204,7 +200,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
                 Utils.customWarningAlert(PetrolPumpActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
             }
         } else {
-            Utils.customErrorAlert(PetrolPumpActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            Utils.customErrorAlert(PetrolPumpActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
         }
 
 
@@ -269,9 +265,9 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
             return mFragmentList.size();
         }
 
-        void addFrag(Fragment fragment, String title) {
+        void addFrag(Fragment fragment) {
             mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
+            mFragmentTitleList.add("Petrol Commodities");
         }
 
         @Override

@@ -48,7 +48,8 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     CustomProgressDialog customProgressDialog;
     InstMainViewModel instMainViewModel;
     private InstSelectionViewModel selectionViewModel;
-    ArrayAdapter selectAdapter;
+    private ArrayAdapter<String> selectAdapter;
+    private ArrayList<String> selectList;
 
     @Override
     public void onBackPressed() {
@@ -65,7 +66,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         customProgressDialog.show();
         dmvSelectionActivityBinding = DataBindingUtil.setContentView(this, R.layout.dmv_selection_activity);
         dmvSelectionActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
-        dmvSelectionActivityBinding.header.headerTitle.setText("Institute Inspection");
+        dmvSelectionActivityBinding.header.headerTitle.setText(getString(R.string.institute_inspection));
         instMainViewModel = new InstMainViewModel(getApplication());
         selectionViewModel = new InstSelectionViewModel(getApplication());
 
@@ -103,9 +104,9 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
             e.printStackTrace();
         }
 
-        ArrayList selectList = new ArrayList();
+        selectList = new ArrayList<String>();
         selectList.add("-Select-");
-        selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
+        selectAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
         instNames = new ArrayList<>();
         institutesEntityList = new ArrayList<>();
@@ -196,7 +197,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                     public void onChanged(String str) {
                         if (str != null) {
                             selectedDistName = dmvSelectionActivityBinding.spDist.getSelectedItem().toString();
-                            selectedDistId = Integer.valueOf(str);
+                            selectedDistId = Integer.parseInt(str);
                             dmvSelectionActivityBinding.mandal.setText("");
                             dmvSelectionActivityBinding.village.setText("");
                             dmvSelectionActivityBinding.address.setText("");
@@ -214,7 +215,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                                         dmvSelectionActivityBinding.spInstitution.setAdapter(adapter);
                                     } else {
                                         dmvSelectionActivityBinding.spInstitution.setAdapter(selectAdapter);
-                                        showSnackBar("No institutes found");
+                                        showSnackBar(getString(R.string.no_inst_found));
 
                                     }
                                 }
@@ -254,16 +255,16 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                                         selectedManId = str.getMandalId();
                                         selectedManName = str.getMandalName();
                                         if (selectedManName != null)
-                                            dmvSelectionActivityBinding.mandal.setText("Mandal : " + selectedManName);
+                                            dmvSelectionActivityBinding.mandal.setText(getString(R.string.mandal_) + selectedManName);
 
                                         selectedVilId = str.getVillageId();
                                         selectedVilName = str.getVillageName();
                                         if (selectedVilName != null)
-                                            dmvSelectionActivityBinding.village.setText("Village : " + selectedVilName);
+                                            dmvSelectionActivityBinding.village.setText(getString(R.string.village_) + selectedVilName);
 
                                         selectedAddress = str.getAddress();
                                         if (selectedAddress != null)
-                                            dmvSelectionActivityBinding.address.setText("Address : " + selectedAddress);
+                                            dmvSelectionActivityBinding.address.setText(getString(R.string.address_) + selectedAddress);
                                         lat = str.getLatitude();
                                         lng = str.getLongitude();
                                         address = str.getAddress();
@@ -296,7 +297,6 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {
@@ -331,8 +331,8 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                         editor.putString(AppConstants.ADDRESS, instSelectionInfo.getInst_address());
                         editor.commit();
 
-                        if (!TextUtils.isEmpty(instSelectionInfo.getInst_lat()) && Double.valueOf(instSelectionInfo.getInst_lat()) > 0.0
-                                && !TextUtils.isEmpty(instSelectionInfo.getInst_lng()) && Double.valueOf(instSelectionInfo.getInst_lng()) > 0.0) {
+                        if (!TextUtils.isEmpty(instSelectionInfo.getInst_lat()) && Double.parseDouble(instSelectionInfo.getInst_lat()) > 0.0
+                                && !TextUtils.isEmpty(instSelectionInfo.getInst_lng()) && Double.parseDouble(instSelectionInfo.getInst_lng()) > 0.0) {
                             startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
                             finish();
                         } else {
@@ -343,7 +343,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                 }
             });
         } else {
-            Toast.makeText(context, "Something went wrong..Please try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
     }
 }

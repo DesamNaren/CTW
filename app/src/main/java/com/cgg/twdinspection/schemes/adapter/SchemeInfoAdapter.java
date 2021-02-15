@@ -18,8 +18,8 @@ import java.util.List;
 
 public class SchemeInfoAdapter extends RecyclerView.Adapter<SchemeInfoAdapter.ItemHolder> {
 
-    private Context context;
-    private List<SchemeEntity> list;
+    private final Context context;
+    private final List<SchemeEntity> list;
     private SchemeClickCallback schemeClickCallback;
     private int selectedPos = -1;
 
@@ -67,11 +67,7 @@ public class SchemeInfoAdapter extends RecyclerView.Adapter<SchemeInfoAdapter.It
             }
         });
 
-        if (selectedPos == i) {
-            dataModel.setSelection(true);
-        } else {
-            dataModel.setSelection(false);
-        }
+        dataModel.setSelection(selectedPos == i);
 
         holder.bind(dataModel);
     }
@@ -82,7 +78,7 @@ public class SchemeInfoAdapter extends RecyclerView.Adapter<SchemeInfoAdapter.It
         return list != null && list.size() > 0 ? list.size() : 0;
     }
 
-    class ItemHolder extends RecyclerView.ViewHolder {
+    static class ItemHolder extends RecyclerView.ViewHolder {
 
 
         SchemeInfoNamesBinding listItemBinding;

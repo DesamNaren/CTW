@@ -399,8 +399,6 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
-                        + " directory");
                 return null;
             }
         }
@@ -420,8 +418,6 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
-                        + " directory");
                 return null;
             }
         }
@@ -636,11 +632,11 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        getString(R.string.user_cancelled_cap), Toast.LENGTH_SHORT)
                         .show();
             } else {
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        getString(R.string.sorry_failed_to_cap), Toast.LENGTH_SHORT)
                         .show();
             }
         } else if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE2) {
@@ -663,11 +659,11 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        getString(R.string.user_cancelled_cap), Toast.LENGTH_SHORT)
                         .show();
             } else {
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        getString(R.string.sorry_failed_to_cap), Toast.LENGTH_SHORT)
                         .show();
             }
         }

@@ -17,21 +17,12 @@ import java.util.List;
 
 public class EngDashboardViewModel extends AndroidViewModel {
 
-    private MutableLiveData<SectorsResponse> sectorsResponseLiveData;
-    private Context context;
-    private ErrorHandlerInterface errorHandlerInterface;
-    private WorksRepository worksRepository;
-    private LiveData<List<SectorsEntity>> sectorsListLiveData;
+    private final WorksRepository worksRepository;
 
 
     public EngDashboardViewModel(Context context, Application application) {
         super(application);
         worksRepository = new WorksRepository(application);
-        sectorsResponseLiveData = new MutableLiveData<>();
-        sectorsListLiveData = new MutableLiveData<>();
-        this.context = context;
-        errorHandlerInterface = (ErrorHandlerInterface) context;
-
     }
 
     public int insertWorksInfo(List<WorkDetail> workDetails) {

@@ -78,34 +78,36 @@ import okhttp3.RequestBody;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterface, ErrorHandlerInterface, GCCOfflineInterface {
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private StockViewModel viewModel;
     ActivityDrDepotBinding binding;
     CustomProgressDialog customProgressDialog;
     private StockDetailsResponse stockDetailsResponsemain;
     private DRDepots drDepots;
-    private List<String> mFragmentTitleList = new ArrayList<>();
-    private List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> mFragmentTitleList = new ArrayList<>();
+    private final List<Fragment> mFragmentList = new ArrayList<>();
     private String shopAvail, divId, suppId;
     String PIC_NAME, PIC_TYPE, officerID;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public Uri fileUri;
     public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
     public static String IMAGE_DIRECTORY_NAME_MODE;
-    String FilePath, checkUpDate;
+    String FilePath;
     Bitmap bm;
     File file;
     StockDetailsResponse stockDetailsResponse;
     private int shopFlag = 0;
     GCCPhotoViewModel gccPhotoViewModel;
     private String randomNum;
-    private boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag;
+    private boolean dailyreq_flag;
+    private boolean emp_flag;
+    private boolean ess_flag;
     File mediaStorageDir;
     private GCCSubmitRequest request;
-    private GCCOfflineViewModel gccOfflineViewModel;
     private boolean flag;
     private GCCOfflineRepository gccOfflineRepository;
+
+    public DRDepotActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,13 +128,13 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
 
         customProgressDialog = new CustomProgressDialog(this);
-        viewModel = new StockViewModel(getApplication(), this);
+        StockViewModel viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
         binding.header.ivHome.setVisibility(View.GONE);
-        sharedPreferences = TWDApplication.get(this).getPreferences();
+        SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
         officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
-        gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
         gccOfflineRepository = new GCCOfflineRepository(getApplication());
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
@@ -207,8 +209,6 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                         for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
                             if (!TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
                                 existFlag = true;
-//                                String header = stockDetailsResponsemain.getEssential_commodities().get(0).getComHeader();
-//                                setFragPos(header, z);
                                 break;
                             }
                         }
@@ -218,8 +218,6 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                         for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
                             if (!TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
                                 existFlag = true;
-//                                String header = stockDetailsResponsemain.getDialy_requirements().get(0).getComHeader();
-//                                setFragPos(header, z);
                                 break;
                             }
                         }
@@ -230,8 +228,6 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                         for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
                             if (!TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
                                 existFlag = true;
-//                                String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
-//                                setFragPos(header, z);
                                 break;
                             }
                         }
@@ -254,7 +250,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                     }
                 } else {
                     if (shopFlag == 0) {
-                        showSnackBar("Please capture shop image");
+                        showSnackBar(getString(R.string.plz_cap_shop_image));
                     } else {
                         request = new GCCSubmitRequest();
                         request.setOfficerId(officerID);
@@ -279,7 +275,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                                 customProgressDialog.show();
                                 gccPhotoViewModel.submitGCCDetails(request);
                             } else {
-                                Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                                Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
                             }
                         }
                     }
@@ -535,8 +531,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     private void CallSuccessAlert(String msg) {
         if (mediaStorageDir.isDirectory()) {
             String[] children = mediaStorageDir.list();
-            for (int i = 0; i < children.length; i++)
-                new File(mediaStorageDir, children[i]).delete();
+            for (String child : children) new File(mediaStorageDir, child).delete();
             mediaStorageDir.delete();
         }
         Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
@@ -555,7 +550,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                Toast.makeText(this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.data_saved_successfully), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, GCCDashboardActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
@@ -728,14 +723,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
 
         String Image_name = PIC_NAME;
         FilePath = FilePath + "/" + Image_name;
-
-//        File file = new File(Environment.getExternalStorageDirectory().getPath(), "MyFolder/Images");
-//        if (!file.exists()) {
-//            file.mkdirs();
-//        }
-//        String uriSting = (file.getAbsolutePath() + "/" + System.currentTimeMillis() + ".jpg");
         return FilePath;
-
     }
 
     private String getRealPathFromURI(String contentURI) {
@@ -795,11 +783,11 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        getString(R.string.user_cancelled_cap), Toast.LENGTH_SHORT)
                         .show();
             } else {
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        getString(R.string.sorry_failed_to_cap), Toast.LENGTH_SHORT)
                         .show();
             }
         }
@@ -822,8 +810,6 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                 + "/" + IMAGE_DIRECTORY_NAME_MODE + "/" + AppConstants.OFFLINE_DR_DEPOT + "_" + suppId);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
-                        + " directory");
                 return null;
             }
         }

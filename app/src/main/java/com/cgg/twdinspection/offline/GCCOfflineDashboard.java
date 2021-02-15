@@ -76,7 +76,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
                     startActivity(new Intent(GCCOfflineDashboard.this, GCCOfflineDataActivity.class)
                             .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_DR_DEPOT));
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar();
                 }
             }
         });
@@ -88,7 +88,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
                     startActivity(new Intent(GCCOfflineDashboard.this, GCCOfflineDataActivity.class)
                             .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_DR_GODOWN));
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar();
                 }
             }
         });
@@ -100,7 +100,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
                     startActivity(new Intent(GCCOfflineDashboard.this, GCCOfflineDataActivity.class)
                             .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_MFP));
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar();
                 }
             }
         });
@@ -112,7 +112,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
                     startActivity(new Intent(GCCOfflineDashboard.this, GCCOfflineDataActivity.class)
                             .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_P_UNIT));
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar();
                 }
             }
         });
@@ -124,7 +124,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
                     startActivity(new Intent(GCCOfflineDashboard.this, GCCOfflineDataActivity.class)
                             .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_PETROL));
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar();
                 }
             }
         });
@@ -136,7 +136,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
                     startActivity(new Intent(GCCOfflineDashboard.this, GCCOfflineDataActivity.class)
                             .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_LPG));
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar();
                 }
             }
         });
@@ -236,8 +236,8 @@ public class GCCOfflineDashboard extends AppCompatActivity {
         });
     }
 
-    void callSnackBar(String msg) {
-        Snackbar snackbar = Snackbar.make(binding.root, msg, Snackbar.LENGTH_INDEFINITE);
+    void callSnackBar() {
+        Snackbar snackbar = Snackbar.make(binding.root, "No data found", Snackbar.LENGTH_INDEFINITE);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));
         snackbar.setAction("OK", new View.OnClickListener() {
             @Override

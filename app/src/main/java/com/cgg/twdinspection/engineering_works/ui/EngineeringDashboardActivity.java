@@ -50,15 +50,11 @@ import java.util.List;
 public class EngineeringDashboardActivity extends AppCompatActivity implements ErrorHandlerInterface {
 
     private ActivityEngDashboardBinding binding;
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private EngDashboardViewModel viewModel;
-    private CustomProgressDialog customProgressDialog;
     private String selDistId, selDistName, selMandId, selMandalName;
     private Menu mMenu = null;
-    private SearchView mSearchView;
     private EngWorksAdapter adapter;
-    private InspDetailsViewModel inspDetailsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +65,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                 new EngDashboardCustomViewModel(this, getApplication())).get(EngDashboardViewModel.class);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
-        customProgressDialog = new CustomProgressDialog(this);
+        CustomProgressDialog customProgressDialog = new CustomProgressDialog(this);
 
         try {
             if (getSupportActionBar() != null) {
@@ -78,7 +74,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                         RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
                         RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
                 tv.setLayoutParams(lp);
-                tv.setText("ENGINEERING WORKS");
+                tv.setText(getString(R.string.engineering_works));
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextColor(Color.WHITE);
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
@@ -91,20 +87,14 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
         } catch (Exception e) {
             e.printStackTrace();
         }
-//
-//        binding.header.syncIv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(EngineeringDashboardActivity.this,EngSyncActivity.class));
-//            }
-//        });
+
         ArrayList<String> selectList = new ArrayList<>();
         selectList.add("Select");
-        ArrayAdapter selectAdapter = new ArrayAdapter(EngineeringDashboardActivity.this, R.layout.support_simple_spinner_dropdown_item, selectList);
+        ArrayAdapter<String> selectAdapter = new ArrayAdapter<String>(EngineeringDashboardActivity.this, R.layout.support_simple_spinner_dropdown_item, selectList);
         binding.spMandal.setAdapter(selectAdapter);
 
         try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
+            SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
             String curTime = Utils.getCurrentDateTimeDisplay();
             editor.putString(AppConstants.INSP_TIME, curTime);
@@ -126,13 +116,11 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(EngineeringDashboardActivity.this, android.R.layout.simple_spinner_dropdown_item, strings);
                     binding.spDist.setAdapter(adapter);
                 } else {
-//                    callSnackBar(getString(R.string.something));
                     Utils.customEngSyncAlert(EngineeringDashboardActivity.this, getString(R.string.app_name), "No districts found...\n Do you want to sync Works master data to proceed further?");
-
                 }
             }
         });
-        inspDetailsViewModel = new InspDetailsViewModel(EngineeringDashboardActivity.this, getApplication());
+        InspDetailsViewModel inspDetailsViewModel = new InspDetailsViewModel(EngineeringDashboardActivity.this, getApplication());
         LiveData<List<GrantScheme>> grantListLiveData = inspDetailsViewModel.getGrantSchemes();
         grantListLiveData.observe(EngineeringDashboardActivity.this, new Observer<List<GrantScheme>>() {
             @Override
@@ -174,7 +162,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                                                     strings.remove(i);
                                                 }
                                             }
-                                            ArrayAdapter<String> adapter = new ArrayAdapter(EngineeringDashboardActivity.this, R.layout.support_simple_spinner_dropdown_item, strings);
+                                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(EngineeringDashboardActivity.this, R.layout.support_simple_spinner_dropdown_item, strings);
                                             binding.spMandal.setAdapter(adapter);
                                         }
                                     }
@@ -297,7 +285,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
         mMenu.findItem(R.id.mi_filter).setVisible(false);
         mMenu.findItem(R.id.mi_sync).setVisible(true);
         MenuItem mSearch = mMenu.findItem(R.id.action_search);
-        mSearchView = (SearchView) mSearch.getActionView();
+        SearchView mSearchView = (SearchView) mSearch.getActionView();
         mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_by_workId) + "</font>"));
         mSearchView.setInputType(InputType.TYPE_CLASS_TEXT);
         mSearchView.setMaxWidth(Integer.MAX_VALUE);

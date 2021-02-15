@@ -82,7 +82,9 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             functioningToilets, repairsReqToilets, repairsReqBathrooms, add_req;
 
     InstMainViewModel instMainViewModel;
-    private String officerID, instID, insTime, randomNo;
+    private String officerID;
+    private String instID;
+    private String randomNo;
     private String add_cls_cnt, add_din_cnt, add_dom_cnt, add_toilets_cnt, add_bathrooms_cnt;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
@@ -92,7 +94,6 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     File file_tds;
     int flag_tds = 0;
     SharedPreferences.Editor editor;
-    private int localFlag = -1;
 
     private void ScrollToView(View view) {
         view.getParent().requestChildFocus(view, view);
@@ -131,7 +132,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             editor = sharedPreferences.edit();
 
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
-            insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
+            String insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
             randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
 
@@ -869,7 +870,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         });
 
         try {
-            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            int localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
             if (localFlag == 1) {
                 //get local record & set to data binding
                 LiveData<InfraStructureEntity> dietInfoData = instMainViewModel.getInfrastructureInfoData();
@@ -980,12 +981,6 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     }
 
     private boolean validateData() {
-
-        /*if (TextUtils.isEmpty(bigSchoolNameBoard)) {
-            showSnackBar(getResources().getString(R.string.select_school));
-            ScrollToView(binding.rgBigSchoolNameBoard);
-            return false;
-        }*/
 
         if (TextUtils.isEmpty(drinkingWaterFacility)) {
             ScrollToView(binding.rgDrinkingWaterFacility);
@@ -1320,13 +1315,13 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
 
-    private void addPhoto(String instID, String secId, String currentDateTime, String typeOfImage, String valueOfImage) {
+    private void addPhoto(String instID, String currentDateTime, String valueOfImage) {
         uploadPhotos = new ArrayList<>();
         UploadPhoto uploadPhoto = new UploadPhoto();
         uploadPhoto.setInstitute_id(instID);
-        uploadPhoto.setSection_id(secId);
+        uploadPhoto.setSection_id("12");
         uploadPhoto.setTimeStamp(currentDateTime);
-        uploadPhoto.setPhoto_name(typeOfImage);
+        uploadPhoto.setPhoto_name(AppConstants.TDS);
         uploadPhoto.setPhoto_path(valueOfImage);
         uploadPhotos.add(uploadPhoto);
     }
@@ -1337,10 +1332,10 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     @Override
     public void submitData() {
         if (roPlant.equalsIgnoreCase("yes")) {
-            addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.TDS, String.valueOf(file_tds));
+            addPhoto(instID, Utils.getCurrentDateTime(), String.valueOf(file_tds));
         } else {
             file_tds = null;
-            addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.TDS, String.valueOf(file_tds));
+            addPhoto(instID, Utils.getCurrentDateTime(), String.valueOf(file_tds));
         }
         long y = viewModel.insertPhotos(uploadPhotos);
         if (y >= 0) {
@@ -1450,20 +1445,14 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             }
         }
 
-//      setting inSampleSize value allows to load a scaled down version of the original image
 
         options.inSampleSize = calculateInSampleSize(options, actualWidth, actualHeight);
-
-//      inJustDecodeBounds set to false to load the actual bitmap
         options.inJustDecodeBounds = false;
-
-//      this options allow android to claim the bitmap memory if it runs low on memory
         options.inPurgeable = true;
         options.inInputShareable = true;
         options.inTempStorage = new byte[16 * 1024];
 
         try {
-//          load the bitmap from its path
             bmp = BitmapFactory.decodeFile(filePath, options);
         } catch (OutOfMemoryError exception) {
             exception.printStackTrace();
@@ -1486,8 +1475,6 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         Canvas canvas = new Canvas(scaledBitmap);
         canvas.setMatrix(scaleMatrix);
         canvas.drawBitmap(bmp, middleX - bmp.getWidth() / 2, middleY - bmp.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
-
-//      check the rotation of the image and display it properly
         ExifInterface exif;
         try {
             exif = new ExifInterface(filePath);
@@ -1535,26 +1522,26 @@ public class InfraActivity extends BaseActivity implements SaveListener {
 
         String Image_name = PIC_NAME;
         FilePath = FilePath + "/" + Image_name;
-
-//        File file = new File(Environment.getExternalStorageDirectory().getPath(), "MyFolder/Images");
-//        if (!file.exists()) {
-//            file.mkdirs();
-//        }
-//        String uriSting = (file.getAbsolutePath() + "/" + System.currentTimeMillis() + ".jpg");
         return FilePath;
-
     }
 
     private String getRealPathFromURI(String contentURI) {
-        Uri contentUri = Uri.parse(contentURI);
-        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
-        if (cursor == null) {
-            return contentUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(index);
+        Cursor cursor = null;
+        int index = 0;
+        try {
+            Uri contentUri = Uri.parse(contentURI);
+            cursor = getContentResolver().query(contentUri, null, null, null, null);
+            if (cursor == null) {
+                return contentUri.getPath();
+            } else {
+                cursor.moveToFirst();
+                index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                return cursor.getString(index);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return cursor.getString(index);
     }
 
     public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -1630,7 +1617,6 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {

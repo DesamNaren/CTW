@@ -23,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UploadEngPhotoViewModel extends ViewModel {
-    private Context context;
+    private final Context context;
     private ErrorHandlerInterface errorHandlerInterface;
     private UploadEngPhotosSubmitInterface engPhotosSubmitInterface;
 

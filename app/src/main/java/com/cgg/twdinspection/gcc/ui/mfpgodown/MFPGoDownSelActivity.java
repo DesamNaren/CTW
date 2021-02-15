@@ -55,8 +55,9 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
     private DivisionSelectionViewModel viewModel;
     private String selectedDivId, selectedMfpID;
     private List<String> mfpGoDowns;
+    private ArrayList<String> selectList;
     private MFPGoDowns selectedMfpGoDowns;
-    ArrayAdapter selectAdapter;
+    private ArrayAdapter<String> selectAdapter;
     private boolean mfp_flag, emp_flag;
     private GCCOfflineRepository gccOfflineRepository;
     private GCCOfflineViewModel gccOfflineViewModel;
@@ -103,7 +104,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
             e.printStackTrace();
         }
 
-        ArrayList selectList = new ArrayList();
+        selectList = new ArrayList<>();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -189,7 +190,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
 
 
                             } else {
-                                customOnlineAlert("Do you want to proceed in Online mode?");
+                                customOnlineAlert();
                             }
                         }
                     });
@@ -445,7 +446,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnDownload.setText("Re-Download");
+                binding.btnDownload.setText(getString(R.string.re_download));
                 binding.btnRemove.setVisibility(View.VISIBLE);
                 Utils.customSyncSuccessAlert(MFPGoDownSelActivity.this, getResources().getString(R.string.app_name),
                         "Data downloaded successfully");
@@ -460,7 +461,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
 
         try {
             if (cnt > 0) {
-                binding.btnDownload.setText("Download");
+                binding.btnDownload.setText(getString(R.string.download));
                 binding.btnRemove.setVisibility(View.GONE);
                 Utils.customSyncSuccessAlert(MFPGoDownSelActivity.this, getResources().getString(R.string.app_name),
                         "Data deleted successfully");
@@ -475,7 +476,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
 
     }
 
-    private void customOnlineAlert(String msg) {
+    private void customOnlineAlert() {
         try {
             final Dialog dialog = new Dialog(context);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -487,7 +488,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                 TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
                 dialogTitle.setText(getString(R.string.app_name));
                 TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
-                dialogMessage.setText(msg);
+                dialogMessage.setText(getString(R.string.do_you_want_online_mode));
                 Button btDialogNo = dialog.findViewById(R.id.btDialogNo);
                 btDialogNo.setOnClickListener(new View.OnClickListener() {
                     @Override

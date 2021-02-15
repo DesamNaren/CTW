@@ -102,7 +102,6 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     private String gccType;
     File mediaStorageDir;
     private boolean flag;
-    private GCCOfflineViewModel gccOfflineViewModel;
     private GCCOfflineRepository gccOfflineRepository;
     private GCCSubmitRequest request;
 
@@ -125,7 +124,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         binding.header.ivHome.setVisibility(View.GONE);
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
         customProgressDialog = new CustomProgressDialog(this);
-        gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
         gccOfflineRepository = new GCCOfflineRepository(getApplication());
         viewModel = ViewModelProviders.of(this,
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
@@ -423,7 +422,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         } else {
             if (Utils.checkInternetConnection(GCCPhotoActivity.this)) {
                 customProgressDialog.show();
-                customProgressDialog.addText("Please wait...Uploading Data");
+                customProgressDialog.addText(getString(R.string.uploading_data));
                 viewModel.submitGCCDetails(request);
             } else {
                 Utils.customWarningAlert(GCCPhotoActivity.this, getResources().getString(R.string.app_name), "Please check internet");
@@ -452,9 +451,6 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 if (!TextUtils.isEmpty(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant())) {
                     essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()));
                     essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getEssential_commodities().get(i).getRate());
-                } else {
-                    //essentialCommodity.setPhysiacalQty(-1.0);
-                    //essentialCommodity.setPhysicalValue(-1.0);
                 }
                 essentialCommodityList.add(essentialCommodity);
             }
@@ -472,9 +468,6 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 if (!TextUtils.isEmpty(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())) {
                     essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()));
                     essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()) * stockDetailsResponse.getDialy_requirements().get(i).getRate());
-                } else {
-                    // essentialCommodity.setPhysiacalQty(-1.0);
-                    // essentialCommodity.setPhysicalValue(-1.0);
                 }
                 dailyReqList.add(essentialCommodity);
             }
@@ -492,9 +485,6 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 if (!TextUtils.isEmpty(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant())) {
                     essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()));
                     essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getMfp_commodities().get(i).getRate());
-                } else {
-                    //essentialCommodity.setPhysiacalQty(-1.0);
-                    //essentialCommodity.setPhysicalValue(-1.0);
                 }
                 mfp_commodities.add(essentialCommodity);
             }
@@ -512,9 +502,6 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 if (!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
                     essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()));
                     essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()) * stockDetailsResponse.getEmpties().get(i).getRate());
-                } else {
-                    //essentialCommodity.setPhysiacalQty(-1.0);
-                    //essentialCommodity.setPhysicalValue(-1.0);
                 }
                 emptiesList.add(essentialCommodity);
             }
@@ -532,9 +519,6 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 if (!TextUtils.isEmpty(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant())) {
                     essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant()));
                     essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant()) * stockDetailsResponse.getProcessing_units().get(i).getRate());
-                } else {
-                    //essentialCommodity.setPhysiacalQty(-1.0);
-                    //essentialCommodity.setPhysicalValue(-1.0);
                 }
                 processing_units.add(essentialCommodity);
             }
@@ -798,15 +782,22 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     }
 
     private String getRealPathFromURI(String contentURI) {
-        Uri contentUri = Uri.parse(contentURI);
-        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
-        if (cursor == null) {
-            return contentUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(index);
+        int index=0;
+        Cursor cursor=null;
+        try {
+            Uri contentUri = Uri.parse(contentURI);
+            cursor = getContentResolver().query(contentUri, null, null, null, null);
+            if (cursor == null) {
+                return contentUri.getPath();
+            } else {
+                cursor.moveToFirst();
+                index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return cursor.getString(index);
     }
 
     public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -850,51 +841,58 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
 
 
-                if (PIC_TYPE.equals(AppConstants.ENTRANCE)) {
-                    flag_entrance = 1;
-                    binding.ivEntrance.setPadding(0, 0, 0, 0);
-                    binding.ivEntrance.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_entrance = new File(FilePath);
-                    Glide.with(GCCPhotoActivity.this).load(file_entrance).into(binding.ivEntrance);
+                switch (PIC_TYPE) {
+                    case AppConstants.ENTRANCE:
+                        flag_entrance = 1;
+                        binding.ivEntrance.setPadding(0, 0, 0, 0);
+                        binding.ivEntrance.setBackgroundColor(getResources().getColor(R.color.white));
+                        file_entrance = new File(FilePath);
+                        Glide.with(GCCPhotoActivity.this).load(file_entrance).into(binding.ivEntrance);
 
-                } else if (PIC_TYPE.equals(AppConstants.FLOOR)) {
-                    flag_floor = 1;
-                    binding.ivFloor.setPadding(0, 0, 0, 0);
-                    binding.ivFloor.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_floor = new File(FilePath);
-                    Glide.with(GCCPhotoActivity.this).load(file_floor).into(binding.ivFloor);
-                } else if (PIC_TYPE.equals(AppConstants.CEILING)) {
-                    flag_ceiling = 1;
-                    binding.ivCeiling.setPadding(0, 0, 0, 0);
-                    binding.ivCeiling.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_ceiling = new File(FilePath);
-                    Glide.with(GCCPhotoActivity.this).load(file_ceiling).into(binding.ivCeiling);
-                } else if (PIC_TYPE.equals(AppConstants.STOCK_ARRANG1)) {
-                    flag_stock_arrang1 = 1;
-                    binding.ivStockArrng1.setPadding(0, 0, 0, 0);
-                    binding.ivStockArrng1.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_stock_arrang1 = new File(FilePath);
-                    Glide.with(GCCPhotoActivity.this).load(file_stock_arrang1).into(binding.ivStockArrng1);
-                } else if (PIC_TYPE.equals(AppConstants.STOCK_ARRANG2)) {
-                    flag_stock_arrang2 = 1;
-                    binding.ivStockArrng2.setPadding(0, 0, 0, 0);
-                    binding.ivStockArrng2.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_stock_arrang2 = new File(FilePath);
-                    Glide.with(GCCPhotoActivity.this).load(file_stock_arrang2).into(binding.ivStockArrng2);
-                } else if (PIC_TYPE.equals(AppConstants.MACHINARY)) {
-                    flag_machinary = 1;
-                    binding.ivMachinary.setPadding(0, 0, 0, 0);
-                    binding.ivMachinary.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_machinary = new File(FilePath);
-                    Glide.with(GCCPhotoActivity.this).load(file_machinary).into(binding.ivMachinary);
+                        break;
+                    case AppConstants.FLOOR:
+                        flag_floor = 1;
+                        binding.ivFloor.setPadding(0, 0, 0, 0);
+                        binding.ivFloor.setBackgroundColor(getResources().getColor(R.color.white));
+                        file_floor = new File(FilePath);
+                        Glide.with(GCCPhotoActivity.this).load(file_floor).into(binding.ivFloor);
+                        break;
+                    case AppConstants.CEILING:
+                        flag_ceiling = 1;
+                        binding.ivCeiling.setPadding(0, 0, 0, 0);
+                        binding.ivCeiling.setBackgroundColor(getResources().getColor(R.color.white));
+                        file_ceiling = new File(FilePath);
+                        Glide.with(GCCPhotoActivity.this).load(file_ceiling).into(binding.ivCeiling);
+                        break;
+                    case AppConstants.STOCK_ARRANG1:
+                        flag_stock_arrang1 = 1;
+                        binding.ivStockArrng1.setPadding(0, 0, 0, 0);
+                        binding.ivStockArrng1.setBackgroundColor(getResources().getColor(R.color.white));
+                        file_stock_arrang1 = new File(FilePath);
+                        Glide.with(GCCPhotoActivity.this).load(file_stock_arrang1).into(binding.ivStockArrng1);
+                        break;
+                    case AppConstants.STOCK_ARRANG2:
+                        flag_stock_arrang2 = 1;
+                        binding.ivStockArrng2.setPadding(0, 0, 0, 0);
+                        binding.ivStockArrng2.setBackgroundColor(getResources().getColor(R.color.white));
+                        file_stock_arrang2 = new File(FilePath);
+                        Glide.with(GCCPhotoActivity.this).load(file_stock_arrang2).into(binding.ivStockArrng2);
+                        break;
+                    case AppConstants.MACHINARY:
+                        flag_machinary = 1;
+                        binding.ivMachinary.setPadding(0, 0, 0, 0);
+                        binding.ivMachinary.setBackgroundColor(getResources().getColor(R.color.white));
+                        file_machinary = new File(FilePath);
+                        Glide.with(GCCPhotoActivity.this).load(file_machinary).into(binding.ivMachinary);
+                        break;
                 }
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        getString(R.string.user_cancelled_cap), Toast.LENGTH_SHORT)
                         .show();
             } else {
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        getString(R.string.sorry_failed_to_cap), Toast.LENGTH_SHORT)
                         .show();
             }
         }
@@ -918,8 +916,6 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 "/" + IMAGE_DIRECTORY_NAME_MODE + "/" + gccType + "_" + suppId);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
-                        + " directory");
                 return null;
             }
         }
@@ -941,7 +937,6 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     public void handleError(Throwable e, Context context) {
         customProgressDialog.hide();
         String errMsg = ErrorHandler.handleError(e, context);
-        Log.i("MSG", "handleError: " + errMsg);
         showSnackBar(errMsg);
     }
 

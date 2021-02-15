@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 public class EngDashboardCustomViewModel implements ViewModelProvider.Factory {
-    private Context context;
-    private Application application;
+    private final Context context;
+    private final Application application;
 
     public EngDashboardCustomViewModel(Context context, Application application) {
         this.context = context;

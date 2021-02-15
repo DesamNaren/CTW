@@ -24,13 +24,11 @@ import java.util.Random;
 
 public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.ItemHolder> implements Filterable {
 
-    private Context context;
-    private List<BeneficiaryDetail> list;
+    private final List<BeneficiaryDetail> list;
     private List<BeneficiaryDetail> filterList;
     private BenClickCallback benClickCallback;
 
     public BenReportAdapter(Context context, List<BeneficiaryDetail> list) {
-        this.context = context;
         this.list = list;
         filterList = new ArrayList<>();
         filterList.addAll(list);
@@ -113,7 +111,7 @@ public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.Item
         };
     }
 
-    class ItemHolder extends RecyclerView.ViewHolder {
+    static class ItemHolder extends RecyclerView.ViewHolder {
 
 
         AdapterBenReportBinding listItemBinding;

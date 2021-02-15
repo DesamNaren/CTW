@@ -61,10 +61,8 @@ public class SchemesReportActivity extends AppCompatActivity implements ReportCl
     private ActivitySchemeReportBinding schemeReportBinding;
     private CustomProgressDialog customProgressDialog;
     SearchView mSearchView;
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private String officerId;
-    private SchemeReportsViewModel schemeReportsViewModel;
     BenReportViewModel viewModel;
     private List<SchemeEntity> schemesInfoEntitiesMain;
     private BottomSheetDialog dialog;
@@ -108,10 +106,10 @@ public class SchemesReportActivity extends AppCompatActivity implements ReportCl
                 ViewModelProviders.of(this,
                         new BenCustomReportViewModel(schemeReportBinding, this)).get(BenReportViewModel.class);
 
-        schemeReportsViewModel = new SchemeReportsViewModel(SchemesReportActivity.this, getApplication());
+        SchemeReportsViewModel schemeReportsViewModel = new SchemeReportsViewModel(SchemesReportActivity.this, getApplication());
 
         try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
+            SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
             officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         } catch (Exception e) {

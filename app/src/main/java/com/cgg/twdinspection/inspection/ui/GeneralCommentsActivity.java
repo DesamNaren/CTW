@@ -43,14 +43,12 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
     String officerID, instID, insTime;
     SharedPreferences sharedPreferences;
     InstMainViewModel instMainViewModel;
-    private int localFlag = -1;
     private String gccDate, suppliedDate, hmhwoDate;
 
     public static final int SIGNATURE_ACTIVITY = 1;
 
     private void ScrollToView(View view) {
         view.getParent().requestChildFocus(view, view);
-
     }
 
 
@@ -336,7 +334,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
 
 
         try {
-            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            int localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
             if (localFlag == 1) {
                 //get local record & set to data binding
                 LiveData<GeneralCommentsEntity> generalCommentsEntityLiveData = instMainViewModel.getGeneralCommentsInfoData();

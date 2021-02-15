@@ -30,14 +30,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EngSyncViewModel extends AndroidViewModel {
-    private MutableLiveData<WorksMasterResponse> worksMasterLiveData;
-    private MutableLiveData<SectorsResponse> sectorsResponseLiveData;
-    private MutableLiveData<GrantSchemesResponse> schemesResponseMutableLiveData;
+    private final MutableLiveData<WorksMasterResponse> worksMasterLiveData;
+    private final MutableLiveData<SectorsResponse> sectorsResponseLiveData;
+    private final MutableLiveData<GrantSchemesResponse> schemesResponseMutableLiveData;
     private LiveData<List<WorkDetail>> engWorks;
     private LiveData<List<GrantScheme>> grantSchemes;
     private LiveData<List<SectorsEntity>> sectors;
     Context context;
-    private ErrorHandlerInterface errorHandlerInterface;
+    private final ErrorHandlerInterface errorHandlerInterface;
     ActivityEngSyncBinding binding;
     WorksRepository worksRepository;
     GrantSchemeRepository schemesRepository;

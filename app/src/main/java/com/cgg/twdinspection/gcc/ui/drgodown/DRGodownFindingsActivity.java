@@ -82,7 +82,9 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
     private int repairsFlag = 0;
     private String randomNum;
 
-    private List<CommonCommodity> finalEssCom, finalDaiCom, finalEmpCom, finalMFPCom, finalPUnitCom;
+    private List<CommonCommodity> finalEssCom;
+    private List<CommonCommodity> finalDaiCom;
+    private List<CommonCommodity> finalEmpCom;
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -98,8 +100,8 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         finalEssCom = new ArrayList<>();
         finalDaiCom = new ArrayList<>();
         finalEmpCom = new ArrayList<>();
-        finalMFPCom = new ArrayList<>();
-        finalPUnitCom = new ArrayList<>();
+        List<CommonCommodity> finalMFPCom = new ArrayList<>();
+        List<CommonCommodity> finalPUnitCom = new ArrayList<>();
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -170,17 +172,17 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
             }
 
 
-            sysVal = Double.valueOf(String.format("%.2f", sysVal));
-            physVal = Double.valueOf(String.format("%.2f", physVal));
+            sysVal = Double.parseDouble(String.format("%.2f", sysVal));
+            physVal = Double.parseDouble(String.format("%.2f", physVal));
             binding.tvSysVal.setText(String.format("%.2f", sysVal));
             binding.tvPhysVal.setText(String.format("%.2f", physVal));
 
             notInsSysVal = sysVal - insSysVal;
-            notInsSysVal = Double.valueOf(String.format("%.2f", notInsSysVal));
+            notInsSysVal = Double.parseDouble(String.format("%.2f", notInsSysVal));
             binding.tvInsSysVal.setText(String.format("%.2f", insSysVal));
             binding.tvSysValNotIns.setText(String.format("%.2f", notInsSysVal));
             difference = insSysVal - physVal;
-            difference = Double.valueOf(String.format("%.2f", difference));
+            difference = Double.parseDouble(String.format("%.2f", difference));
             binding.tvDiffVal.setText(String.format("%.2f", difference));
         }
 
@@ -616,7 +618,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && !insComDate.contains("/")) {
             returnFlag = false;
             showSnackBar("Enter insurance validity");
-//            ScrollToViewEditText(binding.etInsDate, "Enter insurance validity");
             ScrollToView(binding.etInsDate);
         } else if (TextUtils.isEmpty(fireNOC)) {
             returnFlag = false;
@@ -629,7 +630,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         } else if (weightMea.equalsIgnoreCase(AppConstants.Yes) && !weightDate.contains("/")) {
             returnFlag = false;
             showSnackBar("Enter weight measure validity date");
-//            ScrollToViewEditText(binding.etLegalMetDate, "Enter weight measure validity date");
             ScrollToView(binding.etLegalMetDate);
         } else if (TextUtils.isEmpty(stockRegEntry)) {
             returnFlag = false;
@@ -755,7 +755,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
 
 
     private void lastInsSocDateSelection() {
-        // Get Current Date
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
@@ -779,7 +778,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
 
 
     private void lastInsDivDateSelection() {
-        // Get Current Date
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
@@ -938,15 +936,22 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
     }
 
     private String getRealPathFromURI(String contentURI) {
-        Uri contentUri = Uri.parse(contentURI);
-        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
-        if (cursor == null) {
-            return contentUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(index);
+        Cursor cursor = null;
+        int index = 0;
+        try {
+            Uri contentUri = Uri.parse(contentURI);
+            cursor = getContentResolver().query(contentUri, null, null, null, null);
+            if (cursor == null) {
+                return contentUri.getPath();
+            } else {
+                cursor.moveToFirst();
+                index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return cursor.getString(index);
     }
 
     public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -1022,8 +1027,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
-                        + " directory");
                 return null;
             }
         }

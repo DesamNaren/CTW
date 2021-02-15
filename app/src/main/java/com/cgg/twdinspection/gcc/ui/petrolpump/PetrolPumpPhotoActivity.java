@@ -100,7 +100,6 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
     private String randomNum;
     File mediaStorageDir;
     private boolean flag;
-    private GCCOfflineViewModel gccOfflineViewModel;
     private GCCOfflineRepository gccOfflineRepository;
     private GCCSubmitRequest request;
 
@@ -117,7 +116,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
         customProgressDialog = new CustomProgressDialog(this);
 
-        gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
         gccOfflineRepository = new GCCOfflineRepository(getApplication());
         viewModel = ViewModelProviders.of(this,
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
@@ -389,9 +388,6 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
                 if (!TextUtils.isEmpty(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant())) {
                     petrolCommodities.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()));
                     petrolCommodities.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()) * stockDetailsResponse.getCommonCommodities().get(i).getRate());
-                } else {
-                    //petrolCommodities.setPhysiacalQty(-1.0);
-                    //petrolCommodities.setPhysicalValue(-1.0);
                 }
 
                 petrolCommoditiesList.add(petrolCommodities);
@@ -759,11 +755,11 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
                 }
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        getString(R.string.user_cancelled_cap),Toast.LENGTH_SHORT)
                         .show();
             } else {
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        getString(R.string.sorry_failed_to_cap), Toast.LENGTH_SHORT)
                         .show();
             }
         }
@@ -787,8 +783,6 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
                 + "/" + IMAGE_DIRECTORY_NAME_MODE + "/" + AppConstants.OFFLINE_PETROL + "_" + suppId);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
-                        + " directory");
                 return null;
             }
         }
@@ -818,7 +812,6 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
     public void getData(GCCSubmitResponse gccSubmitResponse) {
         customProgressDialog.hide();
         if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
-//            Snackbar.make(binding.root, "Data Submitted, Uploading photos", Snackbar.LENGTH_SHORT).show();
             callPhotoSubmit();
         } else if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
             Snackbar.make(binding.root, gccSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
@@ -842,8 +835,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
     private void CallSuccessAlert(String msg) {
         if (mediaStorageDir.isDirectory()) {
             String[] children = mediaStorageDir.list();
-            for (int i = 0; i < children.length; i++)
-                new File(mediaStorageDir, children[i]).delete();
+            for (String child : children) new File(mediaStorageDir, child).delete();
             mediaStorageDir.delete();
         }
         Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);

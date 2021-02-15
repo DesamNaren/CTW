@@ -84,20 +84,19 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     ActivityReportStockDetailsBinding binding;
-    private List<String> mFragmentTitleList = new ArrayList<>();
-    private List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> mFragmentTitleList = new ArrayList<>();
+    private final List<Fragment> mFragmentList = new ArrayList<>();
     ReportData reportData;
     private boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag, petrol_flag, lpg_flag;
     int pos = -1;
     CustomProgressDialog customProgressDialog;
-    String directory_path, filePath, filePath1, filePath2;
+    String directory_path, filePath, filePath1, filePath2, filePath_temp;
     ViewPhotoAdapterPdf adapter;
-    private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
-            Font.BOLD);
-    private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
-            Font.BOLD);
+    private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
     private List<ReportSubmitReqCommodities> essentialList, dailyreqList, emptiesList, mfpList, punitList, petrolList, lpgList;
     Gson gson;
+    String folder = "GCC";
+    String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -460,23 +459,35 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
             @Override
             public void onClick(View view) {
 
-                if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN))
-                    createPdf("Dr_Godown_", binding.drGownTitlePdf, null,
+                if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
+                    type = "Dr_Godown";
+                    createPdf(binding.drGownTitlePdf, null,
                             binding.drGodownGeneralPdf, binding.drGodownPhotosPdf);
-                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP))
-                    createPdf("Dr_Depot_", binding.drDepotTitlePdf, binding.drDepotMfpPdf,
+                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)
+                        && !TextUtils.isEmpty(reportData.getShopAvail())
+                        && reportData.getShopAvail().equalsIgnoreCase(AppConstants.close)) {
+                    type = "Dr_Depot";
+                    createPdf(binding.drDepotCloseTitlePdf, null,
+                            null, null);
+                }else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
+                    type = "Dr_Depot";
+                    createPdf(binding.drDepotTitlePdf, binding.drDepotMfpPdf,
                             binding.drDepotGeneralPdf, binding.drDepotPhotosPdf);
-                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP))
-                    createPdf("MFP_", binding.mfpTitlePdf, null,
+                }  else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
+                    type = "MFP";
+                    createPdf(binding.mfpTitlePdf, null,
                             binding.mfpGeneralPdf, binding.mfpPhotosPdf);
-                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP))
-                    createPdf("Processing_Unit_", binding.punitRegistersPdf, null,
+                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
+                    type = "Processing_Unit";
+                    createPdf(binding.punitRegistersPdf, null,
                             binding.punitGeneralPdf, binding.punitPhotosPdf);
-                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP))
-                    createPdf("Petrol_Pump_", binding.petrolPumpTitlePdf, null,
+                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
+                    type = "Petrol_Pump";
+                    createPdf(binding.petrolPumpTitlePdf, null,
                             binding.petrolPumpGeneralPdf, binding.petrolPumpPhotosPdf);
-                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
-                    createPdf("LPG_", binding.lpgTitlePdf, null,
+                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
+                    type = "LPG";
+                    createPdf(binding.lpgTitlePdf, null,
                             binding.lpgGeneralPdf, binding.lpgPhotosPdf);
                 } else {
                     customProgressDialog.hide();
@@ -506,7 +517,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
 
     }
 
-    private void createPdf(String godown, LinearLayout titlePdf, LinearLayout mfpPdf,
+    private void createPdf(LinearLayout titlePdf, LinearLayout mfpPdf,
                            LinearLayout generalPdf, LinearLayout photosPdf) {
 
         customProgressDialog.show();
@@ -516,23 +527,26 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
             @Override
             public void run() {
                 try {
+                    List<View> views = new ArrayList<>();
+                    views.add(titlePdf);
+                    if (mfpPdf != null)
+//                        if (type.equalsIgnoreCase("Dr_Depot"))
+                        views.add(mfpPdf);
+                    if (generalPdf != null)
+                        views.add(generalPdf);
+                    if (photosPdf != null)
+                        views.add(photosPdf);
+
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                        directory_path = getExternalFilesDir(null)
-                                + "/" + "CTW/GCC/";
+                        filePath1 = PDFUtil.createPdfFile(ReportStockDetailsActivity.this,
+                                type + "_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime()
+                                        + "_1" + ".pdf", folder);
                     } else {
                         directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                                 + "/" + "CTW/GCC/";
+                        filePath = directory_path + type + "_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
+                        filePath1 = filePath + "_1" + ".pdf";
                     }
-
-                    filePath = directory_path + godown + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
-                    filePath1 = filePath + "_1" + ".pdf";
-
-                    List<View> views = new ArrayList<>();
-                    views.add(titlePdf);
-                    if (godown.equalsIgnoreCase("Dr_Depot_"))
-                        views.add(mfpPdf);
-                    views.add(generalPdf);
-                    views.add(photosPdf);
 
                     PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
 
@@ -682,7 +696,14 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
-        filePath2 = filePath + "_2" + ".pdf";
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            filePath2 = PDFUtil.createPdfFile(ReportStockDetailsActivity.this,
+                    type + "_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime()
+                            + "_2" + ".pdf", folder);
+        } else {
+            filePath2 = filePath + "_2" + ".pdf";
+        }
 
         try {
 
@@ -710,12 +731,21 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                     addCommoditiesContent(document, "Petrol Commodities", petrolList);
                 if (lpgList != null && lpgList.size() > 0)
                     addCommoditiesContent(document, "LPG Commodities", lpgList);
-//                createFooter(document);
-
             }
 
             document.close();
-            new ItextMerge(ReportStockDetailsActivity.this, filePath + "_temp", filePath1, filePath2, ReportStockDetailsActivity.this);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                filePath_temp = PDFUtil.createPdfFile(ReportStockDetailsActivity.this,
+                        type + "_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime()
+                                + "_temp" + ".pdf", folder);
+
+                new ItextMerge(ReportStockDetailsActivity.this,
+                        filePath_temp, filePath1, filePath2, ReportStockDetailsActivity.this);
+
+            } else {
+                new ItextMerge(ReportStockDetailsActivity.this,
+                        filePath + "_temp", filePath1, filePath2, ReportStockDetailsActivity.this);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -844,19 +874,27 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
     }
 
     public void pdfMergeSuccess() {
-        File savedPDFFile = new File(filePath + ".pdf");
+
+        File savedPDFFile = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            filePath = PDFUtil.createPdfFile(ReportStockDetailsActivity.this,
+                    type + "_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime()
+                            + ".pdf", folder);
+
+            savedPDFFile = new File(filePath);
+
+        } else {
+            savedPDFFile = new File(filePath + ".pdf");
+        }
+
         customProgressDialog.hide();
         try {
-            addWatermark();
+            addWatermark(savedPDFFile);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (DocumentException e) {
             e.printStackTrace();
         }
-        File file = new File(filePath + "_temp" + ".pdf");
-        file.delete();
-        Utils.customPDFAlert(ReportStockDetailsActivity.this, getString(R.string.app_name),
-                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
 
     }
 
@@ -867,9 +905,18 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
     }
 
 
-    public void addWatermark() throws IOException, DocumentException {
-        PdfReader reader = new PdfReader(filePath + "_temp" + ".pdf");
-        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(filePath + ".pdf"));
+    public void addWatermark(File savedPDFFile) throws IOException, DocumentException {
+        PdfStamper stamper;
+        PdfReader reader;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            reader = new PdfReader(filePath_temp);
+            stamper = new PdfStamper(reader, new FileOutputStream(filePath));
+        } else {
+            reader = new PdfReader(filePath + "_temp" + ".pdf");
+            stamper = new PdfStamper(reader, new FileOutputStream(filePath + ".pdf"));
+        }
+
         Font f = new Font(Font.FontFamily.HELVETICA, 11);
         f.setColor(BaseColor.GRAY);
         int n = reader.getNumberOfPages();
@@ -888,6 +935,18 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
         }
         stamper.close();
         reader.close();
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            File file = new File(filePath_temp);
+            file.delete();
+        } else {
+            File file = new File(filePath + "_temp" + ".pdf");
+            file.delete();
+        }
+        Utils.customPDFAlert(ReportStockDetailsActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at "
+                        + savedPDFFile + "\n Do you want open it?", savedPDFFile);
+
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

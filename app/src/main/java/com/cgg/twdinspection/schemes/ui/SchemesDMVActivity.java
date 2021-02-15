@@ -47,7 +47,8 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
     SharedPreferences.Editor editor;
     List<FinancialYearsEntity> finYearList;
     InstMainViewModel instMainViewModel;
-    ArrayAdapter selectAdapter;
+    private ArrayAdapter<String> selectAdapter;
+    private ArrayList<String> selectList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
         context = SchemesDMVActivity.this;
 
         schemesDMVActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_schemes_dmv);
-        schemesDMVActivityBinding.header.headerTitle.setText("SCHEMES");
+        schemesDMVActivityBinding.header.headerTitle.setText(getString(R.string.schemes));
         instMainViewModel = new InstMainViewModel(getApplication());
 
         schemesDMVActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
@@ -98,7 +99,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
             Toast.makeText(context, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-        ArrayList selectList = new ArrayList();
+         selectList = new ArrayList<>();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 

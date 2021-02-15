@@ -296,12 +296,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
                         studAttendInfoEntity.setInspection_time(Utils.getCurrentDateTime());
                         studAttendInfoEntity.setFlag_completed(1);
 
-//                    long x=studentsAttndViewModel.updateClassInfo(IsattenMarked,count_reg,count_during_insp,variance,
-//                            TWDApplication.get(StudentsAttendActivity.this).getPreferences().getString(AppConstants.InstId,"")
-//                            ,studAttendInfoEntity.getClass_id());
-//
-                        long x = studentsAttndViewModel.updateClassInfo(studAttendInfoEntity);
-                        //Toast.makeText(StudentsAttendActivity.this, "Updated " + x, Toast.LENGTH_SHORT).show();
+                        studentsAttndViewModel.updateClassInfo(studAttendInfoEntity);
                         dialog.dismiss();
                     }
 

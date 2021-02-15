@@ -23,19 +23,15 @@ import java.util.List;
 
 
 public class ItextMerge {
-    private String filePath, filePath1, filePath2;
-    private Context context;
+    private final String filePath;
+    private final String filePath1;
+    private final String filePath2;
     private File destFile = null;
-    private PDFMergeListener listener;
-
 
     public ItextMerge(Context context, String filePath, String filePath1, String filePath2, PDFMergeListener listener) {
-
         this.filePath = filePath;
         this.filePath1 = filePath1;
         this.filePath2 = filePath2;
-        this.context = context;
-        this.listener = listener;
 
         new MergePDFAsync(listener).execute();
     }
@@ -52,7 +48,7 @@ public class ItextMerge {
 
         private Exception mException;
         boolean flag = false;
-        private PDFMergeListener listener;
+        private final PDFMergeListener listener;
 
         MergePDFAsync(PDFMergeListener listener) {
             this.listener = listener;
@@ -87,61 +83,9 @@ public class ItextMerge {
                 listener.pdfMergeFailure(mException);
             }
         }
-
-//        private File savePDFDocumentToStorage(final PdfDocument pdfDocument) throws
-//                IOException {
-//            FileOutputStream fos = null;
-//            // Create file.
-//            File pdfFile = null;
-//            if (mFilePath == null || mFilePath.isEmpty()) {
-//                pdfFile = File.createTempFile(Long.toString(new Date().getTime()), "pdf");
-//            } else {
-//                pdfFile = new File(mFilePath);
-//            }
-//
-//            //Create parent directories
-//            File parentFile = pdfFile.getParentFile();
-//            if (parentFile != null && !parentFile.exists() && !parentFile.mkdirs()) {
-//                throw new IllegalStateException("Couldn't create directory: " + parentFile);
-//            }
-//            boolean fileExists = pdfFile.exists();
-//            // If File already Exists. delete it.
-//            if (fileExists) {
-//                fileExists = !pdfFile.delete();
-//            }
-//            try {
-//                if (!fileExists) {
-//                    // Create New File.
-//                    fileExists = pdfFile.createNewFile();
-//                }
-//
-//                if (fileExists) {
-//                    // Write PDFDocument to the file.
-//                    fos = new FileOutputStream(pdfFile);
-//                    pdfDocument.writeTo(fos);
-//
-//                    //Close output stream
-//                    fos.close();
-//
-//                    // close the document
-//                    pdfDocument.close();
-//                }
-//                return pdfFile;
-//            } catch (IOException exception) {
-//                mException = exception;
-//                exception.printStackTrace();
-//                if (fos != null) {
-//                    fos.close();
-//                }
-//                throw exception;
-//            }
-//        }
     }
 
     private void cretateDestFile() {
-
-//        String directory_path = context.getExternalFilesDir(null)
-//                + "/" + "CTW/Schools/";
         String path;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
             path = filePath;

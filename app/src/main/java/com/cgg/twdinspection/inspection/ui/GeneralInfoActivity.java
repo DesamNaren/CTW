@@ -33,8 +33,8 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
     String hmheadQuarters, hmstayingFacilitiesType, hmcaptureDistance;
     String hwopresentTime, hworeasontype, hwocaptureodtype, hwocaptureLeavetype, hwomovementRegisterEntry;
     String hmPresentTime, hmreasontype, hmCaptureodtype, hmCaptureLeavetype, hmMovementRegisterEntry;
-    private String officerID, instID, insTime;
-    private int localFlag = -1;
+    private String officerID;
+    private String instID;
 
 
     private void ScrollToView(View view) {
@@ -61,7 +61,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
 
-            insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
+            String insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             binding.includeBasicLayout.inspectionTime.setText(insTime);
 
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
@@ -71,7 +71,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
             String instName = sharedPreferences.getString(AppConstants.INST_NAME, "");
 
             binding.disNameTv.setText(dist);
-            binding.manNameTv.setText(mandal + " & " + village);
+            binding.manNameTv.setText(mandal + getString(R.string.amp) + village);
             binding.instNameTv.setText(instName);
 
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
         }
 
         try {
-            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            int localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
             if (localFlag == 1) {
                 //get local record & set to data binding
                 final LiveData<GeneralInfoEntity> generalInfoEntityLiveData = instMainViewModel.getGeneralInfoData();

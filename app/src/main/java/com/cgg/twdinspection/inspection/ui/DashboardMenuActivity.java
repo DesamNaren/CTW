@@ -1,14 +1,22 @@
 package com.cgg.twdinspection.inspection.ui;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,6 +30,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.cgg.twdinspection.R;
+import com.cgg.twdinspection.common.AppInfoActivity;
+import com.cgg.twdinspection.common.PrivacyPolicyActivity;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
@@ -41,26 +51,26 @@ import java.util.List;
 
 public class DashboardMenuActivity extends AppCompatActivity {
 
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private AppBarConfiguration mAppBarConfiguration;
     private InstMainViewModel instMainViewModel;
-    private ActivityHomeBinding binding;
-    private MenuItem nav_home, nav_schemes, nav_school, nav_gcc, nav_eng, nav_reports, nav_my_insp, nav_logout;
     private Context context;
     private InstSelectionViewModel instSelectionViewModel;
     private String instId;
 
+    public DashboardMenuActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        com.cgg.twdinspection.databinding.ActivityHomeBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context = DashboardMenuActivity.this;
         instSelectionViewModel = new InstSelectionViewModel(getApplication());
         try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
+            SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
             instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         } catch (Exception e) {
@@ -71,11 +81,9 @@ public class DashboardMenuActivity extends AppCompatActivity {
         binding.appBarLayout.ivLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.customExitAlert(DashboardMenuActivity.this,
+                Utils.customCancelAlert(DashboardMenuActivity.this,
                         getResources().getString(R.string.app_name),
-                        getString(R.string.logout));
-//                Utils.customLogoutAlert(DashboardMenuActivity.this, getResources().getString(R.string.app_name),
-//                        getString(R.string.logout), instMainViewModel, editor);
+                        getString(R.string.logout), editor);
             }
         });
 
@@ -85,21 +93,39 @@ public class DashboardMenuActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_schemes, R.id.nav_school, R.id.nav_gcc, R.id.nav_eng, R.id.nav_reports, R.id.nav_my_insp, R.id.nav_logout)
+                R.id.nav_home, R.id.nav_schemes, R.id.nav_school, R.id.nav_gcc,
+                R.id.nav_eng, R.id.nav_reports, R.id.nav_my_insp, R.id.nav_exit, R.id.nav_log_out)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        nav_home = navigationView.getMenu().findItem(R.id.nav_home);
-        nav_schemes = navigationView.getMenu().findItem(R.id.nav_schemes);
-        nav_school = navigationView.getMenu().findItem(R.id.nav_school);
-        nav_gcc = navigationView.getMenu().findItem(R.id.nav_gcc);
-        nav_eng = navigationView.getMenu().findItem(R.id.nav_eng);
-        nav_reports = navigationView.getMenu().findItem(R.id.nav_reports);
-        nav_my_insp = navigationView.getMenu().findItem(R.id.nav_my_insp);
-        nav_logout = navigationView.getMenu().findItem(R.id.nav_logout);
+        MenuItem nav_home = navigationView.getMenu().findItem(R.id.nav_home);
+        MenuItem nav_schemes = navigationView.getMenu().findItem(R.id.nav_schemes);
+        MenuItem nav_school = navigationView.getMenu().findItem(R.id.nav_school);
+        MenuItem nav_gcc = navigationView.getMenu().findItem(R.id.nav_gcc);
+        MenuItem nav_eng = navigationView.getMenu().findItem(R.id.nav_eng);
+        MenuItem nav_reports = navigationView.getMenu().findItem(R.id.nav_reports);
+        MenuItem nav_my_insp = navigationView.getMenu().findItem(R.id.nav_my_insp);
+        MenuItem nav_logout = navigationView.getMenu().findItem(R.id.nav_log_out);
+        MenuItem nav_exit = navigationView.getMenu().findItem(R.id.nav_exit);
+
+        MenuItem navAppInfo = navigationView.getMenu().findItem(R.id.nav_info);
+        navAppInfo.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                Intent newIntent = new Intent(DashboardMenuActivity.this, AppInfoActivity.class);
+                startActivity(newIntent);
+                //do as you want with the button click
+
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+
+                return true;
+            }
+        });
 
         nav_home.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -231,7 +257,7 @@ public class DashboardMenuActivity extends AppCompatActivity {
                 return true;
             }
         });
-        nav_logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        nav_exit.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
@@ -239,6 +265,36 @@ public class DashboardMenuActivity extends AppCompatActivity {
                         getResources().getString(R.string.app_name),
                         getString(R.string.exit_msg));
                 //do as you want with the button click
+
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+
+                return true;
+            }
+        });
+
+
+        MenuItem navPri = navigationView.getMenu().findItem(R.id.nav_pri_pol);
+        navPri.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                startActivity(new Intent(DashboardMenuActivity.this, PrivacyPolicyActivity.class));
+                //do as you want with the button click
+
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+
+                return true;
+            }
+        });
+
+
+        nav_logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Utils.customCancelAlert(DashboardMenuActivity.this, getResources().getString(R.string.app_name),
+                        getString(R.string.logout), editor);
 
                 DrawerLayout drawer = findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);

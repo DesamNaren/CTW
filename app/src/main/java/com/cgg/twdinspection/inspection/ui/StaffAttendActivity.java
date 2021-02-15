@@ -105,21 +105,6 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
             }
         });
 
-//        staffViewModel.getUserResponseLiveData().observe(this,
-//                new Observer<CreateUserResponse>() {
-//                    @Override
-//                    public void onChanged(CreateUserResponse c) {
-//                        if (c != null) {
-//                            setAdapter();
-//                            Toast.makeText(getBaseContext(), "" + c.getId(), Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(getBaseContext(), "No val", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//
-//        setAdapter();
-
         localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
     }
 
@@ -137,27 +122,7 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                 returnFlag = false;
                 showSnackBar(getString(R.string.yes_duty_alloted));
                 break;
-            } /*else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getCategory()) || staffAttendanceEntitiesmain.get(i).getCateg_pos() == 0) {
-                returnFlag = false;
-                showSnackBar(getString(R.string.sel_category));
-                break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_availed())) {
-                returnFlag = false;
-                showSnackBar(getString(R.string.total_leaves));
-                break;
-            } else if (staffAttendanceEntitiesmain.get(i).getLeaves_availed().equals("0")) {
-                returnFlag = false;
-                showSnackBar(getString(R.string.total_leaves_zero));
-                break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_taken())) {
-                returnFlag = false;
-                showSnackBar(getString(R.string.leaves_taken));
-                break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_bal())) {
-                returnFlag = false;
-                showSnackBar(getString(R.string.leave_bal));
-                break;
-            }*/ else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended())) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended())) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.last_week_turn_att));
                 break;
@@ -205,20 +170,6 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.failed));
         }
     }
-
-//    private void setAdapter() {
-//        authViewModel.getAllEmployees().observe(this, new Observer<List<LoginResponse>>() {
-//            @Override
-//            public void onChanged(List<LoginResponse> employeeResponses) {
-//                if (employeeResponses != null && employeeResponses.size() > 0) {
-//                    adapter.setEmployeeList(employeeResponses);
-////                            binding.rv.scrollToPosition(employeeResponses.size()-1);
-//
-//                }
-//            }
-//
-//        });
-//    }
 
     @Override
     public void onBackPressed() {

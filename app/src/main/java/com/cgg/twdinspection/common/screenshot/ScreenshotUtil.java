@@ -160,7 +160,7 @@ public class ScreenshotUtil {
     public static class AsyncBTCheckTask extends AsyncTask<Void, Void, File> {
         Activity _activity;
         String fromDate, toDate;
-        private RecyclerView recyclerView;
+        private final RecyclerView recyclerView;
 
         AsyncBTCheckTask(RecyclerView recyclerView, Activity _activity, String fromDate, String toDate) {
             this.recyclerView = recyclerView;

@@ -88,7 +88,9 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     InstMainViewModel instMainViewModel;
     DietIssuesEntity dietIssuesEntity;
     SharedPreferences sharedPreferences;
-    private String officerID, instID, insTime, randomNo;
+    private String officerID;
+    private String instID;
+    private String randomNo;
     List<DietListEntity> dietInfoEntityListMain, mandatoryList, tempList;
     List<String> itemsList;
     DietIssuesTempItemsAdapter adapter;
@@ -107,6 +109,9 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     SearchView mSearchView;
     Menu mMenu = null;
     TextView tv;
+
+    UploadPhotoViewModel viewModel;
+    private final List<UploadPhoto> uploadPhotos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,7 +159,6 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             editor = sharedPreferences.edit();
 
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
-            insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
             randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
 
@@ -501,10 +505,10 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         view.getParent().requestChildFocus(view, view);
     }
 
-    private void addPhoto(String instID, String secId, String currentDateTime, String typeOfImage, String valueOfImage) {
+    private void addPhoto(String instID, String currentDateTime, String typeOfImage, String valueOfImage) {
         UploadPhoto uploadPhoto = new UploadPhoto();
         uploadPhoto.setInstitute_id(instID);
-        uploadPhoto.setSection_id(secId);
+        uploadPhoto.setSection_id("12");
         uploadPhoto.setTimeStamp(currentDateTime);
         uploadPhoto.setPhoto_name(typeOfImage);
         uploadPhoto.setPhoto_path(valueOfImage);
@@ -570,7 +574,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MY_CAMERA_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.cam_granted), Toast.LENGTH_LONG).show();
             } else if (ActivityCompat.shouldShowRequestPermissionRationale(DietIssuesActivity.this,
                     Manifest.permission.CAMERA)) {
                 customPerAlert();
@@ -657,11 +661,6 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             ScrollToView(binding.rgMaintainingRegister);
             return false;
         }
-//        if (TextUtils.isEmpty(menu_chart_served)) {
-//            showSnackBar(getResources().getString(R.string.select_menu_chart_served));
-//            ScrollToView(binding.rgMenuChartServed);
-//            return false;
-//        }
         if (flag_officer == 0) {
             showSnackBar(getString(R.string.insp_officer_image));
             return false;
@@ -670,18 +669,16 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         return true;
     }
 
-    UploadPhotoViewModel viewModel;
-    private List<UploadPhoto> uploadPhotos = new ArrayList<>();
 
     @Override
     public void submitData() {
         if (menu_chart_painted.equalsIgnoreCase(AppConstants.Yes)) {
-            addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.MENU, String.valueOf(file_menu));
+            addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.MENU, String.valueOf(file_menu));
         } else {
             file_menu = null;
-            addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.MENU, String.valueOf(file_menu));
+            addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.MENU, String.valueOf(file_menu));
         }
-        addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.OFFICER, String.valueOf(file_officer));
+        addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.OFFICER, String.valueOf(file_officer));
 
         long y = viewModel.insertPhotos(uploadPhotos);
         if (y >= 0) {
@@ -982,7 +979,6 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {

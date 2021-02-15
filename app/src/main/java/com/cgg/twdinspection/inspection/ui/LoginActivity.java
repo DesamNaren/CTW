@@ -31,18 +31,16 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterface {
     ActivityLoginCreBinding binding;
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private String mpin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
+            SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
 
-            mpin = sharedPreferences.getString(AppConstants.MPIN, "");
+            String mpin = sharedPreferences.getString(AppConstants.MPIN, "");
 
             if (!TextUtils.isEmpty(mpin)) {
                 startActivity(new Intent(LoginActivity.this, ValidateMPINActivity.class));
@@ -115,7 +113,7 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
 
     private class GenericTextWatcher implements TextWatcher {
 
-        private View view;
+        private final View view;
 
         private GenericTextWatcher(View view) {
             this.view = view;
@@ -155,7 +153,7 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
         unregisterReceiver(mGpsSwitchStateReceiver);
     }
 
-    private BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             try {
@@ -178,7 +176,6 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {

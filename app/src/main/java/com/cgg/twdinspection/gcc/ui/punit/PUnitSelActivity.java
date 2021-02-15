@@ -48,7 +48,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PUnitSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, GCCOfflineInterface {
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     CustomProgressDialog customProgressDialog;
     ActivityPUnitSelBinding binding;
@@ -59,7 +58,8 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
     private List<String> societies;
     private List<String> pUnits;
     private PUnits selectedPUnits;
-    ArrayAdapter selectAdapter;
+    private ArrayAdapter<String> selectAdapter;
+    private ArrayList<String> selectList;
     private boolean dailyreq_flag, emp_flag, ess_flag, p_unit_flag, mfp_flag;
     private GCCOfflineRepository gccOfflineRepository;
     private GCCOfflineViewModel gccOfflineViewModel;
@@ -97,7 +97,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         binding.executePendingBindings();
 
         try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
+            SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
@@ -108,7 +108,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ArrayList selectList = new ArrayList();
+        selectList = new ArrayList<>();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -212,7 +212,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
 
 
                             } else {
-                                customOnlineAlert("Do you want to proceed in Online mode?");
+                                customOnlineAlert(getString(R.string.do_you_want_online_mode));
                             }
                         }
                     });
@@ -330,7 +330,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
 
                 });
             } else {
-                Utils.customWarningAlert(PUnitSelActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                Utils.customWarningAlert(PUnitSelActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
             }
         }
     }
@@ -352,10 +352,6 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
             showSnackBar("Please select division");
             return false;
         }
-//        else if (TextUtils.isEmpty(selectedSocietyId)) {
-//            showSnackBar("Please select society");
-//            return false;
-//        }
 
         else if (TextUtils.isEmpty(selectedPUnitID)) {
             showSnackBar("Please select processing unit");
@@ -555,7 +551,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnDownload.setText("Re-Download");
+                binding.btnDownload.setText(getString(R.string.re_download));
                 binding.btnRemove.setVisibility(View.VISIBLE);
                 Utils.customSyncSuccessAlert(PUnitSelActivity.this, getResources().getString(R.string.app_name),
                         "Data downloaded successfully");
@@ -570,7 +566,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
 
         try {
             if (cnt > 0) {
-                binding.btnDownload.setText("Download");
+                binding.btnDownload.setText(getString(R.string.download));
                 binding.btnRemove.setVisibility(View.GONE);
                 Utils.customSyncSuccessAlert(PUnitSelActivity.this, getResources().getString(R.string.app_name),
                         "Data deleted successfully");

@@ -53,7 +53,6 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
     SharedPreferences.Editor editor;
     CustomProgressDialog customProgressDialog;
     InstMainViewModel instMainViewModel;
-    private DivisionSelectionViewModel divisionSelectionViewModel;
 
 
     @Override
@@ -69,7 +68,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         gccSyncRepository = new GCCSyncRepository(getApplication());
         binding.header.headerTitle.setText(getResources().getString(R.string.sync_gcc_activity));
         instMainViewModel = new InstMainViewModel(getApplication());
-        divisionSelectionViewModel = new DivisionSelectionViewModel(getApplication());
+        DivisionSelectionViewModel divisionSelectionViewModel = new DivisionSelectionViewModel(getApplication());
 
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,9 +82,6 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
-//            binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
-//            binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
-//            binding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
         } catch (Exception e) {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
@@ -97,9 +93,9 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 lpgLiveData.removeObservers(GCCSyncActivity.this);
                 customProgressDialog.dismiss();
                 if (drGodowns == null || drGodowns.size() <= 0)
-                    binding.btnLpg.setText("Download");
+                    binding.btnLpg.setText(getString(R.string.download));
                 else
-                    binding.btnLpg.setText("Re-Download");
+                    binding.btnLpg.setText(getString(R.string.re_download));
 
             }
         });
@@ -112,9 +108,9 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 petrolLiveData.removeObservers(GCCSyncActivity.this);
                 customProgressDialog.dismiss();
                 if (drGodowns == null || drGodowns.size() <= 0)
-                    binding.btnPetrolPump.setText("Download");
+                    binding.btnPetrolPump.setText(getString(R.string.download));
                 else
-                    binding.btnPetrolPump.setText("Re-Download");
+                    binding.btnPetrolPump.setText(getString(R.string.re_download));
             }
         });
 
@@ -126,9 +122,9 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 punitLiveData.removeObservers(GCCSyncActivity.this);
                 customProgressDialog.dismiss();
                 if (drGodowns == null || drGodowns.size() <= 0)
-                    binding.btnPUnit.setText("Download");
+                    binding.btnPUnit.setText(getString(R.string.download));
                 else
-                    binding.btnPUnit.setText("Re-Download");
+                    binding.btnPUnit.setText(getString(R.string.re_download));
 
             }
         });
@@ -139,9 +135,9 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 mfpLiveData.removeObservers(GCCSyncActivity.this);
                 customProgressDialog.dismiss();
                 if (drGodowns == null || drGodowns.size() <= 0)
-                    binding.btnMfpGodown.setText("Download");
+                    binding.btnMfpGodown.setText(getString(R.string.download));
                 else
-                    binding.btnMfpGodown.setText("Re-Download");
+                    binding.btnMfpGodown.setText(getString(R.string.re_download));
             }
         });
 
@@ -152,9 +148,9 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 drDepotLiveData.removeObservers(GCCSyncActivity.this);
                 customProgressDialog.dismiss();
                 if (drGodowns == null || drGodowns.size() <= 0)
-                    binding.btnDrDepot.setText("Download");
+                    binding.btnDrDepot.setText(getString(R.string.download));
                 else
-                    binding.btnDrDepot.setText("Re-Download");
+                    binding.btnDrDepot.setText(getString(R.string.re_download));
 
             }
         });
@@ -166,9 +162,9 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 drGodownLiveData.removeObservers(GCCSyncActivity.this);
                 customProgressDialog.dismiss();
                 if (drGodowns == null || drGodowns.size() <= 0)
-                    binding.btnDrGodown.setText("Download");
+                    binding.btnDrGodown.setText(getString(R.string.download));
                 else
-                    binding.btnDrGodown.setText("Re-Download");
+                    binding.btnDrGodown.setText(getString(R.string.re_download));
             }
         });
         LiveData<List<DivisionsInfo>> divisionListLiveData = divisionSelectionViewModel.getAllDivisionsMaster();
@@ -178,9 +174,9 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 divisionListLiveData.removeObservers(GCCSyncActivity.this);
                 customProgressDialog.dismiss();
                 if (divisionsInfos == null || divisionsInfos.size() <= 0)
-                    binding.btnDivision.setText("Download");
+                    binding.btnDivision.setText(getString(R.string.download));
                 else
-                    binding.btnDivision.setText("Re-Download");
+                    binding.btnDivision.setText(getString(R.string.re_download));
             }
         });
 
@@ -207,9 +203,9 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                                 if (officesResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                                     if (officesResponse.getDivisions() != null && officesResponse.getDivisions().size() > 0) {
                                         gccSyncRepository.insertDivisions(GCCSyncActivity.this, officesResponse.getDivisions());
-                                        binding.btnDivision.setText("Re-Download");
+                                        binding.btnDivision.setText(getString(R.string.re_download));
                                     } else {
-                                        binding.btnDivision.setText("Download");
+                                        binding.btnDivision.setText(getString(R.string.download));
                                         Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
                                     }
                                 } else if (officesResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
@@ -499,7 +495,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnDivision.setText("Re-Download");
+                binding.btnDivision.setText(getString(R.string.re_download));
                 Log.i("DIV_CNT", "divCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "Division master data downloaded successfully");
@@ -516,7 +512,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnDrDepot.setText("Re-Download");
+                binding.btnDrDepot.setText(getString(R.string.re_download));
                 Log.i("SUP_CNT", "supCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "DR Depot master data downloaded successfully");
@@ -533,7 +529,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnDrGodown.setText("Re-Download");
+                binding.btnDrGodown.setText(getString(R.string.re_download));
                 Log.i("SUP_CNT", "drGodCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "DR GoDown master data downloaded successfully");
@@ -550,7 +546,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnMfpGodown.setText("Re-Download");
+                binding.btnMfpGodown.setText(getString(R.string.re_download));
                 Log.i("SUP_CNT", "mfpGodCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "MFP GoDown master data downloaded successfully");
@@ -567,7 +563,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnPUnit.setText("Re-Download");
+                binding.btnPUnit.setText(getString(R.string.re_download));
                 Log.i("SUP_CNT", "pUnitCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "Processing Unit master data downloaded successfully");
@@ -584,7 +580,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnPetrolPump.setText("Re-Download");
+                binding.btnPetrolPump.setText(getString(R.string.re_download));
                 Log.i("PETROL_CNT", "petrolCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "Petrol pump master data downloaded successfully");
@@ -601,7 +597,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnLpg.setText("Re-Download");
+                binding.btnLpg.setText(getString(R.string.re_download));
                 Log.i("LPG_CNT", "lpglCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "LPG master data downloaded successfully");

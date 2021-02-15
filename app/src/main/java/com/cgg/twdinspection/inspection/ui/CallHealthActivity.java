@@ -29,10 +29,6 @@ public class CallHealthActivity extends AppCompatActivity implements MedicalInte
 
     private ActivityCallHealthBinding binding;
     private CallHealthViewModel viewModel;
-    private CallHealthAdapter callHealthAdapter;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-    InstMainViewModel instMainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +37,8 @@ public class CallHealthActivity extends AppCompatActivity implements MedicalInte
         binding.appBarLayout.backBtn.setVisibility(View.VISIBLE);
         binding.appBarLayout.ivHome.setVisibility(View.GONE);
         binding.appBarLayout.headerTitle.setText(getString(R.string.call_health));
-        instMainViewModel = new InstMainViewModel(getApplication());
+        InstMainViewModel instMainViewModel = new InstMainViewModel(getApplication());
 
-        sharedPreferences = TWDApplication.get(this).getPreferences();
-        editor = sharedPreferences.edit();
         binding.appBarLayout.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +56,7 @@ public class CallHealthActivity extends AppCompatActivity implements MedicalInte
                 if (callHealthInfoEntities != null && callHealthInfoEntities.size() > 0) {
                     binding.noDataTv.setVisibility(View.GONE);
                     binding.callRv.setVisibility(View.VISIBLE);
-                    callHealthAdapter = new CallHealthAdapter(CallHealthActivity.this, callHealthInfoEntities);
+                    CallHealthAdapter callHealthAdapter = new CallHealthAdapter(CallHealthActivity.this, callHealthInfoEntities);
                     binding.callRv.setLayoutManager(new LinearLayoutManager(CallHealthActivity.this));
                     binding.callRv.setAdapter(callHealthAdapter);
                 } else {
@@ -96,7 +90,6 @@ public class CallHealthActivity extends AppCompatActivity implements MedicalInte
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {

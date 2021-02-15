@@ -43,15 +43,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInterface {
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private StockViewModel viewModel;
     ActivityPUnitBinding binding;
     CustomProgressDialog customProgressDialog;
     private StockDetailsResponse stockDetailsResponsemain;
     private PUnits pUnits;
-    private List<String> mFragmentTitleList = new ArrayList<>();
-    private List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> mFragmentTitleList = new ArrayList<>();
+    private final List<Fragment> mFragmentList = new ArrayList<>();
     private boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag;
 
     @Override
@@ -69,11 +67,11 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
         PUnitFragment.commonCommodities = null;
 
         customProgressDialog = new CustomProgressDialog(this);
-        viewModel = new StockViewModel(getApplication(), this);
+        StockViewModel viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
         binding.header.ivHome.setVisibility(View.GONE);
-        sharedPreferences = TWDApplication.get(this).getPreferences();
+        SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
         binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.man_unit_name));
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -283,7 +281,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                                     binding.tabs.setVisibility(View.GONE);
                                     binding.noDataTv.setVisibility(View.VISIBLE);
                                     binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                                    binding.noDataTv.setText("No data found");
+                                    binding.noDataTv.setText(getString(R.string.no_data_found));
                                     callSnackBar("No data found");
                                 }
 
@@ -306,7 +304,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                 Utils.customWarningAlert(PUnitActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
             }
         } else {
-            Utils.customWarningAlert(PUnitActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            Utils.customWarningAlert(PUnitActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
         }
 
     }

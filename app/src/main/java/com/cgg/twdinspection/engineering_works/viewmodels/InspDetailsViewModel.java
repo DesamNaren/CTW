@@ -27,14 +27,14 @@ import retrofit2.Response;
 
 public class InspDetailsViewModel extends AndroidViewModel {
 
-    private MutableLiveData<StagesResponse> stagesResponseMutableLiveData;
-    private Context context;
-    private ErrorHandlerInterface errorHandlerInterface;
-    private SectorsRepository sectorsRepository;
-    private GrantSchemeRepository schemeRepository;
+    private final MutableLiveData<StagesResponse> stagesResponseMutableLiveData;
+    private final Context context;
+    private final ErrorHandlerInterface errorHandlerInterface;
+    private final SectorsRepository sectorsRepository;
+    private final GrantSchemeRepository schemeRepository;
     private LiveData<List<SectorsEntity>> sectorsListLiveData;
     private LiveData<List<GrantScheme>> schemesListLiveData;
-    private MutableLiveData<SubmittedStageResponse> submittedStage;
+    private final MutableLiveData<SubmittedStageResponse> submittedStage;
 
 
     public InspDetailsViewModel(Context context, Application application) {

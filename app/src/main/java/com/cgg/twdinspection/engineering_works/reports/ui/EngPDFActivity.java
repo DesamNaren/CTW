@@ -29,7 +29,6 @@ import java.util.List;
 public class EngPDFActivity extends AppCompatActivity implements PDFUtil.PDFUtilListener {
     ActivityEngPdfBinding binding;
     CustomProgressDialog customProgressDialog;
-    private SharedPreferences sharedPreferences;
     String directory_path, filePath;
     private ReportWorkDetails reportWorkDetails;
 
@@ -42,11 +41,11 @@ public class EngPDFActivity extends AppCompatActivity implements PDFUtil.PDFUtil
         binding.engDetails.btnLayout.btnLayout.setVisibility(View.GONE);
         binding.photos.header.getRoot().setVisibility(View.GONE);
 
-        binding.btnLayout.btnNext.setText("Get PDF");
-        binding.actionBar.headerTitle.setText("PDF Preview");
+        binding.btnLayout.btnNext.setText(getString(R.string.get_pdf));
+        binding.actionBar.headerTitle.setText(R.string.pdf_preview);
 
         try {
-            sharedPreferences = TWDApplication.get(EngPDFActivity.this).getPreferences();
+            SharedPreferences sharedPreferences = TWDApplication.get(EngPDFActivity.this).getPreferences();
             Gson gson = new Gson();
             String data = sharedPreferences.getString(AppConstants.ENG_REPORT_DATA, "");
             reportWorkDetails = gson.fromJson(data, ReportWorkDetails.class);

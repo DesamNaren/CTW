@@ -35,11 +35,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-
-    private FragmentHomeBinding binding;
     private Context context;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
     InstMainViewModel instMainViewModel;
     InstSelectionViewModel instSelectionViewModel;
     private String instId;
@@ -48,13 +44,12 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         context = getActivity();
-        binding =
-                DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
+        com.cgg.twdinspection.databinding.FragmentHomeBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
 
         try {
-            sharedPreferences = TWDApplication.get(context).getPreferences();
+            SharedPreferences sharedPreferences = TWDApplication.get(context).getPreferences();
             instId = sharedPreferences.getString(AppConstants.INST_ID, "");
-            editor = sharedPreferences.edit();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
             String curTime = Utils.getCurrentDateTimeDisplay();

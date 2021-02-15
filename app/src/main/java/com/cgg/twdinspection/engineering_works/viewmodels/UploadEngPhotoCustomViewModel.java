@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 public class UploadEngPhotoCustomViewModel implements ViewModelProvider.Factory {
-    private Context context;
+    private final Context context;
 
     public UploadEngPhotoCustomViewModel(Context context) {
         this.context = context;

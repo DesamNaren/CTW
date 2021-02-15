@@ -19,17 +19,13 @@ import java.util.List;
 
 public class GCCOfflineDataAdapter extends RecyclerView.Adapter<GCCOfflineDataAdapter.ItemHolder> {
 
-    private Context context;
-    private List<GccOfflineEntity> list;
+    private final List<GccOfflineEntity> list;
     private GCCOfflineSubmitInterface gccOfflineSubmitInterface;
-    private GCCSubmitInterface gccSubmitInterface;
 
     public GCCOfflineDataAdapter(Context context, List<GccOfflineEntity> list) {
-        this.context = context;
         this.list = list;
         try {
             gccOfflineSubmitInterface = (GCCOfflineSubmitInterface) context;
-            gccSubmitInterface = (GCCSubmitInterface) context;
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -51,7 +51,7 @@ import java.util.List;
 public class InspectionDetailsActivity extends LocBaseActivity implements ErrorHandlerInterface {
 
     ActivityInspDetailsBinding binding;
-    ArrayAdapter spinnerAdapter;
+    private ArrayAdapter<String> spinnerAdapter;
     String inspTime, officerName, officerDesg, place, officerId, sectorOthers;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -63,6 +63,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
     private String overallAppearance, worksmenSkill, qualCare, qualMat, surfaceFinishing, observation, satLevel;
     StagesResponse stagesResponse;
     ArrayList<String> majorStages, tempMajorStages;
+    ArrayList<String> selectList;
     ArrayAdapter majorStagesAdapter, selectAdapter;
     CustomProgressDialog customProgressDialog;
 
@@ -98,7 +99,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ArrayList selectList = new ArrayList<>();
+        selectList = new ArrayList<>();
         selectList.add(getString(R.string.select));
         selectAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -121,7 +122,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     for (int i = 0; i < sectorsEntities.size(); i++) {
                         sectorsList.add(sectorsEntities.get(i).getSectorName());
                     }
-                    ArrayAdapter spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, sectorsList);
+                    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, sectorsList);
                     binding.spSector.setAdapter(spinnerAdapter);
                 } else {
                     Utils.customEngSyncAlert(InspectionDetailsActivity.this, getString(R.string.app_name), "No sectors found...\n Do you want to sync Sector master data to proceed further?");
@@ -138,7 +139,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         tempMajorStages = new ArrayList<>();
         tempMajorStages.add("Select");
         tempMajorStages.addAll(majorStages);
-        majorStagesAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, tempMajorStages);
+        majorStagesAdapter = new ArrayAdapter<String>(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, tempMajorStages);
         binding.spStage.setAdapter(majorStagesAdapter);
         if (Utils.checkInternetConnection(InspectionDetailsActivity.this)) {
             customProgressDialog.show();
@@ -187,7 +188,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     for (int i = 0; i < grantSchemes.size(); i++) {
                         schemesList.add(grantSchemes.get(i).getSchemeName());
                     }
-                    ArrayAdapter spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, schemesList);
+                    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, schemesList);
                     binding.spScheme.setAdapter(spinnerAdapter);
                 } else {
                     Utils.customEngSyncAlert(InspectionDetailsActivity.this, getString(R.string.app_name), "No schemes found...\n Do you want to sync Scheme master data to proceed further?");
@@ -204,19 +205,6 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     selStageName = "";
                 } else {
                     selStageName = binding.spStage.getSelectedItem().toString();
-//                    tempMajorStages.clear();
-//                    for (int z = 0; z < majorStages.size(); z++) {
-//                        if (majorStages.get(z).equalsIgnoreCase(selStageName)) {
-//                            selPos = z;
-//                            break;
-//                        }
-//                    }
-//                    for (int z = 0; z < majorStages.size(); z++) {
-//                        if (z >= selPos) {
-//                            tempMajorStages.add(majorStages.get(z));
-//                        }
-//                    }
-//                    binding.spStage.setAdapter(majorStagesAdapter);
                 }
             }
 
@@ -231,9 +219,6 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 spinnerAdapter = null;
-//                binding.tvSectorOthers.setVisibility(View.GONE);
-//                binding.tvStageOthers.setVisibility(View.GONE);
-//                binding.llStageWork.setVisibility(View.VISIBLE);
                 ArrayList<String> stagesList = new ArrayList<>();
                 binding.etFinProgressOthers.setText("");
                 if (binding.spSector.getSelectedItem().toString().equalsIgnoreCase(getString(R.string.select))) {
@@ -301,7 +286,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                                                     for (int y = 0; y < stagesResponse.getStages().size(); y++) {
                                                         stagesList.add(stagesResponse.getStages().get(y).getStageName());
                                                     }
-                                                    ArrayAdapter spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, stagesList);
+                                                    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, stagesList);
                                                     binding.spStageInProgress.setAdapter(spinnerAdapter);
                                                 } else {
                                                     callSnackBar(getString(R.string.something));
@@ -594,7 +579,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
     }
 
 
-    private BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             try {

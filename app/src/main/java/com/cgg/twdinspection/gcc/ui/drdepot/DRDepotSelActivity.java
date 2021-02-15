@@ -59,10 +59,11 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
     private List<String> societies;
     private List<String> drDepots;
     private DRDepots selectedDRDepots;
-    ArrayAdapter selectAdapter;
+    private ArrayAdapter<String> selectAdapter;
     private boolean dailyreq_flag, emp_flag, ess_flag;
     private GCCOfflineRepository gccOfflineRepository;
     private GCCOfflineViewModel gccOfflineViewModel;
+    private ArrayList<String> selectList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,9 +109,9 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
             e.printStackTrace();
         }
 
-        ArrayList selectList = new ArrayList();
+        selectList = new ArrayList<String>();
         selectList.add("Select");
-        selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
+        selectAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
         LiveData<List<String>> divisionLiveData = viewModel.getAllDivisions();
         divisionLiveData.observe(this, new Observer<List<String>>() {
@@ -199,7 +200,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
 
 
                             } else {
-                                customOnlineAlert("Do you want to proceed in Online mode?");
+                                customOnlineAlert();
                             }
                         }
                     });
@@ -525,7 +526,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                 binding.btnDownload.setText(getString(R.string.download));
                 binding.btnRemove.setVisibility(View.GONE);
                 Utils.customSyncSuccessAlert(DRDepotSelActivity.this, getResources().getString(R.string.app_name),
-                        "Data deleted successfully");
+                        getString(R.string.data_saved_successfully));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -538,7 +539,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
     }
 
 
-    private void customOnlineAlert(String msg) {
+    private void customOnlineAlert() {
         try {
             final Dialog dialog = new Dialog(context);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -550,7 +551,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                 TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
                 dialogTitle.setText(getString(R.string.app_name));
                 TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
-                dialogMessage.setText(msg);
+                dialogMessage.setText(R.string.do_you_want_online_mode);
                 Button btDialogNo = dialog.findViewById(R.id.btDialogNo);
                 btDialogNo.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -568,11 +569,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
-
-
                         callService(true);
-
-
                     }
                 });
 

@@ -28,6 +28,8 @@ import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalDetails
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.MedicalDetailsViewModel;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -222,7 +224,7 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
 
                     binding.recyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
                         @Override
-                        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                        public boolean onInterceptTouchEvent(@NotNull RecyclerView rv, @NotNull MotionEvent e) {
                             return rv.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING;
                         }
                     });
@@ -270,7 +272,7 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onValueChange(int position) {
-        binding.tvTypeCnt.setText("Record: " + position);
+        binding.tvTypeCnt.setText(getString(R.string.record_) + position);
     }
 
     @Override
@@ -283,7 +285,6 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {

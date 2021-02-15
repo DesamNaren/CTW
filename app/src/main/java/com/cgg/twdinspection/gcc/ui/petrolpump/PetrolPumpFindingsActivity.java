@@ -72,7 +72,6 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
     File file;
     private String officerID, divId, suppId;
     double physVal = 0, sysVal = 0, difference = 0, insSysVal = 0, notInsSysVal = 0;
-    private PetrolStockDetailsResponse stockDetailsResponse;
     private PetrolStockDetailsResponse finalStockDetailsResponse;
     private String stockReg, purchaseReg, dailysales, godownLiaReg, cashbook, remittance, remittanceCash, insCer, fireNOC, weightMea;
     private String petrolPumpCom, petrolPumpHyg, availEqp, availCcCameras, lastInsSoc, lastInsDiv, repairsReq;
@@ -108,7 +107,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
         String stockData = sharedPreferences.getString(AppConstants.stockData, "");
         officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         Gson gson = new Gson();
-        stockDetailsResponse = gson.fromJson(stockData, PetrolStockDetailsResponse.class);
+        PetrolStockDetailsResponse stockDetailsResponse = gson.fromJson(stockData, PetrolStockDetailsResponse.class);
 
         String petrolData = sharedPreferences.getString(AppConstants.PETROL_PUMP_DATA, "");
         PetrolSupplierInfo petrolSupplierInfo = gson.fromJson(petrolData, PetrolSupplierInfo.class);
@@ -143,16 +142,16 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                 }
             }
 
-            sysVal = Double.valueOf(String.format("%.2f", sysVal));
-            physVal = Double.valueOf(String.format("%.2f", physVal));
+            sysVal = Double.parseDouble(String.format("%.2f", sysVal));
+            physVal = Double.parseDouble(String.format("%.2f", physVal));
             binding.tvSysVal.setText(String.format("%.2f", sysVal));
             binding.tvPhysVal.setText(String.format("%.2f", physVal));
             notInsSysVal = sysVal - insSysVal;
-            notInsSysVal = Double.valueOf(String.format("%.2f", notInsSysVal));
+            notInsSysVal = Double.parseDouble(String.format("%.2f", notInsSysVal));
             binding.tvInsSysVal.setText(String.format("%.2f", insSysVal));
             binding.tvNotInsSysVal.setText(String.format("%.2f", notInsSysVal));
             difference = insSysVal - physVal;
-            difference = Double.valueOf(String.format("%.2f", difference));
+            difference = Double.parseDouble(String.format("%.2f", difference));
             binding.tvDiffVal.setText(String.format("%.2f", difference));
         }
 
@@ -948,11 +947,11 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        getString(R.string.user_cancelled_cap), Toast.LENGTH_SHORT)
                         .show();
             } else {
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        getString(R.string.sorry_failed_to_cap), Toast.LENGTH_SHORT)
                         .show();
             }
         }
@@ -974,8 +973,6 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
         File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
-                        + " directory");
                 return null;
             }
         }

@@ -72,7 +72,6 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
     File file;
     private String officerID, divId, suppId;
     double physVal = 0, sysVal = 0, difference = 0, notInsSysVal = 0, insSysVal = 0;
-    private StockDetailsResponse stockDetailsResponse;
     private String stockReg, insCer, fireNOC, weightMea;
     private String qualityStock, stockCards, godownHyg, driage, trayAvail, repairsReq;
     private String insComName, insComDate, weightDate, genAvail, remarks, repairType, lastInsDiv;
@@ -109,7 +108,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         String stockData = sharedPreferences.getString(AppConstants.stockData, "");
         officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         Gson gson = new Gson();
-        stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
+        StockDetailsResponse stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
         String godownData = sharedPreferences.getString(AppConstants.MFP_DEPOT_DATA, "");
         MFPGoDowns mfpGoDowns = gson.fromJson(godownData, MFPGoDowns.class);
         divId = mfpGoDowns.getDivisionId();
@@ -153,17 +152,17 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                 }
             }
 
-            sysVal = Double.valueOf(String.format("%.2f", sysVal));
-            physVal = Double.valueOf(String.format("%.2f", physVal));
+            sysVal = Double.parseDouble(String.format("%.2f", sysVal));
+            physVal = Double.parseDouble(String.format("%.2f", physVal));
             binding.tvSysVal.setText(String.format("%.2f", sysVal));
             binding.tvPhysVal.setText(String.format("%.2f", physVal));
 
             notInsSysVal = sysVal - insSysVal;
-            notInsSysVal = Double.valueOf(String.format("%.2f", notInsSysVal));
+            notInsSysVal = Double.parseDouble(String.format("%.2f", notInsSysVal));
             binding.tvInsSysVal.setText(String.format("%.2f", insSysVal));
             binding.tvSysValNotIns.setText(String.format("%.2f", notInsSysVal));
             difference = insSysVal - physVal;
-            difference = Double.valueOf(String.format("%.2f", difference));
+            difference = Double.parseDouble(String.format("%.2f", difference));
             binding.tvDiffVal.setText(String.format("%.2f", difference));
 
         }
@@ -486,7 +485,6 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
             returnFlag = false;
             showSnackBar("Enter insurance validity");
             ScrollToView(binding.rgInsurance);
-//            ScrollToViewEditText(binding.etInsDate, "Enter insurance validity");
         } else if (TextUtils.isEmpty(fireNOC)) {
             returnFlag = false;
             showSnackBar("Please check fire department NOC");
@@ -499,7 +497,6 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
             returnFlag = false;
             showSnackBar("Enter weight measure validity date");
             ScrollToView(binding.rgWeight);
-//            ScrollToViewEditText(binding.etLegalMetDate, "Enter weight measure validity date");
         } else if (TextUtils.isEmpty(qualityStock)) {
             returnFlag = false;
             ScrollToView(binding.rgQualityStock);
@@ -743,15 +740,22 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
     }
 
     private String getRealPathFromURI(String contentURI) {
-        Uri contentUri = Uri.parse(contentURI);
-        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
-        if (cursor == null) {
-            return contentUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(index);
+        int index = 0;
+        Cursor cursor = null;
+        try {
+            Uri contentUri = Uri.parse(contentURI);
+            cursor = getContentResolver().query(contentUri, null, null, null, null);
+            if (cursor == null) {
+                return contentUri.getPath();
+            } else {
+                cursor.moveToFirst();
+                index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return cursor.getString(index);
     }
 
     public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -801,11 +805,11 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        getString(R.string.user_cancelled_cap), Toast.LENGTH_SHORT)
                         .show();
             } else {
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        getString(R.string.sorry_failed_to_cap), Toast.LENGTH_SHORT)
                         .show();
             }
         }
@@ -827,8 +831,6 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
-                        + " directory");
                 return null;
             }
         }

@@ -254,10 +254,10 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                         if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
                             getLocationData();
                         } else {
-                            Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                            Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
                         }
                     } else {
-                        Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Please inspect all the sections");
+                        Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_insp_all));
                     }
                 }
             }
@@ -270,8 +270,8 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
         if (!TextUtils.isEmpty(desLat) && !TextUtils.isEmpty(desLng)) {
             dLocation = new Location("dLoc");
-            dLocation.setLatitude(Double.valueOf(desLat));
-            dLocation.setLongitude(Double.valueOf(desLng));
+            dLocation.setLatitude(Double.parseDouble(desLat));
+            dLocation.setLongitude(Double.parseDouble(desLng));
         }
 
         if (mCurrentLocation != null && mCurrentLocation.getLatitude() != 0 && mCurrentLocation.getLongitude() != 0) {
@@ -292,11 +292,11 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             if (distance <= AppConstants.DISTANCE) {
                 submitCall();
             } else {
-                Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Sorry, inspection submit not allowed, You are not within the "
-                        + AppConstants.DISTANCE + " meter radius of selected institute");
+                Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.ins_not_allowed)
+                        + AppConstants.DISTANCE + getString(R.string.radius_not_in_range));
             }
         } else {
-            Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Sorry, inspection submit not allowed, institute location details are not found");
+            Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.ins_not_submitted));
         }
     }
 
@@ -578,10 +578,10 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
             revertFlags();
-            Utils.customErrorAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), schemeSubmitResponse.getStatusMessage() + " Failed data submit");
+            Utils.customErrorAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), schemeSubmitResponse.getStatusMessage() + getString(R.string.failed_to_submit));
         } else {
             revertFlags();
-            Utils.customErrorAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getResources().getString(R.string.something) + " Failed data submit");
+            Utils.customErrorAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getResources().getString(R.string.something) + getString(R.string.failed_to_submit));
         }
     }
 
@@ -606,8 +606,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
         if (mediaStorageDir.isDirectory()) {
             String[] children = mediaStorageDir.list();
-            for (int i = 0; i < children.length; i++)
-                new File(mediaStorageDir, children[i]).delete();
+            for (String child : children) new File(mediaStorageDir, child).delete();
             mediaStorageDir.delete();
         }
         Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
@@ -636,7 +635,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             }
             if (!flag) {
                 clearSharedPref();
-                Log.i("DELETE", "onBackPressed: DELETE INonBackPressed ");
                 instMainViewModel.deleteMenuData();
                 startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
@@ -708,7 +706,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {
@@ -716,7 +713,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         }
     }
 
-    private BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             try {
@@ -740,7 +737,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         customProgressDialog.hide();
 
         if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
-//            Snackbar.make(binding.appbar.root, "Uploaded photos successfully.Submitting data...", Snackbar.LENGTH_LONG).show();
             instSubmitRequest.setOfficer_id(officer_id);
             instSubmitRequest.setInstitute_id(instId);
             instSubmitRequest.setInspection_time(Utils.getCurrentDateTime());
@@ -761,7 +757,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
                 submitFlag = true;
                 customProgressDialog.show();
-                customProgressDialog.addText("Please wait...Uploading Data");
+                customProgressDialog.addText(getString(R.string.uploading_data));
                 instMainViewModel.submitInstDetails(instSubmitRequest);
             } else {
                 revertFlags();

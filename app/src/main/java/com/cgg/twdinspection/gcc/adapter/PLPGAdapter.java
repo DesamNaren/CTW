@@ -17,6 +17,8 @@ import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -25,9 +27,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
 public class PLPGAdapter extends RecyclerView.Adapter<PLPGAdapter.ItemHolder> {
-    private Context context;
-    private List<CommonCommodity> commonCommodities;
-    private StockChildRowBinding stockChildRowBinding;
+    private final Context context;
+    private final List<CommonCommodity> commonCommodities;
 
     public PLPGAdapter(Context context, List<CommonCommodity> commonCommodities) {
         this.context = context;
@@ -37,11 +38,11 @@ public class PLPGAdapter extends RecyclerView.Adapter<PLPGAdapter.ItemHolder> {
     @NonNull
     @Override
     public PLPGAdapter.ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        stockChildRowBinding = DataBindingUtil.inflate(
+        com.cgg.twdinspection.databinding.StockChildRowBinding stockChildRowBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 R.layout.stock_child_row, parent, false);
 
-        return new PLPGAdapter.ItemHolder(stockChildRowBinding);
+        return new ItemHolder(stockChildRowBinding);
     }
 
 
@@ -84,12 +85,12 @@ public class PLPGAdapter extends RecyclerView.Adapter<PLPGAdapter.ItemHolder> {
                     }
 
                     @Override
-                    public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
+                    public void onNext(@NotNull TextViewTextChangeEvent textViewTextChangeEvent) {
 
                         String str = textViewTextChangeEvent.text().toString();
                         if (!TextUtils.isEmpty(str) && !str.equals(".")) {
-                            if (Double.valueOf(str) <= dataModel.getQty()) {
-                                holder.stockChildRowBinding.tvPhyVal.setText(String.valueOf(Double.valueOf(str) * dataModel.getRate()));
+                            if (Double.parseDouble(str) <= dataModel.getQty()) {
+                                holder.stockChildRowBinding.tvPhyVal.setText(String.valueOf(Double.parseDouble(str) * dataModel.getRate()));
                                 dataModel.setPhyQuant(String.valueOf(Double.valueOf(str)));
                             } else {
                                 holder.stockChildRowBinding.phyAvaQty.setText("");
@@ -121,7 +122,7 @@ public class PLPGAdapter extends RecyclerView.Adapter<PLPGAdapter.ItemHolder> {
         return commonCommodities != null && commonCommodities.size() > 0 ? commonCommodities.size() : 0;
     }
 
-    class ItemHolder extends RecyclerView.ViewHolder {
+    static class ItemHolder extends RecyclerView.ViewHolder {
 
         StockChildRowBinding stockChildRowBinding;
 

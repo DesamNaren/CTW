@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/action_bar_layout" />
+
+        <RelativeLayout
+            android:id="@+id/profile_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header">
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="@dimen/dimen_70dp"
+                android:layout_height="@dimen/dimen_70dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:padding="@dimen/dimen_2dp"
+                android:src="@drawable/ctw_icon_latest"
+                app:civ_border_color="#FFF"
+                app:civ_border_width="2dp" />
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:id="@+id/data_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/footer"
+            android:layout_below="@+id/profile_ll">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:gravity="end"
+                        android:layout_gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.1"
+                        android:text="@string/version"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dimen_16sp" />
+
+                    <TextView
+                        android:paddingLeft="@dimen/dimen_20dp"
+                        android:paddingRight="@dimen/dimen_20dp"
+                        android:layout_gravity="center"
+                        android:id="@+id/tv_version"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dimen_20sp"
+                        android:paddingStart="@dimen/dimen_20dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:gravity="end"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.1"
+                        android:text="@string/updated_on"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dimen_16sp" />
+
+                    <TextView
+                        android:paddingLeft="@dimen/dimen_20dp"
+                        android:paddingRight="@dimen/dimen_20dp"                        android:layout_gravity="center"
+                        android:id="@+id/tv_updated_on"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dimen_20sp"
+                        android:paddingStart="@dimen/dimen_20dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <include
+            android:id="@+id/footer"
+            layout="@layout/footer_layout_new" />
+
+    </RelativeLayout>
+</layout>

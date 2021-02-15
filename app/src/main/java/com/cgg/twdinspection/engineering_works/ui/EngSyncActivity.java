@@ -55,7 +55,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
         engSyncRepository = new EngSyncRepository(getApplication());
-        binding.header.headerTitle.setText(getResources().getString(R.string.sync_activity));
+        binding.header.headerTitle.setText(getResources().getString(R.string.sync_eng_activity));
         instMainViewModel = new InstMainViewModel(getApplication());
 
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {

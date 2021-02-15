@@ -39,15 +39,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterface {
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private StockViewModel viewModel;
     ActivityPetrolPumpBinding binding;
     private LPGSupplierInfo lpgSupplierInfo;
     CustomProgressDialog customProgressDialog;
     private PetrolStockDetailsResponse petrolStockDetailsResponseMain;
-    private List<String> mFragmentTitleList = new ArrayList<>();
-    private List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> mFragmentTitleList = new ArrayList<>();
+    private final List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +57,7 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
 
         binding.header.headerTitle.setText(getResources().getString(R.string.gcc_lpg));
         binding.header.ivHome.setVisibility(View.GONE);
-        viewModel = new StockViewModel(getApplication(), this);
+        StockViewModel viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
 
@@ -76,12 +74,12 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
         });
 
         try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
+            SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
             Gson gson = new Gson();
             String str = sharedPreferences.getString(AppConstants.LPG_DATA, "");
             lpgSupplierInfo = gson.fromJson(str, LPGSupplierInfo.class);
             if (lpgSupplierInfo != null) {
-                binding.includeBasicLayout.drGodownNameTV.setText("LPG");
+                binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.lpg));
                 binding.includeBasicLayout.divName.setText(lpgSupplierInfo.getDivisionName());
                 binding.includeBasicLayout.socName.setText(lpgSupplierInfo.getSocietyName());
                 binding.includeBasicLayout.drGodownName.setText(lpgSupplierInfo.getGodownName());
@@ -170,7 +168,7 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
                                     Bundle bundle = new Bundle();
                                     bundle.putString(AppConstants.petComm, petrolComm);
                                     plpgFragment.setArguments(bundle);
-                                    adapter.addFrag(plpgFragment, "LPG Commodities");
+                                    adapter.addFrag(plpgFragment);
                                 } else {
                                     binding.viewPager.setVisibility(View.GONE);
                                     binding.tabs.setVisibility(View.GONE);
@@ -269,9 +267,9 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
             return mFragmentList.size();
         }
 
-        void addFrag(Fragment fragment, String title) {
+        void addFrag(Fragment fragment) {
             mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
+            mFragmentTitleList.add("LPG Commodities");
         }
 
         @Override

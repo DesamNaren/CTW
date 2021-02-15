@@ -37,7 +37,6 @@ import com.cgg.twdinspection.BuildConfig;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
-import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityUploadedPhotoBinding;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
@@ -76,14 +75,13 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    private String officerID, instID, insTime, randomNo;
-    private CustomProgressDialog customProgressDialog;
+    private String instID;
+    private String randomNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        customProgressDialog = new CustomProgressDialog(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_uploaded_photo);
         binding.header.headerTitle.setText(getString(R.string.upload_photos));
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
@@ -99,11 +97,8 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
-            officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
-            insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
             randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -222,64 +217,37 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
             public void onClick(View view) {
                 uploadPhotos = new ArrayList<>();
 
-                if (flag_storeroom == 0) {
-//                    showSnackBar("Please capture storeroom image");
-//                    return;
-                } else {
-                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.STOREROOM, String.valueOf(file_storeroom));
+                if (flag_storeroom != 0) {
+                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.STOREROOM, String.valueOf(file_storeroom));
                 }
-                if (flag_varandah == 0) {
-//                    showSnackBar("Please capture varandah image");
-//                    return;
-                } else {
-                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.VARANDAH, String.valueOf(file_varandah));
+                if (flag_varandah != 0) {
+                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.VARANDAH, String.valueOf(file_varandah));
                 }
-                if (flag_playGround == 0) {
-//                    showSnackBar("Please capture playground image");
-//                    return;
-                } else {
-                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.PLAYGROUND, String.valueOf(file_playGround));
+                if (flag_playGround != 0) {
+                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.PLAYGROUND, String.valueOf(file_playGround));
                 }
-                if (flag_diningHall == 0) {
-//                    showSnackBar("Please capture dining hall image");
-//                    return;
-                } else {
-                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.DININGHALL, String.valueOf(file_diningHall));
+                if (flag_diningHall != 0) {
+                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.DININGHALL, String.valueOf(file_diningHall));
                 }
-                if (flag_dormitory == 0) {
-//                    showSnackBar("Please capture dormitory image");
-//                    return;
-                } else {
-                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.DORMITORY, String.valueOf(file_dormitory));
+                if (flag_dormitory != 0) {
+                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.DORMITORY, String.valueOf(file_dormitory));
                 }
-                if (flag_mainBuilding == 0) {
-//                    showSnackBar("Please capture main building image");
-//                    return;
-                } else {
-                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.MAINBUILDING, String.valueOf(file_mainBulding));
+                if (flag_mainBuilding != 0) {
+                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.MAINBUILDING, String.valueOf(file_mainBulding));
                 }
-                if (flag_toilet == 0) {
-//                    showSnackBar("Please capture toilet image");
-//                    return;
-                } else {
-                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.TOILET, String.valueOf(file_toilet));
+                if (flag_toilet != 0) {
+                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.TOILET, String.valueOf(file_toilet));
                 }
-                if (flag_kitchen == 0) {
-//                    showSnackBar("Please capture kitchen image");
-//                    return;
-                } else {
-                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.KITCHEN, String.valueOf(file_kitchen));
+                if (flag_kitchen != 0) {
+                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.KITCHEN, String.valueOf(file_kitchen));
                 }
-                if (flag_classroom == 0) {
-//                    showSnackBar("Please capture classroom image");
-//                    return;
-                } else {
-                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.CLASSROOM, String.valueOf(file_classroom));
+                if (flag_classroom != 0) {
+                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.CLASSROOM, String.valueOf(file_classroom));
                 }
                 if (uploadPhotos.size() > 0) {
                     Utils.customSaveAlert(UploadedPhotoActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
                 } else {
-                    showSnackBar("Capture atleast one image to save data");
+                    showSnackBar(getString(R.string.cap_at_least));
                 }
             }
         });
@@ -591,10 +559,10 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         snackbar.show();
     }
 
-    private void addPhoto(String instID, String secId, String currentDateTime, String typeOfImage, String valueOfImage) {
+    private void addPhoto(String instID, String currentDateTime, String typeOfImage, String valueOfImage) {
         UploadPhoto uploadPhoto = new UploadPhoto();
         uploadPhoto.setInstitute_id(instID);
-        uploadPhoto.setSection_id(secId);
+        uploadPhoto.setSection_id("12");
         uploadPhoto.setTimeStamp(currentDateTime);
         uploadPhoto.setPhoto_name(typeOfImage);
         uploadPhoto.setPhoto_path(valueOfImage);
@@ -641,20 +609,13 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
             }
         }
 
-//      setting inSampleSize value allows to load a scaled down version of the original image
-
         options.inSampleSize = calculateInSampleSize(options, actualWidth, actualHeight);
-
-//      inJustDecodeBounds set to false to load the actual bitmap
         options.inJustDecodeBounds = false;
-
-//      this options allow android to claim the bitmap memory if it runs low on memory
         options.inPurgeable = true;
         options.inInputShareable = true;
         options.inTempStorage = new byte[16 * 1024];
 
         try {
-//          load the bitmap from its path
             bmp = BitmapFactory.decodeFile(filePath, options);
         } catch (OutOfMemoryError exception) {
             exception.printStackTrace();
@@ -677,8 +638,6 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         Canvas canvas = new Canvas(scaledBitmap);
         canvas.setMatrix(scaleMatrix);
         canvas.drawBitmap(bmp, middleX - bmp.getWidth() / 2, middleY - bmp.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
-
-//      check the rotation of the image and display it properly
         ExifInterface exif;
         try {
             exif = new ExifInterface(filePath);
@@ -708,8 +667,6 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         String filename = getFilename();
         try {
             out = new FileOutputStream(filename);
-
-//          write the compressed bitmap at the destination specified by filename.
             scaledBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
 
         } catch (FileNotFoundException e) {
@@ -723,29 +680,28 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     public String getFilename() {
         FilePath = getExternalFilesDir(null)
                 + "/" + IMAGE_DIRECTORY_NAME;
-
         String Image_name = PIC_NAME;
         FilePath = FilePath + "/" + Image_name;
-
-//        File file = new File(Environment.getExternalStorageDirectory().getPath(), "MyFolder/Images");
-//        if (!file.exists()) {
-//            file.mkdirs();
-//        }
-//        String uriSting = (file.getAbsolutePath() + "/" + System.currentTimeMillis() + ".jpg");
         return FilePath;
-
     }
 
     private String getRealPathFromURI(String contentURI) {
-        Uri contentUri = Uri.parse(contentURI);
-        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
-        if (cursor == null) {
-            return contentUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(index);
+        int index = 0;
+        Cursor cursor = null;
+        try {
+            Uri contentUri = Uri.parse(contentURI);
+            cursor = getContentResolver().query(contentUri, null, null, null, null);
+            if (cursor == null) {
+                return contentUri.getPath();
+            } else {
+                cursor.moveToFirst();
+                index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return cursor.getString(index);
     }
 
     public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -849,11 +805,11 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        getString(R.string.user_cancelled_cap), Toast.LENGTH_SHORT)
                         .show();
             } else {
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        getString(R.string.sorry_failed_to_cap), Toast.LENGTH_SHORT)
                         .show();
             }
         }
@@ -876,8 +832,6 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
-                        + " directory");
                 return null;
             }
         }
@@ -949,7 +903,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         unregisterReceiver(mGpsSwitchStateReceiver);
     }
 
-    private BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             try {
@@ -983,7 +937,6 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {

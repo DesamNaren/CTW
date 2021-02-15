@@ -25,13 +25,11 @@ import java.util.Random;
 
 public class EngReportAdapter extends RecyclerView.Adapter<EngReportAdapter.ItemHolder> implements Filterable {
 
-    private Context context;
-    private List<ReportWorkDetails> list;
+    private final List<ReportWorkDetails> list;
     private List<ReportWorkDetails> filterList;
     EngReportClickCallback reportClickCallback;
 
     public EngReportAdapter(Context context, List<ReportWorkDetails> list) {
-        this.context = context;
         this.list = list;
         filterList = new ArrayList<>();
         filterList.addAll(list);
@@ -114,7 +112,7 @@ public class EngReportAdapter extends RecyclerView.Adapter<EngReportAdapter.Item
         };
     }
 
-    class ItemHolder extends RecyclerView.ViewHolder {
+    static class ItemHolder extends RecyclerView.ViewHolder {
 
 
         AdapterEngReportBinding listItemBinding;

@@ -322,7 +322,6 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {

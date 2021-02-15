@@ -24,9 +24,8 @@ public class ValidateMPINActivity extends AppCompatActivity {
 
     private Context context;
     private ActivityValidateMpinBinding binding;
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private String mpin;
+    private String mPIN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +33,11 @@ public class ValidateMPINActivity extends AppCompatActivity {
         context = ValidateMPINActivity.this;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_validate_mpin);
         try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
+            SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
 
             binding.loggedIn.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
-            mpin = sharedPreferences.getString(AppConstants.MPIN, "");
+            mPIN = sharedPreferences.getString(AppConstants.MPIN, "");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,7 +117,7 @@ public class ValidateMPINActivity extends AppCompatActivity {
         } else {
             binding.firstPinView.setError(null);
             if (!TextUtils.isEmpty(binding.firstPinView.getText().toString()) &&
-                    binding.firstPinView.getText().toString().equalsIgnoreCase(mpin)) {
+                    binding.firstPinView.getText().toString().equalsIgnoreCase(mPIN)) {
                 startActivity(new Intent(ValidateMPINActivity.this, DashboardMenuActivity.class));
                 finish();
 

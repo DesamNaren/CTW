@@ -24,7 +24,7 @@
         <item
             android:id="@+id/nav_schemes"
             android:icon="@drawable/schemes_icon"
-            android:title="@string/scheme"
+            android:title="@string/schemes"
             app:iconTint="@color/colorPrimaryDark" />
         <item
             android:id="@+id/nav_gcc"
@@ -48,12 +48,44 @@
         <item
             android:id="@+id/nav_my_insp"
             android:icon="@drawable/gcc_icon"
-            android:title="@string/my_inspections"
+            android:title="@string/gcc_reports_offline"
             app:iconTint="@color/colorPrimaryDark" />
-        <item
-            android:id="@+id/nav_logout"
-            app:iconTint="@color/colorPrimaryDark"
-            android:icon="@drawable/logout"
-            android:title="@string/logout_str" />
+
+
     </group>
+
+    <item
+        android:id="@+id/menu_other"
+        android:title="@string/info">
+        <menu>
+            <group
+                android:id="@+id/pri_group"
+                android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_exit"
+                    android:icon="@drawable/exit"
+                    android:title="@string/exit_menu" />
+
+                <item
+                    app:iconTint="@color/colorPrimaryDark"
+                    android:id="@+id/nav_log_out"
+                    android:icon="@drawable/logout"
+                    android:title="@string/logout_menu" />
+
+                <item
+                    android:id="@+id/nav_pri_pol"
+                    android:icon="@drawable/privacy"
+                    android:title="@string/privacy_policy" />
+
+                <item
+                    android:id="@+id/nav_info"
+                    android:icon="@drawable/info"
+                    android:title="@string/app_info" />
+
+
+
+            </group>
+        </menu>
+    </item>
 </menu>

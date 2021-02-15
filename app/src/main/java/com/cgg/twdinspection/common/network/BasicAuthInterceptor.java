@@ -1,5 +1,7 @@
 package com.cgg.twdinspection.common.network;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
 import okhttp3.Credentials;
@@ -9,14 +11,14 @@ import okhttp3.Response;
 
 public class BasicAuthInterceptor implements Interceptor {
 
-    private String credentials;
+    private final String credentials;
 
     public BasicAuthInterceptor(String user, String password) {
         this.credentials = Credentials.basic(user, password);
     }
 
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public @NotNull Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         Request authenticatedRequest = request.newBuilder()
                 .header("Authorization", credentials).build();

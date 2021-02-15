@@ -24,13 +24,11 @@ import java.util.Random;
 
 public class SchemeReportAdapter extends RecyclerView.Adapter<SchemeReportAdapter.ItemHolder> implements Filterable {
 
-    private Context context;
-    private List<SchemeReportData> list;
+    private final List<SchemeReportData> list;
     private List<SchemeReportData> filterList;
     private ReportClickCallback reportClickCallback;
 
     public SchemeReportAdapter(Context context, List<SchemeReportData> list) {
-        this.context = context;
         this.list = list;
         filterList = new ArrayList<>();
         filterList.addAll(list);
@@ -119,7 +117,7 @@ public class SchemeReportAdapter extends RecyclerView.Adapter<SchemeReportAdapte
         };
     }
 
-    class ItemHolder extends RecyclerView.ViewHolder {
+    static class ItemHolder extends RecyclerView.ViewHolder {
 
 
         AdapterSchemeReportBinding listItemBinding;

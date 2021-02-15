@@ -43,15 +43,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MFPGodownActivity extends AppCompatActivity implements ErrorHandlerInterface {
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private StockViewModel viewModel;
     ActivityMfpGodownBinding binding;
     CustomProgressDialog customProgressDialog;
     private StockDetailsResponse stockDetailsResponsemain;
     private MFPGoDowns mfpGoDowns;
-    private List<String> mFragmentTitleList = new ArrayList<>();
-    private List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> mFragmentTitleList = new ArrayList<>();
+    private final List<Fragment> mFragmentList = new ArrayList<>();
     private boolean mfp_flag, emp_flag;
 
     @Override
@@ -68,11 +66,11 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
         PUnitFragment.commonCommodities = null;
 
         customProgressDialog = new CustomProgressDialog(this);
-        viewModel = new StockViewModel(getApplication(), this);
+        StockViewModel viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
         binding.header.ivHome.setVisibility(View.GONE);
-        sharedPreferences = TWDApplication.get(this).getPreferences();
+        SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
         binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.mfp_godown_name));
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,7 +223,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                                     binding.tabs.setVisibility(View.GONE);
                                     binding.noDataTv.setVisibility(View.VISIBLE);
                                     binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                                    binding.noDataTv.setText("No data found");
+                                    binding.noDataTv.setText(R.string.no_data_found);
                                     callSnackBar("No data found");
                                 }
 
@@ -259,33 +257,6 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
         } else {
             Utils.customWarningAlert(MFPGodownActivity.this, getResources().getString(R.string.app_name), "Please check internet");
         }
-
-    }
-
-
-    void setFragPos(String header, int pos) {
-        for (int x = 0; x < mFragmentTitleList.size(); x++) {
-            if (header.equalsIgnoreCase(mFragmentTitleList.get(x))) {
-                callSnackBar("Submit all records in " + header);
-                binding.viewPager.setCurrentItem(x);
-                if (header.contains("Essential Commodities")) {
-                    ((EssentialFragment) mFragmentList.get(x)).setPos(pos);
-                }
-                if (header.equalsIgnoreCase("Daily Requirements")) {
-                    ((DailyFragment) mFragmentList.get(x)).setPos(pos);
-                }
-                if (header.equalsIgnoreCase("Empties")) {
-                    ((EmptiesFragment) mFragmentList.get(x)).setPos(pos);
-                }
-                if (header.equalsIgnoreCase("MFP Commodities")) {
-                    ((MFPFragment) mFragmentList.get(x)).setPos(pos);
-                }
-                if (header.equalsIgnoreCase("Processing Units")) {
-                    ((PUnitFragment) mFragmentList.get(x)).setPos(pos);
-                }
-                break;
-            }
-        }
     }
 
     void callSnackBar(String msg) {
@@ -310,13 +281,11 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
     public void handleError(Throwable e, Context context) {
         customProgressDialog.hide();
         String errMsg = ErrorHandler.handleError(e, context);
-        Log.i("MSG", "handleError: " + errMsg);
         callSnackBar(errMsg);
     }
 
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
-
 
         ViewPagerAdapter(FragmentManager manager) {
             super(manager);

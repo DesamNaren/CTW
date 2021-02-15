@@ -22,8 +22,6 @@ import com.cgg.twdinspection.gcc.ui.punit.PUnitSelActivity;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 
 public class GCCDashboardActivity extends AppCompatActivity {
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
     ActivityGccDashboardBinding binding;
 
     @Override
@@ -56,8 +54,8 @@ public class GCCDashboardActivity extends AppCompatActivity {
         });
 
         try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
-            editor = sharedPreferences.edit();
+            SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
             String curTime = Utils.getCurrentDateTimeDisplay();

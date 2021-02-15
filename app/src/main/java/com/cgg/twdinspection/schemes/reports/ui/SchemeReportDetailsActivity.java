@@ -52,7 +52,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
     private SchemeReportData schemeReportData;
     CustomProgressDialog customProgressDialog;
     String directory_path, filePath;
-    private String TAG = SchemeReportDetailsActivity.class.getSimpleName();
+    private final String TAG = SchemeReportDetailsActivity.class.getSimpleName();
     String folder = "Schemes";
     private String filePath_temp;
 
@@ -79,8 +79,6 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
         binding.header.ivPdf.setVisibility(View.VISIBLE);
 
         binding.tvDate.setText(schemeReportData.getInspectionTime());
-//        binding.tvOfficerName.setText(schemeReportData.getOfficerId() + ", " + sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
-//        binding.tvOfficerDes.setText("Inspection Report-Schemes" + ", " + schemeReportData.getInspectionTime());
 
         customProgressDialog = new CustomProgressDialog(this);
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {

@@ -18,6 +18,8 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -57,13 +59,11 @@ public class PDFUtil {
      * Singleton instance for PDFUtil.
      */
     private static PDFUtil sInstance;
-    private Context context;
 
     /**
      * Constructor.
      */
     private PDFUtil(Context context) {
-        this.context = context;
     }
 
     /**
@@ -129,15 +129,13 @@ public class PDFUtil {
     /**
      * Async task class used to generate PDF in separate thread.
      */
-    private class GeneratePDFAsync extends AsyncTask<Void, Void, File> {
+    private static class GeneratePDFAsync extends AsyncTask<Void, Void, File> {
 
         // mContentViews.
-        private List<View> mContentViews;
+        private final List<View> mContentViews;
 
         // mFilePath.
-        private String mFilePath;
-        private String flag;
-        private String folderName;
+        private final String mFilePath;
 
         // mListener.
         private PDFUtilListener mListener = null;
@@ -156,8 +154,6 @@ public class PDFUtil {
             this.mContentViews = contentViews;
             this.mFilePath = filePath;
             this.mListener = listener;
-            this.flag = flag;
-            this.folderName = folderName;
         }
 
 
@@ -310,7 +306,7 @@ public class PDFUtil {
      */
     private static class APINotSupportedException extends Exception {
         // mErrorMessage.
-        private String mErrorMessage;
+        private final String mErrorMessage;
 
         /**
          * Constructor.
@@ -327,7 +323,7 @@ public class PDFUtil {
          * @return error message as a string.
          */
         @Override
-        public String toString() {
+        public @NotNull String toString() {
             return "APINotSupportedException{" +
                     "mErrorMessage='" + mErrorMessage + '\'' +
                     '}';
@@ -342,13 +338,11 @@ public class PDFUtil {
      * //     * @throws MyOPDException
      */
     public static ArrayList<Bitmap> pdfToBitmap(File pdfFile) throws IllegalStateException {
-        if (pdfFile == null || pdfFile.exists() == false) {
+        if (pdfFile == null || !pdfFile.exists()) {
             throw new IllegalStateException("");
         }
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
-//            throw new MyOPDException("PDF preview image cannot be generated in this device");
-//            Toast.makeText( "PDF preview image cannot be generated in this device", Toast.LENGTH_SHORT).show();
-        }
+        //            throw new MyOPDException("PDF preview image cannot be generated in this device");
+        //            Toast.makeText( "PDF preview image cannot be generated in this device", Toast.LENGTH_SHORT).show();
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
             return null;
         }
@@ -412,7 +406,7 @@ public class PDFUtil {
             contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + File.separator + "CTW/" + folder);
             final Uri contentUri = MediaStore.Files.getContentUri("external");
             Uri uri = resolver.insert(contentUri, contentValues);
-            OutputStream outputStream = resolver.openOutputStream(uri);
+            resolver.openOutputStream(uri);
             return PDFUtil.getPath(context, uri);
         } catch (Exception e) {
             e.printStackTrace();

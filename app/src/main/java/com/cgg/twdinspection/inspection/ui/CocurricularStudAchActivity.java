@@ -33,8 +33,6 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
     private ActivityCocurricularAchDetailsBinding binding;
     private StudAchViewModel viewModel;
     private StudAchievementsAdapter studAchievementsAdapter;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
     InstMainViewModel instMainViewModel;
     private String fromClass;
 
@@ -45,14 +43,11 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
         binding.appBarLayout.backBtn.setVisibility(View.GONE);
         binding.appBarLayout.ivHome.setVisibility(View.GONE);
         binding.appBarLayout.headerTitle.setText(getString(R.string.stu_ach));
-        sharedPreferences = TWDApplication.get(this).getPreferences();
+        SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
         viewModel = ViewModelProviders.of(this,
                 new StudAchCustomViewModel(binding, this, getApplication())).get(StudAchViewModel.class);
         binding.setViewModel(viewModel);
         instMainViewModel = new InstMainViewModel(getApplication());
-
-        sharedPreferences = TWDApplication.get(this).getPreferences();
-        editor = sharedPreferences.edit();
         Gson gson = new Gson();
 
         fromClass = getIntent().getStringExtra(AppConstants.FROM_CLASS);
@@ -110,7 +105,6 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {

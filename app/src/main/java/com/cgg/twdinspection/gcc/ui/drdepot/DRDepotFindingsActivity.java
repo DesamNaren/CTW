@@ -52,6 +52,8 @@ import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -82,7 +84,6 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     File file;
     private String officerID, divId, suppId;
     double physVal = 0, sysVal = 0, difference = 0, insSysVal = 0, notInsSysVal = 0;
-    private StockDetailsResponse stockDetailsResponse;
     private String ecsStock, drStock, emptyStock, abstractSales, depotCashBook, liabilityReg, visitorsBook, saleBook, weightsMeasurements, certIssueDate;
     private String depotAuthCert, mfpStock, mfpPurchase, billAbstract, abstractAccnt, advanceAccnt, mfpLiability, depotNameBoard, gccObjPrinc;
     private String depotTimimg, mfpComm, ecComm, drComm, stockBal, valuesAsPerSale, valuesAsPerPurchasePrice, qualVerified, depotMaintHygeine, repairsReq, repairsType;
@@ -122,7 +123,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         String stockData = sharedPreferences.getString(AppConstants.stockData, "");
         officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         Gson gson = new Gson();
-        stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
+        StockDetailsResponse stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
         String depotData = sharedPreferences.getString(AppConstants.DR_DEPOT_DATA, "");
         DRDepots drDepot = gson.fromJson(depotData, DRDepots.class);
         divId = drDepot.getDivisionId();
@@ -175,20 +176,18 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                 }
             }
 
-            sysVal = Double.valueOf(String.format("%.2f", sysVal));
-            physVal = Double.valueOf(String.format("%.2f", physVal));
+            sysVal = Double.parseDouble(String.format("%.2f", sysVal));
+            physVal = Double.parseDouble(String.format("%.2f", physVal));
             binding.tvSysVal.setText(String.format("%.2f", sysVal));
             binding.tvPhysVal.setText(String.format("%.2f", physVal));
             notInsSysVal = sysVal - insSysVal;
-            notInsSysVal = Double.valueOf(String.format("%.2f", notInsSysVal));
+            notInsSysVal = Double.parseDouble(String.format("%.2f", notInsSysVal));
             binding.tvSysValIns.setText(String.format("%.2f", insSysVal));
             binding.tvSysValNotIns.setText(String.format("%.2f", notInsSysVal));
             difference = insSysVal - physVal;
-            difference = Double.valueOf(String.format("%.2f", difference));
+            difference = Double.parseDouble(String.format("%.2f", difference));
             binding.tvDiffVal.setText(String.format("%.2f", difference));
-
         }
-
 
         binding.rgWeightMeasCert.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -682,7 +681,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     }
 
                     @Override
-                    public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
+                    public void onNext(@NotNull TextViewTextChangeEvent textViewTextChangeEvent) {
 
                         vocBills = textViewTextChangeEvent.text().toString();
                         if (!TextUtils.isEmpty(vocBills) && !vocBills.equals(".")) {
@@ -720,7 +719,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     }
 
                     @Override
-                    public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
+                    public void onNext(@NotNull TextViewTextChangeEvent textViewTextChangeEvent) {
 
                         liaBal = textViewTextChangeEvent.text().toString();
                         if (!TextUtils.isEmpty(liaBal) && !liaBal.equals(".")) {
@@ -748,9 +747,9 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     }
 
     private double calcDef(String cashBal, String vocBills, String liaBal) {
-        double cashBalDbl = Double.valueOf(cashBal);
-        double adjBalDbl = Double.valueOf(vocBills);
-        double liaBalDbl = Double.valueOf(liaBal);
+        double cashBalDbl = Double.parseDouble(cashBal);
+        double adjBalDbl = Double.parseDouble(vocBills);
+        double liaBalDbl = Double.parseDouble(liaBal);
         return cashBalDbl + adjBalDbl + physVal - liaBalDbl;
     }
 
@@ -1086,16 +1085,24 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     }
 
     private String getRealPathFromURI(String contentURI) {
-        Uri contentUri = Uri.parse(contentURI);
-        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
-        if (cursor == null) {
-            return contentUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(index);
+        int index = 0;
+        Cursor cursor = null;
+        try {
+            Uri contentUri = Uri.parse(contentURI);
+            cursor = getContentResolver().query(contentUri, null, null, null, null);
+            if (cursor == null) {
+                return contentUri.getPath();
+            } else {
+                cursor.moveToFirst();
+                index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return cursor.getString(index);
     }
+
 
     public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         final int height = options.outHeight;
@@ -1168,8 +1175,6 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
-                        + " directory");
                 return null;
             }
         }

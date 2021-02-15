@@ -29,8 +29,8 @@ import java.util.Random;
 
 public class EngWorksAdapter extends RecyclerView.Adapter<EngWorksAdapter.ItemHolder> implements Filterable {
 
-    private Context context;
-    private List<WorkDetail> list;
+    private final Context context;
+    private final List<WorkDetail> list;
     private List<WorkDetail> filterList;
     SharedPreferences.Editor editor;
     SharedPreferences sharedPreferences;
@@ -127,7 +127,7 @@ public class EngWorksAdapter extends RecyclerView.Adapter<EngWorksAdapter.ItemHo
         };
     }
 
-    class ItemHolder extends RecyclerView.ViewHolder {
+    static class ItemHolder extends RecyclerView.ViewHolder {
 
 
         AdapterEngWorksBinding listItemBinding;

@@ -48,7 +48,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, GCCOfflineInterface {
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     CustomProgressDialog customProgressDialog;
     ActivityPetrolPumpSelBinding binding;
@@ -59,9 +58,10 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
     private List<String> societies;
     private List<String> petrolPumps;
     private PetrolSupplierInfo selectedPetrolPumps;
-    ArrayAdapter selectAdapter;
+    private ArrayAdapter<String> selectAdapter;
     private GCCOfflineRepository gccOfflineRepository;
     private GCCOfflineViewModel gccOfflineViewModel;
+    private ArrayList<String> selectList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +95,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
         binding.executePendingBindings();
 
         try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
+            SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
@@ -107,7 +107,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
             e.printStackTrace();
         }
 
-        ArrayList selectList = new ArrayList();
+        selectList = new ArrayList<>();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -187,7 +187,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
 
 
                             } else {
-                                customOnlineAlert("Do you want to proceed in Online mode?");
+                                customOnlineAlert();
                             }
                         }
                     });
@@ -483,7 +483,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnDownload.setText("Re-Download");
+                binding.btnDownload.setText(getString(R.string.re_download));
                 binding.btnRemove.setVisibility(View.VISIBLE);
                 Utils.customSyncSuccessAlert(PetrolPumpSelActivity.this, getResources().getString(R.string.app_name),
                         "Data downloaded successfully");
@@ -498,7 +498,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
 
         try {
             if (cnt > 0) {
-                binding.btnDownload.setText("Download");
+                binding.btnDownload.setText(getString(R.string.download));
                 binding.btnRemove.setVisibility(View.GONE);
                 Utils.customSyncSuccessAlert(PetrolPumpSelActivity.this, getResources().getString(R.string.app_name),
                         "Data deleted successfully");
@@ -513,7 +513,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
 
     }
 
-    private void customOnlineAlert(String msg) {
+    private void customOnlineAlert() {
         try {
             final Dialog dialog = new Dialog(context);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -525,7 +525,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                 TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
                 dialogTitle.setText(getString(R.string.app_name));
                 TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
-                dialogMessage.setText(msg);
+                dialogMessage.setText(getString(R.string.do_you_want_online_mode));
                 Button btDialogNo = dialog.findViewById(R.id.btDialogNo);
                 btDialogNo.setOnClickListener(new View.OnClickListener() {
                     @Override

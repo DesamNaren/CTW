@@ -48,7 +48,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DRGODownSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, GCCOfflineInterface {
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     CustomProgressDialog customProgressDialog;
     ActivityDrGodownSelBinding binding;
@@ -63,7 +62,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
     private GCCOfflineRepository gccOfflineRepository;
     ArrayAdapter<String> selectAdapter;
     private boolean dailyreq_flag, emp_flag, ess_flag;
-
+    private ArrayList<String> selectList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +95,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
         binding.executePendingBindings();
 
         try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
+            SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
@@ -108,7 +107,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             e.printStackTrace();
         }
 
-        ArrayList selectList = new ArrayList();
+        selectList = new ArrayList<>();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -204,7 +203,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
 
 
                             } else {
-                                customOnlineAlert("Do you want to proceed in Online mode?");
+                                customOnlineAlert();
                             }
                         }
                     });
@@ -512,7 +511,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnDownload.setText("Re-Download");
+                binding.btnDownload.setText(getString(R.string.re_download));
                 binding.btnRemove.setVisibility(View.VISIBLE);
                 Utils.customSyncSuccessAlert(DRGODownSelActivity.this, getResources().getString(R.string.app_name),
                         "Data downloaded successfully");
@@ -527,7 +526,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
 
         try {
             if (cnt > 0) {
-                binding.btnDownload.setText("Download");
+                binding.btnDownload.setText(getString(R.string.download));
                 binding.btnRemove.setVisibility(View.GONE);
                 Utils.customSyncSuccessAlert(DRGODownSelActivity.this, getResources().getString(R.string.app_name),
                         "Data deleted successfully");
@@ -542,7 +541,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
 
     }
 
-    private void customOnlineAlert(String msg) {
+    private void customOnlineAlert() {
         try {
             final Dialog dialog = new Dialog(context);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -554,7 +553,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                 TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
                 dialogTitle.setText(getString(R.string.app_name));
                 TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
-                dialogMessage.setText(msg);
+                dialogMessage.setText(getString(R.string.do_you_want_online_mode));
                 Button btDialogNo = dialog.findViewById(R.id.btDialogNo);
                 btDialogNo.setOnClickListener(new View.OnClickListener() {
                     @Override

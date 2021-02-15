@@ -124,7 +124,6 @@ public class ViewMedicalActivity extends AppCompatActivity {
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {

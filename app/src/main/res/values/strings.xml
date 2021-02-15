@@ -25,7 +25,7 @@
     <string name="select_mandal">Select Mandal</string>
     <string name="select_institution">Select Institution</string>
     <string name="submit">SUBMIT</string>
-    <string name="staff_att">STAFF ATTENDANCE</string>
+    <string name="staff_att">Staff Attendance</string>
     <string name="hm_present_time">Whether the HM present at the time of inspection</string>
     <string name="hwo_present_time">Whether the HWO/ Deputy warden present at the time of inspection</string>
     <string name="hm_head_quarters">Whether the HM maintaining Head Quarters</string>
@@ -106,7 +106,6 @@
     <string name="raise_request">Raise request to construct soak pit</string>
     <string name="is_drainage">Is drainage line functioning</string>
     <string name="is_solar">Is solar water heater available</string>
-    <!--<string name="working_status">Working Status</string>-->
     <string name="add_class">Additional class rooms required?</string>
     <string name="add_dining">Additional dining halls required?</string>
     <string name="add_dorm">Additional dormitories required?</string>
@@ -150,7 +149,6 @@
     <string name="par_meet">Parents Meeting Register</string>
     <string name="ins_reg">Inspection Register for Departmental Officers</string>
     <string name="visit_book">Visitors Register</string>
-
     <string name="previous">PREVIOUS</string>
     <string name="saveandnext">SAVE &amp; NEXT</string>
     <string name="next">NEXT</string>
@@ -236,11 +234,11 @@
     <string name="whether_the_details_of_medical_checkup_entered_in_the_visitor_s_register">Whether the details of medical checkup entered in the register</string>
     <string name="sel_visitor_register">Select whether the details of medical checkup entered in the register</string>
     <string name="general_info">General Info</string>
-    <string name="sync_activity">SYNC DATA</string>
-    <string name="sync_scheme_activity">SCHME SYNC</string>
+    <string name="sync_activity">SYNC Data</string>
+    <string name="sync_scheme_activity">Schemes SYNC</string>
     <string name="sync_school_activity">School SYNC</string>
     <string name="sync_gcc_activity">GCC SYNC</string>
-    <string name="sync_eng_activity">WORKS SYNC</string>
+    <string name="sync_eng_activity">Works SYNC</string>
     <string name="dashboard">DASHBOARD</string>
     <string name="title_activity_institute_menu">InstituteMenuActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -254,7 +252,7 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-    <string name="whether_sports_material_received_during_the_year_2019_2020">Whether sports material received during the year 2019- 2020</string>
+    <string name="whether_sports_material_received_during_the_year_2019_2020">Whether sports material received during the year 2019– 2020</string>
     <string name="entered_in_stock_entry_register">Entered in stock entry register</string>
     <string name="separate_games_sports_room_available">Separate games &amp; sports room available</string>
     <string name="name_of_the_pd_pft">Name of the PD/ PET</string>
@@ -276,8 +274,8 @@
     <string name="event_of_kitchen_in_charge">Event of kitchen in charge</string>
     <string name="types_of_kitchen_garden">Varieties of kitchen Garden</string>
     <string name="name_of_the_kitchen_garden_in_charge_teacher">Name of the kitchen garden in charge/ teacher</string>
-    <string name="whether_haritha_haram_conducted_2019_2020">Whether haritha haram conducted 2019-2020</string>
-    <string name="whether_students_council_elections_conducted_during_2019_2020">Whether students council elections conducted during 2019- 2020</string>
+    <string name="whether_haritha_haram_conducted_2019_2020">Whether haritha haram conducted 2019–2020</string>
+    <string name="whether_students_council_elections_conducted_during_2019_2020">Whether students council elections conducted during 2019– 2020</string>
     <string name="reason">Reason</string>
     <string name="name_of_the_student_s_council_captain">Name of the student’s council captain</string>
     <string name="last_meeting_conducted_with_students_council_date">Last meeting conducted with students council date</string>
@@ -296,7 +294,7 @@
     <string name="whether_staff_quarters_available">Whether staff quarters available</string>
     <string name="capture_operating_from_distance">Capture operating from distance (in KMS)</string>
     <string name="below_30">below 30</string>
-    <string name="_31_50">31-50</string>
+    <string name="_31_50">31–50</string>
     <string name="above_50">above 50</string>
     <string name="capture_staying_facilities_type">Capture staying facilities type</string>
     <string name="pvt_building">Pvt. Building</string>
@@ -394,6 +392,8 @@
     <string name="io_exe">:IO Exception</string>
     <string name="something">Something went wrong, please try again</string>
     <string name="server_not">Server not responding, Please try later</string>
+    <string name="exit_menu">Exit</string>
+    <string name="logout_menu">Logout</string>
     <string name="exit">Yes, Logout</string>
     <string name="exit_no">No, Cancel</string>
     <string name="no_districts">No districts found</string>
@@ -680,10 +680,10 @@
     <string name="liability_balance_as_per_liability_register">Liability balance as per liability register</string>
     <string name="deficit_excess">Deficit / Excess</string>
     <string name="report">Reports</string>
-    <string name="gcc_reports">GCC REPORTS</string>
-    <string name="gcc_reports_offline">GCC OFFLINE REPORTS</string>
-    <string name="gcc_reports_offline_data">GCC OFFLINE DATA</string>
-    <string name="gcc">GCC DASHBOARD</string>
+    <string name="gcc_reports">GCC Reports</string>
+    <string name="gcc_reports_offline">GCC Offline Inspections</string>
+    <string name="gcc_reports_offline_data">GCC Offline Data</string>
+    <string name="gcc">GCC Dashboard</string>
     <string name="reason_mentioned_by_incharge_regarding_deficit_surplus">Reason mentioned by incharge regarding deficit / surplus</string>
     <string name="abstract_sales_register">Abstract sales register</string>
     <string name="sale_bill_book">Sale bill book</string>
@@ -700,10 +700,10 @@
     <string name="any_repairs_required_for_dr_godown">Any repairs required for Dr Godown</string>
     <string name="feedback_of_card_holders">Feedback of Card Holders</string>
     <string name="remarks_of_inspection_officer">Remarks of Inspection officer</string>
-    <string name="scheme_report_details">SCHEME REPORT DETAILS</string>
-    <string name="scheme_report">SCHEME REPORTS</string>
+    <string name="scheme_report_details">Scheme Report Details</string>
+    <string name="scheme_report">Scheme Reports</string>
     <string name="insp_reports">Inspection Reports</string>
-    <string name="eng_reports">ENGINEERING WORK REPORTS</string>
+    <string name="eng_reports">Engineering Work Reports</string>
     <string name="godown_title">Dr Godown</string>
     <string name="depot_title">Dr Depot</string>
     <string name="mfp_godown_title">MFP Godown</string>
@@ -876,7 +876,7 @@
     <string name="elevation">Elevation</string>
     <string name="specify">Specify sector</string>
     <string name="engineering_works">Engineering Works</string>
-    <string name="engineering_works_rep">WORKS DETAIL REPORT</string>
+    <string name="engineering_works_rep">Works Detail Report</string>
     <string name="d">D</string>
     <string name="search_hint_diet">Search by diet name</string>
     <string-array name="category">
@@ -1127,7 +1127,6 @@
     <string name="greater_than_zero">Students marked present should be greater than zero</string>
     <string name="capture_class_per">Please capture classes performance</string>
     <string name="enter_how_many_out_of_a_total_no">Enter how many,out of a total no</string>
-    <string name="pdf_preview">PDF Preview</string>
     <string name="sel_sick_boarders_zero">Sick boarders count should not be zero</string>
     <string name="sel_sick_boarders_area_zero">Sick boarders referred to area/district hospital should not be zero</string>
     <string name="sel_screened_by_call_health_zero">Students screened by call health count should not be zero</string>
@@ -1158,12 +1157,12 @@
     <string name="repairs_req_less_than_total_bathrooms">Repairs required to bathrooms should be less than total bathrooms</string>
     <string name="title_activity_dashboard_menu">DashboardMenuActivity</string>
     <string name="title_activity_dashboard_new">DashboardNewActivity</string>
-    <string name="title_activity_menu_dashboard">MenuDashboardActivity</string>
+    <string name="no_inst_found">No institutes found</string>
     <string name="institute_inspection">Institute Inspection</string>
     <string name="gcc_title">GCC</string>
     <string name="my_inspections">GCC Inspections</string>
-    <string name="logout_str">Logout</string>
     <string name="insp_remarks">Inspection Officer Remarks</string>
+    <string name="logout_str">Do you want to logout from app?</string>
     <string name="sel_insp_remarks">Enter Inspection Officer Remarks</string>
     <string name="new_construction">New Construction</string>
     <string name="part_construction">Part Construction</string>
@@ -1194,5 +1193,44 @@
     <string name="cancel_otp_process">Are you sure, Do you want cancel setting MPIN?</string>
     <string name="enter_valid_mpin">Enter valid MPIN</string>
     <string name="radius_not_found">Radius value not found from server level</string>
+    <string name="info">Info</string>
+
+
+    <string name="terms">Terms and Conditions</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="copy_right">Copyright Policy</string>
+    <string name="app_info">App Info</string>
+    <string name="version">Version</string>
+    <string name="updated_on">Updated on</string>
+    <string name="high_class">\"Highest Class: Class \"</string>
+    <string name="strength">\", Strength: \"</string>
+    <string name="no_master_inst">No master institute data found</string>
+    <string name="cam_granted">camera permission granted</string>
+    <string name="mandal_">\"Mandal : \"</string>
+    <string name="village_">\"Village : \"</string>
+    <string name="address_">\"Address : \"</string>
+    <string name="amp"><![CDATA[\" & \"]]></string>
+    <string name="plz_insp_all">Please inspect all the sections</string>
+    <string name="ins_not_allowed">\"Sorry, inspection submit not allowed, You are not within the \"</string>
+    <string name="ins_not_submitted">Sorry, inspection submit not allowed, institute location details are not found</string>
+    <string name="radius_not_in_range">\" meter radius of selected institute\"</string>
+    <string name="failed_to_submit">\" Failed data submit\"</string>
+    <string name="uploading_data">Please wait…Uploading Data</string>
+    <string name="inst_overall_strength">\"Institute overall strength: \"</string>
+    <string name="record_">\"Record: \"</string>
+    <string name="cap_at_least">Capture at least one image to save data</string>
+    <string name="sorry_failed_to_cap">Sorry! Failed to capture image</string>
+    <string name="user_cancelled_cap">User cancelled image capture</string>
+    <string name="plz_cap_shop_image">Please capture shop image</string>
+    <string name="data_saved_successfully">Data Saved Successfully</string>
+    <string name="do_you_want_online_mode">Do you want to proceed in Online mode?</string>
+    <string name="pdf_preview">PDF Preview</string>
+    <string name="get_pdf">Get PDF</string>
+    <string name="dr_ins_rep">DR DEPOT Findings Report</string>
+    <string name="dr_gow_rep">DR GODOWN Findings Report</string>
+    <string name="lpg_ins_rep">LPG Findings Report</string>
+    <string name="mfp_ins_rep">MFP GODOWN Findings Report</string>
+    <string name="petrol_ins_rep">PETROL PUMP Findings Report</string>
+    <string name="p_unit_ins_rep">PROCESSING UNIT Findings Report</string>
 
 </resources>

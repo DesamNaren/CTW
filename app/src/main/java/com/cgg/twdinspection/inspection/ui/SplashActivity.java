@@ -42,17 +42,14 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
     private static final int REQUEST_PERMISSION_CODE = 2000;
     private CustomLayoutForPermissionsBinding customBinding;
     private Context context;
-    private SplashViewModel splashViewModel;
     private String appVersion;
-    private ActivitySplashBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
         context = SplashActivity.this;
         appVersion = Utils.getVersionName(this);
-        splashViewModel = new SplashViewModel(this, getApplication());
+        SplashViewModel splashViewModel = new SplashViewModel(this, getApplication());
 
 
         if (Utils.checkInternetConnection(this)) {
@@ -63,6 +60,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                         if (versionResponse.getStatusCode() != null && versionResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                             if (appVersion != null) {
                                 if (versionResponse.getCurrentVersion() != null && versionResponse.getCurrentVersion().equalsIgnoreCase(appVersion)) {
+                                    AppConstants.VERSION_DATE = "Feb 15, 2021";
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -134,13 +132,11 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
         @Override
         public void onClick(View view) {
             try {
-                switch (view.getId()) {
-                    case R.id.accept:
-                        ActivityCompat.requestPermissions(SplashActivity.this,
-                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION
-                                        , Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                REQUEST_PERMISSION_CODE);
-                        break;
+                if (view.getId() == R.id.accept) {
+                    ActivityCompat.requestPermissions(SplashActivity.this,
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION
+                                    , Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            REQUEST_PERMISSION_CODE);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -149,31 +145,25 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
     };
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NotNull String permissions[], @NotNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NotNull  String permissions[], @NotNull int @NotNull [] grantResults) {
         try {
-            switch (requestCode) {
-                case REQUEST_PERMISSION_CODE:
+            if (requestCode == REQUEST_PERMISSION_CODE) {
+                if ((grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                        && (grantResults[1] == PackageManager.PERMISSION_GRANTED)
+                        && (grantResults[2] == PackageManager.PERMISSION_GRANTED)) {
+                    //TODO
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
-                    if ((grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                            && (grantResults[1] == PackageManager.PERMISSION_GRANTED)
-                            && (grantResults[2] == PackageManager.PERMISSION_GRANTED)) {
-                        //TODO
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
+                            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                            finish();
 
-                                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                                finish();
-
-                            }
-                        }, 1000);
-                    } else {
-                        customAlert();
-                    }
-                    break;
-
-                default:
-                    break;
+                        }
+                    }, 1000);
+                } else {
+                    customAlert();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -225,7 +215,6 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
     @Override
     public void handleError(Throwable e, Context context) {
         String errMsg = ErrorHandler.handleError(e, context);
-        Log.i("MSG", "handleError: " + errMsg);
         Utils.customSplashErrorAlert(SplashActivity.this, getResources().getString(R.string.app_name), errMsg);
     }
 

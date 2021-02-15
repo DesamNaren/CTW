@@ -51,7 +51,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
     CocurricularViewModel cocurricularViewModel;
     String participationStr, stuNameStr, studClassStr, locationStr, levelStr, eventStr, plantTypeStr, plantCntStr;
     CoordinatorLayout rootLayout;
-    CoordinatorLayout bottomll;
+    CoordinatorLayout bottomLl;
     SharedPreferences sharedPreferences;
     String instId, officerId, insTime;
     BottomSheetDialog dialog;
@@ -292,19 +292,6 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             }
         });
 
-      /*  binding.rgParentMeeting.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if (radioGroup.getCheckedRadioButtonId() == R.id.parents_meeting_yes) {
-                    smc_parents_meeting = AppConstants.Yes;
-                } else if (radioGroup.getCheckedRadioButtonId() == R.id.parents_meeting_no) {
-                    smc_parents_meeting = AppConstants.No;
-                } else {
-                    smc_parents_meeting = null;
-                }
-            }
-        });*/
-
         binding.rgSmcElections.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -484,7 +471,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
 
     public void showStudAcheivementDetails() {
         View view = getLayoutInflater().inflate(R.layout.stud_acheivement_bottom_sheet, null);
-        bottomll = view.findViewById(R.id.bottom_ll);
+        bottomLl = view.findViewById(R.id.bottom_ll);
         dialog = new BottomSheetDialog(CoCurricularActivity.this);
         dialog.setContentView(view);
         dialog.setCancelable(false);
@@ -608,7 +595,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
         } else if (TextUtils.isEmpty(plantCntStr)) {
             showBottomSheetSnackBar(getString(R.string.no_of_plants));
             returnFlag = false;
-        } else if (!(Integer.valueOf(plantCntStr) > 0)) {
+        } else if (!(Integer.parseInt(plantCntStr) > 0)) {
             showBottomSheetSnackBar(getString(R.string.count_greater_than_zero));
             returnFlag = false;
         }
@@ -872,7 +859,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
     }
 
     private void showStudBottomSheetSnackBar(String str) {
-        Snackbar.make(bottomll, str, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(bottomLl, str, Snackbar.LENGTH_SHORT).show();
     }
 
     private void showBottomSheetSnackBar(String str) {

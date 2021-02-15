@@ -33,7 +33,6 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
     String instId, officerId;
     SharedPreferences sharedPreferences;
     InstMainViewModel instMainViewModel;
-    private int localFlag = -1;
 
     private void ScrollToView(View view) {
         view.getParent().requestChildFocus(view, view);
@@ -308,7 +307,7 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
         });
 
         try {
-            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            int localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
             if (localFlag == 1) {
                 //get local record & set to data binding
                 LiveData<RegistersEntity> registersEntityLiveData = instMainViewModel.getRegistersInfoData();
@@ -462,7 +461,6 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
         registersEntity.setVisit_book(visitBook);
 
         long x = registersViewModel.insertRegistersInfo(registersEntity);
-//                Toast.makeText(RegistersActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
         if (x >= 0) {
             final long[] z = {0};
             try {

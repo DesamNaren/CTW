@@ -42,7 +42,7 @@ public class AcademicGradeActivity extends AppCompatActivity implements Academic
         sharedPreferences = TWDApplication.get(this).getPreferences();
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
-        binding.btnLayout.btnNext.setText("Submit");
+        binding.btnLayout.btnNext.setText(getString(R.string.submit));
         binding.header.ivHome.setVisibility(View.GONE);
         binding.header.headerTitle.setText(getString(R.string.title_academic));
 

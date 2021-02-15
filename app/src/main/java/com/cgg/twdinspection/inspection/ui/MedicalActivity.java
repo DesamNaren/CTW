@@ -195,26 +195,26 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
 
 
                 if (!TextUtils.isEmpty(binding.etFever.getText())) {
-                    f_cnt = Integer.valueOf(binding.etFever.getText().toString());
+                    f_cnt = Integer.parseInt(binding.etFever.getText().toString());
                 }
 
                 if (!TextUtils.isEmpty(binding.etCold.getText())) {
-                    c_cnt = Integer.valueOf(binding.etCold.getText().toString());
+                    c_cnt = Integer.parseInt(binding.etCold.getText().toString());
                 }
 
                 if (!TextUtils.isEmpty(binding.etHeadache.getText())) {
-                    h_cnt = Integer.valueOf(binding.etHeadache.getText().toString());
+                    h_cnt = Integer.parseInt(binding.etHeadache.getText().toString());
                 }
 
                 if (!TextUtils.isEmpty(binding.etDiarrhea.getText())) {
-                    d_cnt = Integer.valueOf(binding.etDiarrhea.getText().toString());
+                    d_cnt = Integer.parseInt(binding.etDiarrhea.getText().toString());
                 }
 
                 if (!TextUtils.isEmpty(binding.etMalaria.getText())) {
-                    m_cnt = Integer.valueOf(binding.etMalaria.getText().toString());
+                    m_cnt = Integer.parseInt(binding.etMalaria.getText().toString());
                 }
                 if (!TextUtils.isEmpty(binding.etOthers.getText())) {
-                    o_cnt = Integer.valueOf(binding.etOthers.getText().toString());
+                    o_cnt = Integer.parseInt(binding.etOthers.getText().toString());
                 }
 
                 tot_cnt = f_cnt + c_cnt + h_cnt + d_cnt + m_cnt + o_cnt;
@@ -273,22 +273,22 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                 othersCount = 0;
 
                 if (!TextUtils.isEmpty(binding.etFever.getText().toString())) {
-                    feverCount = Integer.valueOf(binding.etFever.getText().toString());
+                    feverCount = Integer.parseInt(binding.etFever.getText().toString());
                 }
                 if (!TextUtils.isEmpty(binding.etCold.getText().toString())) {
-                    coldCount = Integer.valueOf(binding.etCold.getText().toString());
+                    coldCount = Integer.parseInt(binding.etCold.getText().toString());
                 }
                 if (!TextUtils.isEmpty(binding.etDiarrhea.getText().toString())) {
-                    diarrheaCount = Integer.valueOf(binding.etDiarrhea.getText().toString());
+                    diarrheaCount = Integer.parseInt(binding.etDiarrhea.getText().toString());
                 }
                 if (!TextUtils.isEmpty(binding.etHeadache.getText().toString())) {
-                    headacheCount = Integer.valueOf(binding.etHeadache.getText().toString());
+                    headacheCount = Integer.parseInt(binding.etHeadache.getText().toString());
                 }
                 if (!TextUtils.isEmpty(binding.etMalaria.getText().toString())) {
-                    malariaCount = Integer.valueOf(binding.etMalaria.getText().toString());
+                    malariaCount = Integer.parseInt(binding.etMalaria.getText().toString());
                 }
                 if (!TextUtils.isEmpty(binding.etOthers.getText().toString())) {
-                    othersCount = Integer.valueOf(binding.etOthers.getText().toString());
+                    othersCount = Integer.parseInt(binding.etOthers.getText().toString());
                 }
 
                 tot_cnt = feverCount + coldCount + diarrheaCount + headacheCount + malariaCount + othersCount;
@@ -347,7 +347,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s)) {
-                    int fevCnt = Integer.valueOf(s.toString());
+                    int fevCnt = Integer.parseInt(s.toString());
                     if (fevCnt > totalStrength) {
                         binding.etFever.setText("");
                         binding.etFever.setError(getString(R.string.count_not_exceed_strength));
@@ -370,7 +370,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s)) {
-                    int fevCnt = Integer.valueOf(s.toString());
+                    int fevCnt = Integer.parseInt(s.toString());
                     if (fevCnt > totalStrength) {
                         binding.etCold.setText("");
                         binding.etCold.setError(getString(R.string.count_not_exceed_strength));
@@ -393,7 +393,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s)) {
-                    int fevCnt = Integer.valueOf(s.toString());
+                    int fevCnt = Integer.parseInt(s.toString());
                     if (fevCnt > totalStrength) {
                         binding.etDiarrhea.setText("");
                         binding.etDiarrhea.setError(getString(R.string.count_not_exceed_strength));
@@ -416,7 +416,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s)) {
-                    int fevCnt = Integer.valueOf(s.toString());
+                    int fevCnt = Integer.parseInt(s.toString());
                     if (fevCnt > totalStrength) {
                         binding.etHeadache.setText("");
                         binding.etHeadache.setError(getString(R.string.count_not_exceed_strength));
@@ -439,7 +439,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s)) {
-                    int fevCnt = Integer.valueOf(s.toString());
+                    int fevCnt = Integer.parseInt(s.toString());
                     if (fevCnt > totalStrength) {
                         binding.etMalaria.setText("");
                         binding.etMalaria.setError(getString(R.string.count_not_exceed_strength));
@@ -462,7 +462,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s)) {
-                    int cnt = Integer.valueOf(s.toString());
+                    int cnt = Integer.parseInt(s.toString());
                     if (cnt > totalStrength) {
                         binding.etOthers.setText("");
                         binding.etOthers.setError(getString(R.string.count_not_exceed_strength));
@@ -485,7 +485,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s)) {
-                    int cnt = Integer.valueOf(s.toString());
+                    int cnt = Integer.parseInt(s.toString());
                     if (cnt > totalStrength) {
                         binding.etLeftForScreening.setText("");
                         binding.etLeftForScreening.setError(getString(R.string.count_not_exceed_strength));
@@ -508,7 +508,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s)) {
-                    int cnt = Integer.valueOf(s.toString());
+                    int cnt = Integer.parseInt(s.toString());
                     if (cnt > totalStrength) {
                         binding.etScreenedByCallHealth.setText("");
                         binding.etScreenedByCallHealth.setError(getString(R.string.count_not_exceed_strength));
@@ -541,7 +541,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     }
                 }
 
-                binding.totalStrength.setText("Institute overall strength: " + totalStrength);
+                binding.totalStrength.setText(getString(R.string.inst_overall_strength) + totalStrength);
 
                 try {
                     localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
@@ -631,13 +631,6 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             showBottomSheetSnackBar(getResources().getString(R.string.enter_suffering_count));
             return false;
         }
-
-//        else if (recorderedInRegister.equals(AppConstants.Yes) &&
-//                tot_cnt > 0 && medicalDetailsBeans != null &&
-//                tot_cnt != medicalDetailsBeans.size()) {
-//            showBottomSheetSnackBar(getResources().getString(R.string.not_match));
-//            return false;
-//        }
         return true;
     }
 
@@ -797,18 +790,25 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     int fCnt = 0, cCnt = 0, hCnt = 0, dCnt = 0, mCnt = 0, oCnt = 0;
 
                     for (int z = 0; z < medicalDetailsBeans.size(); z++) {
-                        if (medicalDetailsBeans.get(z).getType().equals("1")) {
-                            fCnt++;
-                        } else if (medicalDetailsBeans.get(z).getType().equals("2")) {
-                            cCnt++;
-                        } else if (medicalDetailsBeans.get(z).getType().equals("3")) {
-                            hCnt++;
-                        } else if (medicalDetailsBeans.get(z).getType().equals("4")) {
-                            dCnt++;
-                        } else if (medicalDetailsBeans.get(z).getType().equals("5")) {
-                            mCnt++;
-                        } else if (medicalDetailsBeans.get(z).getType().equals("6")) {
-                            oCnt++;
+                        switch (medicalDetailsBeans.get(z).getType()) {
+                            case "1":
+                                fCnt++;
+                                break;
+                            case "2":
+                                cCnt++;
+                                break;
+                            case "3":
+                                hCnt++;
+                                break;
+                            case "4":
+                                dCnt++;
+                                break;
+                            case "5":
+                                mCnt++;
+                                break;
+                            case "6":
+                                oCnt++;
+                                break;
                         }
                     }
 

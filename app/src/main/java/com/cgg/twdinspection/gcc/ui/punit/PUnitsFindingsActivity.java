@@ -41,8 +41,6 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     ActivityGccPunitFindingsBinding binding;
-    private String officerID, divId, suppId;
-    private StockDetailsResponse stockDetailsResponse;
     double physVal = 0, sysVal = 0, notInsSysVal = 0, insSysVal = 0, difference = 0;
     private String remarks, insComName, insComDate, insCer, weightDate, weightMea, difReason;
     private String fireNOC, qualityStock, godownHyg, repairsReq;
@@ -62,7 +60,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         binding.header.ivHome.setVisibility(View.GONE);
         sharedPreferences = TWDApplication.get(this).getPreferences();
         String stockData = sharedPreferences.getString(AppConstants.stockData, "");
-        officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+        String officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
         randomNum = Utils.getRandomNumberString();
 
@@ -73,11 +71,9 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         finalPUnitCCom = new ArrayList<>();
 
         Gson gson = new Gson();
-        stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
+        StockDetailsResponse stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
         String pUnitData = sharedPreferences.getString(AppConstants.P_UNIT_DATA, "");
         PUnits pUnits = gson.fromJson(pUnitData, PUnits.class);
-        divId = pUnits.getDivisionId();
-        suppId = pUnits.getGodownId();
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,17 +150,17 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                 }
             }
 
-            sysVal = Double.valueOf(String.format("%.2f", sysVal));
-            physVal = Double.valueOf(String.format("%.2f", physVal));
+            sysVal = Double.parseDouble(String.format("%.2f", sysVal));
+            physVal = Double.parseDouble(String.format("%.2f", physVal));
             binding.tvSysVal.setText(String.format("%.2f", sysVal));
             binding.tvPhysVal.setText(String.format("%.2f", physVal));
 
             notInsSysVal = sysVal - insSysVal;
-            notInsSysVal = Double.valueOf(String.format("%.2f", notInsSysVal));
+            notInsSysVal = Double.parseDouble(String.format("%.2f", notInsSysVal));
             binding.tvInsSysVal.setText(String.format("%.2f", insSysVal));
             binding.tvSysValNotIns.setText(String.format("%.2f", notInsSysVal));
             difference = insSysVal - physVal;
-            difference = Double.valueOf(String.format("%.2f", difference));
+            difference = Double.parseDouble(String.format("%.2f", difference));
             binding.tvDiffVal.setText(String.format("%.2f", difference));
 
         }
@@ -267,8 +263,8 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                         e.printStackTrace();
                     }
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);
-                    sysVal = Double.valueOf(String.format("%.2f", sysVal));
-                    physVal = Double.valueOf(String.format("%.2f", physVal));
+                    sysVal = Double.parseDouble(String.format("%.2f", sysVal));
+                    physVal = Double.parseDouble(String.format("%.2f", physVal));
                     editor.putString(AppConstants.TOTAL_PHYVAL, String.valueOf(physVal));
                     editor.putString(AppConstants.TOTAL_SYSVAL, String.valueOf(sysVal));
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);

@@ -52,7 +52,6 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
     InstMainViewModel instMainViewModel;
     SchemesDMVViewModel viewModel;
     BenReportViewModel benReportViewModel;
-    private BenDetailsViewModel benDetailsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
 
         binding = DataBindingUtil.setContentView(SchemeSyncActivity.this, R.layout.activity_scheme_sync);
         viewModel = new SchemesDMVViewModel(getApplication());
-        benDetailsViewModel = new BenDetailsViewModel(getApplication());
+        BenDetailsViewModel benDetailsViewModel = new BenDetailsViewModel(getApplication());
         benReportViewModel = new BenReportViewModel(SchemeSyncActivity.this);
         customProgressDialog = new CustomProgressDialog(this);
         SchemeSyncViewModel sviewModel = new SchemeSyncViewModel(SchemeSyncActivity.this, getApplication(), binding);
@@ -109,14 +108,14 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                             SchemeSyncActivity.this.schemeDMVResponse = schemeDMVResponse;
 
                             if (schemeDMVResponse != null && schemeDMVResponse.getStatusCode() != null) {
-                                if (Integer.valueOf(schemeDMVResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
+                                if (Integer.parseInt(schemeDMVResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
                                     if (schemeDMVResponse.getDistricts() != null && schemeDMVResponse.getDistricts().size() > 0) {
 
                                         schemeSyncRepository.insertSchemeDistricts(SchemeSyncActivity.this, schemeDMVResponse.getDistricts());
                                     } else {
                                         Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_districts));
                                     }
-                                } else if (Integer.valueOf(schemeDMVResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
+                                } else if (Integer.parseInt(schemeDMVResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
                                     Snackbar.make(binding.root, schemeDMVResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
                                 } else {
                                     callSnackBar(getString(R.string.something));
@@ -144,13 +143,13 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                         public void onChanged(FinancialYearResponse financialYearResponse) {
                             financialYearResponseLiveData.removeObservers(SchemeSyncActivity.this);
                             if (financialYearResponse != null && financialYearResponse.getStatusCode() != null) {
-                                if (Integer.valueOf(financialYearResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
+                                if (Integer.parseInt(financialYearResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
                                     if (financialYearResponse.getFinYears() != null && financialYearResponse.getFinYears().size() > 0) {
                                         schemeSyncRepository.insertFinYears(SchemeSyncActivity.this, financialYearResponse.getFinYears());
                                     } else {
                                         Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_fin_year));
                                     }
-                                } else if (Integer.valueOf(financialYearResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
+                                } else if (Integer.parseInt(financialYearResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
                                     Snackbar.make(binding.root, financialYearResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
                                 } else {
                                     callSnackBar(getString(R.string.something));
@@ -179,13 +178,13 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                         public void onChanged(InspectionRemarkResponse inspectionRemarkResponse) {
                             inspectionRemarkResponseLiveData.removeObservers(SchemeSyncActivity.this);
                             if (inspectionRemarkResponse != null && inspectionRemarkResponse.getStatusCode() != null) {
-                                if (Integer.valueOf(inspectionRemarkResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
+                                if (Integer.parseInt(inspectionRemarkResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
                                     if (inspectionRemarkResponse.getSchemes() != null && inspectionRemarkResponse.getSchemes().size() > 0) {
                                         schemeSyncRepository.insertInsRemarks(SchemeSyncActivity.this, inspectionRemarkResponse.getSchemes());
                                     } else {
                                         Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_ins_rem));
                                     }
-                                } else if (Integer.valueOf(inspectionRemarkResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
+                                } else if (Integer.parseInt(inspectionRemarkResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
                                     Snackbar.make(binding.root, inspectionRemarkResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
                                 } else {
                                     callSnackBar(getString(R.string.something));
@@ -215,7 +214,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                         public void onChanged(SchemeResponse schemeResponse) {
                             schemeResponseLiveData.removeObservers(SchemeSyncActivity.this);
                             if (schemeResponse != null && schemeResponse.getStatusCode() != null) {
-                                if (Integer.valueOf(schemeResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
+                                if (Integer.parseInt(schemeResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
                                     if (schemeResponse.getSchemes() != null && schemeResponse.getSchemes().size() > 0) {
                                         schemeResponse.getSchemes().add(0, new SchemeEntity(false, "ALL", "-1"));
                                         schemeSyncRepository.insertSchemes(SchemeSyncActivity.this, schemeResponse.getSchemes());
@@ -223,7 +222,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                                         Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
                                     }
 
-                                } else if (Integer.valueOf(schemeResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
+                                } else if (Integer.parseInt(schemeResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
                                     Snackbar.make(binding.root, schemeResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
                                 } else {
                                     callSnackBar(getString(R.string.something));
@@ -244,9 +243,9 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             public void onChanged(List<FinancialYearsEntity> institutesEntities) {
 
                 if (institutesEntities != null && institutesEntities.size() > 0) {
-                    binding.syncBtnYears.setText("Re-Download");
+                    binding.syncBtnYears.setText(getString(R.string.re_download));
                 } else {
-                    binding.syncBtnYears.setText("Download");
+                    binding.syncBtnYears.setText(getString(R.string.download));
                 }
             }
         });
@@ -254,9 +253,9 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             @Override
             public void onChanged(List<SchemeDistrict> schemeDistricts) {
                 if (schemeDistricts != null && schemeDistricts.size() > 0) {
-                    binding.btnDmv.setText("Re-Download");
+                    binding.btnDmv.setText(getString(R.string.re_download));
                 } else {
-                    binding.btnDmv.setText("Download");
+                    binding.btnDmv.setText(getString(R.string.download));
                 }
             }
         });
@@ -266,9 +265,9 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             @Override
             public void onChanged(List<SchemeEntity> schemesInfoEntities) {
                 if (schemesInfoEntities != null && schemesInfoEntities.size() > 0) {
-                    binding.syncLlSchemes.setText("Re-Download");
+                    binding.syncLlSchemes.setText(getString(R.string.re_download));
                 } else {
-                    binding.syncLlSchemes.setText("Download");
+                    binding.syncLlSchemes.setText(getString(R.string.download));
                 }
             }
         });
@@ -278,9 +277,9 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             public void onChanged(List<InspectionRemarksEntity> inspectionRemarksEntities) {
                 if (inspectionRemarksEntities != null && inspectionRemarksEntities.size() > 0) {
 
-                    binding.btnInstInsp.setText("Re-Download");
+                    binding.btnInstInsp.setText(getString(R.string.re_download));
                 } else {
-                    binding.btnInstInsp.setText("Download");
+                    binding.btnInstInsp.setText(getString(R.string.download));
                 }
             }
         });
@@ -319,7 +318,6 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
     public void distCount(int cnt) {
         try {
             if (cnt > 0) {
-                Log.i("D_CNT", "distCount: " + cnt);
                 schemeSyncRepository.insertSchemeMandals(SchemeSyncActivity.this, schemeDMVResponse.getMandals());
             } else {
                 Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_districts));
@@ -333,7 +331,6 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
     public void manCount(int cnt) {
         try {
             if (cnt > 0) {
-                Log.i("M_CNT", "manCount: " + cnt);
                 schemeSyncRepository.insertSchemeVillages(SchemeSyncActivity.this, schemeDMVResponse.getVillages());
             } else {
                 Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_mandals));
@@ -348,7 +345,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnDmv.setText("Re-Download");
+                binding.btnDmv.setText(getString(R.string.re_download));
                 Utils.customSyncSuccessAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name),
                         "District master data downloaded successfully");
                 // Success Alert;
@@ -365,7 +362,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.syncBtnYears.setText("Re-Download");
+                binding.syncBtnYears.setText(getString(R.string.re_download));
                 Utils.customSyncSuccessAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name),
                         "Financial years master data downloaded successfully");
                 // Success Alert;
@@ -382,7 +379,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnInstInsp.setText("Re-Download");
+                binding.btnInstInsp.setText(getString(R.string.re_download));
                 Utils.customSyncSuccessAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name),
                         "Inspection remarks master data downloaded successfully");
                 // Success Alert;
@@ -399,7 +396,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.syncLlSchemes.setText("Re-Download");
+                binding.syncLlSchemes.setText(getString(R.string.re_download));
                 Utils.customSyncSuccessAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name),
                         "Schemes master data downloaded successfully");
                 // Success Alert;
@@ -421,7 +418,6 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {
