@@ -35,6 +35,7 @@
             android:id="@+id/nav_eng"
             android:icon="@drawable/engineering_works_icon"
             android:title="@string/engineering_works"
+            android:visible="false"
             app:iconTint="@color/colorPrimaryDark" />
     </group>
     <group
