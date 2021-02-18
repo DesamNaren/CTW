@@ -1,9 +1,8 @@
 package com.cgg.twdinspection.gcc.room.repository;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
-import android.os.AsyncTask;
 
+import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.gcc.interfaces.GCCDivisionInterface;
 import com.cgg.twdinspection.gcc.room.dao.GCCSyncDao;
 import com.cgg.twdinspection.gcc.room.database.GCCDatabase;
@@ -18,7 +17,7 @@ import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 import java.util.List;
 
 public class GCCSyncRepository {
-    private GCCSyncDao syncDao;
+    private final GCCSyncDao syncDao;
 
     public GCCSyncRepository(Application application) {
         GCCDatabase db = GCCDatabase.getDatabase(application);
@@ -26,207 +25,135 @@ public class GCCSyncRepository {
     }
 
     public void insertDivisions(final GCCDivisionInterface dmvInterface, final List<DivisionsInfo> divisionsInfos) {
-        new InsertDivisionAsyncTask(dmvInterface, divisionsInfos).execute();
+        TWDApplication.getExecutorService().execute(() -> {
+            syncDao.deleteDivisions();
+            syncDao.insertDivisions(divisionsInfos);
+            int x = syncDao.divisionCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        dmvInterface.divisionCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
     }
 
     public void insertDRDepots(final GCCDivisionInterface dmvInterface, final List<DRDepots> DRDepots) {
-        new InsertDRDepotAsyncTask(dmvInterface, DRDepots).execute();
+        TWDApplication.getExecutorService().execute(() -> {
+            syncDao.deleteDRDepots();
+            syncDao.insertDRDepots(DRDepots);
+            int x = syncDao.drDepotCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        dmvInterface.drDepotCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
     }
 
-    public void insertDRGoDowns(final GCCDivisionInterface dmvInterface, final List<DrGodowns> DRGoDowns) {
-        new InsertDRGoDownAsyncTask(dmvInterface, DRGoDowns).execute();
+    public void insertDRGoDowns(final GCCDivisionInterface dmvInterface, final List<DrGodowns> DRGodowns) {
+        TWDApplication.getExecutorService().execute(() -> {
+            syncDao.deleteDRGoDowns();
+            syncDao.insertDRGoDowns(DRGodowns);
+            int x = syncDao.drGoDownCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        dmvInterface.drGoDownCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
     }
 
     public void insertMFPGoDowns(final GCCDivisionInterface dmvInterface, final List<MFPGoDowns> mfpGoDowns) {
-        new InsertMFPGoDownAsyncTask(dmvInterface, mfpGoDowns).execute();
+        TWDApplication.getExecutorService().execute(() -> {
+            syncDao.deleteMFPDowns();
+            syncDao.insertMFPGoDowns(mfpGoDowns);
+            int x = syncDao.mfpGoDownCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        dmvInterface.mfpGoDownCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
     }
 
     public void insertPUnits(final GCCDivisionInterface dmvInterface, final List<PUnits> pUnits) {
-        new InsertPUnitAsyncTask(dmvInterface, pUnits).execute();
+        TWDApplication.getExecutorService().execute(() -> {
+            syncDao.deletePUnits();
+            syncDao.insertPUnits(pUnits);
+            int x = syncDao.pUnitCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        dmvInterface.pUNitCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
     }
 
     public void insertPetrolPumps(final GCCDivisionInterface dmvInterface, final List<PetrolSupplierInfo> petrolSupplierInfos) {
-        new InsertPetrolAsyncTask(dmvInterface, petrolSupplierInfos).execute();
+        TWDApplication.getExecutorService().execute(() -> {
+            syncDao.deletePetrolPumps();
+            syncDao.insertPetrolPumps(petrolSupplierInfos);
+            int x = syncDao.petrolPumpCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        dmvInterface.petrolPumpCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
     }
 
     public void insertLpg(final GCCDivisionInterface dmvInterface, final List<LPGSupplierInfo> lpgSupplierInfos) {
-        new InsertLPGAsyncTask(dmvInterface, lpgSupplierInfos).execute();
-    }
-
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertDivisionAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<DivisionsInfo> divisionsInfos;
-        GCCDivisionInterface dmvInterface;
-
-        InsertDivisionAsyncTask(GCCDivisionInterface dmvInterface,
-                                List<DivisionsInfo> divisionsInfos) {
-            this.divisionsInfos = divisionsInfos;
-            this.dmvInterface = dmvInterface;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            syncDao.deleteDivisions();
-            syncDao.insertDivisions(divisionsInfos);
-            return syncDao.divisionCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            dmvInterface.divisionCount(integer);
-        }
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertDRDepotAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<DRDepots> DRDepots;
-        GCCDivisionInterface dmvInterface;
-
-        InsertDRDepotAsyncTask(GCCDivisionInterface dmvInterface,
-                               List<DRDepots> DRDepots) {
-            this.DRDepots = DRDepots;
-            this.dmvInterface = dmvInterface;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            syncDao.deleteDRDepots();
-            syncDao.insertDRDepots(DRDepots);
-            return syncDao.drDepotCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            dmvInterface.drDepotCount(integer);
-        }
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertDRGoDownAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<DrGodowns> DRGodowns;
-        GCCDivisionInterface dmvInterface;
-
-        InsertDRGoDownAsyncTask(GCCDivisionInterface dmvInterface,
-                                List<DrGodowns> DRGodowns) {
-            this.DRGodowns = DRGodowns;
-            this.dmvInterface = dmvInterface;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            syncDao.deleteDRGoDowns();
-            syncDao.insertDRGoDowns(DRGodowns);
-            return syncDao.drGoDownCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            dmvInterface.drGoDownCount(integer);
-        }
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertMFPGoDownAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<MFPGoDowns> mfpGoDowns;
-        GCCDivisionInterface dmvInterface;
-
-        InsertMFPGoDownAsyncTask(GCCDivisionInterface dmvInterface,
-                                 List<MFPGoDowns> mfpGoDowns) {
-            this.mfpGoDowns = mfpGoDowns;
-            this.dmvInterface = dmvInterface;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            syncDao.deleteMFPDowns();
-            syncDao.insertMFPGoDowns(mfpGoDowns);
-            return syncDao.mfpGoDownCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            dmvInterface.mfpGoDownCount(integer);
-        }
-    }
-
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertPUnitAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<PUnits> pUnits;
-        GCCDivisionInterface dmvInterface;
-
-        InsertPUnitAsyncTask(GCCDivisionInterface dmvInterface,
-                             List<PUnits> pUnits) {
-            this.pUnits = pUnits;
-            this.dmvInterface = dmvInterface;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            syncDao.deletePUnits();
-            syncDao.insertPUnits(pUnits);
-            return syncDao.pUnitCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            dmvInterface.pUNitCount(integer);
-        }
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertPetrolAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<PetrolSupplierInfo> petrolSupplierInfos;
-        GCCDivisionInterface dmvInterface;
-
-        InsertPetrolAsyncTask(GCCDivisionInterface dmvInterface,
-                              List<PetrolSupplierInfo> petrolSupplierInfos) {
-            this.petrolSupplierInfos = petrolSupplierInfos;
-            this.dmvInterface = dmvInterface;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            syncDao.deletePetrolPumps();
-            syncDao.insertPetrolPumps(petrolSupplierInfos);
-            return syncDao.petrolPumpCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            dmvInterface.petrolPumpCount(integer);
-        }
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertLPGAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<LPGSupplierInfo> lpgSupplierInfos;
-        GCCDivisionInterface dmvInterface;
-
-        InsertLPGAsyncTask(GCCDivisionInterface dmvInterface,
-                           List<LPGSupplierInfo> lpgSupplierInfos) {
-            this.lpgSupplierInfos = lpgSupplierInfos;
-            this.dmvInterface = dmvInterface;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
+        TWDApplication.getExecutorService().execute(() -> {
             syncDao.deleteLPG();
             syncDao.insertLPG(lpgSupplierInfos);
-            return syncDao.lpgCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            dmvInterface.lpgCount(integer);
-        }
+            int x = syncDao.lpgCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        dmvInterface.lpgCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
     }
 }

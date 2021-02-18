@@ -109,9 +109,34 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         binding.appbar.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(InstMenuMainActivity.this, DashboardMenuActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                finish();
+                if (arrayListLiveData != null && arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
+                    boolean flag = false;
+                    for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
+                        if (arrayListLiveData.getValue().get(i).getFlag_completed() == 1) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag) {
+                        clearSharedPref();
+                        instMainViewModel.deleteMenuData();
+                        startActivity(new Intent(InstMenuMainActivity.this, DashboardMenuActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        finish();
+                    } else {
+
+                        startActivity(new Intent(InstMenuMainActivity.this, DashboardMenuActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        finish();
+                    }
+                } else {
+                    clearSharedPref();
+                    Log.i("DELETE", "onBackPressed: DELETE INonBackPressed ");
+                    instMainViewModel.deleteMenuData();
+                    startActivity(new Intent(InstMenuMainActivity.this, DashboardMenuActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    finish();
+                }
             }
         });
 
@@ -292,8 +317,9 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             if (distance <= AppConstants.DISTANCE) {
                 submitCall();
             } else {
-                Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.ins_not_allowed)
-                        + AppConstants.DISTANCE + getString(R.string.radius_not_in_range));
+                Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name),
+                        getString(R.string.ins_not_allowed) + " "
+                                + AppConstants.DISTANCE + " " + getString(R.string.radius_not_in_range));
             }
         } else {
             Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.ins_not_submitted));

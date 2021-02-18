@@ -217,6 +217,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             drGodownLiveData.observe(GCCPhotoActivity.this, new Observer<GccOfflineEntity>() {
                 @Override
                 public void onChanged(GccOfflineEntity GCCOfflineEntity) {
+                    binding.header.ivMode.setVisibility(View.VISIBLE);
                     if (GCCOfflineEntity != null) {
                         flag = true;
                         binding.btnLayout.btnNext.setText(getString(R.string.save));
@@ -238,6 +239,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             drGodownLiveData.observe(GCCPhotoActivity.this, new Observer<GccOfflineEntity>() {
                 @Override
                 public void onChanged(GccOfflineEntity GCCOfflineEntity) {
+                    binding.header.ivMode.setVisibility(View.VISIBLE);
                     if (GCCOfflineEntity != null) {
                         flag = true;
                         binding.btnLayout.btnNext.setText(getString(R.string.save));

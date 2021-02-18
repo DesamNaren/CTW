@@ -110,7 +110,8 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
                         filePath_temp = filePath + "_temp" + ".pdf";
                     }
 
-                    PDFUtil.getInstance(SchemeReportDetailsActivity.this).generatePDF(views,filePath_temp , SchemeReportDetailsActivity.this, "schemes", "Schemes");
+                    PDFUtil.getInstance(SchemeReportDetailsActivity.this).generatePDF(views,
+                            filePath_temp, SchemeReportDetailsActivity.this);
                     Log.i(TAG, "onClick: try");
 
                 } catch (Exception e) {

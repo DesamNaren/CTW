@@ -1,7 +1,6 @@
 package com.cgg.twdinspection.inspection.room.repository;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -9,6 +8,8 @@ import com.cgg.twdinspection.inspection.room.Dao.AcademicInfoDao;
 import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -22,8 +23,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class AcademicRepository {
 
-    public AcademicInfoDao academicInfoDao;
-    private String tag = AcademicRepository.class.getSimpleName();
+    private final AcademicInfoDao academicInfoDao;
+    private long x;
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -32,7 +33,6 @@ public class AcademicRepository {
     public AcademicRepository(Context application) {
         SchoolDatabase db = SchoolDatabase.getDatabase(application);
         academicInfoDao = db.academicInfoDao();
-
     }
 
 
@@ -40,42 +40,32 @@ public class AcademicRepository {
         return academicInfoDao.getAcademicGradeInfo(inst_id);
     }
 
-    long x;
-
     public long insertAcademicInfo(AcademicEntity AcademicEntity) {
-
-
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 academicInfoDao.insertAcademicInfo(AcademicEntity);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
-//                flag = true;
-                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
-            public void onError(Throwable e) {
-//                flag = false;
-                Log.i("Tag", tag + "onError: " + x);
+            public void onError(@NotNull Throwable e) {
+
             }
 
             @Override
             public void onComplete() {
-//                flag = true;
-                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 
@@ -87,39 +77,30 @@ public class AcademicRepository {
 
 
     public long deleteGradeInfo() {
-
-
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 academicInfoDao.deleteAcademicGradeInfo();
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
-//                flag = true;
-                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
-            public void onError(Throwable e) {
-//                flag = false;
-                Log.i("Tag", tag + "onError: " + x);
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-//                flag = true;
-                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 
@@ -130,27 +111,26 @@ public class AcademicRepository {
     }
 
     public void insertAcademicGradeInfo(List<AcademicGradeEntity> academicGradeEntities) {
-
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 academicInfoDao.insertAcademicGradeInfo(academicGradeEntities);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
             }
 
 
             @Override
-            public void onError(Throwable e) {
+            public void onError(@NotNull Throwable e) {
 
             }
 

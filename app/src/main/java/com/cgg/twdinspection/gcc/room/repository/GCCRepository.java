@@ -19,10 +19,9 @@ import java.util.List;
 
 public class GCCRepository {
 
-    private GCCDao gccDao;
+    private final GCCDao gccDao;
     public LiveData<List<DivisionsInfo>> divisions = new MutableLiveData<>();
     public LiveData<List<DRDepots>> drGodowns = new MutableLiveData<>();
-    public int count;
 
     public GCCRepository(Application application) {
         GCCDatabase db = GCCDatabase.getDatabase(application);

@@ -11,6 +11,8 @@ import com.cgg.twdinspection.inspection.source.medical_and_health.CallHealthInfo
 import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -23,51 +25,41 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MedicalInfoRepository {
 
-    private MedicalInfoDao medicalInfoDao;
-    private String tag = MedicalInfoRepository.class.getSimpleName();
+    private final MedicalInfoDao medicalInfoDao;
+    private long x;
 
     public MedicalInfoRepository(Context application) {
         SchoolDatabase db = SchoolDatabase.getDatabase(application);
         medicalInfoDao = db.medicalInfoDao();
     }
 
-    long x;
-
     public long insertMedicalInfo(MedicalInfoEntity medicalIssuesEntity) {
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 medicalInfoDao.insertMedicalInfo(medicalIssuesEntity);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
-//                flag = true;
-                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
-            public void onError(Throwable e) {
-//                flag = false;
-                Log.i("Tag", tag + "onError: " + x);
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-//                flag = true;
-                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
-
         observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(observer);
@@ -75,39 +67,30 @@ public class MedicalInfoRepository {
     }
 
     public long insertCallInfo(CallHealthInfoEntity callHealthInfoEntity) {
-
-
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 medicalInfoDao.insertCallInfo(callHealthInfoEntity);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
-//                flag = true;
-                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
-            public void onError(Throwable e) {
-//                flag = false;
-                Log.i("Tag", tag + "onError: " + x);
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-//                flag = true;
-                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 
@@ -122,39 +105,30 @@ public class MedicalInfoRepository {
     }
 
     public long deleteCallInfo(CallHealthInfoEntity callHealthInfoEntity) {
-
-
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 medicalInfoDao.deleteCallInfo(callHealthInfoEntity);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
-//                flag = true;
-                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
-            public void onError(Throwable e) {
-//                flag = false;
-                Log.i("Tag", tag + "onError: " + x);
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-//                flag = true;
-                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 
@@ -173,11 +147,9 @@ public class MedicalInfoRepository {
     }
 
     public void insertMedicalDetailsInfo(List<MedicalDetailsBean> medicalDetailsBeans) {
-
-
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 medicalInfoDao.deleteMedicalInfo();
                 medicalInfoDao.insertMedicalDetailsInfo(medicalDetailsBeans);
             }
@@ -185,18 +157,17 @@ public class MedicalInfoRepository {
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
             }
 
 
             @Override
-            public void onError(Throwable e) {
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override

@@ -37,6 +37,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/btn_layout"
             android:layout_below="@+id/ll_title"
             android:layout_centerHorizontal="true"
             android:paddingLeft="@dimen/dimen_5dp"
@@ -58,6 +59,11 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:theme="@style/ProgressBarTheme"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/btn_layout"
+            layout="@layout/buttons_layout"
             android:visibility="gone" />
     </RelativeLayout>
 

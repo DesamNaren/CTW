@@ -10,6 +10,8 @@ import com.cgg.twdinspection.inspection.room.Dao.PhotoDao;
 import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -22,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class PhotoRepository {
 
-    private PhotoDao photoDao;
+    private final PhotoDao photoDao;
     public LiveData<List<UploadPhoto>> photos = new MutableLiveData<>();
 
 
@@ -49,34 +51,29 @@ public class PhotoRepository {
     long x;
 
     public long insertPhotos(List<UploadPhoto> uploadPhotos) {
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 photoDao.insertPhotos(uploadPhotos);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
-                Log.i("Tag", "onNext: " + x);
             }
 
-
             @Override
-            public void onError(Throwable e) {
-                Log.i("Tag", "onError: " + x);
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-                Log.i("Tag", "onComplete: " + x);
             }
         };
 

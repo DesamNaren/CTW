@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SchemesDMVRepository {
 
-    public SchemeDmvDao dmvDao;
+    private final SchemeDmvDao dmvDao;
 //    public LiveData<List<Districts>> districts = new MutableLiveData<>();
 //    public LiveData<List<Mandals>> mandals = new MutableLiveData<>();
 
@@ -31,8 +31,7 @@ public class SchemesDMVRepository {
     // Room executes all queries on file_provider_paths separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     public LiveData<List<SchemeDistrict>> getDistricts() {
-        LiveData<List<SchemeDistrict>> districts = dmvDao.getDistricts();
-        return districts;
+        return dmvDao.getDistricts();
     }
 
     public LiveData<List<SchemeMandal>> getMandals(String dist_id) {
@@ -49,8 +48,7 @@ public class SchemesDMVRepository {
 
 
     public LiveData<List<FinancialYearsEntity>> getFinancialYrs() {
-        LiveData<List<FinancialYearsEntity>> financialYrs = dmvDao.getFinancialYrs();
-        return financialYrs;
+        return dmvDao.getFinancialYrs();
     }
 
     public LiveData<String> getMandalId(String mandalName, String distId) {

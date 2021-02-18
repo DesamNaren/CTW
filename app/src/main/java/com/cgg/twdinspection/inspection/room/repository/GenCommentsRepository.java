@@ -7,6 +7,8 @@ import com.cgg.twdinspection.inspection.room.Dao.GenCommentsInfoDao;
 import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -17,8 +19,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class GenCommentsRepository {
 
-    public GenCommentsInfoDao genCommentsInfoDao;
-    private String tag = GenCommentsRepository.class.getSimpleName();
+    private final GenCommentsInfoDao genCommentsInfoDao;
+    private long x;
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -30,43 +32,31 @@ public class GenCommentsRepository {
 
     }
 
-
-    long x;
-
     public long insertGeneralCommentsInfo(GeneralCommentsEntity generalCommentsEntity) {
-
-
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 genCommentsInfoDao.insertGenCommentsInfo(generalCommentsEntity);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
-//                flag = true;
-                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
-            public void onError(Throwable e) {
-//                flag = false;
-                Log.i("Tag", tag + "onError: " + x);
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-//                flag = true;
-                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 
@@ -78,39 +68,30 @@ public class GenCommentsRepository {
 
 
     public long updateGeneralCommentsInfo(GeneralCommentsEntity generalCommentsEntity) {
-
-
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 genCommentsInfoDao.updateGenCommentsInfo(generalCommentsEntity);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
-//                flag = true;
-                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
-            public void onError(Throwable e) {
-//                flag = false;
-                Log.i("Tag", tag + "onError: " + x);
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-//                flag = true;
-                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 

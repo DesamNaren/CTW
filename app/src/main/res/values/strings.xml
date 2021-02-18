@@ -152,6 +152,7 @@
     <string name="previous">PREVIOUS</string>
     <string name="saveandnext">SAVE &amp; NEXT</string>
     <string name="next">NEXT</string>
+    <string name="finish">Finish</string>
     <string name="entitlements_provided_to_students">All Entitlements provided to students</string>
     <string name="entitlements_cosmetics">Cosmetics distributed</string>
     <string name="entitlements_cosmetics_upto_month">Cosmetics distributed up to which month</string>

@@ -276,6 +276,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         drGodownLiveData.observe(LpgPhotoActivity.this, new Observer<GccOfflineEntity>() {
             @Override
             public void onChanged(GccOfflineEntity gccOfflineEntity) {
+                binding.header.ivMode.setVisibility(View.VISIBLE);
                 if (gccOfflineEntity != null) {
                     flag = true;
                     binding.btnLayout.btnNext.setText(getString(R.string.save));

@@ -49,7 +49,7 @@
                     android:layout_marginEnd="@dimen/dimen_10dp"
                     android:layout_marginRight="@dimen/dimen_10dp"
                     android:src="@drawable/filter"
-                    android:tint="@color/white"
+                    app:tint="@color/white"
                     android:visibility="gone" />
 
 
@@ -62,7 +62,7 @@
                     android:layout_marginEnd="@dimen/dimen_10dp"
                     android:layout_marginRight="@dimen/dimen_10dp"
                     android:src="@drawable/home"
-                    android:tint="@color/white"
+                    app:tint="@color/white"
                     android:visibility="visible" />
 
                 <ImageView
@@ -73,7 +73,7 @@
                     android:layout_gravity="right"
                     android:layout_marginEnd="@dimen/dimen_10dp"
                     android:layout_marginRight="@dimen/dimen_10dp"
-                    android:tint="@color/white"
+                    app:tint="@color/white"
                     android:visibility="gone" />
 
                 <ImageView
@@ -96,7 +96,7 @@
                     android:layout_marginEnd="@dimen/dimen_10dp"
                     android:layout_marginRight="@dimen/dimen_10dp"
                     android:src="@drawable/sync"
-                    android:tint="@color/white"
+                    app:tint="@color/white"
                     android:visibility="gone" />
 
 
@@ -109,7 +109,7 @@
                     android:layout_marginEnd="@dimen/dimen_10dp"
                     android:layout_marginRight="@dimen/dimen_10dp"
                     android:src="@drawable/change"
-                    android:tint="@color/white"
+                    app:tint="@color/white"
                     android:visibility="gone" />
 
 
@@ -122,7 +122,7 @@
                     android:layout_marginEnd="@dimen/dimen_10dp"
                     android:layout_marginRight="@dimen/dimen_10dp"
                     android:src="@drawable/user_white"
-                    android:tint="@color/white"
+                    app:tint="@color/white"
                     android:visibility="gone" />
 
                 <ImageView
@@ -134,7 +134,7 @@
                     android:layout_marginEnd="@dimen/dimen_10dp"
                     android:layout_marginRight="@dimen/dimen_10dp"
                     android:src="@android:drawable/stat_sys_download"
-                    android:tint="@color/white"
+                    app:tint="@color/white"
                     android:visibility="gone" />
 
 

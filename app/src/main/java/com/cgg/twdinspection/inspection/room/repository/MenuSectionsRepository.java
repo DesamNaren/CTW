@@ -20,6 +20,8 @@ import com.cgg.twdinspection.inspection.source.registers_upto_date.RegistersEnti
 import com.cgg.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -32,8 +34,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MenuSectionsRepository {
 
-    private MenuSectionsDao menuSectionsDao;
-    private String tag = MenuSectionsRepository.class.getSimpleName();
+    private final MenuSectionsDao menuSectionsDao;
+    private long x;
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -96,37 +98,31 @@ public class MenuSectionsRepository {
         return menuSectionsDao.getMenuRecordsCount();
     }
 
-    long x;
-
     public long insertMenuSections(List<InstMenuInfoEntity> menuInfoEntities) {
-
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 menuSectionsDao.insertMenuSections(menuInfoEntities);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
             }
 
 
             @Override
-            public void onError(Throwable e) {
-                Log.i("Tag", tag + "onError: " + x);
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 
@@ -137,33 +133,29 @@ public class MenuSectionsRepository {
     }
 
     public long updateSectionInfo(String time, int id, String instId) {
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 menuSectionsDao.updateSectionInfo(time, id, instId);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
             }
 
-
             @Override
-            public void onError(Throwable e) {
-                Log.i("Tag", tag + "onError: " + x);
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 
@@ -201,7 +193,6 @@ public class MenuSectionsRepository {
         menuSectionsDao.deleteStudAchievementEntity();
         menuSectionsDao.deletePhotos();
     }
-
 
     public void deleteMenuData() {
         menuSectionsDao.deleteInstMenuInfoEntity();

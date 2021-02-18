@@ -35,7 +35,8 @@ public class ReportCoCarricularActivity extends BaseActivity {
         binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ReportCoCarricularActivity.this, InstReportsMenuActivity.class));
+                startActivity(new Intent(ReportCoCarricularActivity.this, InstReportsMenuActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
 

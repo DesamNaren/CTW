@@ -1,12 +1,11 @@
 package com.cgg.twdinspection.engineering_works.room.repository;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.engineering_works.room.dao.GrantSchemeDao;
 import com.cgg.twdinspection.engineering_works.room.database.EngWorksDatabase;
 import com.cgg.twdinspection.engineering_works.source.GrantScheme;
@@ -15,7 +14,7 @@ import java.util.List;
 
 public class GrantSchemeRepository {
 
-    GrantSchemeDao grantSchemeDao;
+    private final GrantSchemeDao grantSchemeDao;
     private LiveData<List<GrantScheme>> schemesLiveData = new MutableLiveData<>();
     private int x;
 
@@ -32,29 +31,12 @@ public class GrantSchemeRepository {
     }
 
     public int insertSchemes(List<GrantScheme> schemes) {
-        new InsertSchemesAsyncTask(schemes).execute();
+        TWDApplication.getExecutorService().execute(() -> {
+            grantSchemeDao.insertSchemes(schemes);
+            x = grantSchemeDao.schemesCount();
+            //Background work here
+        });
         return x;
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertSchemesAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<GrantScheme> grantSchemes;
-
-        InsertSchemesAsyncTask(List<GrantScheme> grantSchemes) {
-            this.grantSchemes = grantSchemes;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            grantSchemeDao.insertSchemes(grantSchemes);
-            return grantSchemeDao.schemesCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            x = integer;
-        }
     }
 
     public LiveData<Integer> getSchemeId(String schemeName) {

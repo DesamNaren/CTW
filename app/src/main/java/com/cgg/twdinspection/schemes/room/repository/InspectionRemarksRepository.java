@@ -12,7 +12,7 @@ import java.util.List;
 
 public class InspectionRemarksRepository {
 
-    private InspectionRemarksDao remarksDao;
+    private final InspectionRemarksDao remarksDao;
 
     public InspectionRemarksRepository(Context application) {
         SchemesDatabase db = SchemesDatabase.getDatabase(application);
@@ -22,7 +22,6 @@ public class InspectionRemarksRepository {
     public LiveData<List<InspectionRemarksEntity>> getInspRemarks() {
         return remarksDao.getInspectionRemarks();
     }
-
 
     public LiveData<String> getRemarkId(String remType) {
         return remarksDao.getRemarkId(remType);

@@ -10,8 +10,9 @@ import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -23,8 +24,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class StaffInfoRepository {
 
-    public String tag = ClassInfoRepository.class.getSimpleName();
-    public StaffInfoDao staffInfoDao;
+    private final StaffInfoDao staffInfoDao;
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -33,7 +33,6 @@ public class StaffInfoRepository {
     public StaffInfoRepository(Application application) {
         SchoolDatabase db = SchoolDatabase.getDatabase(application);
         staffInfoDao = db.staffInfoDao();
-
     }
 
 
@@ -42,24 +41,13 @@ public class StaffInfoRepository {
     }
 
     public LiveData<List<StaffAttendanceEntity>> getStaffInfoList(String inst_id) {
-        LiveData<List<StaffAttendanceEntity>> classIdList = staffInfoDao.getStaffInfoList(inst_id);
-        return classIdList;
+        return staffInfoDao.getStaffInfoList(inst_id);
     }
 
     public void insertStaffInfo(List<StaffAttendanceEntity> staffAttendanceEntities) {
-
-        Observable.fromCallable(new Callable<List<StaffAttendanceEntity>>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public List<StaffAttendanceEntity> call() throws Exception {
-                staffInfoDao.deleteStaffInfo();
-                staffInfoDao.insertStaffAttendInfo(staffAttendanceEntities);
-                return null;
-            }
-        });
-
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
-            @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 staffInfoDao.deleteStaffInfo();
                 staffInfoDao.insertStaffAttendInfo(staffAttendanceEntities);
             }
@@ -67,18 +55,16 @@ public class StaffInfoRepository {
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
             }
 
-
             @Override
-            public void onError(Throwable e) {
-
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
@@ -95,34 +81,30 @@ public class StaffInfoRepository {
     long x;
 
     public long updateStaffInfo(List<StaffAttendanceEntity> staffAttendanceEntities) {
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 staffInfoDao.updateStaffInfo(staffAttendanceEntities);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
-                Log.i("Tag", tag + "onNext: ");
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
             }
 
 
             @Override
-            public void onError(Throwable e) {
-                Log.i("Tag", tag + "onError: " + x);
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 

@@ -181,6 +181,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         drGodownLiveData.observe(DRDepotActivity.this, new Observer<GccOfflineEntity>() {
             @Override
             public void onChanged(GccOfflineEntity GCCOfflineEntity) {
+                binding.header.ivMode.setVisibility(View.VISIBLE);
                 if (GCCOfflineEntity != null) {
                     flag = true;
                     binding.bottomLl.btnNext.setText(getString(R.string.save));

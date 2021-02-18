@@ -60,7 +60,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                         if (versionResponse.getStatusCode() != null && versionResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                             if (appVersion != null) {
                                 if (versionResponse.getCurrentVersion() != null && versionResponse.getCurrentVersion().equalsIgnoreCase(appVersion)) {
-                                    AppConstants.VERSION_DATE = "Feb 15, 2021";
+                                    AppConstants.VERSION_DATE = versionResponse.getVersionDate();
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {

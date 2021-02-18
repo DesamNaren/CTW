@@ -16,11 +16,8 @@ import java.util.List;
 
 public class DMVRepository {
 
-    private DistrictDao districtDao;
+    private final DistrictDao districtDao;
     public LiveData<List<SchoolDistrict>> districts = new MutableLiveData<>();
-    public LiveData<List<SchoolMandal>> mandals = new MutableLiveData<>();
-    public LiveData<List<String>> institute_names = new MutableLiveData<>();
-    public int count;
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -52,13 +49,11 @@ public class DMVRepository {
 
 
     public LiveData<List<MasterInstituteInfo>> getInstitutes(int districtId) {
-        LiveData<List<MasterInstituteInfo>> institutes = districtDao.getInstitutes(districtId);
-        return institutes;
+        return districtDao.getInstitutes(districtId);
     }
 
     public LiveData<List<MasterInstituteInfo>> getAllInstitutes() {
-        LiveData<List<MasterInstituteInfo>> institutes = districtDao.getAllInstitutes();
-        return institutes;
+        return districtDao.getAllInstitutes();
     }
 
 

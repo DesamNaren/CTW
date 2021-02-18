@@ -2,12 +2,9 @@ package com.cgg.twdinspection.inspection.reports.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -311,7 +308,8 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                                 filePath1 = filePath + "_1" + ".pdf";
                             }
 
-                            PDFUtil.getInstance(InstReportsMenuActivity.this).generatePDF(views, filePath1, InstReportsMenuActivity.this, "schemes", "GCC");
+                            PDFUtil.getInstance(InstReportsMenuActivity.this).generatePDF(views,
+                                    filePath1, InstReportsMenuActivity.this);
 
                         } catch (Exception e) {
                             if (customProgressDialog.isShowing())
@@ -416,10 +414,10 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                         + "_" + inspReportData.getInspectionTime()
                         + "_temp" + ".pdf", folder);
 
-                new ItextMerge(InstReportsMenuActivity.this, filePath_temp, filePath1, filePath2, InstReportsMenuActivity.this);
+                new ItextMerge(filePath_temp, filePath1, filePath2, InstReportsMenuActivity.this);
 
             } else {
-                new ItextMerge(InstReportsMenuActivity.this, filePath + "_temp", filePath1, filePath2, InstReportsMenuActivity.this);
+                new ItextMerge(filePath + "_temp", filePath1, filePath2, InstReportsMenuActivity.this);
             }
 
 

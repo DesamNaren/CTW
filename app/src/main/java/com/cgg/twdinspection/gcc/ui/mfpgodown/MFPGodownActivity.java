@@ -108,6 +108,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
         drGodownLiveData.observe(MFPGodownActivity.this, new Observer<GccOfflineEntity>() {
             @Override
             public void onChanged(GccOfflineEntity gccOfflineEntity) {
+                binding.header.ivMode.setVisibility(View.VISIBLE);
                 if (gccOfflineEntity != null) {
                     binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
                 } else {

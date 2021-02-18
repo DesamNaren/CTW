@@ -17,6 +17,17 @@ public class VersionResponse {
     @SerializedName("radius")
     @Expose
     private String radius;
+    @SerializedName("version_date")
+    @Expose
+    private String versionDate;
+
+    public String getVersionDate() {
+        return versionDate;
+    }
+
+    public void setVersionDate(String versionDate) {
+        this.versionDate = versionDate;
+    }
 
     public String getRadius() {
         return radius;

@@ -48,10 +48,18 @@ public class ReportsInfraActivity extends BaseActivity {
         binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ReportsInfraActivity.this, InstReportsMenuActivity.class));
+                startActivity(new Intent(ReportsInfraActivity.this, InstReportsMenuActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
 
+        binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
+        binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ReportsInfraActivity.this, ReportsAcademicActivity.class));
+            }
+        });
 
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,13 +111,7 @@ public class ReportsInfraActivity extends BaseActivity {
         }
 
 
-        binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
-        binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ReportsInfraActivity.this, ReportsAcademicActivity.class));
-            }
-        });
+
     }
 
     @Override

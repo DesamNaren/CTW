@@ -97,7 +97,8 @@ public class EngReportDetailsActivity extends AppCompatActivity implements PDFUt
                             views.add(binding.engWorksPdf2);
                             views.add(binding.photosPdf);
 
-                            PDFUtil.getInstance(EngReportDetailsActivity.this).generatePDF(views, filePath + "_temp" + ".pdf", EngReportDetailsActivity.this, "schemes", "GCC");
+                            PDFUtil.getInstance(EngReportDetailsActivity.this).generatePDF(views,
+                                    filePath + "_temp" + ".pdf", EngReportDetailsActivity.this);
 
                         } catch (Exception e) {
                             if (customProgressDialog.isShowing())

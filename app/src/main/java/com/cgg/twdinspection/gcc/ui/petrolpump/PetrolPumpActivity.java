@@ -97,6 +97,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
         drGodownLiveData.observe(PetrolPumpActivity.this, new Observer<GccOfflineEntity>() {
             @Override
             public void onChanged(GccOfflineEntity gccOfflineEntity) {
+                binding.header.ivMode.setVisibility(View.VISIBLE);
                 if (gccOfflineEntity != null) {
                     binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
                 } else {

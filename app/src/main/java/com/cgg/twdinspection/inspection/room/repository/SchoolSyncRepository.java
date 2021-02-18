@@ -1,9 +1,8 @@
 package com.cgg.twdinspection.inspection.room.repository;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
-import android.os.AsyncTask;
 
+import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.inspection.interfaces.SchoolDMVInterface;
 import com.cgg.twdinspection.inspection.interfaces.SchoolInstInterface;
 import com.cgg.twdinspection.inspection.room.Dao.SchoolSyncDao;
@@ -16,7 +15,7 @@ import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import java.util.List;
 
 public class SchoolSyncRepository {
-    private SchoolSyncDao syncDao;
+    private final SchoolSyncDao syncDao;
 
     public SchoolSyncRepository(Application application) {
         SchoolDatabase db = SchoolDatabase.getDatabase(application);
@@ -24,117 +23,79 @@ public class SchoolSyncRepository {
     }
 
     public void insertSchoolDistricts(final SchoolDMVInterface dmvInterface, final List<SchoolDistrict> districtEntities) {
-        new InsertDistrictAsyncTask(dmvInterface, districtEntities).execute();
+        TWDApplication.getExecutorService().execute(() -> {
+            syncDao.deleteSchoolDistricts();
+            syncDao.insertSchoolDistricts(districtEntities);
+            int x = syncDao.districtCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        dmvInterface.distCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
     }
 
     public void insertSchoolMandals(final SchoolDMVInterface dmvInterface, final List<SchoolMandal> mandalEntities) {
-        new InsertMandalAsyncTask(dmvInterface, mandalEntities).execute();
+        TWDApplication.getExecutorService().execute(() -> {
+            syncDao.deleteSchoolMandals();
+            syncDao.insertSchoolMandals(mandalEntities);
+            int x = syncDao.mandalCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        dmvInterface.manCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
     }
 
 
     public void insertSchoolVillages(final SchoolDMVInterface dmvInterface, final List<SchoolVillage> villageEntities) {
-        new InsertVillageAsyncTask(dmvInterface, villageEntities).execute();
+        TWDApplication.getExecutorService().execute(() -> {
+            syncDao.deleteSchoolVillage();
+            syncDao.insertSchoolVillages(villageEntities);
+            int x = syncDao.villageCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        dmvInterface.vilCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
     }
 
     public void insertMasterInstitutes(final SchoolInstInterface schoolInstInterface, final List<MasterInstituteInfo> masterInstituteInfos) {
-        new InsertInstAsyncTask(schoolInstInterface, masterInstituteInfos).execute();
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertDistrictAsyncTask extends AsyncTask<Void, Void, Integer> {
-        SchoolDMVInterface dmvInterface;
-        List<SchoolDistrict> districtEntities;
-
-        InsertDistrictAsyncTask(SchoolDMVInterface dmvInterface, List<SchoolDistrict> districtEntities) {
-            this.districtEntities = districtEntities;
-            this.dmvInterface = dmvInterface;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            syncDao.deleteSchoolDistricts();
-            syncDao.insertSchoolDistricts(districtEntities);
-            return syncDao.districtCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            dmvInterface.distCount(integer);
-        }
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertMandalAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<SchoolMandal> mandalEntites;
-        SchoolDMVInterface dmvInterface;
-
-        InsertMandalAsyncTask(SchoolDMVInterface dmvInterface,
-                              List<SchoolMandal> mandalEntites) {
-            this.mandalEntites = mandalEntites;
-            this.dmvInterface = dmvInterface;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            syncDao.deleteSchoolMandals();
-            syncDao.insertSchoolMandals(mandalEntites);
-            return syncDao.mandalCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            dmvInterface.manCount(integer);
-        }
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertVillageAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<SchoolVillage> villageEntites;
-        SchoolDMVInterface dmvInterface;
-
-        InsertVillageAsyncTask(SchoolDMVInterface dmvInterface,
-                               List<SchoolVillage> villageEntites) {
-            this.villageEntites = villageEntites;
-            this.dmvInterface = dmvInterface;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            syncDao.deleteSchoolVillage();
-            syncDao.insertSchoolVillages(villageEntites);
-            return syncDao.villageCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            dmvInterface.vilCount(integer);
-        }
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertInstAsyncTask extends AsyncTask<Void, Void, Integer> {
-        SchoolInstInterface schoolInstInterface;
-        List<MasterInstituteInfo> masterInstituteInfos;
-
-        InsertInstAsyncTask(SchoolInstInterface schoolInstInterface, List<MasterInstituteInfo> masterInstituteInfos) {
-            this.masterInstituteInfos = masterInstituteInfos;
-            this.schoolInstInterface = schoolInstInterface;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
+        TWDApplication.getExecutorService().execute(() -> {
             syncDao.deleteMasterInst();
             syncDao.insertMasterInst(masterInstituteInfos);
-            return syncDao.instCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            schoolInstInterface.instCount(integer);
-        }
+            int x = syncDao.instCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        schoolInstInterface.instCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
     }
 }

@@ -272,6 +272,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         drGodownLiveData.observe(PetrolPumpPhotoActivity.this, new Observer<GccOfflineEntity>() {
             @Override
             public void onChanged(GccOfflineEntity gccOfflineEntity) {
+                binding.header.ivMode.setVisibility(View.VISIBLE);
                 if (gccOfflineEntity != null) {
                     flag = true;
                     binding.btnLayout.btnNext.setText(getString(R.string.save));

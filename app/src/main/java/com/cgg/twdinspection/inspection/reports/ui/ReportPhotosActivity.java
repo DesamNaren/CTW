@@ -33,10 +33,20 @@ public class ReportPhotosActivity extends AppCompatActivity {
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ReportPhotosActivity.this, InstReportsMenuActivity.class));
+                startActivity(new Intent(ReportPhotosActivity.this, InstReportsMenuActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
 
+        binding.btnLayout.btnLayout.setVisibility(View.VISIBLE);
+        binding.btnLayout.btnNext.setText(getResources().getString(R.string.finish));
+        binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ReportPhotosActivity.this, InstReportsMenuActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

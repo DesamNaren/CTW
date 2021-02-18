@@ -1,9 +1,6 @@
 package com.cgg.twdinspection.common.screenshot;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.os.AsyncTask;
-
+import com.cgg.twdinspection.common.application.TWDApplication;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfContentByte;
@@ -27,62 +24,45 @@ public class ItextMerge {
     private final String filePath1;
     private final String filePath2;
     private File destFile = null;
+    private boolean flag = false;
+    private Exception mException;
 
-    public ItextMerge(Context context, String filePath, String filePath1, String filePath2, PDFMergeListener listener) {
+    public ItextMerge(String filePath, String filePath1, String filePath2, PDFMergeListener listener) {
         this.filePath = filePath;
         this.filePath1 = filePath1;
         this.filePath2 = filePath2;
 
-        new MergePDFAsync(listener).execute();
-    }
-
-    public interface PDFMergeListener {
-
-        void pdfMergeSuccess();
-
-        void pdfMergeFailure(final Exception exception);
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class MergePDFAsync extends AsyncTask<Void, Void, Boolean> {
-
-        private Exception mException;
-        boolean flag = false;
-        private final PDFMergeListener listener;
-
-        MergePDFAsync(PDFMergeListener listener) {
-            this.listener = listener;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
+        TWDApplication.getExecutorService().execute(() -> {
             try {
                 cretateDestFile();
                 flag = mergeFiles();
             } catch (Exception exception) {
                 mException = exception;
-                return flag;
             }
-            return flag;
-        }
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                if (flag) {
+                    //Send Success callback.
+                    File file1 = new File(filePath1);
+                    file1.delete();
 
-        @Override
-        protected void onPostExecute(Boolean flag) {
-            super.onPostExecute(flag);
-            if (flag) {
-                //Send Success callback.
-                File file1 = new File(filePath1);
-                file1.delete();
+                    File file2 = new File(filePath2);
+                    file2.delete();
 
-                File file2 = new File(filePath2);
-                file2.delete();
+                    listener.pdfMergeSuccess();
+                } else {
+                    //Send Error callback.
+                    listener.pdfMergeFailure(mException);
+                }
+                //UI Thread work here
+            });
+        });
+    }
 
-                listener.pdfMergeSuccess();
-            } else {
-                //Send Error callback.
-                listener.pdfMergeFailure(mException);
-            }
-        }
+    public interface PDFMergeListener {
+        void pdfMergeSuccess();
+
+        void pdfMergeFailure(final Exception exception);
     }
 
     private void cretateDestFile() {
@@ -161,7 +141,6 @@ public class ItextMerge {
                 cb.addTemplate(page, 0, 0);
             }
         }
-
         outputStream.flush();
         document.close();
         outputStream.close();

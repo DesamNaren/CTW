@@ -1,7 +1,6 @@
 package com.cgg.twdinspection.inspection.room.repository;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -9,6 +8,8 @@ import com.cgg.twdinspection.inspection.room.Dao.ClassInfoDao;
 import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -22,8 +23,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ClassInfoRepository {
 
-    private ClassInfoDao classInfoDao;
-    public String tag = ClassInfoRepository.class.getSimpleName();
+    private final ClassInfoDao classInfoDao;
+    private long x = -1;
 
     public ClassInfoRepository(Context application) {
         SchoolDatabase db = SchoolDatabase.getDatabase(application);
@@ -34,57 +35,47 @@ public class ClassInfoRepository {
         return classInfoDao.getMasterClassIdList(inst_id);
     }
 
-
     public LiveData<List<StudAttendInfoEntity>> getClassIdsList(String inst_id) {
         return classInfoDao.getClassIdList(inst_id);
     }
 
-    long x = -1;
-
     public long updateClassInfo(StudAttendInfoEntity studAttendInfoEntity) {
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 classInfoDao.updateClassInfo(studAttendInfoEntity);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
-                x = aLong;
-                Log.i("Tag", tag + "onNext: " + aLong);
+            public void onNext(@NotNull Long aLong) {
             }
 
 
             @Override
-            public void onError(Throwable e) {
-                Log.i("Tag", tag + "onError: " + e.getLocalizedMessage());
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-
             }
         };
-
         observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(observer);
         return x;
     }
 
-
     public void insertClassInfo(List<StudAttendInfoEntity> studAttendInfoEntityList) {
 
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 classInfoDao.deleteClassInfo();
                 classInfoDao.insertStudAttendInfo(studAttendInfoEntityList);
             }
@@ -92,30 +83,25 @@ public class ClassInfoRepository {
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
             }
 
 
             @Override
-            public void onError(Throwable e) {
-
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-
             }
         };
-
         observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(observer);
     }
-
-
 }

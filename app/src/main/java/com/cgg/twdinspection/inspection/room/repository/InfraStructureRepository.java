@@ -7,6 +7,8 @@ import com.cgg.twdinspection.inspection.room.Dao.InfraStructureInfoDao;
 import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -17,8 +19,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class InfraStructureRepository {
 
-    public InfraStructureInfoDao infraStructureInfoDao;
-    private String tag = InfraStructureRepository.class.getSimpleName();
+    private final InfraStructureInfoDao infraStructureInfoDao;
+    private long x;
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -27,46 +29,32 @@ public class InfraStructureRepository {
     public InfraStructureRepository(Application application) {
         SchoolDatabase db = SchoolDatabase.getDatabase(application);
         infraStructureInfoDao = db.infraStructureInfoDao();
-
     }
 
-
-    long x;
-
     public long insertInfraStructureInfo(InfraStructureEntity infrastuctureEntity) {
-
-
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 infraStructureInfoDao.insertInfraStructureInfo(infrastuctureEntity);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
-//                flag = true;
-                Log.i("Tag", tag + "onNext: " + x);
             }
 
-
             @Override
-            public void onError(Throwable e) {
-//                flag = false;
-                Log.i("Tag", tag + "onError: " + x);
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-//                flag = true;
-                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 

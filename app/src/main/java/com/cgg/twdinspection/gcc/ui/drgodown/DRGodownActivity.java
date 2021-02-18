@@ -171,6 +171,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
         drGodownLiveData.observe(DRGodownActivity.this, new Observer<GccOfflineEntity>() {
             @Override
             public void onChanged(GccOfflineEntity drGodowns) {
+                binding.header.ivMode.setVisibility(View.VISIBLE);
                 if (drGodowns != null) {
                     binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
                 } else {

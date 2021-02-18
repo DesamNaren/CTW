@@ -131,6 +131,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         drGodownLiveData.observe(DRGodownFindingsActivity.this, new Observer<GccOfflineEntity>() {
             @Override
             public void onChanged(GccOfflineEntity gccOfflineEntity) {
+                binding.header.ivMode.setVisibility(View.VISIBLE);
                 if (gccOfflineEntity != null) {
                     binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
                 } else {

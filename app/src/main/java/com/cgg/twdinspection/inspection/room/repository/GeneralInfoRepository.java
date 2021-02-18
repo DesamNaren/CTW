@@ -7,6 +7,8 @@ import com.cgg.twdinspection.inspection.room.Dao.GeneralInfoDao;
 import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -17,46 +19,39 @@ import io.reactivex.schedulers.Schedulers;
 
 public class GeneralInfoRepository {
 
-    private GeneralInfoDao generalInfoDao;
+    private final GeneralInfoDao generalInfoDao;
     private long x;
-    private String tag = GeneralInfoRepository.class.getSimpleName();
-
 
     public GeneralInfoRepository(Application application) {
         SchoolDatabase db = SchoolDatabase.getDatabase(application);
         generalInfoDao = db.generalInfoDao();
     }
 
-
     public long insertGeneralInfo(GeneralInfoEntity generalInformationEntity) {
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+        Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
                 generalInfoDao.insertGeneralInfo(generalInformationEntity);
             }
         });
 
         Observer<Long> observer = new Observer<Long>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
+            public void onSubscribe(@NotNull Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
-                Log.i("Tag", tag + "onNext: ");
+            public void onNext(@NotNull Long aLong) {
                 x = aLong;
             }
 
 
             @Override
-            public void onError(Throwable e) {
-                Log.i("Tag", tag + "onError: " + x);
+            public void onError(@NotNull Throwable e) {
             }
 
             @Override
             public void onComplete() {
-                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 

@@ -48,7 +48,8 @@ public class ReportsDietIssuesActivity extends BaseActivity {
         binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ReportsDietIssuesActivity.this, InstReportsMenuActivity.class));
+                startActivity(new Intent(ReportsDietIssuesActivity.this, InstReportsMenuActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
 
@@ -59,12 +60,18 @@ public class ReportsDietIssuesActivity extends BaseActivity {
             }
         });
 
+        binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
+        binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ReportsDietIssuesActivity.this, ReportsInfraActivity.class));
+            }
+        });
 
         sharedPreferences = TWDApplication.get(this).getPreferences();
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
         reportData = gson.fromJson(data, InspReportData.class);
-
 
         String jsonObject = gson.toJson(reportData.getDietIssues());
         if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
@@ -134,14 +141,6 @@ public class ReportsDietIssuesActivity extends BaseActivity {
             binding.executePendingBindings();
         }
 
-
-        binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
-        binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ReportsDietIssuesActivity.this, ReportsInfraActivity.class));
-            }
-        });
     }
 
     private void setAdapter(List<DietListEntity> dietListEntities) {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.text.InputType;
 import android.util.TypedValue;
@@ -167,7 +168,15 @@ public class InspectionReportsDashboard extends AppCompatActivity implements Err
         String data = gson.toJson(reportData);
         editor.putString(AppConstants.INSP_REP_DATA, data);
         editor.commit();
-        startActivity(new Intent(this, InstReportsMenuActivity.class));
+        customProgressDialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                customProgressDialog.hide();
+                startActivity(new Intent(InspectionReportsDashboard.this, InstReportsMenuActivity.class));
+            }
+        }, 2000);
+
     }
 
     @Override

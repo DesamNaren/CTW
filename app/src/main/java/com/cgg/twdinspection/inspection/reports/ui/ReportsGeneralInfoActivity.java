@@ -44,7 +44,8 @@ public class ReportsGeneralInfoActivity extends AppCompatActivity {
         binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ReportsGeneralInfoActivity.this, InstReportsMenuActivity.class));
+                startActivity(new Intent(ReportsGeneralInfoActivity.this, InstReportsMenuActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
         sharedPreferences = TWDApplication.get(this).getPreferences();

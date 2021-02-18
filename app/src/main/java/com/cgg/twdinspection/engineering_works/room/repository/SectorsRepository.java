@@ -1,12 +1,11 @@
 package com.cgg.twdinspection.engineering_works.room.repository;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.engineering_works.room.dao.SectorsDao;
 import com.cgg.twdinspection.engineering_works.room.database.EngWorksDatabase;
 import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
@@ -15,7 +14,7 @@ import java.util.List;
 
 public class SectorsRepository {
 
-    SectorsDao sectorsDao;
+    private final SectorsDao sectorsDao;
     private LiveData<List<SectorsEntity>> sectorsLiveData = new MutableLiveData<>();
     private int x;
 
@@ -32,29 +31,12 @@ public class SectorsRepository {
     }
 
     public int insertSectors(List<SectorsEntity> sectorsEntities) {
-        new InsertSectorsAsyncTask(sectorsEntities).execute();
-        return x;
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertSectorsAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<SectorsEntity> sectorsEntities;
-
-        InsertSectorsAsyncTask(List<SectorsEntity> sectorsEntities) {
-            this.sectorsEntities = sectorsEntities;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
+        TWDApplication.getExecutorService().execute(() -> {
             sectorsDao.insertSectors(sectorsEntities);
-            return sectorsDao.sectorCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            x = integer;
-        }
+            x = sectorsDao.sectorCount();
+            //Background work here
+        });
+        return x;
     }
 
     public LiveData<Integer> getSectorId(String sectorName) {

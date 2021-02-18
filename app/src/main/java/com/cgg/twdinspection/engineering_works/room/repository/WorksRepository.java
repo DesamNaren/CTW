@@ -1,12 +1,11 @@
 package com.cgg.twdinspection.engineering_works.room.repository;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.engineering_works.room.dao.WorksDao;
 import com.cgg.twdinspection.engineering_works.room.database.EngWorksDatabase;
 import com.cgg.twdinspection.engineering_works.source.WorkDetail;
@@ -15,7 +14,7 @@ import java.util.List;
 
 public class WorksRepository {
 
-    WorksDao worksDao;
+    private final WorksDao worksDao;
     private LiveData<List<WorkDetail>> workDetailLiveData = new MutableLiveData<>();
     private int x;
 
@@ -32,7 +31,11 @@ public class WorksRepository {
     }
 
     public int insertWorks(List<WorkDetail> workDetails) {
-        new InsertWorksAsyncTask(workDetails).execute();
+        TWDApplication.getExecutorService().execute(() -> {
+            worksDao.insertWorks(workDetails);
+            x = worksDao.getInsertedWorksCount();
+            //Background work here
+        });
         return x;
     }
 
@@ -56,34 +59,12 @@ public class WorksRepository {
         return worksDao.getWorksCount();
     }
 
-    @SuppressLint("StaticFieldLeak")
-    private class InsertWorksAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<WorkDetail> workDetails;
-
-        InsertWorksAsyncTask(List<WorkDetail> workDetails) {
-            this.workDetails = workDetails;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            worksDao.insertWorks(workDetails);
-            return worksDao.getInsertedWorksCount();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            x = integer;
-        }
-    }
-
     public LiveData<Integer> getSectorId(String sectorName) {
         return worksDao.getSectorId(sectorName);
     }
 
     public LiveData<List<WorkDetail>> getWorks() {
-        LiveData<List<WorkDetail>> works = worksDao.getWorks();
-        return works;
+        return worksDao.getWorks();
     }
 
 }

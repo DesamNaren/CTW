@@ -86,7 +86,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
             }
         });
 
-
+        instMainViewModel.deleteAllInspectionData();
         viewModel = new DMVDetailsViewModel(getApplication());
         dmvSelectionActivityBinding.setViewModel(viewModel);
         dmvSelectionActivityBinding.executePendingBindings();

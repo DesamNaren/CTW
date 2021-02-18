@@ -10,67 +10,34 @@ import android.graphics.Canvas;
 import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfRenderer;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
+
+import com.cgg.twdinspection.common.application.TWDApplication;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * A Class used to generate PDF for the given Views.
- */
 
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class PDFUtil {
 
-
-    /**
-     * TAG.
-     */
-    private static final String TAG = PDFUtil.class.getName();
-    /**
-     * Page width for our PDF.
-     */
     public static final double PDF_PAGE_WIDTH = 8.3 * 72;
-    /**
-     * Page height for our PDF.
-     */
     public static final double PDF_PAGE_HEIGHT = 11.7 * 72;
-    /**
-     * Page width for our PDF in inch.
-     */
-//    public static final double PDF_PAGE_WIDTH_INCH = 8.3;
-    /**
-     * Page height for our PDF in inch.
-     */
-//    public static final double PDF_PAGE_HEIGHT_INCH = 11.7;
-    /**
-     * Singleton instance for PDFUtil.
-     */
     private static PDFUtil sInstance;
+    private Exception mException;
+    private File savedPDFFile;
 
-    /**
-     * Constructor.
-     */
     private PDFUtil(Context context) {
     }
 
-    /**
-     * Return singleton instance of PDFUtil.
-     *
-     * @return singleton instance of PDFUtil.
-     */
     public static PDFUtil getInstance(Context context) {
         if (sInstance == null) {
             sInstance = new PDFUtil(context);
@@ -78,183 +45,98 @@ public class PDFUtil {
         return sInstance;
     }
 
-
-    /**
-     * Generates PDF for the given content views to the file path specified.
-     * <p/>
-     * Method gets List of views as the input and each view will be written to the single page in
-     * the PDF.
-     * <p/>
-     * If API is not support then PDFUtilListener's  pdfGenerationFailure method will be called with
-     * APINotSupportedException.
-     *
-     * @param contentViews List of Content Views to be converted as PDF.
-     * @param filePath     FilePath where the PDF has to be stored.
-     * @param listener     PDFUtilListener to send callback for PDF generation.
-     */
+    //Generates PDF for the given content views to the file path specified.
     public final void generatePDF(final List<View> contentViews, final String filePath,
-                                  final PDFUtilListener listener, String flag, String folderName) {
-        // Check Api Version.
+                                  final PDFUtilListener mListener) {
         int currentApiVersion = Build.VERSION.SDK_INT;
         if (currentApiVersion >= Build.VERSION_CODES.KITKAT) {
-            // Kitkat
-            new GeneratePDFAsync(contentViews, filePath, listener, flag, folderName).execute();
+
+            TWDApplication.getExecutorService().execute(() -> {
+
+                try {
+                    // Create PDF Document.
+                    PdfDocument pdfDocument = new PdfDocument();
+                    // Write content to PDFDocument.
+                    writePDFDocument(pdfDocument, contentViews);
+                    // Save document to file.
+                    savedPDFFile = savePDFDocumentToStorage(pdfDocument, filePath);
+                } catch (Exception exception) {
+                    mException = exception;
+                }
+                //Background work here
+                TWDApplication.getHandler().post(() -> {
+                    try {
+                        if (savedPDFFile != null) {
+                            //Send Success callback.
+                            mListener.pdfGenerationSuccess(savedPDFFile);
+                        } else {
+                            //Send Error callback.
+                            mListener.pdfGenerationFailure(mException);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //UI Thread work here
+                });
+            });
         } else {
-            // Before Kitkat
-            Log.e(TAG, "Generate PDF is not available for your android version.");
-            listener.pdfGenerationFailure(
+            mListener.pdfGenerationFailure(
                     new APINotSupportedException("Generate PDF is not available for your android version."));
         }
 
     }
 
-
-    /**
-     * Listener used to send PDF Generation callback.
-     */
+    //Listener used to send PDF Generation callback.
     public interface PDFUtilListener {
-        /**
-         * Called on the success of PDF Generation.
-         */
+        // Called on the success of PDF Generation.
         void pdfGenerationSuccess(File savedPDFFile);
 
-        /**
-         * Called when PDF Generation failed.
-         *
-         * @param exception Exception occurred during PDFGeneration.
-         */
+        // Called when PDF Generation failed.
         void pdfGenerationFailure(final Exception exception);
     }
 
-    /**
-     * Async task class used to generate PDF in separate thread.
-     */
-    private static class GeneratePDFAsync extends AsyncTask<Void, Void, File> {
+    //Writes given PDFDocument using content views.
+    private void writePDFDocument(final PdfDocument pdfDocument, final List<View> mContentViews) {
 
-        // mContentViews.
-        private final List<View> mContentViews;
+        for (int i = 0; i < mContentViews.size(); i++) {
+            View contentView = mContentViews.get(i);
 
-        // mFilePath.
-        private final String mFilePath;
-
-        // mListener.
-        private PDFUtilListener mListener = null;
-
-        // mException.
-        private Exception mException;
-
-        /**
-         * Constructor.
-         *
-         * @param contentViews List of Content Views to be converted as PDF.
-         * @param filePath     FilePath where the PDF has to be stored.
-         * @param listener     PDFUtilListener to send callback for PDF generation.
-         */
-        public GeneratePDFAsync(final List<View> contentViews, final String filePath, final PDFUtilListener listener, String flag, String folderName) {
-            this.mContentViews = contentViews;
-            this.mFilePath = filePath;
-            this.mListener = listener;
-        }
-
-
-        /**
-         * Do In Background.
-         *
-         * @param params Params
-         * @return TRUE if PDF successfully generated else FALSE.
-         */
-        @Override
-        protected File doInBackground(Void... params) {
-            try {
-                // Create PDF Document.
-                PdfDocument pdfDocument = new PdfDocument();
-
-                // Write content to PDFDocument.
-                writePDFDocument(pdfDocument);
-
-                // Save document to file.
-                return savePDFDocumentToStorage(pdfDocument);
-            } catch (Exception exception) {
-                mException = exception;
-                return null;
+            if (contentView.getWidth() > 0 && contentView.getHeight() > 0) {
+                PdfDocument.PageInfo pageInfo;
+                // crate a page description
+                pageInfo = new PdfDocument.PageInfo.Builder(595, 842, i + 1).create();
+                // start a page
+                PdfDocument.Page page = pdfDocument.startPage(pageInfo);
+                // draw view on the page
+                Canvas pageCanvas = page.getCanvas();
+                pageCanvas.scale(1f, 1f);
+                int pageWidth = pageCanvas.getWidth();
+                int pageHeight = pageCanvas.getHeight();
+                int measureWidth = View.MeasureSpec.makeMeasureSpec(pageWidth, View.MeasureSpec.EXACTLY);
+                int measuredHeight = View.MeasureSpec.makeMeasureSpec(pageHeight, View.MeasureSpec.EXACTLY);
+                contentView.measure(measureWidth, measuredHeight);
+                contentView.layout(0, 0, pageWidth, pageHeight);
+                //595, 842
+                contentView.draw(pageCanvas);
+                // finish the page
+                pdfDocument.finishPage(page);
             }
+
         }
+    }
 
-        /**
-         * On Post Execute.
-         *
-         * @param savedPDFFile Saved pdf file, null if not generated successfully
-         */
-        @Override
-        protected void onPostExecute(File savedPDFFile) {
-            super.onPostExecute(savedPDFFile);
-            if (savedPDFFile != null) {
-                //Send Success callback.
-                mListener.pdfGenerationSuccess(savedPDFFile);
-            } else {
-                //Send Error callback.
-                mListener.pdfGenerationFailure(mException);
-            }
-        }
-
-        /**
-         * Writes given PDFDocument using content views.
-         *
-         * @param pdfDocument PDFDocument to be written.
-         */
-        private void writePDFDocument(final PdfDocument pdfDocument) {
-
-            for (int i = 0; i < mContentViews.size(); i++) {
-
-                //Get Content View.
-                View contentView = mContentViews.get(i);
-
-                if (contentView.getWidth() > 0 && contentView.getHeight() > 0) {
-                    PdfDocument.PageInfo pageInfo;
-                    // crate a page description
-                    pageInfo = new PdfDocument.PageInfo.
-                            Builder(595, 842, i + 1).create();
-
-
-                    // start a page
-                    PdfDocument.Page page = pdfDocument.startPage(pageInfo);
-
-                    // draw view on the page
-                    Canvas pageCanvas = page.getCanvas();
-                    pageCanvas.scale(1f, 1f);
-                    int pageWidth = pageCanvas.getWidth();
-                    int pageHeight = pageCanvas.getHeight();
-                    int measureWidth = View.MeasureSpec.makeMeasureSpec(pageWidth, View.MeasureSpec.EXACTLY);
-                    int measuredHeight = View.MeasureSpec.makeMeasureSpec(pageHeight, View.MeasureSpec.EXACTLY);
-                    contentView.measure(measureWidth, measuredHeight);
-                    contentView.layout(0, 0, pageWidth, pageHeight);
-                    //595, 842
-                    contentView.draw(pageCanvas);
-
-                    // finish the page
-                    pdfDocument.finishPage(page);
-                }
-
-            }
-        }
-
-        /**
-         * Save PDFDocument to the File in the storage.
-         *
-         * @param pdfDocument Document to be written to the Storage.
-         * @throws java.io.IOException
-         */
-        private File savePDFDocumentToStorage(final PdfDocument pdfDocument) throws IOException {
-            FileOutputStream fos = null;
-            // Create file.
+    // Save PDFDocument to the File in the storage.
+    private File savePDFDocumentToStorage(final PdfDocument pdfDocument, final String mFilePath) throws IOException {
+        FileOutputStream fos = null;
+        // Create file.
 //            File file = null;
 //            file = new File(context.getExternalFilesDir(null) + "/CTW/" + folderName + "/");
 //            if (!file.exists()) {
 //                file.mkdirs();
 //            }
 
-            File pdfFile = null;
-            pdfFile = new File(mFilePath);
+        File pdfFile = null;
+        pdfFile = new File(mFilePath);
 
 //            if (mFilePath == null || mFilePath.isEmpty()) {
 //                pdfFile = File.createTempFile(Long.toString(new Date().getTime()), "pdf");
@@ -262,87 +144,66 @@ public class PDFUtil {
 //                pdfFile = new File(mFilePath);
 //            }
 
-            //Create parent directories
-            File parentFile = pdfFile.getParentFile();
-            if (parentFile != null && !parentFile.exists() && !parentFile.mkdirs()) {
-                throw new IllegalStateException("Couldn't create directory: " + parentFile);
+        //Create parent directories
+        File parentFile = pdfFile.getParentFile();
+        if (parentFile != null && !parentFile.exists() && !parentFile.mkdirs()) {
+            throw new IllegalStateException("Couldn't create directory: " + parentFile);
+        }
+        boolean fileExists = pdfFile.exists();
+        // If File already Exists. delete it.
+        if (fileExists) {
+            fileExists = !pdfFile.delete();
+        }
+        try {
+            if (!fileExists) {
+                // Create New File.
+                fileExists = pdfFile.createNewFile();
             }
-            boolean fileExists = pdfFile.exists();
-            // If File already Exists. delete it.
+
             if (fileExists) {
-                fileExists = !pdfFile.delete();
+                // Write PDFDocument to the file.
+                fos = new FileOutputStream(pdfFile);
+                pdfDocument.writeTo(fos);
+
+                //Close output stream
+                fos.close();
+
+                // close the document
+                pdfDocument.close();
             }
-            try {
-                if (!fileExists) {
-                    // Create New File.
-                    fileExists = pdfFile.createNewFile();
-                }
-
-                if (fileExists) {
-                    // Write PDFDocument to the file.
-                    fos = new FileOutputStream(pdfFile);
-                    pdfDocument.writeTo(fos);
-
-                    //Close output stream
-                    fos.close();
-
-                    // close the document
-                    pdfDocument.close();
-                }
-                return pdfFile;
-            } catch (IOException exception) {
-                mException = exception;
-                exception.printStackTrace();
-                if (fos != null) {
-                    fos.close();
-                }
-                throw exception;
+            return pdfFile;
+        } catch (IOException exception) {
+            mException = exception;
+            exception.printStackTrace();
+            if (fos != null) {
+                fos.close();
             }
+            throw exception;
         }
     }
 
-    /**
-     * APINotSupportedException will be thrown If the device doesn't support PDF methods.
-     */
+    // APINotSupportedException will be thrown If the device doesn't support PDF methods.
     private static class APINotSupportedException extends Exception {
         // mErrorMessage.
         private final String mErrorMessage;
 
-        /**
-         * Constructor.
-         *
-         * @param errorMessage Error Message.
-         */
         public APINotSupportedException(final String errorMessage) {
             this.mErrorMessage = errorMessage;
         }
 
-        /**
-         * To String.
-         *
-         * @return error message as a string.
-         */
         @Override
         public @NotNull String toString() {
-            return "APINotSupportedException{" +
-                    "mErrorMessage='" + mErrorMessage + '\'' +
-                    '}';
+            return "APINotSupportedException{" + "mErrorMessage='" + mErrorMessage + '\'' + '}';
         }
     }
 
-    /**
-     * Convert PDF to bitmap, only works on devices above LOLLIPOP
-     *
-     * @param pdfFile pdf file
-     * @return list of bitmap of every page
-     * //     * @throws MyOPDException
-     */
+    //Convert PDF to bitmap, only works on devices above LOLLIPOP
     public static ArrayList<Bitmap> pdfToBitmap(File pdfFile) throws IllegalStateException {
         if (pdfFile == null || !pdfFile.exists()) {
             throw new IllegalStateException("");
         }
-        //            throw new MyOPDException("PDF preview image cannot be generated in this device");
-        //            Toast.makeText( "PDF preview image cannot be generated in this device", Toast.LENGTH_SHORT).show();
+        //throw new MyOPDException("PDF preview image cannot be generated in this device");
+        //Toast.makeText( "PDF preview image cannot be generated in this device", Toast.LENGTH_SHORT).show();
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
             return null;
         }

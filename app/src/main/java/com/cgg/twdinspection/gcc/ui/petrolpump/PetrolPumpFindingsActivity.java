@@ -121,6 +121,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
         drGodownLiveData.observe(PetrolPumpFindingsActivity.this, new androidx.lifecycle.Observer<GccOfflineEntity>() {
             @Override
             public void onChanged(GccOfflineEntity gccOfflineEntity) {
+                binding.header.ivMode.setVisibility(View.VISIBLE);
                 if (gccOfflineEntity != null) {
                     binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
                 } else {

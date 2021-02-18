@@ -548,7 +548,8 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                         filePath1 = filePath + "_1" + ".pdf";
                     }
 
-                    PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
+                    PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views,
+                            filePath1, ReportStockDetailsActivity.this);
 
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
@@ -739,12 +740,10 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                         type + "_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime()
                                 + "_temp" + ".pdf", folder);
 
-                new ItextMerge(ReportStockDetailsActivity.this,
-                        filePath_temp, filePath1, filePath2, ReportStockDetailsActivity.this);
+                new ItextMerge(filePath_temp, filePath1, filePath2, ReportStockDetailsActivity.this);
 
             } else {
-                new ItextMerge(ReportStockDetailsActivity.this,
-                        filePath + "_temp", filePath1, filePath2, ReportStockDetailsActivity.this);
+                new ItextMerge(filePath + "_temp", filePath1, filePath2, ReportStockDetailsActivity.this);
             }
 
         } catch (Exception e) {
