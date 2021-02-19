@@ -826,7 +826,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
+                            android:padding="@dimen/dimen_2dp"
                             android:id="@+id/slno4"
                             android:textColor="@color/black" />
 

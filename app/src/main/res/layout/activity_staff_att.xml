@@ -12,24 +12,25 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/root_layout">
+        android:id="@+id/root_layout"
+        android:background="@color/bg">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_above="@+id/btn_layout"
             android:id="@+id/staffRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bg"
             android:padding="5dp"
             tools:listitem="@layout/item_staff_attendance" />
 
         <com.cgg.twdinspection.common.custom.CustomFontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No data found"
+            android:text="No records found"
             android:textColor="@color/white"
             android:id="@+id/emptyTv"
             android:visibility="gone"
+            android:textSize="18sp"
             android:layout_centerInParent="true" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout

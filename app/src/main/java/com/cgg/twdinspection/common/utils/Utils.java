@@ -805,9 +805,10 @@ public class Utils {
                 dialogMessage.setText(msg);
                 Button btnYes = dialog.findViewById(R.id.btDialogYes);
                 Button btnNo = dialog.findViewById(R.id.btDialogNo);
-                btnNo.setVisibility(View.GONE);
-                btnYes.setText("Update");
-                btnYes.setOnClickListener(new View.OnClickListener() {
+                btnYes.setVisibility(View.GONE);
+                btnNo.setVisibility(View.VISIBLE);
+                btnNo.setText("Update");
+                btnNo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();

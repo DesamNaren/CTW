@@ -119,15 +119,15 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (studAttendInfoEntityListMain.size() == 0) {
-                    startActivity(new Intent(StudentsAttendActivity.this, StaffAttendActivity.class));
-                } else {
+//                if (studAttendInfoEntityListMain.size() == 0) {
+//                    startActivity(new Intent(StudentsAttendActivity.this, StaffAttendActivity.class));
+//                } else {
                     if (validateSubmit()) {
                         Utils.customSaveAlert(StudentsAttendActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
                     } else {
                         showSnackBar("Please inspect all the classes");
                     }
-                }
+//                }
             }
         });
     }
