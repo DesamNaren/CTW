@@ -36,6 +36,7 @@ import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.offline.GCCOfflineDashboard;
+import com.cgg.twdinspection.offline.SchoolOfflineDataActivity;
 import com.cgg.twdinspection.schemes.ui.SchemesDMVActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -100,6 +101,7 @@ public class DashboardMenuActivity extends AppCompatActivity {
         MenuItem nav_eng = navigationView.getMenu().findItem(R.id.nav_eng);
         MenuItem nav_reports = navigationView.getMenu().findItem(R.id.nav_reports);
         MenuItem nav_my_insp = navigationView.getMenu().findItem(R.id.nav_my_insp);
+        MenuItem nav_my_insp_school = navigationView.getMenu().findItem(R.id.nav_my_insp_school);
         MenuItem nav_logout = navigationView.getMenu().findItem(R.id.nav_log_out);
         MenuItem nav_exit = navigationView.getMenu().findItem(R.id.nav_exit);
 
@@ -242,6 +244,18 @@ public class DashboardMenuActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
 
                 Intent newIntent = new Intent(context, GCCOfflineDashboard.class);
+                startActivity(newIntent);
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+
+                return true;
+            }
+        });
+        nav_my_insp_school.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                Intent newIntent = new Intent(context, SchoolOfflineDataActivity.class);
                 startActivity(newIntent);
                 DrawerLayout drawer = findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);

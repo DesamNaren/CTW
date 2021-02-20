@@ -9,6 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.cgg.twdinspection.inspection.offline.SchoolsOfflineEntity;
 import com.cgg.twdinspection.inspection.room.Dao.AcademicInfoDao;
 import com.cgg.twdinspection.inspection.room.Dao.ClassInfoDao;
 import com.cgg.twdinspection.inspection.room.Dao.CocurricularDao;
@@ -25,6 +26,7 @@ import com.cgg.twdinspection.inspection.room.Dao.PhotoDao;
 import com.cgg.twdinspection.inspection.room.Dao.PlantsInfoDao;
 import com.cgg.twdinspection.inspection.room.Dao.RegistersInfoDao;
 import com.cgg.twdinspection.inspection.room.Dao.SchoolSyncDao;
+import com.cgg.twdinspection.inspection.room.Dao.SchoolsDaoOffline;
 import com.cgg.twdinspection.inspection.room.Dao.StaffInfoDao;
 import com.cgg.twdinspection.inspection.room.Dao.StudAchDao;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
@@ -65,10 +67,12 @@ import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
         , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class, MasterInstituteInfo.class, PlantsEntity.class
         , InstMenuInfoEntity.class, StudAchievementEntity.class, MedicalDetailsBean.class
         , CoCurricularEntity.class, UploadPhoto.class, AcademicGradeEntity.class
-        , InstSelectionInfo.class}, version = 1, exportSchema = false)
+        , InstSelectionInfo.class, SchoolsOfflineEntity.class}, version = 1, exportSchema = false)
 public abstract class SchoolDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();
+
+    public abstract SchoolsDaoOffline gccSchoolsOfflineDao();
 
     public abstract StudAchDao studAchDao();
 
