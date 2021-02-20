@@ -67,6 +67,7 @@ import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
 import com.cgg.twdinspection.inspection.viewmodel.DietIssuesCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.DietIsuuesViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -111,6 +112,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     TextView tv;
 
     UploadPhotoViewModel viewModel;
+    InstSelectionViewModel selectionViewModel;
     private final List<UploadPhoto> uploadPhotos = new ArrayList<>();
 
     @Override
@@ -160,12 +162,19 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
-            randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        selectionViewModel = new InstSelectionViewModel(getApplication());
+        LiveData<String> liveData = selectionViewModel.getRandomId(instID);
+        liveData.observe(DietIssuesActivity.this, new Observer<String>() {
+            @Override
+            public void onChanged(String value) {
+                randomNo = value;
+            }
+        });
         dietIsuuesViewModel.getDietInfo(TWDApplication.get(DietIssuesActivity.this).getPreferences().getString(AppConstants.INST_ID, "")).observe(DietIssuesActivity.this, new Observer<List<DietListEntity>>() {
             @Override
             public void onChanged(List<DietListEntity> dietIssuesEntities) {
@@ -449,7 +458,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
             if (localFlag == 1) {
                 //get local record & set to data binding
-                LiveData<DietIssuesEntity> dietInfoData = instMainViewModel.getDietInfoData();
+                LiveData<DietIssuesEntity> dietInfoData = instMainViewModel.getDietInfoData(instID);
                 dietInfoData.observe(DietIssuesActivity.this, new Observer<DietIssuesEntity>() {
                     @Override
                     public void onChanged(DietIssuesEntity dietIssuesEntity) {

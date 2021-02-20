@@ -6,7 +6,6 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.inspection.offline.SchoolsOfflineEntity;
 
 import java.util.List;
@@ -31,11 +30,16 @@ public interface SchoolsDaoOffline {
     @Query("DELETE FROM Schools_Offline where inst_id LIKE :instId")
     int deleteSchoolsRecord(String instId);
 
-
     @Query("DELETE FROM Schools_Offline where inst_time LIKE :time")
     int deletePreviousDayRecords(String time);
 
     @Query("SELECT * from Schools_Offline")
     LiveData<List<SchoolsOfflineEntity>> getSchoolsRecords();
+
+    @Query("SELECT * from Schools_Offline where inst_id LIKE :instId")
+    LiveData<SchoolsOfflineEntity> getSchoolsRecord(String instId);
+
+    @Query("SELECT inst_id from Schools_Offline where inst_time NOT LIKE :time")
+    LiveData<List<String>> getPreviousDayInsts(String time);
 
 }

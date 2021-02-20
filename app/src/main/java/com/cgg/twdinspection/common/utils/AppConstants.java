@@ -5,7 +5,6 @@ public class AppConstants {
     public static final String OFFLINE = "OFFLINE";
     public static final String ONLINE = "ONLINE";
     public static int SL_NO = 0;
-    public static final String RANDOM_NO = "RANDOM_NO";
     public static final String LAT = "LAT";
     public static final String LNG = "LNG";
     public static final String ADDRESS = "ADDRESS";

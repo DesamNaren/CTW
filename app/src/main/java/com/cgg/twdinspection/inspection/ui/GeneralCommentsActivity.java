@@ -337,7 +337,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             int localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
             if (localFlag == 1) {
                 //get local record & set to data binding
-                LiveData<GeneralCommentsEntity> generalCommentsEntityLiveData = instMainViewModel.getGeneralCommentsInfoData();
+                LiveData<GeneralCommentsEntity> generalCommentsEntityLiveData = instMainViewModel.getGeneralCommentsInfoData(instID);
                 generalCommentsEntityLiveData.observe(GeneralCommentsActivity.this, new Observer<GeneralCommentsEntity>() {
                     @Override
                     public void onChanged(GeneralCommentsEntity generalCommentsEntity) {

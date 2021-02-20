@@ -49,7 +49,6 @@ public class InstMainViewModel extends AndroidViewModel {
     private MenuSectionsRepository mRepository;
     private LiveData<List<InstMenuInfoEntity>> instMenuInfoEntities;
     private InstSubmitInterface instSubmitInterface;
-    InstMainActivityBinding binding;
     private LiveData<GeneralInfoEntity> generalInfoEntityLiveData;
     private LiveData<List<StudAttendInfoEntity>> studAttendInfo;
     private LiveData<List<StaffAttendanceEntity>> staffAttendInfo;
@@ -92,10 +91,9 @@ public class InstMainViewModel extends AndroidViewModel {
         }
     }
 
-    public InstMainViewModel(InstMainActivityBinding binding, Application application, Context context) {
+    public InstMainViewModel( Application application, Context context) {
         super(application);
         this.context = context;
-        this.binding = binding;
         setDefaults();
         mRepository = new MenuSectionsRepository(application);
     }
@@ -104,9 +102,9 @@ public class InstMainViewModel extends AndroidViewModel {
         mRepository.insertMenuSections(menuInfoEntities);
     }
 
-    public LiveData<List<InstMenuInfoEntity>> getAllSections() {
+    public LiveData<List<InstMenuInfoEntity>> getAllSections(String inst_id) {
         if (instMenuInfoEntities != null) {
-            instMenuInfoEntities = mRepository.getSections();
+            instMenuInfoEntities = mRepository.getSections(inst_id);
         }
         return instMenuInfoEntities;
     }
@@ -121,7 +119,6 @@ public class InstMainViewModel extends AndroidViewModel {
             twdService.getInstSubmitResponse(instSubmitRequest).enqueue(new Callback<InstSubmitResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<InstSubmitResponse> call, @NotNull Response<InstSubmitResponse> response) {
-                    binding.appbar.progress.setVisibility(View.GONE);
                     instSubmitInterface.getSubmitData(response.body());
                 }
 
@@ -137,79 +134,79 @@ public class InstMainViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<GeneralInfoEntity> getGeneralInfoData() {
+    public LiveData<GeneralInfoEntity> getGeneralInfoData(String inst_id) {
         if (generalInfoEntityLiveData != null) {
-            generalInfoEntityLiveData = mRepository.getGeneralInfo();
+            generalInfoEntityLiveData = mRepository.getGeneralInfo(inst_id);
         }
         return generalInfoEntityLiveData;
     }
 
-    public LiveData<List<StudAttendInfoEntity>> getStudAttendInfoData() {
+    public LiveData<List<StudAttendInfoEntity>> getStudAttendInfoData(String inst_id) {
         if (studAttendInfo != null) {
-            studAttendInfo = mRepository.getStudAttendInfo();
+            studAttendInfo = mRepository.getStudAttendInfo(inst_id);
         }
         return studAttendInfo;
     }
 
-    public LiveData<List<StaffAttendanceEntity>> getStaffInfoData() {
+    public LiveData<List<StaffAttendanceEntity>> getStaffInfoData(String inst_id) {
         if (staffAttendInfo != null) {
-            staffAttendInfo = mRepository.getStaffInfo();
+            staffAttendInfo = mRepository.getStaffInfo(inst_id);
         }
         return staffAttendInfo;
     }
 
-    public LiveData<MedicalInfoEntity> getMedicalInfo() {
+    public LiveData<MedicalInfoEntity> getMedicalInfo(String inst_id) {
         if (medicalInfoEntityLiveData != null) {
-            medicalInfoEntityLiveData = mRepository.getMedicalInfo();
+            medicalInfoEntityLiveData = mRepository.getMedicalInfo(inst_id);
         }
         return medicalInfoEntityLiveData;
     }
 
-    public LiveData<DietIssuesEntity> getDietInfoData() {
+    public LiveData<DietIssuesEntity> getDietInfoData(String inst_id) {
         if (dietIssuesEntityLiveData != null) {
-            dietIssuesEntityLiveData = mRepository.getDietInfo();
+            dietIssuesEntityLiveData = mRepository.getDietInfo(inst_id);
         }
         return dietIssuesEntityLiveData;
     }
 
-    public LiveData<InfraStructureEntity> getInfrastructureInfoData() {
+    public LiveData<InfraStructureEntity> getInfrastructureInfoData(String inst_id) {
         if (infraStructureEntityLiveData != null) {
-            infraStructureEntityLiveData = mRepository.getInfrastructureInfo();
+            infraStructureEntityLiveData = mRepository.getInfrastructureInfo(inst_id);
         }
         return infraStructureEntityLiveData;
     }
 
-    public LiveData<AcademicEntity> getAcademicInfoData() {
+    public LiveData<AcademicEntity> getAcademicInfoData(String inst_id) {
         if (academicEntityLiveData != null) {
-            academicEntityLiveData = mRepository.getAcademicInfo();
+            academicEntityLiveData = mRepository.getAcademicInfo(inst_id);
         }
         return academicEntityLiveData;
     }
 
-    public LiveData<CoCurricularEntity> getCocurricularInfoData() {
+    public LiveData<CoCurricularEntity> getCocurricularInfoData(String inst_id) {
         if (coCurricularEntityLiveData != null) {
-            coCurricularEntityLiveData = mRepository.getCocurricularInfo();
+            coCurricularEntityLiveData = mRepository.getCocurricularInfo(inst_id);
         }
         return coCurricularEntityLiveData;
     }
 
-    public LiveData<EntitlementsEntity> getEntitlementInfoData() {
+    public LiveData<EntitlementsEntity> getEntitlementInfoData(String inst_id) {
         if (entitlementsEntityLiveData != null) {
-            entitlementsEntityLiveData = mRepository.getEntitlementInfo();
+            entitlementsEntityLiveData = mRepository.getEntitlementInfo(inst_id);
         }
         return entitlementsEntityLiveData;
     }
 
-    public LiveData<RegistersEntity> getRegistersInfoData() {
+    public LiveData<RegistersEntity> getRegistersInfoData(String inst_id) {
         if (registersEntityLiveData != null) {
-            registersEntityLiveData = mRepository.getRegistersInfo();
+            registersEntityLiveData = mRepository.getRegistersInfo(inst_id);
         }
         return registersEntityLiveData;
     }
 
-    public LiveData<GeneralCommentsEntity> getGeneralCommentsInfoData() {
+    public LiveData<GeneralCommentsEntity> getGeneralCommentsInfoData(String inst_id) {
         if (generalCommentsEntityLiveData != null) {
-            generalCommentsEntityLiveData = mRepository.getGeneralCommentsInfo();
+            generalCommentsEntityLiveData = mRepository.getGeneralCommentsInfo(inst_id);
         }
         return generalCommentsEntityLiveData;
     }
@@ -228,11 +225,11 @@ public class InstMainViewModel extends AndroidViewModel {
     }
 
 
-    public void deleteAllInspectionData() {
+    public void deleteAllInspectionData(String inst_id) {
         Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
-                mRepository.deleteAllInspectionData();
+                mRepository.deleteAllInspectionData(inst_id);
             }
         });
 
@@ -261,11 +258,11 @@ public class InstMainViewModel extends AndroidViewModel {
                 .subscribe(observer);
     }
 
-    public void deleteMenuData() {
+    public void deleteMenuData(String inst_id) {
         Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
-                mRepository.deleteMenuData();
+                mRepository.deleteMenuData( inst_id);
             }
         });
 

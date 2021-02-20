@@ -452,7 +452,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
             if (localFlag == 1) {
                 //get local record & set to data binding
-                LiveData<CoCurricularEntity> coCurricularEntityLiveData = instMainViewModel.getCocurricularInfoData();
+                LiveData<CoCurricularEntity> coCurricularEntityLiveData = instMainViewModel.getCocurricularInfoData(instId);
                 coCurricularEntityLiveData.observe(CoCurricularActivity.this, new Observer<CoCurricularEntity>() {
                     @Override
                     public void onChanged(CoCurricularEntity coCurricularEntity) {

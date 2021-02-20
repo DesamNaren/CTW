@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
@@ -35,6 +36,9 @@ import com.cgg.twdinspection.databinding.InstMainActivityBinding;
 import com.cgg.twdinspection.inspection.adapter.MenuSectionsAdapter;
 import com.cgg.twdinspection.inspection.interfaces.FinalSubmitListener;
 import com.cgg.twdinspection.inspection.interfaces.InstSubmitInterface;
+import com.cgg.twdinspection.inspection.interfaces.SchoolOfflineInterface;
+import com.cgg.twdinspection.inspection.offline.SchoolsOfflineEntity;
+import com.cgg.twdinspection.inspection.room.repository.SchoolsOfflineRepository;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
@@ -51,7 +55,10 @@ import com.cgg.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.cgg.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.SchoolsOfflineViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
+import com.cgg.twdinspection.offline.SchoolsOfflineDataActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.cgg.twdinspection.schemes.interfaces.SchemeSubmitInterface;
 import com.cgg.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse;
@@ -71,7 +78,7 @@ import okhttp3.RequestBody;
 
 
 public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmitInterface,
-        ErrorHandlerInterface, InstSubmitInterface, FinalSubmitListener {
+        ErrorHandlerInterface, InstSubmitInterface, FinalSubmitListener, SchoolOfflineInterface {
     InstMainActivityBinding binding;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -84,7 +91,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     InstMainViewModel instMainViewModel;
     private String desLat, desLng;
     private CustomProgressDialog customProgressDialog;
-    LiveData<List<InstMenuInfoEntity>> arrayListLiveData;
+    LiveData<List<InstMenuInfoEntity>> sectionsData;
     private UploadPhotoViewModel viewModel;
     private InstSubmitRequest instSubmitRequest;
     private File file_storeroom, file_varandah,
@@ -93,6 +100,8 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             file_tds, file_menu, file_officer;
     private String randomNo;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
+    private SchoolsOfflineViewModel schoolsOfflineViewModel;
+    private InstSelectionViewModel selectionViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,22 +113,23 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         binding.appbar.header.headerTitle.setText(getString(R.string.dashboard));
         binding.appbar.header.backBtn.setVisibility(View.GONE);
         viewModel = new UploadPhotoViewModel(InstMenuMainActivity.this);
+        schoolsOfflineViewModel = new SchoolsOfflineViewModel(getApplication());
 
         binding.appbar.header.ivChange.setVisibility(View.VISIBLE);
         binding.appbar.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (arrayListLiveData != null && arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
+                if (sectionsData != null && sectionsData.getValue() != null && sectionsData.getValue().size() > 0) {
                     boolean flag = false;
-                    for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
-                        if (arrayListLiveData.getValue().get(i).getFlag_completed() == 1) {
+                    for (int i = 0; i < sectionsData.getValue().size(); i++) {
+                        if (sectionsData.getValue().get(i).getFlag_completed() == 1) {
                             flag = true;
                             break;
                         }
                     }
                     if (!flag) {
                         clearSharedPref();
-                        instMainViewModel.deleteMenuData();
+                        instMainViewModel.deleteMenuData(instId);
                         startActivity(new Intent(InstMenuMainActivity.this, DashboardMenuActivity.class)
                                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                         finish();
@@ -132,7 +142,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 } else {
                     clearSharedPref();
                     Log.i("DELETE", "onBackPressed: DELETE INonBackPressed ");
-                    instMainViewModel.deleteMenuData();
+                    instMainViewModel.deleteMenuData(instId);
                     startActivity(new Intent(InstMenuMainActivity.this, DashboardMenuActivity.class)
                             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                     finish();
@@ -144,14 +154,14 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             @Override
             public void onClick(View v) {
                 Utils.customChangeAppAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name),
-                        getString(R.string.change_insp), instMainViewModel, editor);
+                        getString(R.string.change_insp), instMainViewModel, editor, instId);
             }
         });
 
-        instMainViewModel = new InstMainViewModel(binding, getApplication(), InstMenuMainActivity.this);
+        instMainViewModel = new InstMainViewModel(getApplication(), InstMenuMainActivity.this);
         binding.setViewmodel(instMainViewModel);
 
-        arrayListLiveData = instMainViewModel.getAllSections();
+
         sharedPreferences = TWDApplication.get(this).getPreferences();
         editor = sharedPreferences.edit();
         instName = sharedPreferences.getString(AppConstants.INST_NAME, "");
@@ -166,13 +176,15 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         vill_id = String.valueOf(sharedPreferences.getInt(AppConstants.VILL_ID, 0));
         desLat = sharedPreferences.getString(AppConstants.LAT, "");
         desLng = sharedPreferences.getString(AppConstants.LNG, "");
-        randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
 
-        if (randomNo.equalsIgnoreCase("")) {
-            String randomno = Utils.getRandomNumberString();
-            editor.putString(AppConstants.RANDOM_NO, randomno);
-            editor.commit();
-        }
+        selectionViewModel = new InstSelectionViewModel(getApplication());
+        LiveData<String> liveData = selectionViewModel.getRandomId(instId);
+        liveData.observe(InstMenuMainActivity.this, new Observer<String>() {
+            @Override
+            public void onChanged(String value) {
+                randomNo = value;
+            }
+        });
 
         LiveData<List<UploadPhoto>> listLiveData = viewModel.getPhotos();
         listLiveData.observe(InstMenuMainActivity.this, new Observer<List<UploadPhoto>>() {
@@ -222,15 +234,16 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 }
             }
         });
-        arrayListLiveData.observe(this, new Observer<List<InstMenuInfoEntity>>() {
+        sectionsData = instMainViewModel.getAllSections(instId);
+        sectionsData.observe(this, new Observer<List<InstMenuInfoEntity>>() {
             @Override
             public void onChanged(List<InstMenuInfoEntity> menuInfoEntities) {
-                arrayListLiveData.removeObservers(InstMenuMainActivity.this);
+                sectionsData.removeObservers(InstMenuMainActivity.this);
 
-                if (arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
+                if (sectionsData.getValue() != null && sectionsData.getValue().size() > 0) {
                     boolean flag = true;
-                    for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
-                        if (i != 7 && arrayListLiveData.getValue().get(i).getFlag_completed() == 0) {
+                    for (int i = 0; i < sectionsData.getValue().size(); i++) {
+                        if (i != 7 && sectionsData.getValue().get(i).getFlag_completed() == 0) {
                             flag = false;
                             break;
                         }
@@ -267,20 +280,23 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         binding.appbar.includeMenuLayout.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
+                if (sectionsData.getValue() != null && sectionsData.getValue().size() > 0) {
                     boolean flag = true;
-                    for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
-                        if (i != 7 && arrayListLiveData.getValue().get(i).getFlag_completed() == 0) {
+                    for (int i = 0; i < sectionsData.getValue().size(); i++) {
+                        if (i != 7 && sectionsData.getValue().get(i).getFlag_completed() == 0) {
                             flag = false;
                             break;
                         }
                     }
                     if (flag) {
-                        if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
-                            getLocationData();
-                        } else {
-                            Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
-                        }
+
+                        submitCall();
+
+//                        if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
+//                            getLocationData();
+//                        } else {
+//                            Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
+//                        }
                     } else {
                         Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_insp_all));
                     }
@@ -307,9 +323,9 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
         if (cLocation == null) {
             Snackbar.make(binding.appbar.root, getString(R.string.loc_not_ava), Snackbar.LENGTH_SHORT).show();
-
             return;
         }
+
 
         if (dLocation != null && dLocation.getLatitude() > 0 && dLocation.getLongitude() > 0) {
             float distance = Utils.calcDistance(cLocation, dLocation);
@@ -419,7 +435,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     private void submitCall() {
         if (!submitFlag) {
             instSubmitRequest = new InstSubmitRequest();
-            LiveData<GeneralInfoEntity> generalInfoEntityLiveData = instMainViewModel.getGeneralInfoData();
+            LiveData<GeneralInfoEntity> generalInfoEntityLiveData = instMainViewModel.getGeneralInfoData(instId);
             generalInfoEntityLiveData.observe(InstMenuMainActivity.this, new Observer<GeneralInfoEntity>() {
                 @Override
                 public void onChanged(GeneralInfoEntity generalInfoEntity) {
@@ -433,7 +449,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                     }
                 }
             });
-            LiveData<List<StudAttendInfoEntity>> studAttenLiveData = instMainViewModel.getStudAttendInfoData();
+            LiveData<List<StudAttendInfoEntity>> studAttenLiveData = instMainViewModel.getStudAttendInfoData(instId);
             studAttenLiveData.observe(InstMenuMainActivity.this, new Observer<List<StudAttendInfoEntity>>() {
                 @Override
                 public void onChanged(List<StudAttendInfoEntity> studAttendInfoEntities) {
@@ -447,7 +463,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                     }
                 }
             });
-            LiveData<List<StaffAttendanceEntity>> staffAttendLiveData = instMainViewModel.getStaffInfoData();
+            LiveData<List<StaffAttendanceEntity>> staffAttendLiveData = instMainViewModel.getStaffInfoData(instId);
             staffAttendLiveData.observe(InstMenuMainActivity.this, new Observer<List<StaffAttendanceEntity>>() {
                 @Override
                 public void onChanged(List<StaffAttendanceEntity> staffAttendanceEntities) {
@@ -461,7 +477,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                     }
                 }
             });
-            LiveData<MedicalInfoEntity> medicalInfoEntityLiveData = instMainViewModel.getMedicalInfo();
+            LiveData<MedicalInfoEntity> medicalInfoEntityLiveData = instMainViewModel.getMedicalInfo(instId);
             medicalInfoEntityLiveData.observe(InstMenuMainActivity.this, new Observer<MedicalInfoEntity>() {
                 @Override
                 public void onChanged(MedicalInfoEntity medicalInfoEntity) {
@@ -475,7 +491,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                     }
                 }
             });
-            LiveData<DietIssuesEntity> dietIssuesEntityLiveData = instMainViewModel.getDietInfoData();
+            LiveData<DietIssuesEntity> dietIssuesEntityLiveData = instMainViewModel.getDietInfoData(instId);
             dietIssuesEntityLiveData.observe(InstMenuMainActivity.this, new Observer<DietIssuesEntity>() {
                 @Override
                 public void onChanged(DietIssuesEntity dietIssuesEntity) {
@@ -489,7 +505,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                     }
                 }
             });
-            LiveData<InfraStructureEntity> infraStructureEntityLiveData = instMainViewModel.getInfrastructureInfoData();
+            LiveData<InfraStructureEntity> infraStructureEntityLiveData = instMainViewModel.getInfrastructureInfoData(instId);
             infraStructureEntityLiveData.observe(InstMenuMainActivity.this, new Observer<InfraStructureEntity>() {
                 @Override
                 public void onChanged(InfraStructureEntity infraStructureEntity) {
@@ -503,7 +519,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                     }
                 }
             });
-            LiveData<AcademicEntity> academicEntityLiveData = instMainViewModel.getAcademicInfoData();
+            LiveData<AcademicEntity> academicEntityLiveData = instMainViewModel.getAcademicInfoData(instId);
             academicEntityLiveData.observe(InstMenuMainActivity.this, new Observer<AcademicEntity>() {
                 @Override
                 public void onChanged(AcademicEntity academicEntity) {
@@ -517,7 +533,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                     }
                 }
             });
-            LiveData<CoCurricularEntity> coCurricularEntityLiveData = instMainViewModel.getCocurricularInfoData();
+            LiveData<CoCurricularEntity> coCurricularEntityLiveData = instMainViewModel.getCocurricularInfoData(instId);
             coCurricularEntityLiveData.observe(InstMenuMainActivity.this, new Observer<CoCurricularEntity>() {
                 @Override
                 public void onChanged(CoCurricularEntity coCurricularEntity) {
@@ -531,7 +547,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                     }
                 }
             });
-            LiveData<EntitlementsEntity> entitlementsEntityLiveData = instMainViewModel.getEntitlementInfoData();
+            LiveData<EntitlementsEntity> entitlementsEntityLiveData = instMainViewModel.getEntitlementInfoData(instId);
             entitlementsEntityLiveData.observe(InstMenuMainActivity.this, new Observer<EntitlementsEntity>() {
                 @Override
                 public void onChanged(EntitlementsEntity entitlementsEntity) {
@@ -545,7 +561,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                     }
                 }
             });
-            LiveData<RegistersEntity> registersEntityLiveData = instMainViewModel.getRegistersInfoData();
+            LiveData<RegistersEntity> registersEntityLiveData = instMainViewModel.getRegistersInfoData(instId);
             registersEntityLiveData.observe(InstMenuMainActivity.this, new Observer<RegistersEntity>() {
                 @Override
                 public void onChanged(RegistersEntity registersEntity) {
@@ -559,7 +575,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                     }
                 }
             });
-            LiveData<GeneralCommentsEntity> generalCommentsEntityLiveData = instMainViewModel.getGeneralCommentsInfoData();
+            LiveData<GeneralCommentsEntity> generalCommentsEntityLiveData = instMainViewModel.getGeneralCommentsInfoData(instId);
             generalCommentsEntityLiveData.observe(InstMenuMainActivity.this, new Observer<GeneralCommentsEntity>() {
                 @Override
                 public void onChanged(GeneralCommentsEntity generalCommentsEntity) {
@@ -574,8 +590,8 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 }
             });
 
-            if (arrayListLiveData != null && arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
-                if (arrayListLiveData.getValue().get(11).getFlag_completed() == 1) {
+            if (sectionsData != null && sectionsData.getValue() != null && sectionsData.getValue().size() > 0) {
+                if (sectionsData.getValue().get(11).getFlag_completed() == 1) {
                     photoFlag = true;
                 }
                 if (photoFlag) {
@@ -599,7 +615,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         customProgressDialog.hide();
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
             Log.i("DELETE", "getSubmitData");
-            instMainViewModel.deleteAllInspectionData();
+//            instMainViewModel.deleteAllInspectionData(instId);
             clearSharedPref();
             CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
@@ -651,17 +667,17 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     public void onBackPressed() {
 
 
-        if (arrayListLiveData != null && arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
+        if (sectionsData != null && sectionsData.getValue() != null && sectionsData.getValue().size() > 0) {
             boolean flag = false;
-            for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
-                if (arrayListLiveData.getValue().get(i).getFlag_completed() == 1) {
+            for (int i = 0; i < sectionsData.getValue().size(); i++) {
+                if (sectionsData.getValue().get(i).getFlag_completed() == 1) {
                     flag = true;
                     break;
                 }
             }
             if (!flag) {
                 clearSharedPref();
-                instMainViewModel.deleteMenuData();
+                instMainViewModel.deleteMenuData(instId);
                 startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 finish();
@@ -674,7 +690,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         } else {
             clearSharedPref();
             Log.i("DELETE", "onBackPressed: DELETE INonBackPressed ");
-            instMainViewModel.deleteMenuData();
+            instMainViewModel.deleteMenuData(instId);
             startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             finish();
@@ -693,7 +709,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         editor.putString(AppConstants.LAT, "");
         editor.putString(AppConstants.LNG, "");
         editor.putString(AppConstants.ADDRESS, "");
-        editor.putString(AppConstants.RANDOM_NO, "");
 
         editor.commit();
     }
@@ -800,11 +815,19 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
     @Override
     public void finalSubmitCall() {
-        if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
-            callPhotoSubmit(instSubmitRequest);
-        } else {
-            Utils.customErrorAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
-        }
+        SchoolsOfflineEntity schoolsOfflineEntity = new SchoolsOfflineEntity();
+        schoolsOfflineEntity.setInst_id(instId);
+        schoolsOfflineEntity.setInst_name(instName);
+        schoolsOfflineEntity.setInst_time(Utils.getCurrentDate());
+        schoolsOfflineEntity.setDist_id(dist_id);
+        schoolsOfflineEntity.setDist_name(distName);
+        schoolsOfflineEntity.setMan_id(mand_id);
+        schoolsOfflineEntity.setMan_name(mandalName);
+        schoolsOfflineEntity.setVil_id(vill_id);
+        schoolsOfflineEntity.setVil_name(villageName);
+
+        schoolsOfflineViewModel.insertSchoolRecord(InstMenuMainActivity.this,
+                schoolsOfflineEntity);
     }
 
     public void customFinaSubmitAlert(Activity activity, String title, String msg) {
@@ -853,4 +876,28 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     }
 
 
+    @Override
+    public void schoolRecCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                Toast.makeText(this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, SchoolsOfflineDataActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deletedSchoolCount(int cnt) {
+
+    }
+
+    @Override
+    public void deletedSchoolCountSubmitted(int cnt) {
+
+    }
 }

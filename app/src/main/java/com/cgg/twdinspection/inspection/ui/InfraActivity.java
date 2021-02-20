@@ -50,6 +50,7 @@ import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
 import com.cgg.twdinspection.inspection.viewmodel.InfraCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InfraViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -94,6 +95,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     File file_tds;
     int flag_tds = 0;
     SharedPreferences.Editor editor;
+    private InstSelectionViewModel selectionViewModel;
 
     private void ScrollToView(View view) {
         view.getParent().requestChildFocus(view, view);
@@ -134,11 +136,19 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
             String insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
-            randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        selectionViewModel = new InstSelectionViewModel(getApplication());
+        LiveData<String> liveData = selectionViewModel.getRandomId(instID);
+        liveData.observe(InfraActivity.this, new Observer<String>() {
+            @Override
+            public void onChanged(String value) {
+                randomNo = value;
+            }
+        });
 
         binding.rgBigSchoolNameBoard.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -873,7 +883,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             int localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
             if (localFlag == 1) {
                 //get local record & set to data binding
-                LiveData<InfraStructureEntity> dietInfoData = instMainViewModel.getInfrastructureInfoData();
+                LiveData<InfraStructureEntity> dietInfoData = instMainViewModel.getInfrastructureInfoData(instID);
                 dietInfoData.observe(InfraActivity.this, new Observer<InfraStructureEntity>() {
                     @Override
                     public void onChanged(InfraStructureEntity infraStructureEntity) {

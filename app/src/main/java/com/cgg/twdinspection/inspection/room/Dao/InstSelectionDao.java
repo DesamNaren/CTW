@@ -29,6 +29,9 @@ public interface InstSelectionDao {
     @Query("SELECT * from inst_selection_info")
     LiveData<InstSelectionInfo> getInstSelection();
 
+    @Query("SELECT randomNo from inst_selection_info where inst_id LIKE :instid")
+    LiveData<String> getRandomNo(String instid);
+
     @Query("SELECT COUNT(*) FROM inst_selection_info")
     int instSelCount();
 }

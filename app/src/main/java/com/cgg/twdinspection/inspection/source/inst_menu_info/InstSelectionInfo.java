@@ -18,10 +18,11 @@ public class InstSelectionInfo {
     private String inst_lat;
     private String inst_lng;
     private String inst_address;
+    private String randomNo;
 
     public InstSelectionInfo(String inst_id, String inst_name, String dist_id, String man_id,
                              String vil_id, String dist_name, String man_name,
-                             String vil_name, String inst_lat, String inst_lng, String inst_address) {
+                             String vil_name, String inst_lat, String inst_lng, String inst_address, String randomNo) {
         this.inst_id = inst_id;
         this.inst_name = inst_name;
         this.dist_id = dist_id;
@@ -33,6 +34,7 @@ public class InstSelectionInfo {
         this.inst_lat = inst_lat;
         this.inst_lng = inst_lng;
         this.inst_address = inst_address;
+        this.randomNo = randomNo;
     }
 
     public int getId() {
@@ -129,5 +131,13 @@ public class InstSelectionInfo {
 
     public void setInst_address(String inst_address) {
         this.inst_address = inst_address;
+    }
+
+    public String getRandomNo() {
+        return randomNo;
+    }
+
+    public void setRandomNo(String randomNo) {
+        this.randomNo = randomNo;
     }
 }

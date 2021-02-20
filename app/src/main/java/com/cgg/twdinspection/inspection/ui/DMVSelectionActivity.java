@@ -23,12 +23,15 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.DmvSelectionActivityBinding;
 import com.cgg.twdinspection.inspection.interfaces.InstSelInterface;
+import com.cgg.twdinspection.inspection.offline.SchoolsOfflineEntity;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.viewmodel.DMVDetailsViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.SchoolsOfflineViewModel;
+import com.cgg.twdinspection.offline.SchoolsOfflineDataActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -47,6 +50,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     List<MasterInstituteInfo> institutesEntityList;
     CustomProgressDialog customProgressDialog;
     InstMainViewModel instMainViewModel;
+    SchoolsOfflineViewModel schoolsOfflineViewModel;
     private InstSelectionViewModel selectionViewModel;
     private ArrayAdapter<String> selectAdapter;
     private ArrayList<String> selectList;
@@ -68,6 +72,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         dmvSelectionActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
         dmvSelectionActivityBinding.header.headerTitle.setText(getString(R.string.institute_inspection));
         instMainViewModel = new InstMainViewModel(getApplication());
+        schoolsOfflineViewModel = new SchoolsOfflineViewModel(getApplication());
         selectionViewModel = new InstSelectionViewModel(getApplication());
 
         dmvSelectionActivityBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +91,22 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
             }
         });
 
-        instMainViewModel.deleteAllInspectionData();
+        String curDate = Utils.getCurrentDate();
+
+        LiveData<List<String>> schoolsOfflineRecord = schoolsOfflineViewModel.getPreviousDayInsts(curDate);
+        schoolsOfflineRecord.observe(DMVSelectionActivity.this, new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> instList) {
+                schoolsOfflineRecord.removeObservers(DMVSelectionActivity.this);
+                if (instList != null && instList.size() > 0) {
+                    for (int i = 0; i < instList.size(); i++) {
+                        schoolsOfflineViewModel.deleteSchoolsRecord(instList.get(i));
+                        instMainViewModel.deleteAllInspectionData(instList.get(i));
+                    }
+                }
+            }
+        });
+
         viewModel = new DMVDetailsViewModel(getApplication());
         dmvSelectionActivityBinding.setViewModel(viewModel);
         dmvSelectionActivityBinding.executePendingBindings();
@@ -150,11 +170,11 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
             @Override
             public void onClick(View v) {
                 if (validateFields()) {
-
+                    String randomno = Utils.getRandomNumberString();
                     InstSelectionInfo instSelectionInfo = new InstSelectionInfo(selectedInstId,
                             selInstName,
                             String.valueOf(selectedDistId), String.valueOf(selectedManId), String.valueOf(selectedVilId),
-                            selectedDistName, selectedManName, selectedVilName, lat, lng, address);
+                            selectedDistName, selectedManName, selectedVilName, lat, lng, address, randomno);
 
                     selectionViewModel.insertInstitutes(DMVSelectionActivity.this, instSelectionInfo);
                 }
@@ -165,6 +185,13 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DMVSelectionActivity.this, SchoolSyncActivity.class));
+            }
+        });
+        dmvSelectionActivityBinding.btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DMVSelectionActivity.this, SchoolsOfflineDataActivity.class));
+                finish();
             }
         });
     }
@@ -188,6 +215,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         if (adapterView.getId() == R.id.sp_dist) {
+            dmvSelectionActivityBinding.llView.setVisibility(View.GONE);
             instNames = new ArrayList<>();
             institutesEntityList = new ArrayList<>();
             instNames.add("-Select-");
@@ -232,7 +260,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                 dmvSelectionActivityBinding.spInstitution.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_institution) {
-
+            dmvSelectionActivityBinding.llView.setVisibility(View.GONE);
             dmvSelectionActivityBinding.mandal.setText("");
             dmvSelectionActivityBinding.village.setText("");
             dmvSelectionActivityBinding.address.setText("");
@@ -268,6 +296,22 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                                         lat = str.getLatitude();
                                         lng = str.getLongitude();
                                         address = str.getAddress();
+
+                                        LiveData<SchoolsOfflineEntity> schoolsOfflineRecord = schoolsOfflineViewModel.getSchoolsOfflineRecord(String.valueOf(inst_id));
+                                        schoolsOfflineRecord.observe(DMVSelectionActivity.this, new Observer<SchoolsOfflineEntity>() {
+                                            @Override
+                                            public void onChanged(SchoolsOfflineEntity offlineEntity) {
+                                                schoolsOfflineRecord.removeObservers(DMVSelectionActivity.this);
+
+                                                if (offlineEntity == null) {
+                                                    dmvSelectionActivityBinding.llView.setVisibility(View.GONE);
+                                                    dmvSelectionActivityBinding.btnProceed.setVisibility(View.VISIBLE);
+                                                } else {
+                                                    dmvSelectionActivityBinding.llView.setVisibility(View.VISIBLE);
+                                                    dmvSelectionActivityBinding.btnProceed.setVisibility(View.GONE);
+                                                }
+                                            }
+                                        });
                                     }
                                 }
                             });

@@ -36,7 +36,7 @@ import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.offline.GCCOfflineDashboard;
-import com.cgg.twdinspection.offline.SchoolOfflineDataActivity;
+import com.cgg.twdinspection.offline.SchoolsOfflineDataActivity;
 import com.cgg.twdinspection.schemes.ui.SchemesDMVActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -155,13 +155,14 @@ public class DashboardMenuActivity extends AppCompatActivity {
         nav_school.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+/*
                 instSelectionViewModel.getSelectedInst().observe(DashboardMenuActivity.this, new Observer<InstSelectionInfo>() {
                     @Override
                     public void onChanged(InstSelectionInfo instSelectionInfo) {
                         if (instSelectionInfo != null) {
                             instId = instSelectionInfo.getInst_id();
                             if (!TextUtils.isEmpty(instId)) {
-                                instMainViewModel.getAllSections().observe(DashboardMenuActivity.this, new Observer<List<InstMenuInfoEntity>>() {
+                                instMainViewModel.getAllSections(instId).observe(DashboardMenuActivity.this, new Observer<List<InstMenuInfoEntity>>() {
                                     @Override
                                     public void onChanged(List<InstMenuInfoEntity> instMenuInfoEntities) {
                                         if (instMenuInfoEntities != null && instMenuInfoEntities.size() > 0) {
@@ -193,6 +194,8 @@ public class DashboardMenuActivity extends AppCompatActivity {
                         }
                     }
                 });
+*/
+                startActivity(new Intent(DashboardMenuActivity.this, DMVSelectionActivity.class));
                 return true;
             }
         });
@@ -255,7 +258,7 @@ public class DashboardMenuActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
-                Intent newIntent = new Intent(context, SchoolOfflineDataActivity.class);
+                Intent newIntent = new Intent(context, SchoolsOfflineDataActivity.class);
                 startActivity(newIntent);
                 DrawerLayout drawer = findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);

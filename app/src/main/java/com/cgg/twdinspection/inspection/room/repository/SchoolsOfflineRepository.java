@@ -5,10 +5,6 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.cgg.twdinspection.common.application.TWDApplication;
-import com.cgg.twdinspection.gcc.interfaces.GCCOfflineInterface;
-import com.cgg.twdinspection.gcc.room.dao.GCCDaoOffline;
-import com.cgg.twdinspection.gcc.room.database.GCCDatabase;
-import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.inspection.interfaces.SchoolOfflineInterface;
 import com.cgg.twdinspection.inspection.offline.SchoolsOfflineEntity;
 import com.cgg.twdinspection.inspection.room.Dao.SchoolsDaoOffline;
@@ -49,15 +45,25 @@ public class SchoolsOfflineRepository {
         return offlineDao.getSchoolsRecords();
     }
 
-    public void deleteSchoolsRecord(final SchoolOfflineInterface schoolOfflineInterface, String instId) {
+    public LiveData<SchoolsOfflineEntity> getSchoolsRecordOfflineCount(String inst_id) {
+        return offlineDao.getSchoolsRecord(inst_id);
+    }
+
+    public LiveData<List<String>> getPreviousDayInsts(String time) {
+        return offlineDao.getPreviousDayInsts(time);
+    }
+
+    public void deleteSchoolsRecord(final SchoolOfflineInterface schoolOfflineInterface, String instId, boolean flag) {
         TWDApplication.getExecutorService().execute(() -> {
             int x = offlineDao.deleteSchoolsRecord(instId);
             //Background work here
             TWDApplication.getHandler().post(() -> {
                 try {
                     if (x > 0) {
-                        schoolOfflineInterface.deletedSchoolCount(x);
-
+                        if (flag)
+                            schoolOfflineInterface.deletedSchoolCountSubmitted(x);
+                        else
+                            schoolOfflineInterface.deletedSchoolCount(x);
                         //remove all sections
                     }
                 } catch (Exception e) {
@@ -65,6 +71,13 @@ public class SchoolsOfflineRepository {
                 }
                 //UI Thread work here
             });
+        });
+    }
+
+    public void deletePreviousdaySchoolsRecord(String instId) {
+        TWDApplication.getExecutorService().execute(() -> {
+           offlineDao.deleteSchoolsRecord(instId);
+            //Background work here
         });
     }
 
@@ -86,4 +99,6 @@ public class SchoolsOfflineRepository {
             });
         });
     }
+
+
 }

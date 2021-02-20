@@ -46,52 +46,52 @@ public class MenuSectionsRepository {
         menuSectionsDao = db.menuSectionsDao();
     }
 
-    public LiveData<GeneralInfoEntity> getGeneralInfo() {
-        return menuSectionsDao.getGeneralInfo();
+    public LiveData<GeneralInfoEntity> getGeneralInfo(String inst_id) {
+        return menuSectionsDao.getGeneralInfo(inst_id);
     }
 
-    public LiveData<List<StudAttendInfoEntity>> getStudAttendInfo() {
-        return menuSectionsDao.getStudAttendInfo();
+    public LiveData<List<StudAttendInfoEntity>> getStudAttendInfo(String inst_id) {
+        return menuSectionsDao.getStudAttendInfo(inst_id);
     }
 
-    public LiveData<List<StaffAttendanceEntity>> getStaffInfo() {
-        return menuSectionsDao.getStaffAttendInfo();
+    public LiveData<List<StaffAttendanceEntity>> getStaffInfo(String inst_id) {
+        return menuSectionsDao.getStaffAttendInfo(inst_id);
     }
 
-    public LiveData<MedicalInfoEntity> getMedicalInfo() {
-        return menuSectionsDao.getMedicalInfo();
+    public LiveData<MedicalInfoEntity> getMedicalInfo(String inst_id) {
+        return menuSectionsDao.getMedicalInfo(inst_id);
     }
 
-    public LiveData<DietIssuesEntity> getDietInfo() {
-        return menuSectionsDao.getDietInfo();
+    public LiveData<DietIssuesEntity> getDietInfo(String inst_id) {
+        return menuSectionsDao.getDietInfo(inst_id);
     }
 
-    public LiveData<InfraStructureEntity> getInfrastructureInfo() {
-        return menuSectionsDao.getInfraInfo();
+    public LiveData<InfraStructureEntity> getInfrastructureInfo(String inst_id) {
+        return menuSectionsDao.getInfraInfo(inst_id);
     }
 
-    public LiveData<AcademicEntity> getAcademicInfo() {
-        return menuSectionsDao.getAcademicInfo();
+    public LiveData<AcademicEntity> getAcademicInfo(String inst_id) {
+        return menuSectionsDao.getAcademicInfo(inst_id);
     }
 
-    public LiveData<CoCurricularEntity> getCocurricularInfo() {
-        return menuSectionsDao.getCocurricularInfo();
+    public LiveData<CoCurricularEntity> getCocurricularInfo(String inst_id) {
+        return menuSectionsDao.getCocurricularInfo(inst_id);
     }
 
-    public LiveData<EntitlementsEntity> getEntitlementInfo() {
-        return menuSectionsDao.getEntitlementInfo();
+    public LiveData<EntitlementsEntity> getEntitlementInfo(String inst_id) {
+        return menuSectionsDao.getEntitlementInfo(inst_id);
     }
 
-    public LiveData<RegistersEntity> getRegistersInfo() {
-        return menuSectionsDao.getRegisterInfo();
+    public LiveData<RegistersEntity> getRegistersInfo(String inst_id) {
+        return menuSectionsDao.getRegisterInfo(inst_id);
     }
 
-    public LiveData<GeneralCommentsEntity> getGeneralCommentsInfo() {
-        return menuSectionsDao.getGeneralCommentsInfo();
+    public LiveData<GeneralCommentsEntity> getGeneralCommentsInfo(String inst_id) {
+        return menuSectionsDao.getGeneralCommentsInfo(inst_id);
     }
 
-    public LiveData<List<InstMenuInfoEntity>> getSections() {
-        return menuSectionsDao.getSections();
+    public LiveData<List<InstMenuInfoEntity>> getSections(String inst_id) {
+        return menuSectionsDao.getSections(inst_id);
     }
 
     public LiveData<Integer> getMenuRecordsCount() {
@@ -102,6 +102,7 @@ public class MenuSectionsRepository {
         Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
+                menuSectionsDao.deleteInstMenuInfoEntity(menuInfoEntities.get(0).getInstId());
                 menuSectionsDao.insertMenuSections(menuInfoEntities);
             }
         });
@@ -170,32 +171,32 @@ public class MenuSectionsRepository {
     }
 
 
-    public void deleteAllInspectionData() {
+    public void deleteAllInspectionData(String inst_id) {
         Log.i("DELETE", "deleteAllInspectionData: ");
-        menuSectionsDao.deleteInstSelectionInfo();
-        menuSectionsDao.deleteAcademicEntity();
-        menuSectionsDao.deleteAcademicGradeEntity();
+        menuSectionsDao.deleteInstSelectionInfo(inst_id);
+        menuSectionsDao.deleteAcademicEntity(inst_id);
+        menuSectionsDao.deleteAcademicGradeEntity(inst_id);
         menuSectionsDao.deleteCallHealthInfoEntity();
-        menuSectionsDao.deleteClassInfo();
-        menuSectionsDao.deleteCoCurricularEntity();
-        menuSectionsDao.deleteDietIssuesInfo();
-        menuSectionsDao.deleteDietListInfo();
-        menuSectionsDao.deleteEntitlementsInfo();
-        menuSectionsDao.deleteGeneralCommentsInfo();
-        menuSectionsDao.deleteGeneralInfo();
-        menuSectionsDao.deleteInfraStructureInfo();
-        menuSectionsDao.deleteInstMenuInfoEntity();
+        menuSectionsDao.deleteClassInfo(inst_id);
+        menuSectionsDao.deleteCoCurricularEntity(inst_id);
+        menuSectionsDao.deleteDietIssuesInfo(inst_id);
+        menuSectionsDao.deleteDietListInfo(inst_id);
+        menuSectionsDao.deleteEntitlementsInfo(inst_id);
+        menuSectionsDao.deleteGeneralCommentsInfo(inst_id);
+        menuSectionsDao.deleteGeneralInfo(inst_id);
+        menuSectionsDao.deleteInfraStructureInfo(inst_id);
+        menuSectionsDao.deleteInstMenuInfoEntity(inst_id);
         menuSectionsDao.deleteMedicalDetailsBean();
-        menuSectionsDao.deleteMedicalInfoEntity();
+        menuSectionsDao.deleteMedicalInfoEntity(inst_id);
         menuSectionsDao.deletePlantsEntity();
-        menuSectionsDao.deleteRegistersInfo();
-        menuSectionsDao.deleteStaff_Info();
+        menuSectionsDao.deleteRegistersInfo(inst_id);
+        menuSectionsDao.deleteStaff_Info(inst_id);
         menuSectionsDao.deleteStudAchievementEntity();
-        menuSectionsDao.deletePhotos();
+        menuSectionsDao.deletePhotos(inst_id);
     }
 
-    public void deleteMenuData() {
-        menuSectionsDao.deleteInstMenuInfoEntity();
+    public void deleteMenuData(String inst_id) {
+        menuSectionsDao.deleteInstMenuInfoEntity(inst_id);
     }
 
 }

@@ -14,6 +14,7 @@ import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 public class InstSelectionRepository {
 
     private LiveData<InstSelectionInfo> infoLiveData = new MutableLiveData<>();
+    private LiveData<String> randomNoLivedata = new MutableLiveData<>();
     private final InstSelectionDao instSelectionDao;
 
     public InstSelectionRepository(Context application) {
@@ -26,6 +27,13 @@ public class InstSelectionRepository {
             infoLiveData = instSelectionDao.getInstSelection();
         }
         return infoLiveData;
+    }
+
+   public LiveData<String> getRandomNo(String inst_id) {
+        if (randomNoLivedata != null) {
+            randomNoLivedata = instSelectionDao.getRandomNo(inst_id);
+        }
+        return randomNoLivedata;
     }
 
     public void insertSelInst(InstSelInterface instSelInterface, InstSelectionInfo instSelectionInfo) {

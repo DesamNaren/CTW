@@ -26,8 +26,8 @@ public interface MenuSectionsDao {
     @Insert()
     void insertMenuSections(List<InstMenuInfoEntity> menuInfoEntities);
 
-    @Query("SELECT * from inst_menu_info")
-    LiveData<List<InstMenuInfoEntity>> getSections();
+    @Query("SELECT * from inst_menu_info where instId LIKE:inst_id")
+    LiveData<List<InstMenuInfoEntity>> getSections(String inst_id);
 
     @Query("Update inst_menu_info set flag_completed=1, section_time=:time where section_id=:id and instId=:instId")
     void updateSectionInfo(String time, int id, String instId);
@@ -38,105 +38,105 @@ public interface MenuSectionsDao {
     @Query("Select count(*) from inst_menu_info")
     LiveData<Integer> getMenuRecordsCount();
 
-    @Query("SELECT * from general_info")
-    LiveData<GeneralInfoEntity> getGeneralInfo();
+    @Query("SELECT * from general_info where institute_id LIKE:inst_id")
+    LiveData<GeneralInfoEntity> getGeneralInfo(String inst_id);
 
-    @Query("SELECT * from class_info")
-    LiveData<List<StudAttendInfoEntity>> getStudAttendInfo();
+    @Query("SELECT * from class_info where institute_id LIKE:inst_id")
+    LiveData<List<StudAttendInfoEntity>> getStudAttendInfo(String inst_id);
 
-    @Query("SELECT * from staff_info")
-    LiveData<List<StaffAttendanceEntity>> getStaffAttendInfo();
+    @Query("SELECT * from staff_info where institute_id LIKE:inst_id")
+    LiveData<List<StaffAttendanceEntity>> getStaffAttendInfo(String inst_id);
 
-    @Query("SELECT * from medical_info")
-    LiveData<MedicalInfoEntity> getMedicalInfo();
+    @Query("SELECT * from medical_info where institute_id LIKE:inst_id")
+    LiveData<MedicalInfoEntity> getMedicalInfo(String inst_id);
 
-    @Query("SELECT * from diet_issues_info")
-    LiveData<DietIssuesEntity> getDietInfo();
+    @Query("SELECT * from diet_issues_info where institute_id LIKE:inst_id")
+    LiveData<DietIssuesEntity> getDietInfo(String inst_id);
 
-    @Query("SELECT * from infrastructure_info")
-    LiveData<InfraStructureEntity> getInfraInfo();
+    @Query("SELECT * from infrastructure_info where institute_id LIKE:inst_id")
+    LiveData<InfraStructureEntity> getInfraInfo(String inst_id);
 
-    @Query("SELECT * from academic_info")
-    LiveData<AcademicEntity> getAcademicInfo();
+    @Query("SELECT * from academic_info where institute_id LIKE:inst_id")
+    LiveData<AcademicEntity> getAcademicInfo(String inst_id);
 
-    @Query("SELECT * from cocurricular_info")
-    LiveData<CoCurricularEntity> getCocurricularInfo();
+    @Query("SELECT * from cocurricular_info where institute_id LIKE:inst_id")
+    LiveData<CoCurricularEntity> getCocurricularInfo(String inst_id);
 
-    @Query("SELECT * from entitlements_info")
-    LiveData<EntitlementsEntity> getEntitlementInfo();
+    @Query("SELECT * from entitlements_info where institute_id LIKE:inst_id")
+    LiveData<EntitlementsEntity> getEntitlementInfo(String inst_id);
 
-    @Query("SELECT * from registers_info")
-    LiveData<RegistersEntity> getRegisterInfo();
+    @Query("SELECT * from registers_info where institute_id LIKE:inst_id")
+    LiveData<RegistersEntity> getRegisterInfo(String inst_id);
 
-    @Query("SELECT * from general_comments_info")
-    LiveData<GeneralCommentsEntity> getGeneralCommentsInfo();
+    @Query("SELECT * from general_comments_info where institute_id LIKE:inst_id")
+    LiveData<GeneralCommentsEntity> getGeneralCommentsInfo(String inst_id);
 
 
-    @Query("Delete from academic_info")
-    void deleteAcademicEntity();
+    @Query("Delete from academic_info where institute_id LIKE:inst_id")
+    void deleteAcademicEntity(String inst_id);
 
-    @Query("Delete from inst_selection_info")
-    void deleteInstSelectionInfo();
+    @Query("Delete from inst_selection_info where inst_id LIKE:inst_id")
+    void deleteInstSelectionInfo(String inst_id);
 
-    @Query("Delete from academic_grade")
-    void deleteAcademicGradeEntity();
+    @Query("Delete from academic_grade where institute_id LIKE:inst_id")
+    void deleteAcademicGradeEntity(String inst_id);
 
     @Query("Delete from call_health_info")
     void deleteCallHealthInfoEntity();
 
-    @Query("Delete from class_info")
-    void deleteClassInfo();
+    @Query("Delete from class_info where institute_id LIKE:inst_id")
+    void deleteClassInfo(String inst_id);
 
-    @Query("Delete from cocurricular_info")
-    void deleteCoCurricularEntity();
-
-
-    @Query("Delete from diet_issues_info")
-    void deleteDietIssuesInfo();
-
-    @Query("Delete from diet_list_info")
-    void deleteDietListInfo();
+    @Query("Delete from cocurricular_info where institute_id LIKE:inst_id")
+    void deleteCoCurricularEntity(String inst_id);
 
 
-    @Query("Delete from entitlements_info")
-    void deleteEntitlementsInfo();
+    @Query("Delete from diet_issues_info where institute_id LIKE:inst_id")
+    void deleteDietIssuesInfo(String inst_id);
 
-    @Query("Delete from general_comments_info")
-    void deleteGeneralCommentsInfo();
-
-
-    @Query("Delete from general_info")
-    void deleteGeneralInfo();
-
-    @Query("Delete from infrastructure_info")
-    void deleteInfraStructureInfo();
+    @Query("Delete from diet_list_info where institute_id LIKE:inst_id")
+    void deleteDietListInfo(String inst_id);
 
 
-    @Query("Delete from inst_menu_info")
-    void deleteInstMenuInfoEntity();
+    @Query("Delete from entitlements_info where institute_id LIKE:inst_id")
+    void deleteEntitlementsInfo(String inst_id);
+
+    @Query("Delete from general_comments_info where institute_id LIKE:inst_id")
+    void deleteGeneralCommentsInfo(String inst_id);
+
+
+    @Query("Delete from general_info where institute_id LIKE:inst_id")
+    void deleteGeneralInfo(String inst_id);
+
+    @Query("Delete from infrastructure_info where institute_id LIKE:inst_id")
+    void deleteInfraStructureInfo(String inst_id);
+
+
+    @Query("Delete from inst_menu_info where instId LIKE:inst_id")
+    void deleteInstMenuInfoEntity(String inst_id);
 
     @Query("Delete from medical_details_info")
     void deleteMedicalDetailsBean();
 
 
-    @Query("Delete from medical_info")
-    void deleteMedicalInfoEntity();
+    @Query("Delete from medical_info where institute_id LIKE:inst_id")
+    void deleteMedicalInfoEntity(String inst_id);
 
     @Query("Delete from plants_info")
     void deletePlantsEntity();
 
 
-    @Query("Delete from registers_info")
-    void deleteRegistersInfo();
+    @Query("Delete from registers_info where institute_id LIKE:inst_id")
+    void deleteRegistersInfo(String inst_id);
 
-    @Query("Delete from staff_info")
-    void deleteStaff_Info();
+    @Query("Delete from staff_info where institute_id LIKE:inst_id")
+    void deleteStaff_Info(String inst_id);
 
 
     @Query("Delete from stud_achievements_info")
     void deleteStudAchievementEntity();
 
-    @Query("Delete from photos")
-    void deletePhotos();
+    @Query("Delete from photos where institute_id LIKE:inst_id")
+    void deletePhotos(String inst_id);
 
 }

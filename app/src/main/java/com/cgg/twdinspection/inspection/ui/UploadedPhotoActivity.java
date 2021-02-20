@@ -42,6 +42,7 @@ import com.cgg.twdinspection.databinding.ActivityUploadedPhotoBinding;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.UploadPhotoCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
 import com.google.android.gms.location.LocationCallback;
@@ -67,7 +68,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     public Uri fileUri;
     String PIC_NAME, PIC_TYPE;
     UploadPhotoViewModel viewModel;
-    String officerId, instId;
+    String officerId;
     Bitmap bm;
     String FilePath;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
@@ -75,8 +76,9 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    private String instID;
+    private String instId;
     private String randomNo;
+    private InstSelectionViewModel selectionViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
 
         viewModel = ViewModelProviders.of(this,
                 new UploadPhotoCustomViewModel(this)).get(UploadPhotoViewModel.class);
+
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
 
@@ -97,11 +100,19 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
-            instID = sharedPreferences.getString(AppConstants.INST_ID, "");
-            randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
+            instId = sharedPreferences.getString(AppConstants.INST_ID, "");
+            officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        selectionViewModel = new InstSelectionViewModel(getApplication());
+        LiveData<String> liveData = selectionViewModel.getRandomId(instId);
+        liveData.observe(UploadedPhotoActivity.this, new Observer<String>() {
+            @Override
+            public void onChanged(String value) {
+                randomNo = value;
+            }
+        });
 
         try {
             LiveData<List<UploadPhoto>> listLiveData = viewModel.getPhotos();
@@ -218,31 +229,31 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                 uploadPhotos = new ArrayList<>();
 
                 if (flag_storeroom != 0) {
-                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.STOREROOM, String.valueOf(file_storeroom));
+                    addPhoto(instId, Utils.getCurrentDateTime(), AppConstants.STOREROOM, String.valueOf(file_storeroom));
                 }
                 if (flag_varandah != 0) {
-                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.VARANDAH, String.valueOf(file_varandah));
+                    addPhoto(instId, Utils.getCurrentDateTime(), AppConstants.VARANDAH, String.valueOf(file_varandah));
                 }
                 if (flag_playGround != 0) {
-                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.PLAYGROUND, String.valueOf(file_playGround));
+                    addPhoto(instId, Utils.getCurrentDateTime(), AppConstants.PLAYGROUND, String.valueOf(file_playGround));
                 }
                 if (flag_diningHall != 0) {
-                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.DININGHALL, String.valueOf(file_diningHall));
+                    addPhoto(instId, Utils.getCurrentDateTime(), AppConstants.DININGHALL, String.valueOf(file_diningHall));
                 }
                 if (flag_dormitory != 0) {
-                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.DORMITORY, String.valueOf(file_dormitory));
+                    addPhoto(instId, Utils.getCurrentDateTime(), AppConstants.DORMITORY, String.valueOf(file_dormitory));
                 }
                 if (flag_mainBuilding != 0) {
-                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.MAINBUILDING, String.valueOf(file_mainBulding));
+                    addPhoto(instId, Utils.getCurrentDateTime(), AppConstants.MAINBUILDING, String.valueOf(file_mainBulding));
                 }
                 if (flag_toilet != 0) {
-                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.TOILET, String.valueOf(file_toilet));
+                    addPhoto(instId, Utils.getCurrentDateTime(), AppConstants.TOILET, String.valueOf(file_toilet));
                 }
                 if (flag_kitchen != 0) {
-                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.KITCHEN, String.valueOf(file_kitchen));
+                    addPhoto(instId, Utils.getCurrentDateTime(), AppConstants.KITCHEN, String.valueOf(file_kitchen));
                 }
                 if (flag_classroom != 0) {
-                    addPhoto(instID, Utils.getCurrentDateTime(), AppConstants.CLASSROOM, String.valueOf(file_classroom));
+                    addPhoto(instId, Utils.getCurrentDateTime(), AppConstants.CLASSROOM, String.valueOf(file_classroom));
                 }
                 if (uploadPhotos.size() > 0) {
                     Utils.customSaveAlert(UploadedPhotoActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
@@ -252,9 +263,6 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
             }
         });
 
-        sharedPreferences = TWDApplication.get(this).getPreferences();
-        officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
-        instId = sharedPreferences.getString(AppConstants.INST_ID, "");
 
         binding.ivStoreRoom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -875,7 +883,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                     @Override
                     public void onChanged(Integer id) {
                         if (id != null) {
-                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
+                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instId);
                         }
                     }
                 });

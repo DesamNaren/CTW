@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "Schools_Offline")
 public class SchoolsOfflineEntity {
     @PrimaryKey(autoGenerate = true)
-    public int id;
-    public String inst_id;
+    private int id;
+    private String inst_id;
     private String inst_name;
     private String dist_id;
     private String man_id;
@@ -15,24 +15,8 @@ public class SchoolsOfflineEntity {
     private String dist_name;
     private String man_name;
     private String vil_name;
-    private String inst_address;
     private String inst_time;
 
-    public SchoolsOfflineEntity(String inst_id, String inst_name, String dist_id, String man_id,
-                                String vil_id, String dist_name, String man_name,
-                                String vil_name, String inst_address,
-                                String inst_time) {
-        this.inst_id = inst_id;
-        this.inst_name = inst_name;
-        this.dist_id = dist_id;
-        this.man_id = man_id;
-        this.vil_id = vil_id;
-        this.dist_name = dist_name;
-        this.man_name = man_name;
-        this.vil_name = vil_name;
-        this.inst_address = inst_address;
-        this.inst_time = inst_time;
-    }
 
     public int getId() {
         return id;
@@ -112,13 +96,5 @@ public class SchoolsOfflineEntity {
 
     public void setInst_time(String inst_time) {
         this.inst_time = inst_time;
-    }
-
-    public String getInst_address() {
-        return inst_address;
-    }
-
-    public void setInst_address(String inst_address) {
-        this.inst_address = inst_address;
     }
 }

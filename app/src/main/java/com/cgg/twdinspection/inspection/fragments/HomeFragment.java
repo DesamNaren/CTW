@@ -65,6 +65,7 @@ public class HomeFragment extends Fragment {
         binding.btnInstInsp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+/*
                 instSelectionViewModel.getSelectedInst().observe(getActivity(), new Observer<InstSelectionInfo>() {
                     @Override
                     public void onChanged(InstSelectionInfo instSelectionInfo) {
@@ -80,7 +81,6 @@ public class HomeFragment extends Fragment {
                                             for (int i = 0; i < instMenuInfoEntities.size(); i++) {
                                                 if (instMenuInfoEntities.get(i).getFlag_completed() == 1) {
                                                     flag = true;
-                                                    break;
                                                 }
                                             }
                                             if (flag) {
@@ -103,7 +103,8 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 });
-
+*/
+                startActivity(new Intent(context, DMVSelectionActivity.class));
             }
         });
 

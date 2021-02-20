@@ -478,7 +478,8 @@ public class Utils {
     }
 
 
-    public static void customChangeAppAlert(Activity activity, String title, String msg, InstMainViewModel instMainViewModel, SharedPreferences.Editor editor) {
+    public static void customChangeAppAlert(Activity activity, String title, String msg, InstMainViewModel instMainViewModel,
+                                            SharedPreferences.Editor editor,String inst_id) {
         try {
             final Dialog dialog = new Dialog(activity);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -512,7 +513,7 @@ public class Utils {
 
                         editor.commit();
                         Log.i("DELETE", "customChangeAppAlert");
-                        instMainViewModel.deleteAllInspectionData();
+                        instMainViewModel.deleteAllInspectionData(inst_id);
 
                         Intent newIntent = new Intent(activity, DashboardMenuActivity.class);
                         newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |

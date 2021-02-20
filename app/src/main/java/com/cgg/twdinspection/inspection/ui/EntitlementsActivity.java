@@ -286,7 +286,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
             localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
             if (localFlag == 1) {
                 //get local record & set to data binding
-                LiveData<EntitlementsEntity> entitlementInfoData = instMainViewModel.getEntitlementInfoData();
+                LiveData<EntitlementsEntity> entitlementInfoData = instMainViewModel.getEntitlementInfoData(instId);
                 entitlementInfoData.observe(EntitlementsActivity.this, new Observer<EntitlementsEntity>() {
                     @Override
                     public void onChanged(EntitlementsEntity entitlementsEntity) {

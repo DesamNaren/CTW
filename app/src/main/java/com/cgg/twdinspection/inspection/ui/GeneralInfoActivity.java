@@ -82,7 +82,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
             int localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
             if (localFlag == 1) {
                 //get local record & set to data binding
-                final LiveData<GeneralInfoEntity> generalInfoEntityLiveData = instMainViewModel.getGeneralInfoData();
+                final LiveData<GeneralInfoEntity> generalInfoEntityLiveData = instMainViewModel.getGeneralInfoData(instID);
                 generalInfoEntityLiveData.observe(GeneralInfoActivity.this, new Observer<GeneralInfoEntity>() {
                     @Override
                     public void onChanged(GeneralInfoEntity generalInfoEntity) {

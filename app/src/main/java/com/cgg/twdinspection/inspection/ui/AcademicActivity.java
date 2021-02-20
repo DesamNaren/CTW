@@ -925,7 +925,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                             localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
                             if (localFlag == 1) {
                                 //get local record & set to data binding
-                                LiveData<AcademicEntity> academicInfoData = instMainViewModel.getAcademicInfoData();
+                                LiveData<AcademicEntity> academicInfoData = instMainViewModel.getAcademicInfoData(instId);
                                 academicInfoData.observe(AcademicActivity.this, new Observer<AcademicEntity>() {
                                     @Override
                                     public void onChanged(AcademicEntity generalInfoEntity) {

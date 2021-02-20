@@ -547,7 +547,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
                     if (localFlag == 1) {
                         //get local record & set to data binding
-                        LiveData<MedicalInfoEntity> medicalInfo = instMainViewModel.getMedicalInfo();
+                        LiveData<MedicalInfoEntity> medicalInfo = instMainViewModel.getMedicalInfo(instID);
                         medicalInfo.observe(MedicalActivity.this, new Observer<MedicalInfoEntity>() {
                             @Override
                             public void onChanged(MedicalInfoEntity medicalInfoEntity) {

@@ -5,6 +5,6 @@ public interface SchoolOfflineInterface {
 
     void deletedSchoolCount(int cnt);
 
-    void deletedSchoolCountSubmitted(int cnt, String msg);
+    void deletedSchoolCountSubmitted(int cnt);
 
 }
