@@ -748,9 +748,8 @@
                             android:id="@+id/high_class_strength"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_8dp"
-                            android:layout_marginLeft="@dimen/dimen_8dp"
-                            android:padding="@dimen/dimen_8dp"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textColor="@color/black" />
 
@@ -1325,7 +1324,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.labroom_available.equalsIgnoreCase(`No`)}"
-
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1337,12 +1335,11 @@
                             android:id="@+id/ll_name_science_lab"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.labroom_available.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textColorHint="@color/colorAccent"

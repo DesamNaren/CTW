@@ -917,6 +917,8 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                                 highClassStrength = masterClassInfos.get(i - 1).getStudentCount();
                                 binding.highClassStrength.setText(getString(R.string.high_class) + masterClassInfos.get(i - 1).getClassId() + getString(R.string.strength) + highClassStrength);
                                 break;
+                            }else {
+                                binding.highClassStrength.setText( "Highest Class: Not Found" + getString(R.string.strength) + " 0");
                             }
                         }
                         try {

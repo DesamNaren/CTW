@@ -359,8 +359,8 @@
                                 android:layout_height="wrap_content"
                                 android:imeOptions="actionNext"
                                 android:padding="@dimen/dimen_5dp"
-                                android:textColor="@color/black"
-                                android:text="@{`Subjects: `+inspData.subject_names}" />
+                                android:text="@{`Subjects: `+inspData.subject_names}"
+                                android:textColor="@color/black" />
 
                         </LinearLayout>
 
@@ -1313,8 +1313,8 @@
                             android:id="@+id/ll_name_science_lab"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.labroomAvailable.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
