@@ -29,7 +29,7 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/btn_bg"
             android:padding="@dimen/dimen_5dp"
-            android:text="@string/submit"
+            android:text="@string/save"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/white"
             android:textStyle="bold" />

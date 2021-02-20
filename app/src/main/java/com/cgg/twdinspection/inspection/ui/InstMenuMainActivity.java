@@ -606,7 +606,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     void submitFinalCall() {
         if (!submitFlag && generalInfoFlag && studAttendFlag && staffAttendFlag && medicalFlag && dietFlag && infraFlag && cocurricularFlag &&
                 academicFlag && entitlementsFlag && regFlag && generalCommentsFlag && photoFlag) {
-            customFinaSubmitAlert(InstMenuMainActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
+            customFinaSubmitAlert(InstMenuMainActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure_save));
         }
     }
 

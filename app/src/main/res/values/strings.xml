@@ -419,6 +419,7 @@
     <string name="failed">Failed to insert data, please try again!</string>
     <string name="data_saved">Data saved successfully!</string>
     <string name="are_you_sure">Are you sure to submit the data?</string>
+    <string name="are_you_sure_save">Are you sure to save the data?</string>
     <string name="are_you_sure_remove">Are you sure to remove the data?</string>
     <string name="hm_presence">Select HM presence</string>
     <string name="hwo_presence">Select HWO presence</string>
