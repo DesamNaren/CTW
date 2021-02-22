@@ -3,6 +3,7 @@ package com.cgg.twdinspection.gcc.reports.source;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReportData {
@@ -48,7 +49,7 @@ public class ReportData {
     private InspectionReportResponse inspectionFindings;
     @SerializedName("photos")
     @Expose
-    private List<ReportPhoto> photos = null;
+    private ArrayList<ReportPhoto> photos = null;
 
     public String getOfficerId() {
         return officerId;
@@ -154,11 +155,11 @@ public class ReportData {
         this.inspectionFindings = inspectionFindings;
     }
 
-    public List<ReportPhoto> getPhotos() {
+    public ArrayList<ReportPhoto> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<ReportPhoto> photos) {
+    public void setPhotos(ArrayList<ReportPhoto> photos) {
         this.photos = photos;
     }
 

@@ -4,6 +4,7 @@ public class AppConstants {
     public static final String SHARED_PREF = "TWD_PREFERENCES";
     public static final String OFFLINE = "OFFLINE";
     public static final String ONLINE = "ONLINE";
+    public static final String INSP_REP_DATA = "INSP_REP_DATA";
     public static int SL_NO = 0;
     public static final String LAT = "LAT";
     public static final String LNG = "LNG";
@@ -99,7 +100,6 @@ public class AppConstants {
     public static final String REPORT_PETROL_REP = "petrol_pump";
     public static final String REPORT_LPG_REP = "lpg";
     public static final String REP_DATA = "REP_DATA";
-    public static final String INSP_REP_DATA = "INSP_REP_DATA";
 
 
     public static final String SCHEME_REP_DATA = "SCHEME_REP_DATA";

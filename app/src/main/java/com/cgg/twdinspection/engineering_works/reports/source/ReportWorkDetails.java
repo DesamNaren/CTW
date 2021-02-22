@@ -4,6 +4,7 @@ import com.cgg.twdinspection.gcc.reports.source.ReportPhoto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReportWorkDetails {
@@ -18,7 +19,7 @@ public class ReportWorkDetails {
     private String extensionTime;
     @SerializedName("photos")
     @Expose
-    private List<ReportPhoto> photos = null;
+    private ArrayList<ReportPhoto> photos = null;
     @SerializedName("qual_care")
     @Expose
     private String qualCare;
@@ -197,11 +198,11 @@ public class ReportWorkDetails {
         this.extensionTime = extensionTime;
     }
 
-    public List<ReportPhoto> getPhotos() {
+    public ArrayList<ReportPhoto> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<ReportPhoto> photos) {
+    public void setPhotos(ArrayList<ReportPhoto> photos) {
         this.photos = photos;
     }
 
