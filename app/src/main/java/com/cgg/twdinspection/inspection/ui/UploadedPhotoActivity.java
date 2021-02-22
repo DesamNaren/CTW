@@ -115,7 +115,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         });
 
         try {
-            LiveData<List<UploadPhoto>> listLiveData = viewModel.getPhotos();
+            LiveData<List<UploadPhoto>> listLiveData = viewModel.getPhotos(instId);
             listLiveData.observe(UploadedPhotoActivity.this, new Observer<List<UploadPhoto>>() {
                 @Override
                 public void onChanged(List<UploadPhoto> uploadPhotos) {
@@ -226,6 +226,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 uploadPhotos = new ArrayList<>();
 
                 if (flag_storeroom != 0) {
@@ -687,7 +688,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
 
     public String getFilename() {
         FilePath = getExternalFilesDir(null)
-                + "/" + IMAGE_DIRECTORY_NAME;
+                + "/" + IMAGE_DIRECTORY_NAME + "/" + instId;
         String Image_name = PIC_NAME;
         FilePath = FilePath + "/" + Image_name;
         return FilePath;
@@ -739,7 +740,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
             if (resultCode == RESULT_OK) {
 
                 FilePath = getExternalFilesDir(null)
-                        + "/" + IMAGE_DIRECTORY_NAME;
+                        + "/" + IMAGE_DIRECTORY_NAME + "/" + instId;
 
                 String Image_name = PIC_TYPE + ".png";
                 FilePath = FilePath + "/" + Image_name;
@@ -837,7 +838,8 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     }
 
     private File getOutputMediaFile(int type) {
-        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME
+                + "/" + instId);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 return null;
@@ -874,6 +876,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
 
     @Override
     public void submitData() {
+//        viewModel.deleteMenuData(instId);
         long x = viewModel.insertPhotos(uploadPhotos);
         if (x >= 0 && uploadPhotos.size() == 9) {
             final long[] z = {0};
@@ -883,6 +886,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                     @Override
                     public void onChanged(Integer id) {
                         if (id != null) {
+
                             z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instId);
                         }
                     }

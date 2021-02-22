@@ -5,16 +5,18 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,11 +26,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 
 import com.cgg.twdinspection.R;
+import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.custom.CustomFontTextView;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
-import com.cgg.twdinspection.databinding.ActivitySplashBinding;
 import com.cgg.twdinspection.databinding.CustomLayoutForPermissionsBinding;
 import com.cgg.twdinspection.inspection.source.version_check.VersionResponse;
 import com.cgg.twdinspection.inspection.viewmodel.SplashViewModel;
@@ -43,15 +45,75 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
     private CustomLayoutForPermissionsBinding customBinding;
     private Context context;
     private String appVersion;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private SplashViewModel splashViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = SplashActivity.this;
         appVersion = Utils.getVersionName(this);
-        SplashViewModel splashViewModel = new SplashViewModel(this, getApplication());
+        splashViewModel = new SplashViewModel(this, getApplication());
+        sharedPreferences = TWDApplication.get(context).getPreferences();
+        editor = sharedPreferences.edit();
 
+        String version = sharedPreferences.getString("VERSION", "");
+        String mPIN = sharedPreferences.getString(AppConstants.MPIN, "");
 
+        if (TextUtils.isEmpty(version)) {
+            callService();
+        } else if (!version.equalsIgnoreCase(Utils.getVersionName(context))) {
+            if (Utils.checkInternetConnection(this)) {
+                callService();
+            } else
+                showAlert(SplashActivity.this, getResources().getString(R.string.app_name), getString(R.string.update_msg));
+        } else if (!TextUtils.isEmpty(mPIN)) {
+            startActivity(new Intent(SplashActivity.this, ValidateMPINActivity.class));
+            finish();
+        } else {
+            callService();
+        }
+    }
+
+    private void showAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_information);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button btnYes = dialog.findViewById(R.id.btDialogYes);
+                Button btnNo = dialog.findViewById(R.id.btDialogNo);
+                btnYes.setVisibility(View.GONE);
+                btnNo.setVisibility(View.VISIBLE);
+                btnNo.setText("Update");
+                btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        try {
+                            callService();
+                        } catch (Exception e) {
+                            Toast.makeText(activity, activity.getString(R.string.google_play), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void callService() {
         if (Utils.checkInternetConnection(this)) {
             splashViewModel.getCurrentVersion().observe(this, new Observer<VersionResponse>() {
                 @Override
@@ -60,7 +122,10 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                         if (versionResponse.getStatusCode() != null && versionResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                             if (appVersion != null) {
                                 if (versionResponse.getCurrentVersion() != null && versionResponse.getCurrentVersion().equalsIgnoreCase(appVersion)) {
+                                    editor.putString("VERSION", versionResponse.getCurrentVersion());
+                                    editor.commit();
                                     AppConstants.VERSION_DATE = versionResponse.getVersionDate();
+
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -121,7 +186,6 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
         } else {
             Utils.customSplashErrorAlert(SplashActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
         }
-
     }
 
     private void handleError(Activity context) {
@@ -145,7 +209,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
     };
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NotNull  String permissions[], @NotNull int @NotNull [] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NotNull String permissions[], @NotNull int @NotNull [] grantResults) {
         try {
             if (requestCode == REQUEST_PERMISSION_CODE) {
                 if ((grantResults[0] == PackageManager.PERMISSION_GRANTED)

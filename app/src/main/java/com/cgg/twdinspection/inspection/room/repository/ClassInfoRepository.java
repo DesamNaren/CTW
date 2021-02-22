@@ -76,7 +76,7 @@ public class ClassInfoRepository {
         Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
-                classInfoDao.deleteClassInfo();
+                classInfoDao.deleteClassInfo(studAttendInfoEntityList.get(0).getInstitute_id());
                 classInfoDao.insertStudAttendInfo(studAttendInfoEntityList);
             }
         });

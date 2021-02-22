@@ -76,11 +76,11 @@ public class AcademicRepository {
     }
 
 
-    public long deleteGradeInfo() {
+    public long deleteGradeInfo(String inst_id) {
         Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
-                academicInfoDao.deleteAcademicGradeInfo();
+                academicInfoDao.deleteAcademicGradeInfo(inst_id);
             }
         });
 

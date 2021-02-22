@@ -822,7 +822,6 @@ public class Utils {
                             Toast.makeText(activity, activity.getString(R.string.google_play), Toast.LENGTH_SHORT).show();
                         }
 
-
                     }
                 });
                 if (!dialog.isShowing())
@@ -832,6 +831,7 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
 
     public static void customSuccessAlert(Activity activity, String title, String msg) {
         try {

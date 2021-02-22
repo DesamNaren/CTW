@@ -366,11 +366,13 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
             ScrollToView(binding.rgStockIssue);
             returnFlag = false;
             showSnackBar(getString(R.string.reg_stock));
-        } else if (TextUtils.isEmpty(perArticle)) {
+        }
+        else if (TextUtils.isEmpty(perArticle)) {
             ScrollToView(binding.rgPerArticle);
             returnFlag = false;
             showSnackBar(getString(R.string.reg_per_art));
-        } else if (TextUtils.isEmpty(budWatch)) {
+        }
+        else if (TextUtils.isEmpty(budWatch)) {
             ScrollToView(binding.rgBudWatch);
             returnFlag = false;
             showSnackBar(getString(R.string.reg_budget));

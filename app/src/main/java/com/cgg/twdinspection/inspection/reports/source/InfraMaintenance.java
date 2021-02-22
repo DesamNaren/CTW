@@ -1,9 +1,46 @@
 package com.cgg.twdinspection.inspection.reports.source;
 
+import androidx.room.ColumnInfo;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class InfraMaintenance {
+    @SerializedName("lights_working")
+    private String lights_working;
+
+    @SerializedName("lights_nonworking")
+    private String lights_nonworking;
+
+    @SerializedName("lights_required")
+    private String lights_required;
+
+
+    public String getLights_working() {
+        return lights_working;
+    }
+
+    public void setLights_working(String lights_working) {
+        this.lights_working = lights_working;
+    }
+
+    public String getLights_nonworking() {
+        return lights_nonworking;
+    }
+
+    public void setLights_nonworking(String lights_nonworking) {
+        this.lights_nonworking = lights_nonworking;
+    }
+
+    public String getLights_required() {
+        return lights_required;
+    }
+
+    public void setLights_required(String lights_required) {
+        this.lights_required = lights_required;
+    }
+
+
     @SerializedName("bigSchoolNameBoard")
     @Expose
     private String bigSchoolNameBoard;

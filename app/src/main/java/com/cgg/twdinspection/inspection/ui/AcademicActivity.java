@@ -1433,7 +1433,6 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                             dialog.dismiss();
                         }
 
-                        academicViewModel.deleteGradeInfo();
                         finish();
                     }
                 });

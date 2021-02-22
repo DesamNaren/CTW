@@ -9,12 +9,11 @@ import org.jetbrains.annotations.NotNull;
 
 @Entity(tableName = "diet_list_info")
 public class DietListEntity {
-
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo()
     private int id;
 
     @NonNull
-    @PrimaryKey
     @ColumnInfo()
     private String item_name;
 

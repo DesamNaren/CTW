@@ -18,6 +18,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,15 +58,49 @@ public class UploadPhotoViewModel extends ViewModel {
         return repository.insertPhotos(photos);
     }
 
-    public LiveData<List<UploadPhoto>> getPhotos() {
-        uploadLiveData = repository.getPhotos();
+    public LiveData<List<UploadPhoto>> getPhotos(String inst_id) {
+        uploadLiveData = repository.getPhotos(inst_id);
         return uploadLiveData;
     }
 
-    public LiveData<UploadPhoto> getPhotoData(String fileName) {
-        uploadPhotoLiveData = repository.getPhotoData(fileName);
+    public LiveData<UploadPhoto> getPhotoData(String fileName, String inst_id) {
+        uploadPhotoLiveData = repository.getPhotoData(fileName, inst_id);
         return uploadPhotoLiveData;
     }
+
+    public void deletePhotoData(String inst_id) {
+        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                repository.deletePhotoData(inst_id);
+            }
+        });
+
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        };
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
+    }
+
 
     public void UploadImageServiceCall(final List<MultipartBody.Part> partList, InstSubmitRequest instSubmitRequest) {
         try {

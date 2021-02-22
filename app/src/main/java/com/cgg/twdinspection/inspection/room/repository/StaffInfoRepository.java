@@ -48,7 +48,7 @@ public class StaffInfoRepository {
         Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
-                staffInfoDao.deleteStaffInfo();
+                staffInfoDao.deleteStaffInfo(staffAttendanceEntities.get(0).getInstitute_id());
                 staffInfoDao.insertStaffAttendInfo(staffAttendanceEntities);
             }
         });

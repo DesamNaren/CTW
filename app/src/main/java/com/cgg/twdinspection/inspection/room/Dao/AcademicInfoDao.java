@@ -17,8 +17,8 @@ public interface AcademicInfoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAcademicInfo(AcademicEntity AcademicEntity);
 
-    @Query("delete from academic_grade")
-    void deleteAcademicGradeInfo();
+    @Query("delete from academic_grade where institute_id LIKE :inst_id")
+    void deleteAcademicGradeInfo(String inst_id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAcademicGradeInfo(List<AcademicGradeEntity> academicGradeEntities);

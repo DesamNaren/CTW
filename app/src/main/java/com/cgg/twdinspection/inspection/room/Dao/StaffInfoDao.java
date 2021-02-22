@@ -27,6 +27,6 @@ public interface StaffInfoDao {
     @Insert
     void insertStaffAttendInfo(List<StaffAttendanceEntity> staffAttendanceEntities);
 
-    @Query("DELETE FROM Staff_Info")
-    void deleteStaffInfo();
+    @Query("DELETE FROM Staff_Info  where institute_id LIKE :inst_id")
+    void deleteStaffInfo(String inst_id);
 }

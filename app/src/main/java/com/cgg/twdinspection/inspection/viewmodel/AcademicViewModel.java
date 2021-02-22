@@ -36,8 +36,8 @@ public class AcademicViewModel extends ViewModel {
         return mRepository.insertAcademicInfo(AcademicEntity);
     }
 
-    public long deleteGradeInfo() {
-        return mRepository.deleteGradeInfo();
+    public long deleteGradeInfo(String inst_id) {
+        return mRepository.deleteGradeInfo(inst_id);
     }
 
     public void insertAcademicGradeInfo(List<AcademicGradeEntity> academicGradeEntities) {

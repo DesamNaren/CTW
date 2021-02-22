@@ -1,7 +1,6 @@
 package com.cgg.twdinspection.inspection.room.repository;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -85,7 +84,7 @@ public class DietIssuesInfoRepository {
         Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
-                dietIssuesInfoDao.deleteDietInfo();
+                dietIssuesInfoDao.deleteDietInfo(dietListEntities.get(0).getInstitute_id());
                 dietIssuesInfoDao.insertDietInfo(dietListEntities);
             }
         });
@@ -116,12 +115,12 @@ public class DietIssuesInfoRepository {
                 .subscribe(observer);
     }
 
-    public long deleteDietListInfo() {
+    public long deleteDietListInfo(String inst_id) {
 
         Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
-                dietIssuesInfoDao.deleteDietListInfo();
+                dietIssuesInfoDao.deleteDietListInfo(inst_id);
             }
         });
 

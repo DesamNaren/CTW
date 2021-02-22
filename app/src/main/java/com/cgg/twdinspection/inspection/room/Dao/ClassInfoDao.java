@@ -27,8 +27,8 @@ public interface ClassInfoDao {
     @Update()
     void updateClassInfo(StudAttendInfoEntity studAttendInfoEntity);
 
-    @Query("DELETE FROM class_info")
-    void deleteClassInfo();
+    @Query("DELETE FROM class_info where institute_id LIKE :inst_id")
+    void deleteClassInfo(String inst_id);
 
 
 }

@@ -79,6 +79,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             repairs_to_door, painting, electricity_wiring_reason,
             roplant_reason, ceilingFansWorking, ceilingFansNonWorking, ceilingFansReq,
             mountedFansWorking, mountedFansNonWorking, mountedFansReq,
+            lightsWorking,  lightsNonWorking,  lightsReq,
             repair_required, how_many_buildings, totalToilets, totalBathrooms, functioningBathrooms,
             functioningToilets, repairsReqToilets, repairsReqBathrooms, add_req;
 
@@ -347,6 +348,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     enough_fans = "YES";
                     binding.llCeilingFans.setVisibility(View.GONE);
                     binding.llWallMountedFans.setVisibility(View.GONE);
+                    binding.llTubeLights.setVisibility(View.GONE);
 
                     binding.etCeilingFansWorking.setText("");
                     binding.etCeilingFansNonWorking.setText("");
@@ -361,6 +363,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
 
                     binding.llCeilingFans.setVisibility(View.VISIBLE);
                     binding.llWallMountedFans.setVisibility(View.VISIBLE);
+                    binding.llTubeLights.setVisibility(View.VISIBLE);
                 } else
                     enough_fans = null;
             }
@@ -792,6 +795,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 mountedFansWorking = binding.etWallMountedFansWorking.getText().toString().trim();
                 mountedFansNonWorking = binding.etWallMountedFansNonWorking.getText().toString().trim();
                 mountedFansReq = binding.etWallMountedFansRequired.getText().toString().trim();
+
+                lightsWorking = binding.etLightWorking.getText().toString().trim();
+                lightsNonWorking = binding.etLightNonWorking.getText().toString().trim();
+                lightsReq = binding.etLightRequired.getText().toString().trim();
+
                 repair_required = binding.etRepairRequired.getText().toString().trim();
                 how_many_buildings = binding.etHowManyBuildings.getText().toString().trim();
                 totalToilets = binding.etTotalToilets.getText().toString().trim();
@@ -830,6 +838,12 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     infrastuctureEntity.setMountedfans_working(mountedFansWorking);
                     infrastuctureEntity.setMountedfans_nonworking(mountedFansNonWorking);
                     infrastuctureEntity.setMountedfans_required(mountedFansReq);
+
+                    infrastuctureEntity.setLights_working(lightsWorking);
+                    infrastuctureEntity.setLights_nonworking(lightsNonWorking);
+                    infrastuctureEntity.setLights_required(lightsReq);
+
+
                     infrastuctureEntity.setDininghall_available(dining_hall);
                     infrastuctureEntity.setDininghall_used(dining_hall_used);
                     infrastuctureEntity.setDininghall_add_req(dining_hall_add_req);
@@ -892,7 +906,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                             binding.setInspData(infraStructureEntity);
                             binding.executePendingBindings();
 
-                            LiveData<UploadPhoto> uploadPhotoLiveData = viewModel.getPhotoData(AppConstants.TDS);
+                            LiveData<UploadPhoto> uploadPhotoLiveData = viewModel.getPhotoData(AppConstants.TDS, instID);
                             uploadPhotoLiveData.observe(InfraActivity.this, new Observer<UploadPhoto>() {
                                 @Override
                                 public void onChanged(UploadPhoto uploadPhoto) {
@@ -1084,6 +1098,23 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             binding.etWallMountedFansRequired.requestFocus();
             return false;
         }
+
+        if (enough_fans.equalsIgnoreCase(AppConstants.No) && TextUtils.isEmpty(lightsWorking)) {
+            showSnackBar(getResources().getString(R.string.select_tube_lights_working));
+            binding.etLightWorking.requestFocus();
+            return false;
+        }
+        if (enough_fans.equalsIgnoreCase(AppConstants.No) && TextUtils.isEmpty(lightsNonWorking)) {
+            showSnackBar(getResources().getString(R.string.select_tube_lights_non_working));
+            binding.etLightNonWorking.requestFocus();
+            return false;
+        }
+        if (enough_fans.equalsIgnoreCase(AppConstants.No) && TextUtils.isEmpty(lightsReq)) {
+            showSnackBar(getResources().getString(R.string.select_tube_lights_req));
+            binding.etLightRequired.requestFocus();
+            return false;
+        }
+
         if (TextUtils.isEmpty(dining_hall)) {
             ScrollToView(binding.rgDiningHall);
             showSnackBar(getResources().getString(R.string.select_dininghall_available));
@@ -1393,7 +1424,8 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     }
 
     private File getOutputMediaFile(int type) {
-        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME
+                + "/" + instID);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.d("TAG", "Oops! Failed create " + "Android File Upload"
@@ -1528,7 +1560,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
 
     public String getFilename() {
         FilePath = getExternalFilesDir(null)
-                + "/" + IMAGE_DIRECTORY_NAME;
+                + "/" + IMAGE_DIRECTORY_NAME+ "/" + instID;
 
         String Image_name = PIC_NAME;
         FilePath = FilePath + "/" + Image_name;
@@ -1581,7 +1613,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             if (resultCode == RESULT_OK) {
 
                 FilePath = getExternalFilesDir(null)
-                        + "/" + IMAGE_DIRECTORY_NAME;
+                        + "/" + IMAGE_DIRECTORY_NAME+ "/" + instID;
 
                 String Image_name = PIC_TYPE + ".png";
                 FilePath = FilePath + "/" + Image_name;

@@ -40,12 +40,12 @@ public class PhotoRepository {
 
     // Room executes all queries on file_provider_paths separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    public LiveData<List<UploadPhoto>> getPhotos() {
-        return photoDao.getPhotos();
+    public LiveData<List<UploadPhoto>> getPhotos(String inst_id) {
+        return photoDao.getPhotos(inst_id);
     }
 
-    public LiveData<UploadPhoto> getPhotoData(String name) {
-        return photoDao.getPhotoData(name);
+    public LiveData<UploadPhoto> getPhotoData(String name, String inst_id) {
+        return photoDao.getPhotoData(name, inst_id);
     }
 
     long x;
@@ -81,5 +81,10 @@ public class PhotoRepository {
                 .subscribeOn(Schedulers.io())
                 .subscribe(observer);
         return x;
+    }
+
+
+    public void deletePhotoData(String inst_id) {
+        photoDao.deletePhotos(inst_id);
     }
 }

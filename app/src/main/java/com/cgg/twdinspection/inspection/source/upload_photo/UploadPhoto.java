@@ -7,10 +7,10 @@ import org.jetbrains.annotations.NotNull;
 
 @Entity(tableName = "Photos")
 public class UploadPhoto {
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String institute_id;
     @NotNull
-    @PrimaryKey
     private String photo_name;
     private String photo_path;
     private String section_id;

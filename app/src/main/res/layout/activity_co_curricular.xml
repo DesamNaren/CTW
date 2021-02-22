@@ -513,12 +513,13 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/measurement_of_land_available_for_games"
                                 android:imeOptions="actionNext"
-                                android:inputType="text"
+                                android:inputType="numberDecimal"
                                 android:paddingLeft="@dimen/dimen_5dp"
                                 android:paddingTop="@dimen/dimen_10dp"
                                 android:paddingRight="@dimen/dimen_5dp"
                                 android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
+                                android:maxLength="6"
                                 android:text="@{inspData.land_mea_value}"
                                 android:textSize="@dimen/dimen_15dp" />
 

@@ -45,7 +45,7 @@ public class DietIsuuesViewModel extends ViewModel {
         return flag;
     }
 
-    public long deleteDietListInfo() {
-        return mRepository.deleteDietListInfo();
+    public long deleteDietListInfo(String inst_id) {
+        return mRepository.deleteDietListInfo(inst_id);
     }
 }

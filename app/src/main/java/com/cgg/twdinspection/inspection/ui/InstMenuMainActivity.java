@@ -38,7 +38,6 @@ import com.cgg.twdinspection.inspection.interfaces.FinalSubmitListener;
 import com.cgg.twdinspection.inspection.interfaces.InstSubmitInterface;
 import com.cgg.twdinspection.inspection.interfaces.SchoolOfflineInterface;
 import com.cgg.twdinspection.inspection.offline.SchoolsOfflineEntity;
-import com.cgg.twdinspection.inspection.room.repository.SchoolsOfflineRepository;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
@@ -186,7 +185,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             }
         });
 
-        LiveData<List<UploadPhoto>> listLiveData = viewModel.getPhotos();
+        LiveData<List<UploadPhoto>> listLiveData = viewModel.getPhotos(instId);
         listLiveData.observe(InstMenuMainActivity.this, new Observer<List<UploadPhoto>>() {
             @Override
             public void onChanged(List<UploadPhoto> uploadPhotos) {
@@ -644,7 +643,8 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
     private void CallSuccessAlert(String msg) {
 
-        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME
+                + "/" + instId);
 
         if (mediaStorageDir.isDirectory()) {
             String[] children = mediaStorageDir.list();

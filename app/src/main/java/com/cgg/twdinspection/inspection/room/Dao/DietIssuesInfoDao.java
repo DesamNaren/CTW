@@ -24,12 +24,12 @@ public interface DietIssuesInfoDao {
     @Query("SELECT * from diet_list_info where institute_id LIKE :inst_id ")
     LiveData<List<DietListEntity>> getDietList(String inst_id);
 
-    @Query("DELETE FROM diet_list_info")
-    void deleteDietInfo();
+    @Query("DELETE FROM diet_list_info where institute_id LIKE :inst_id")
+    void deleteDietInfo(String inst_id);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertDietInfo(List<DietListEntity> dietListEntities);
 
-    @Query("delete from diet_list_info")
-    void deleteDietListInfo();
+    @Query("delete from diet_list_info where institute_id LIKE :inst_id")
+    void deleteDietListInfo(String inst_id);
 }

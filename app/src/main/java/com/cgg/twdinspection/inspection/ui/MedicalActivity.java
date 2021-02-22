@@ -574,21 +574,11 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_no_of_sick_boarders));
             binding.etSickboarders.requestFocus();
             return false;
-        } else if (sickboarders.equals("0")) {
-            showBottomSheetSnackBar(getResources().getString(R.string.sel_sick_boarders_zero));
-            binding.etSickboarders.setText("");
-            binding.etSickboarders.requestFocus();
-            return false;
         } else if (TextUtils.isEmpty(sickboardersArea)) {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_no_of_sick_boarders_area));
             binding.etSickboardersArea.requestFocus();
             return false;
-        } else if (sickboardersArea.equals("0")) {
-            showBottomSheetSnackBar(getResources().getString(R.string.sel_sick_boarders_area_zero));
-            binding.etSickboardersArea.setText("");
-            binding.etSickboardersArea.requestFocus();
-            return false;
-        } else if (TextUtils.isEmpty(checkUpDate)) {
+        }  else if (TextUtils.isEmpty(checkUpDate)) {
             ScrollToView(binding.etMedicalCheckupDate);
             showBottomSheetSnackBar(getResources().getString(R.string.last_medical_date));
             return false;

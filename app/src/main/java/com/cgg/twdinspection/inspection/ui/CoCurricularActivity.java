@@ -951,7 +951,6 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
-                        cocurricularViewModel.deletePlantsInfo();
                         finish();
                     }
                 });

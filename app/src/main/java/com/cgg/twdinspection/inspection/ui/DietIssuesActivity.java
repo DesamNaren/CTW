@@ -205,7 +205,6 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                     masterInstituteInfoLiveData.observe(DietIssuesActivity.this, new Observer<MasterInstituteInfo>() {
                         @Override
                         public void onChanged(MasterInstituteInfo masterInstituteInfos) {
-                            masterInstituteInfoLiveData.removeObservers(DietIssuesActivity.this);
                             DietIssuesActivity.this.masterInstituteInfos = masterInstituteInfos;
                             List<MasterDietInfo> masterDietInfos = masterInstituteInfos.getDietInfo();
                             if (masterDietInfos != null && masterDietInfos.size() > 0) {
@@ -467,7 +466,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                             binding.setInspData(dietIssuesEntity);
                             binding.executePendingBindings();
 
-                            LiveData<UploadPhoto> uploadPhotoLiveData = viewModel.getPhotoData(AppConstants.MENU);
+                            LiveData<UploadPhoto> uploadPhotoLiveData = viewModel.getPhotoData(AppConstants.MENU, instID);
                             uploadPhotoLiveData.observe(DietIssuesActivity.this, new Observer<UploadPhoto>() {
                                 @Override
                                 public void onChanged(UploadPhoto uploadPhoto) {
@@ -483,7 +482,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                                 }
                             });
 
-                            LiveData<UploadPhoto> uploadPhotoLiveData1 = viewModel.getPhotoData(AppConstants.OFFICER);
+                            LiveData<UploadPhoto> uploadPhotoLiveData1 = viewModel.getPhotoData(AppConstants.OFFICER, instID);
                             uploadPhotoLiveData1.observe(DietIssuesActivity.this, new Observer<UploadPhoto>() {
                                 @Override
                                 public void onChanged(UploadPhoto uploadPhoto) {
@@ -737,7 +736,8 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     }
 
     private File getOutputMediaFile(int type) {
-        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME
+                + "/" + instID);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.d("TAG", "Oops! Failed create " + "Android File Upload"
@@ -881,7 +881,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
     public String getFilename() {
         FilePath = getExternalFilesDir(null)
-                + "/" + IMAGE_DIRECTORY_NAME;
+                + "/" + IMAGE_DIRECTORY_NAME+ "/" + instID;
 
         String Image_name = PIC_NAME;
         FilePath = FilePath + "/" + Image_name;
@@ -935,7 +935,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             if (resultCode == RESULT_OK) {
 
                 FilePath = getExternalFilesDir(null)
-                        + "/" + IMAGE_DIRECTORY_NAME;
+                        + "/" + IMAGE_DIRECTORY_NAME+ "/" + instID;
 
                 String Image_name = PIC_TYPE + ".png";
                 FilePath = FilePath + "/" + Image_name;
@@ -1021,8 +1021,6 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
-
-                        dietIsuuesViewModel.deleteDietListInfo();
                         finish();
                     }
                 });

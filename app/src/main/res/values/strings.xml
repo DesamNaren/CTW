@@ -86,6 +86,7 @@
     <string name="non_working">Non working</string>
     <string name="required">Required</string>
     <string name="wall_mounted_fans">Details of wall mounted fans</string>
+    <string name="tube_lights">Details of tube lights</string>
     <string name="dining_hall">Dining hall available</string>
     <string name="being_used">Is it being used</string>
     <string name="avail_construction">Place is available for construction</string>
@@ -259,7 +260,7 @@
     <string name="name_of_the_pd_pft">Name of the PD/ PET</string>
     <string name="play_ground_available">Playground available</string>
     <string name="plan_to_procure_playground">Plan to procure playground</string>
-    <string name="measurement_of_land_available_for_games">Measurement of land available for games</string>
+    <string name="measurement_of_land_available_for_games">Ground area in acres</string>
     <string name="ground_leveling_completed">Ground leveling completed</string>
     <string name="whether_scouts_guides_implemented_in_school">Whether scouts / guides implemented in school</string>
     <string name="scout_master_guide_captain_name">Scout Master/ Guide captain name</string>
@@ -465,6 +466,11 @@
     <string name="select_mountedFansWorking">Enter no of wall mounted fans working</string>
     <string name="select_mountedFansNonWorking">Enter no of wall mounted fans non working</string>
     <string name="select_mountedFansReq">Enter no of wall mounted fans required</string>
+
+    <string name="select_tube_lights_working">Enter no of tube lights working</string>
+    <string name="select_tube_lights_non_working">Enter no of tube lights non working</string>
+    <string name="select_tube_lights_req">Enter no of tube lights required</string>
+
     <string name="select_dininghall_available">Select whether dining hall available</string>
     <string name="select_dininghall_used">Select whether dining hall being used or not</string>
     <string name="select_dininghall_add_req">Select any additional requirements needed</string>
@@ -972,7 +978,7 @@
     <string name="ent_state_level">Enter state Level</string>
     <string name="enter_nat_level">Enter national Level</string>
     <string name="sel_play_avail">Select play ground available</string>
-    <string name="ent_mea_land">Enter measurement of land</string>
+    <string name="ent_mea_land">Enter Ground area in acres</string>
     <string name="sel_plan_pro">Select plan to procure play ground</string>
     <string name="sel_gro_lel_status">Select ground levelling status</string>
     <string name="sco_gou_impl">Select scouts / guides implementation status</string>

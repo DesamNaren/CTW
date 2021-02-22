@@ -79,7 +79,7 @@ public class SchoolsOfflineDataActivity extends AppCompatActivity implements Sch
     private UploadPhotoViewModel uploadPhotoViewModel;
     private InstMainViewModel instMainViewModel;
     private SchoolsOfflineEntity schoolsOfflineEntity;
-    public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_IMAGES";
+    public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
     private InstSubmitRequest instSubmitRequest;
     private File file_storeroom, file_varandah,
             file_playGround, file_diningHall, file_dormitory,
@@ -209,9 +209,8 @@ public class SchoolsOfflineDataActivity extends AppCompatActivity implements Sch
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
+                        schoolsOfflineEntity = entity;
                         if (flag) {
-                            schoolsOfflineEntity = entity;
-
                             InstSelectionViewModel selectionViewModel = new InstSelectionViewModel(getApplication());
                             LiveData<String> liveData = selectionViewModel.getRandomId(schoolsOfflineEntity.getInst_id());
                             liveData.observe(SchoolsOfflineDataActivity.this, new Observer<String>() {
@@ -225,8 +224,6 @@ public class SchoolsOfflineDataActivity extends AppCompatActivity implements Sch
                                     }
                                 }
                             });
-
-
                         } else {
                             removeRecord(false);
                         }
@@ -243,7 +240,7 @@ public class SchoolsOfflineDataActivity extends AppCompatActivity implements Sch
 
     private void removeRecord(boolean flag) {
         File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME +
-                "/" + type + "_" + schoolsOfflineEntity.getInst_id());
+                "/" + schoolsOfflineEntity.getInst_id());
 
         if (mediaStorageDir.isDirectory()) {
             String[] children = mediaStorageDir.list();
@@ -257,7 +254,7 @@ public class SchoolsOfflineDataActivity extends AppCompatActivity implements Sch
     }
 
     private void setPhotosData() {
-        LiveData<List<UploadPhoto>> listLiveData = uploadPhotoViewModel.getPhotos();
+        LiveData<List<UploadPhoto>> listLiveData = uploadPhotoViewModel.getPhotos(schoolsOfflineEntity.getInst_id());
         listLiveData.observe(SchoolsOfflineDataActivity.this, new Observer<List<UploadPhoto>>() {
             @Override
             public void onChanged(List<UploadPhoto> uploadPhotos) {
