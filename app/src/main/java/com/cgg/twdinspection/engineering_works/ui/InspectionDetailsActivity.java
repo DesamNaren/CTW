@@ -557,41 +557,6 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        registerReceiver(mGpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
-
-        mLocationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                super.onLocationResult(locationResult);
-
-                mCurrentLocation = locationResult.getLastLocation();
-            }
-        };
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(mGpsSwitchStateReceiver);
-    }
-
-
-    private final BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            try {
-                if (intent.getAction().matches("android.location.PROVIDERS_CHANGED")) {
-                    // Make an action or refresh an already managed state.
-                    callPermissions();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
 
 
     private boolean validate() {

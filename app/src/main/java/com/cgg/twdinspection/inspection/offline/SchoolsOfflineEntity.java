@@ -16,7 +16,15 @@ public class SchoolsOfflineEntity {
     private String man_name;
     private String vil_name;
     private String inst_time;
+    private String officer_id;
 
+    public String getOfficer_id() {
+        return officer_id;
+    }
+
+    public void setOfficer_id(String officer_id) {
+        this.officer_id = officer_id;
+    }
 
     public int getId() {
         return id;

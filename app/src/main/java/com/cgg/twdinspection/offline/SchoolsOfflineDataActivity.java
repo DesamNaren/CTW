@@ -1,12 +1,16 @@
 package com.cgg.twdinspection.offline;
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,6 +18,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +38,6 @@ import com.cgg.twdinspection.inspection.interfaces.InstSubmitInterface;
 import com.cgg.twdinspection.inspection.interfaces.SchoolOfflineInterface;
 import com.cgg.twdinspection.inspection.interfaces.SchoolsOfflineSubmitInterface;
 import com.cgg.twdinspection.inspection.offline.SchoolsOfflineEntity;
-import com.cgg.twdinspection.inspection.room.repository.SchoolsOfflineRepository;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
@@ -49,6 +53,7 @@ import com.cgg.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.cgg.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
+import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.SchoolsOfflineViewModel;
@@ -57,6 +62,8 @@ import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.cgg.twdinspection.schemes.interfaces.SchemeSubmitInterface;
 import com.cgg.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse;
 import com.cgg.twdinspection.schemes.source.submit.SchemeSubmitResponse;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
@@ -68,7 +75,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class SchoolsOfflineDataActivity extends AppCompatActivity implements SchoolsOfflineSubmitInterface,
+public class SchoolsOfflineDataActivity extends LocBaseActivity implements SchoolsOfflineSubmitInterface,
         SchemeSubmitInterface, InstSubmitInterface, ErrorHandlerInterface, SchoolOfflineInterface {
 
     ActivitySchoolsOfflineReportBinding offlineReportBinding;
@@ -85,8 +92,8 @@ public class SchoolsOfflineDataActivity extends AppCompatActivity implements Sch
             file_playGround, file_diningHall, file_dormitory,
             file_mainBulding, file_toilet, file_kitchen, file_classroom,
             file_tds, file_menu, file_officer;
-    private String type = "Schools";
     private String randomNo;
+    public Location mCurrentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -310,123 +317,87 @@ public class SchoolsOfflineDataActivity extends AppCompatActivity implements Sch
         generalInfoEntityLiveData.observe(SchoolsOfflineDataActivity.this, new Observer<GeneralInfoEntity>() {
             @Override
             public void onChanged(GeneralInfoEntity generalInfoEntity) {
-                if (generalInfoEntity != null) {
-                    instSubmitRequest.setGeneral_info(generalInfoEntity);
-                } else {
-                    instSubmitRequest.setGeneral_info(null);
-                }
+                instSubmitRequest.setGeneral_info(generalInfoEntity);
             }
         });
         LiveData<List<StudAttendInfoEntity>> studAttenLiveData = instMainViewModel.getStudAttendInfoData(schoolsOfflineEntity.getInst_id());
         studAttenLiveData.observe(SchoolsOfflineDataActivity.this, new Observer<List<StudAttendInfoEntity>>() {
             @Override
             public void onChanged(List<StudAttendInfoEntity> studAttendInfoEntities) {
-                if (studAttendInfoEntities != null) {
-                    instSubmitRequest.setStudent_attendence_info(studAttendInfoEntities);
-                } else {
-                    instSubmitRequest.setStudent_attendence_info(null);
-                }
+                instSubmitRequest.setStudent_attendence_info(studAttendInfoEntities);
             }
         });
         LiveData<List<StaffAttendanceEntity>> staffAttendLiveData = instMainViewModel.getStaffInfoData(schoolsOfflineEntity.getInst_id());
         staffAttendLiveData.observe(SchoolsOfflineDataActivity.this, new Observer<List<StaffAttendanceEntity>>() {
             @Override
             public void onChanged(List<StaffAttendanceEntity> staffAttendanceEntities) {
-                if (staffAttendanceEntities != null) {
-                    instSubmitRequest.setStaff_attendence_info(staffAttendanceEntities);
-                } else {
-                    instSubmitRequest.setStaff_attendence_info(null);
-                }
+                instSubmitRequest.setStaff_attendence_info(staffAttendanceEntities);
             }
         });
         LiveData<MedicalInfoEntity> medicalInfoEntityLiveData = instMainViewModel.getMedicalInfo(schoolsOfflineEntity.getInst_id());
         medicalInfoEntityLiveData.observe(SchoolsOfflineDataActivity.this, new Observer<MedicalInfoEntity>() {
             @Override
             public void onChanged(MedicalInfoEntity medicalInfoEntity) {
-                if (medicalInfoEntity != null) {
-                    instSubmitRequest.setMedical_issues(medicalInfoEntity);
-                } else {
-                    instSubmitRequest.setMedical_issues(null);
-                }
+                instSubmitRequest.setMedical_issues(medicalInfoEntity);
             }
         });
         LiveData<DietIssuesEntity> dietIssuesEntityLiveData = instMainViewModel.getDietInfoData(schoolsOfflineEntity.getInst_id());
         dietIssuesEntityLiveData.observe(SchoolsOfflineDataActivity.this, new Observer<DietIssuesEntity>() {
             @Override
             public void onChanged(DietIssuesEntity dietIssuesEntity) {
-                if (dietIssuesEntity != null) {
-                    instSubmitRequest.setDiet_issues(dietIssuesEntity);
-                } else {
-                    instSubmitRequest.setDiet_issues(null);
-                }
+                instSubmitRequest.setDiet_issues(dietIssuesEntity);
             }
         });
         LiveData<InfraStructureEntity> infraStructureEntityLiveData = instMainViewModel.getInfrastructureInfoData(schoolsOfflineEntity.getInst_id());
         infraStructureEntityLiveData.observe(SchoolsOfflineDataActivity.this, new Observer<InfraStructureEntity>() {
             @Override
             public void onChanged(InfraStructureEntity infraStructureEntity) {
-                if (infraStructureEntity != null) {
-                    instSubmitRequest.setInfra_maintenance(infraStructureEntity);
-                } else {
-                    instSubmitRequest.setInfra_maintenance(null);
-                }
+                instSubmitRequest.setInfra_maintenance(infraStructureEntity);
             }
         });
         LiveData<AcademicEntity> academicEntityLiveData = instMainViewModel.getAcademicInfoData(schoolsOfflineEntity.getInst_id());
         academicEntityLiveData.observe(SchoolsOfflineDataActivity.this, new Observer<AcademicEntity>() {
             @Override
             public void onChanged(AcademicEntity academicEntity) {
-                if (academicEntity != null) {
-                    instSubmitRequest.setAcademic_overview(academicEntity);
-                } else {
-                    instSubmitRequest.setAcademic_overview(null);
-                }
+                instSubmitRequest.setAcademic_overview(academicEntity);
             }
         });
         LiveData<CoCurricularEntity> coCurricularEntityLiveData = instMainViewModel.getCocurricularInfoData(schoolsOfflineEntity.getInst_id());
         coCurricularEntityLiveData.observe(SchoolsOfflineDataActivity.this, new Observer<CoCurricularEntity>() {
             @Override
             public void onChanged(CoCurricularEntity coCurricularEntity) {
-                if (coCurricularEntity != null) {
-                    instSubmitRequest.setCoCurricular_info(coCurricularEntity);
-                } else {
-                    instSubmitRequest.setCoCurricular_info(null);
-                }
+                instSubmitRequest.setCoCurricular_info(coCurricularEntity);
             }
         });
         LiveData<EntitlementsEntity> entitlementsEntityLiveData = instMainViewModel.getEntitlementInfoData(schoolsOfflineEntity.getInst_id());
         entitlementsEntityLiveData.observe(SchoolsOfflineDataActivity.this, new Observer<EntitlementsEntity>() {
             @Override
             public void onChanged(EntitlementsEntity entitlementsEntity) {
-                if (entitlementsEntity != null) {
-                    instSubmitRequest.setEntitlements(entitlementsEntity);
-                } else {
-                    instSubmitRequest.setEntitlements(null);
-                }
+                instSubmitRequest.setEntitlements(entitlementsEntity);
             }
         });
         LiveData<RegistersEntity> registersEntityLiveData = instMainViewModel.getRegistersInfoData(schoolsOfflineEntity.getInst_id());
         registersEntityLiveData.observe(SchoolsOfflineDataActivity.this, new Observer<RegistersEntity>() {
             @Override
             public void onChanged(RegistersEntity registersEntity) {
-                if (registersEntity != null) {
-                    instSubmitRequest.setRegisters(registersEntity);
-                } else {
-                    instSubmitRequest.setRegisters(null);
-                }
+                instSubmitRequest.setRegisters(registersEntity);
             }
         });
         LiveData<GeneralCommentsEntity> generalCommentsEntityLiveData = instMainViewModel.getGeneralCommentsInfoData(schoolsOfflineEntity.getInst_id());
         generalCommentsEntityLiveData.observe(SchoolsOfflineDataActivity.this, new Observer<GeneralCommentsEntity>() {
             @Override
             public void onChanged(GeneralCommentsEntity generalCommentsEntity) {
-                if (generalCommentsEntity != null) {
-                    instSubmitRequest.setGeneral_comments(generalCommentsEntity);
-                } else {
-                    instSubmitRequest.setGeneral_comments(null);
-                }
+                instSubmitRequest.setGeneral_comments(generalCommentsEntity);
             }
         });
+
+        if(mCurrentLocation!=null){
+            instSubmitRequest.setLatitude(String.valueOf(mCurrentLocation.getLatitude()));
+            instSubmitRequest.setLongitude(String.valueOf(mCurrentLocation.getLongitude()));
+        }else{
+            instSubmitRequest.setLatitude(null);
+            instSubmitRequest.setLongitude(null);
+        }
         setPhotosData();
     }
 
@@ -527,13 +498,12 @@ public class SchoolsOfflineDataActivity extends AppCompatActivity implements Sch
         customProgressDialog.hide();
 
         if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
-            instSubmitRequest.setOfficer_id(sharedPreferences.getString(AppConstants.OFFICER_ID, ""));
+            instSubmitRequest.setOfficer_id(schoolsOfflineEntity.getOfficer_id());
             instSubmitRequest.setInstitute_id(schoolsOfflineEntity.getInst_id());
             instSubmitRequest.setInspection_time(Utils.getCurrentDateTime());
             instSubmitRequest.setDist_id(schoolsOfflineEntity.getDist_id());
             instSubmitRequest.setMandal_id(schoolsOfflineEntity.getMan_id());
             instSubmitRequest.setVillage_id(schoolsOfflineEntity.getVil_id());
-
             instSubmitRequest.setInstitute_name(schoolsOfflineEntity.getInst_name());
             instSubmitRequest.setDist_name(schoolsOfflineEntity.getDist_name());
             instSubmitRequest.setMandal_name(schoolsOfflineEntity.getMan_name());
@@ -561,16 +531,11 @@ public class SchoolsOfflineDataActivity extends AppCompatActivity implements Sch
     public void getSubmitData(InstSubmitResponse schemeSubmitResponse) {
         customProgressDialog.hide();
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
-            Log.i("DELETE", "getSubmitData");
             instMainViewModel.deleteAllInspectionData(schoolsOfflineEntity.getInst_id());
             removeRecord(true);
-//            clearSharedPref();
-//            CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
-//            revertFlags();
             Utils.customErrorAlert(SchoolsOfflineDataActivity.this, getResources().getString(R.string.app_name), schemeSubmitResponse.getStatusMessage() + getString(R.string.failed_to_submit));
         } else {
-//            revertFlags();
             Utils.customErrorAlert(SchoolsOfflineDataActivity.this, getResources().getString(R.string.app_name), getResources().getString(R.string.something) + getString(R.string.failed_to_submit));
         }
     }
@@ -624,4 +589,51 @@ public class SchoolsOfflineDataActivity extends AppCompatActivity implements Sch
             e.printStackTrace();
         }
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        registerReceiver(mGpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                if (mCurrentLocation == null) {
+                    mCurrentLocation = locationResult.getLastLocation();
+                }
+            }
+        };
+        try {
+            boolean isAutomatic = Utils.isTimeAutomatic(this);
+            if (!isAutomatic) {
+                Utils.customTimeAlert(this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.date_time));
+            }
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private final BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            try {
+                if (intent.getAction().matches("android.location.PROVIDERS_CHANGED")) {
+                    callPermissions();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
 }

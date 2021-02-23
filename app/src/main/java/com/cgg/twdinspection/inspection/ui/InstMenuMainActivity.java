@@ -100,7 +100,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     private String randomNo;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
     private SchoolsOfflineViewModel schoolsOfflineViewModel;
-    private InstSelectionViewModel selectionViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,7 +167,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         mandalName = sharedPreferences.getString(AppConstants.MAN_NAME, "");
         villageName = sharedPreferences.getString(AppConstants.VIL_NAME, "");
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
-        Log.i(":INST_ID", "onCreate: " + instId);
         officer_id = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         dist_id = String.valueOf(sharedPreferences.getInt(AppConstants.DIST_ID, 0));
         mand_id = String.valueOf(sharedPreferences.getInt(AppConstants.MAN_ID, 0));
@@ -176,7 +174,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         desLat = sharedPreferences.getString(AppConstants.LAT, "");
         desLng = sharedPreferences.getString(AppConstants.LNG, "");
 
-        selectionViewModel = new InstSelectionViewModel(getApplication());
+        InstSelectionViewModel selectionViewModel = new InstSelectionViewModel(getApplication());
         LiveData<String> liveData = selectionViewModel.getRandomId(instId);
         liveData.observe(InstMenuMainActivity.this, new Observer<String>() {
             @Override
@@ -825,6 +823,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         schoolsOfflineEntity.setMan_name(mandalName);
         schoolsOfflineEntity.setVil_id(vill_id);
         schoolsOfflineEntity.setVil_name(villageName);
+        schoolsOfflineEntity.setOfficer_id(officer_id);
 
         schoolsOfflineViewModel.insertSchoolRecord(InstMenuMainActivity.this,
                 schoolsOfflineEntity);
