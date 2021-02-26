@@ -33,7 +33,7 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
     private LiveData<List<LPGSupplierInfo>> lpgSuppliers;
     private LiveData<List<PetrolSupplierInfo>> allPetrolSuppliers;
     private LiveData<List<LPGSupplierInfo>> allLPGSuppliers;
-    private GCCRepository mRepository;
+    private final GCCRepository mRepository;
 
     public DivisionSelectionViewModel(Application application) {
         super(application);

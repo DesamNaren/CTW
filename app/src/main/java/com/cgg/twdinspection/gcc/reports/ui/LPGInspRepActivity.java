@@ -102,7 +102,7 @@ public class LPGInspRepActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LPGInspRepActivity.this, ViewPhotosActivity.class)
-                        .putExtra(AppConstants.PHOTO_TITLE, "LPG PHOTOS"));
+                        .putExtra(AppConstants.PHOTO_TITLE, getString(R.string.lpg_photos)));
             }
         });
     }

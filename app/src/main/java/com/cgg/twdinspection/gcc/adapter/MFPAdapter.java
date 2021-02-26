@@ -81,7 +81,7 @@ public class MFPAdapter extends RecyclerView.Adapter<MFPAdapter.ItemHolder> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TextViewTextChangeEvent>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(@NotNull Disposable d) {
 
                     }
 
@@ -106,7 +106,7 @@ public class MFPAdapter extends RecyclerView.Adapter<MFPAdapter.ItemHolder> {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NotNull Throwable e) {
 
                     }
 

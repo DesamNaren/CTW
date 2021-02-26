@@ -21,7 +21,7 @@ public class GCCRepository {
 
     private final GCCDao gccDao;
     public LiveData<List<DivisionsInfo>> divisions = new MutableLiveData<>();
-    public LiveData<List<DRDepots>> drGodowns = new MutableLiveData<>();
+    public LiveData<List<DRDepots>> drGoDowns = new MutableLiveData<>();
 
     public GCCRepository(Application application) {
         GCCDatabase db = GCCDatabase.getDatabase(application);

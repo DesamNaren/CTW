@@ -32,7 +32,7 @@ public class PetrolpumpInspRepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityPetrolPumpInspRepBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_petrol_pump_insp_rep);
 
-        binding.bottomLl.btnNext.setText("Next");
+        binding.bottomLl.btnNext.setText(getString(R.string.next));
         binding.header.headerTitle.setText(getString(R.string.petrol_ins_rep));
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +98,7 @@ public class PetrolpumpInspRepActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(PetrolpumpInspRepActivity.this, ViewPhotosActivity.class)
-                        .putExtra(AppConstants.PHOTO_TITLE, "PETROL PUMP PHOTOS"));
+                        .putExtra(AppConstants.PHOTO_TITLE, getString(R.string.petrol_photos)));
             }
         });
     }

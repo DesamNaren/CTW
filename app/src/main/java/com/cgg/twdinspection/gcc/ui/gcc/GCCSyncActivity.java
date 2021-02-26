@@ -62,7 +62,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         binding = DataBindingUtil.setContentView(GCCSyncActivity.this, R.layout.activity_gcc_sync);
 
         customProgressDialog = new CustomProgressDialog(this);
-        GCCSyncViewModel viewModel = new GCCSyncViewModel(GCCSyncActivity.this, getApplication(), binding);
+        GCCSyncViewModel viewModel = new GCCSyncViewModel(GCCSyncActivity.this, getApplication());
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
         gccSyncRepository = new GCCSyncRepository(getApplication());
@@ -219,7 +219,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                         }
                     });
                 } else {
-                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
                 }
             }
         });
@@ -254,7 +254,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                         }
                     });
                 } else {
-                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
                 }
             }
 
@@ -290,7 +290,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                         }
                     });
                 } else {
-                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
                 }
             }
 
@@ -326,7 +326,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                         }
                     });
                 } else {
-                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
                 }
             }
 
@@ -363,7 +363,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                         }
                     });
                 } else {
-                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
                 }
             }
 
@@ -399,7 +399,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                         }
                     });
                 } else {
-                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
                 }
             }
 
@@ -435,7 +435,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                         }
                     });
                 } else {
-                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
                 }
             }
 
@@ -482,7 +482,6 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 Utils.customTimeAlert(this,
                         getResources().getString(R.string.app_name),
                         getString(R.string.date_time));
-                return;
             }
 
         } catch (Resources.NotFoundException e) {
@@ -500,7 +499,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "Division master data downloaded successfully");
             } else {
-                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No divisions found");
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_div_found));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -517,7 +516,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "DR Depot master data downloaded successfully");
             } else {
-                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No No DR Depots found");
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_dr_depo_found));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -534,7 +533,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "DR GoDown master data downloaded successfully");
             } else {
-                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No DR GoDowns found");
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_dr_godown_found));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -551,7 +550,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "MFP GoDown master data downloaded successfully");
             } else {
-                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No MFP GoDowns found");
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_mfp_found));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -564,11 +563,10 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         try {
             if (cnt > 0) {
                 binding.btnPUnit.setText(getString(R.string.re_download));
-                Log.i("SUP_CNT", "pUnitCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
-                        "Processing Unit master data downloaded successfully");
+                        getString(R.string.p_unit_download_success));
             } else {
-                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No Processing Units found");
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_p_unit_found));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -583,9 +581,9 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 binding.btnPetrolPump.setText(getString(R.string.re_download));
                 Log.i("PETROL_CNT", "petrolCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
-                        "Petrol pump master data downloaded successfully");
+                        getString(R.string.petrol_success));
             } else {
-                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No Petrol pumps found");
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_petrol_found));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -600,9 +598,9 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 binding.btnLpg.setText(getString(R.string.re_download));
                 Log.i("LPG_CNT", "lpglCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
-                        "LPG master data downloaded successfully");
+                        getString(R.string.lpg_success));
             } else {
-                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No LPG data found");
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_lpg_found));
             }
         } catch (Exception e) {
             e.printStackTrace();

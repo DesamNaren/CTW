@@ -59,7 +59,6 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
     private List<String> pUnits;
     private PUnits selectedPUnits;
     private ArrayAdapter<String> selectAdapter;
-    private ArrayList<String> selectList;
     private boolean dailyreq_flag, emp_flag, ess_flag, p_unit_flag, mfp_flag;
     private GCCOfflineRepository gccOfflineRepository;
     private GCCOfflineViewModel gccOfflineViewModel;
@@ -108,7 +107,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         } catch (Exception e) {
             e.printStackTrace();
         }
-        selectList = new ArrayList<>();
+        ArrayList<String> selectList = new ArrayList<>();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -134,12 +133,12 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                             drGodownLiveData.removeObservers(PUnitSelActivity.this);
                             customProgressDialog.dismiss();
                             if (drGodowns == null || drGodowns.size() <= 0) {
-                                Utils.customGCCSyncAlert(PUnitSelActivity.this, getString(R.string.app_name), "No processing units found...\n Do you want to sync processing unit master data to proceed further?");
+                                Utils.customGCCSyncAlert(PUnitSelActivity.this, getString(R.string.app_name), getString(R.string.no_punit_sync));
                             }
                         }
                     });
                 } else {
-                    Utils.customGCCSyncAlert(PUnitSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync division master data to proceed further?");
+                    Utils.customGCCSyncAlert(PUnitSelActivity.this, getString(R.string.app_name), getString(R.string.no_div_sync));
                 }
             }
         });
@@ -404,7 +403,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                                         binding.spSociety.setAdapter(adapter);
                                     } else {
                                         binding.spSociety.setAdapter(selectAdapter);
-                                        showSnackBar("No societies found");
+                                        showSnackBar(getString(R.string.no_soc_found));
                                     }
                                 }
                             });
@@ -424,7 +423,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                                         binding.spPUnit.setAdapter(adapter);
                                     } else {
                                         binding.spPUnit.setAdapter(selectAdapter);
-                                        showSnackBar("No processing units found");
+                                        showSnackBar(getString(R.string.no_p_unit_found));
                                     }
                                 }
                             });
@@ -471,7 +470,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                                         binding.spPUnit.setAdapter(adapter);
                                     } else {
                                         binding.spPUnit.setAdapter(selectAdapter);
-                                        showSnackBar("No processing units found");
+                                        showSnackBar(getString(R.string.no_p_unit_found));
                                     }
                                 }
                             });
@@ -554,7 +553,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                 binding.btnDownload.setText(getString(R.string.re_download));
                 binding.btnRemove.setVisibility(View.VISIBLE);
                 Utils.customSyncSuccessAlert(PUnitSelActivity.this, getResources().getString(R.string.app_name),
-                        "Data downloaded successfully");
+                        getString(R.string.data_downloaded_success));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -569,7 +568,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                 binding.btnDownload.setText(getString(R.string.download));
                 binding.btnRemove.setVisibility(View.GONE);
                 Utils.customSyncSuccessAlert(PUnitSelActivity.this, getResources().getString(R.string.app_name),
-                        "Data deleted successfully");
+                        getString(R.string.data_del_success));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -42,19 +42,16 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
 
     GCCReportAdapter adapter;
     ActivityGccReportBinding gccReportBinding;
-    private CustomProgressDialog customProgressDialog;
     SearchView mSearchView;
     SharedPreferences sharedPreferences;
     List<ReportData> reportData;
     SharedPreferences.Editor editor;
-    private List<ReportData> tempReportData;
-    private Menu mMenu = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        customProgressDialog = new CustomProgressDialog(this);
+        CustomProgressDialog customProgressDialog = new CustomProgressDialog(this);
         sharedPreferences = TWDApplication.get(this).getPreferences();
         editor = sharedPreferences.edit();
 
@@ -64,7 +61,6 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
         gccReportBinding.header.ivHome.setVisibility(View.GONE);
 
         reportData = new ArrayList<>();
-        tempReportData = new ArrayList<>();
 
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.Selected_Supp_Report, "");
@@ -82,22 +78,22 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
                 tv.setLayoutParams(lp);
 
                 if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-                    tv.setText("DR GODOWN REPORT");
+                    tv.setText(R.string.dr_godown_report);
                 }
                 if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
-                    tv.setText("DR DEPOT REPORT");
+                    tv.setText(R.string.dr_depot_report);
                 }
                 if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
-                    tv.setText("MFP GODOWN REPORT");
+                    tv.setText(R.string.mfp_godown_report);
                 }
                 if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
-                    tv.setText("PROCESSING UNIT REPORT");
+                    tv.setText(R.string.p_unit_report);
                 }
                 if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
-                    tv.setText("PETROL PUMP REPORT");
+                    tv.setText(R.string.petrol_pump_report);
                 }
                 if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
-                    tv.setText("LPG REPORT");
+                    tv.setText(R.string.lpg_report);
                 }
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextColor(Color.WHITE);
@@ -125,10 +121,8 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                break;
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
         }
         return true;
     }
@@ -136,13 +130,11 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu, menu);
-        mMenu = menu;
 
         if (reportData != null && reportData.size() > 0) {
 
-            tempReportData.addAll(reportData);
-            mMenu.findItem(R.id.action_search).setVisible(true);
-            mMenu.findItem(R.id.mi_filter).setVisible(false);
+            menu.findItem(R.id.action_search).setVisible(true);
+            menu.findItem(R.id.mi_filter).setVisible(false);
 
             gccReportBinding.recyclerView.setVisibility(View.VISIBLE);
             gccReportBinding.tvEmpty.setVisibility(View.GONE);
@@ -151,15 +143,15 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
             gccReportBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
             gccReportBinding.recyclerView.setAdapter(adapter);
         } else {
-            mMenu.findItem(R.id.action_search).setVisible(false);
-            mMenu.findItem(R.id.mi_filter).setVisible(false);
+            menu.findItem(R.id.action_search).setVisible(false);
+            menu.findItem(R.id.mi_filter).setVisible(false);
 
             gccReportBinding.recyclerView.setVisibility(View.GONE);
             gccReportBinding.tvEmpty.setVisibility(View.VISIBLE);
-            callSnackBar("No data available");
+            callSnackBar();
         }
 
-        MenuItem mSearch = mMenu.findItem(R.id.action_search);
+        MenuItem mSearch = menu.findItem(R.id.action_search);
         mSearchView = (SearchView) mSearch.getActionView();
         String hint = null;
         if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
@@ -204,8 +196,8 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
     }
 
 
-    void callSnackBar(String msg) {
-        Snackbar snackbar = Snackbar.make(gccReportBinding.root, msg, Snackbar.LENGTH_INDEFINITE);
+    void callSnackBar() {
+        Snackbar snackbar = Snackbar.make(gccReportBinding.root, R.string.no_data_available, Snackbar.LENGTH_INDEFINITE);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));
         snackbar.setAction("OK", new View.OnClickListener() {
             @Override
@@ -234,7 +226,6 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
 
     @Override
     public void onBackPressed() {
-
         finish();
     }
 }

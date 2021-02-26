@@ -25,21 +25,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class GCCSyncViewModel extends AndroidViewModel {
-    private MutableLiveData<GetOfficesResponse> divisionsInfoMutableLiveData;
-    private MutableLiveData<DRDepotMasterResponse> drDepotMasterResponseMutableLiveData;
-    private MutableLiveData<DRGoDownMasterResponse> drGoDownMasterResponseMutableLiveData;
-    private MutableLiveData<MFPGoDownMasterResponse> mfpGoDownMasterResponseMutableLiveData;
-    private MutableLiveData<PUnitMasterResponse> pUnitMasterResponseMutableLiveData;
-    private MutableLiveData<PetrolPumpMasterResponse> petrolPumpMasterResponseMutableLiveData;
-    private MutableLiveData<LPGMasterResponse> lpgMasterResponseMutableLiveData;
-    private Context context;
-    private ErrorHandlerInterface errorHandlerInterface;
-    private ActivityGccSyncBinding binding;
+    private final MutableLiveData<GetOfficesResponse> divisionsInfoMutableLiveData;
+    private final MutableLiveData<DRDepotMasterResponse> drDepotMasterResponseMutableLiveData;
+    private final MutableLiveData<DRGoDownMasterResponse> drGoDownMasterResponseMutableLiveData;
+    private final MutableLiveData<MFPGoDownMasterResponse> mfpGoDownMasterResponseMutableLiveData;
+    private final MutableLiveData<PUnitMasterResponse> pUnitMasterResponseMutableLiveData;
+    private final MutableLiveData<PetrolPumpMasterResponse> petrolPumpMasterResponseMutableLiveData;
+    private final MutableLiveData<LPGMasterResponse> lpgMasterResponseMutableLiveData;
+    private final Context context;
+    private final ErrorHandlerInterface errorHandlerInterface;
 
-    public GCCSyncViewModel(Context context, Application application, ActivityGccSyncBinding binding) {
+    public GCCSyncViewModel(Context context, Application application) {
         super(application);
         this.context = context;
-        this.binding = binding;
         divisionsInfoMutableLiveData = new MutableLiveData<>();
         drDepotMasterResponseMutableLiveData = new MutableLiveData<>();
         drGoDownMasterResponseMutableLiveData = new MutableLiveData<>();

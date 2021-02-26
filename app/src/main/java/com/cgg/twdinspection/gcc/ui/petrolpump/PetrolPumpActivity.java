@@ -80,7 +80,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
             petrolSupplierInfo = gson.fromJson(str, PetrolSupplierInfo.class);
             if (petrolSupplierInfo != null) {
                 binding.includeBasicLayout.divName.setText(petrolSupplierInfo.getDivisionName());
-                binding.includeBasicLayout.drGodownNameTV.setText("Petrol Pump");
+                binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.petrol_pump_title));
                 binding.includeBasicLayout.socName.setText(petrolSupplierInfo.getSocietyName());
                 binding.includeBasicLayout.drGodownName.setText(petrolSupplierInfo.getGodownName());
                 binding.includeBasicLayout.inchargeName.setText(petrolSupplierInfo.getIncharge());
@@ -243,7 +243,6 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
     public void handleError(Throwable e, Context context) {
         customProgressDialog.hide();
         String errMsg = ErrorHandler.handleError(e, context);
-        Log.i("MSG", "handleError: " + errMsg);
         callSnackBar(errMsg);
     }
 

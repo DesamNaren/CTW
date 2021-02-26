@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GCCOfflineViewModel extends AndroidViewModel {
 
-    private GCCOfflineRepository mRepository;
+    private final GCCOfflineRepository mRepository;
     private LiveData<GccOfflineEntity> godownOfflineLiveData;
     private LiveData<List<GccOfflineEntity>> getGoDownsOfflineCount;
 

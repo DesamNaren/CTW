@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 public class GCCPhotoCustomViewModel implements ViewModelProvider.Factory {
-    private Context context;
+    private final Context context;
 
     public GCCPhotoCustomViewModel(Context context) {
         this.context = context;

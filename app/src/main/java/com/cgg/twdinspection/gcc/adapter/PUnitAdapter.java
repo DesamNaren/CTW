@@ -80,7 +80,7 @@ public class PUnitAdapter extends RecyclerView.Adapter<PUnitAdapter.ItemHolder> 
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TextViewTextChangeEvent>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(@NotNull Disposable d) {
 
                     }
 
@@ -105,7 +105,7 @@ public class PUnitAdapter extends RecyclerView.Adapter<PUnitAdapter.ItemHolder> 
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NotNull Throwable e) {
 
                     }
 

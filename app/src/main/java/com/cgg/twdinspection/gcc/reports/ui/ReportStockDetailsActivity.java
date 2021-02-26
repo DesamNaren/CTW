@@ -95,7 +95,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
     private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
     private List<ReportSubmitReqCommodities> essentialList, dailyreqList, emptiesList, mfpList, punitList, petrolList, lpgList;
     Gson gson;
-    String folder = "GCC";
+    String folder = AppConstants.GCC_FOLDER;
     String type;
 
     @Override
@@ -105,7 +105,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_stock_details);
         binding.header.ivPdf.setVisibility(View.VISIBLE);
         customProgressDialog = new CustomProgressDialog(this);
-        binding.bottomLl.btnNext.setText("Next");
+        binding.bottomLl.btnNext.setText(getString(R.string.next));
 
         EssentialFragment.commonCommodities = null;
         DailyFragment.commonCommodities = null;
@@ -119,22 +119,22 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
         reportData = gson.fromJson(data, ReportData.class);
 
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-            binding.header.headerTitle.setText("GCC - DR GODOWN REPORT");
+            binding.header.headerTitle.setText(getString(R.string.dr_godown_rep));
         }
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
-            binding.header.headerTitle.setText("GCC- DR DEPOT REPORT");
+            binding.header.headerTitle.setText(getString(R.string.dr_dep));
         }
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
-            binding.header.headerTitle.setText("GCC - MFP GODOWN REPORT");
+            binding.header.headerTitle.setText(R.string.mfp_rep);
         }
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
-            binding.header.headerTitle.setText("GCC - PROCESSING UNIT REPORT");
+            binding.header.headerTitle.setText(getString(R.string.p_unit_rep));
         }
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
-            binding.header.headerTitle.setText("GCC - PETROL PUMP REPORT");
+            binding.header.headerTitle.setText(getString(R.string.petrol_rep));
         }
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
-            binding.header.headerTitle.setText("GCC - LPG REPORT");
+            binding.header.headerTitle.setText(getString(R.string.lpg_rep));
         }
 
         binding.includeBasicLayout.divLL.setVisibility(View.VISIBLE);
@@ -248,23 +248,23 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                 binding.includeBasicLayout.divName.setText(reportData.getDivisionName());
                 binding.includeBasicLayout.socName.setText(reportData.getSocietyName());
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-                    binding.includeBasicLayout.drGodownNameTV.setText("Dr Godown");
+                    binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.dr_godown));
                 }
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
-                    binding.includeBasicLayout.drGodownNameTV.setText("Dr Depot");
+                    binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.dr_depot));
                 }
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
-                    binding.includeBasicLayout.drGodownNameTV.setText("MFP Godown");
+                    binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.mfp_godown));
                     binding.includeBasicLayout.socLL.setVisibility(View.GONE);
                 }
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
-                    binding.includeBasicLayout.drGodownNameTV.setText("Processing Unit");
+                    binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.p_unit));
                 }
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
-                    binding.includeBasicLayout.drGodownNameTV.setText(getResources().getString(R.string.petrol_pump_title));
+                    binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.petrol_pump_title));
                 }
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
-                    binding.includeBasicLayout.drGodownNameTV.setText(getResources().getString(R.string.lpg_title));
+                    binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.lpg_title));
                 }
                 binding.includeBasicLayout.drGodownName.setText(reportData.getGodownName());
                 binding.includeBasicLayout.inchargeName.setText(reportData.getInchargeName());
@@ -312,7 +312,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                     Intent intent = new Intent(ReportStockDetailsActivity.this, LPGInspRepActivity.class);
                     startActivity(intent);
                 } else {
-                    callSnackBar("No Inspection data found");
+                    callSnackBar();
                 }
             }
 
@@ -372,7 +372,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                 Bundle bundle = new Bundle();
                 bundle.putString(AppConstants.essRepComm, essentialComm);
                 essentialFragment.setArguments(bundle);
-                adapter.addFrag(essentialFragment, "Essential Commodities");
+                adapter.addFrag(essentialFragment, getString(R.string.ess_com));
                 ess_flag = true;
             } else {
                 ess_flag = false;
@@ -384,7 +384,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                 Bundle bundle = new Bundle();
                 bundle.putString(AppConstants.dailyRepReq, essentialComm);
                 dailyFragment.setArguments(bundle);
-                adapter.addFrag(dailyFragment, "Daily Requirements");
+                adapter.addFrag(dailyFragment, getString(R.string.dai_re));
                 dailyreq_flag = true;
             } else {
                 dailyreq_flag = false;
@@ -396,7 +396,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                 Bundle bundle = new Bundle();
                 bundle.putString(AppConstants.emptiesRep, essentialComm);
                 emptiesFragment.setArguments(bundle);
-                adapter.addFrag(emptiesFragment, "Empties");
+                adapter.addFrag(emptiesFragment, getString(R.string.empties));
                 emp_flag = true;
             } else {
                 emp_flag = false;
@@ -408,7 +408,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                 Bundle bundle = new Bundle();
                 bundle.putString(AppConstants.mfpRep, essentialComm);
                 mfpFragment.setArguments(bundle);
-                adapter.addFrag(mfpFragment, "MFP Commodities");
+                adapter.addFrag(mfpFragment, getString(R.string.mfp_com));
                 mfp_flag = true;
             } else {
 
@@ -421,7 +421,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                 Bundle bundle = new Bundle();
                 bundle.putString(AppConstants.punitRep, essentialComm);
                 pUnitFragment.setArguments(bundle);
-                adapter.addFrag(pUnitFragment, "Processing Units");
+                adapter.addFrag(pUnitFragment, getString(R.string.p_units));
                 punit_flag = true;
             } else {
                 punit_flag = false;
@@ -433,7 +433,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                 Bundle bundle = new Bundle();
                 bundle.putString(AppConstants.petrolPumpRep, petrolComm);
                 petrollReportFragment.setArguments(bundle);
-                adapter.addFrag(petrollReportFragment, "Petrol Commodities");
+                adapter.addFrag(petrollReportFragment, getString(R.string.petrol_com));
                 petrol_flag = true;
             } else {
                 petrol_flag = false;
@@ -445,7 +445,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                 Bundle bundle = new Bundle();
                 bundle.putString(AppConstants.lpgRep, lpgComm);
                 lpGlReportFragment.setArguments(bundle);
-                adapter.addFrag(lpGlReportFragment, "LPG Commodities");
+                adapter.addFrag(lpGlReportFragment, getString(R.string.lpg_com));
                 lpg_flag = true;
             } else {
                 lpg_flag = false;
@@ -460,33 +460,33 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
             public void onClick(View view) {
 
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-                    type = "Dr_Godown";
+                    type = getString(R.string.dr_godown_type);
                     createPdf(binding.drGownTitlePdf, null,
                             binding.drGodownGeneralPdf, binding.drGodownPhotosPdf);
                 } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)
                         && !TextUtils.isEmpty(reportData.getShopAvail())
                         && reportData.getShopAvail().equalsIgnoreCase(AppConstants.close)) {
-                    type = "Dr_Depot";
+                    type = getString(R.string.dr_depot_type);
                     createPdf(binding.drDepotCloseTitlePdf, null,
                             null, null);
                 }else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
-                    type = "Dr_Depot";
+                    type = getString(R.string.dr_depot_type);
                     createPdf(binding.drDepotTitlePdf, binding.drDepotMfpPdf,
                             binding.drDepotGeneralPdf, binding.drDepotPhotosPdf);
                 }  else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
-                    type = "MFP";
+                    type = getString(R.string.mfp_type);
                     createPdf(binding.mfpTitlePdf, null,
                             binding.mfpGeneralPdf, binding.mfpPhotosPdf);
                 } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
-                    type = "Processing_Unit";
+                    type = getString(R.string.p_unit_type);
                     createPdf(binding.punitRegistersPdf, null,
                             binding.punitGeneralPdf, binding.punitPhotosPdf);
                 } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
-                    type = "Petrol_Pump";
+                    type = getString(R.string.petrol_type);
                     createPdf(binding.petrolPumpTitlePdf, null,
                             binding.petrolPumpGeneralPdf, binding.petrolPumpPhotosPdf);
                 } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
-                    type = "LPG";
+                    type = getString(R.string.lpg_type);
                     createPdf(binding.lpgTitlePdf, null,
                             binding.lpgGeneralPdf, binding.lpgPhotosPdf);
                 } else {
@@ -521,7 +521,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                            LinearLayout generalPdf, LinearLayout photosPdf) {
 
         customProgressDialog.show();
-        customProgressDialog.addText("Please wait...Downloading Pdf");
+        customProgressDialog.addText(getString(R.string.plz_wait));
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -688,8 +688,8 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
         binding.commodities.groupRV.setAdapter(stockSubAdapter);
     }
 
-    void callSnackBar(String msg) {
-        Snackbar snackbar = Snackbar.make(binding.cl, msg, Snackbar.LENGTH_SHORT);
+    void callSnackBar() {
+        Snackbar snackbar = Snackbar.make(binding.cl, getString(R.string.no_ins_data_found), Snackbar.LENGTH_SHORT);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));
         snackbar.show();
     }
@@ -716,22 +716,22 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                     punitList != null || petrolList != null || lpgList != null) {
 
                 customProgressDialog.show();
-                customProgressDialog.addText("Please wait...Downloading Pdf");
+                customProgressDialog.addText(getString(R.string.plz_wait));
 
                 if (essentialList != null && essentialList.size() > 0)
-                    addCommoditiesContent(document, "Essential Commodities", essentialList);
+                    addCommoditiesContent(document, getString(R.string.ess_com), essentialList);
                 if (dailyreqList != null && dailyreqList.size() > 0)
-                    addCommoditiesContent(document, "Daily Requirements", dailyreqList);
+                    addCommoditiesContent(document, getString(R.string.dai_re), dailyreqList);
                 if (emptiesList != null && emptiesList.size() > 0)
-                    addCommoditiesContent(document, "Empties", emptiesList);
+                    addCommoditiesContent(document, getString(R.string.empties), emptiesList);
                 if (mfpList != null && mfpList.size() > 0)
-                    addCommoditiesContent(document, "MFP Commodities", mfpList);
+                    addCommoditiesContent(document, getString(R.string.mfp_com), mfpList);
                 if (punitList != null && punitList.size() > 0)
-                    addCommoditiesContent(document, "Processing Units", punitList);
+                    addCommoditiesContent(document, getString(R.string.p_units), punitList);
                 if (petrolList != null && petrolList.size() > 0)
-                    addCommoditiesContent(document, "Petrol Commodities", petrolList);
+                    addCommoditiesContent(document, getString(R.string.petrol_com), petrolList);
                 if (lpgList != null && lpgList.size() > 0)
-                    addCommoditiesContent(document, "LPG Commodities", lpgList);
+                    addCommoditiesContent(document, getString(R.string.lpg_com), lpgList);
             }
 
             document.close();

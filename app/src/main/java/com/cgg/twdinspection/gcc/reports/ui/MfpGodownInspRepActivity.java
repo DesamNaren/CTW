@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
@@ -13,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -22,18 +19,11 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
-import com.cgg.twdinspection.common.screenshot.PDFUtil;
 import com.cgg.twdinspection.common.utils.AppConstants;
-import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityMfpGodownInspRepBinding;
-import com.cgg.twdinspection.gcc.reports.adapter.ViewPhotoAdapterPdf;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.google.gson.Gson;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MfpGodownInspRepActivity extends AppCompatActivity {
 
@@ -42,7 +32,7 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMfpGodownInspRepBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_mfp_godown_insp_rep);
 
-        binding.bottomLl.btnNext.setText("Next");
+        binding.bottomLl.btnNext.setText(getString(R.string.next));
         binding.header.headerTitle.setText(getString(R.string.mfp_ins_rep));
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +101,7 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MfpGodownInspRepActivity.this, ViewPhotosActivity.class)
-                        .putExtra(AppConstants.PHOTO_TITLE, "MFP GODOWN PHOTOS"));
+                        .putExtra(AppConstants.PHOTO_TITLE, getString(R.string.mfp_photos)));
             }
         });
     }

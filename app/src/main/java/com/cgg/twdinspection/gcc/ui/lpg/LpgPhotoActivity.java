@@ -89,7 +89,6 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     int flag_safety_eq1 = 0;
     int flag_safety_eq2 = 0;
     int flag_office = 0;
-    int flag_lpgSupplierInfo = 0;
     File file_repair, file_entrance, file_ceiling, file_floor, file_safety_eq1, file_safety_eq2, file_office;
     String FilePath, repairPath;
     private String officerID;
@@ -101,7 +100,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     private String suppType;
     private String suppId;
     private String godName;
-    public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
+    public static final String IMAGE_DIRECTORY_NAME = AppConstants.GCC_IMAGES;
     public static String IMAGE_DIRECTORY_NAME_MODE;
     private CustomProgressDialog customProgressDialog;
     SharedPreferences sharedPreferences;
@@ -114,9 +113,6 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     private boolean flag;
     private GCCOfflineRepository gccOfflineRepository;
     private GCCSubmitRequest request;
-
-    public LpgPhotoActivity(String godId) {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -368,10 +364,10 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         } else {
             if (Utils.checkInternetConnection(LpgPhotoActivity.this)) {
                 customProgressDialog.show();
-                customProgressDialog.addText("Please wait...Uploading Data");
+                customProgressDialog.addText(getString(R.string.uploading_data));
                 viewModel.submitGCCDetails(request);
             } else {
-                Utils.customWarningAlert(LpgPhotoActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                Utils.customWarningAlert(LpgPhotoActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
             }
         }
     }
@@ -485,7 +481,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             }
 
             customProgressDialog.show();
-            customProgressDialog.addText("Please wait...Uploading Photos");
+            customProgressDialog.addText(getString(R.string.uploading_photos));
 
             viewModel.UploadImageServiceCall(partList);
         }
@@ -495,22 +491,22 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         boolean returnFlag = true;
         if (flag_entrance == 0) {
             returnFlag = false;
-            showSnackBar("Please capture entrance image");
+            showSnackBar(getString(R.string.cap_ent_image));
         } else if (flag_safety_eq1 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture safety equipment image");
+            showSnackBar(getString(R.string.cap_saf_eqp_image));
         } else if (flag_safety_eq2 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture safety equipment image");
+            showSnackBar(getString(R.string.cap_saf_eqp_image));
         } else if (flag_floor == 0) {
             returnFlag = false;
-            showSnackBar("Please capture floor image");
+            showSnackBar(getString(R.string.cap_floor_image));
         } else if (flag_ceiling == 0) {
             returnFlag = false;
-            showSnackBar("Please capture ceiling image");
+            showSnackBar(getString(R.string.cap_ceiling_image));
         } else if (flag_office == 0) {
             returnFlag = false;
-            showSnackBar("Please capture office image");
+            showSnackBar(getString(R.string.cap_office_image));
         }
         return returnFlag;
     }
@@ -789,8 +785,6 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 + "/" + IMAGE_DIRECTORY_NAME_MODE + "/" + AppConstants.OFFLINE_LPG + "_" + suppId);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
-                        + " directory");
                 return null;
             }
         }
@@ -812,7 +806,6 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     public void handleError(Throwable e, Context context) {
         customProgressDialog.hide();
         String errMsg = ErrorHandler.handleError(e, context);
-        Log.i("MSG", "handleError: " + errMsg);
         showSnackBar(errMsg);
     }
 
@@ -820,7 +813,6 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     public void getData(GCCSubmitResponse gccSubmitResponse) {
         customProgressDialog.hide();
         if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
-//            Snackbar.make(binding.root, "Data Submitted, Uploading photos", Snackbar.LENGTH_SHORT).show();
             callPhotoSubmit();
         } else if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
             Snackbar.make(binding.root, gccSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
@@ -856,9 +848,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-
-
-                Toast.makeText(this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.data_saved_successfully), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, GCCDashboardActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();

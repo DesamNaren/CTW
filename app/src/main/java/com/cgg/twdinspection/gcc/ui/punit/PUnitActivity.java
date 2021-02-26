@@ -46,7 +46,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
     private SharedPreferences.Editor editor;
     ActivityPUnitBinding binding;
     CustomProgressDialog customProgressDialog;
-    private StockDetailsResponse stockDetailsResponsemain;
+    private StockDetailsResponse stockDetailsResponseMain;
     private PUnits pUnits;
     private final List<String> mFragmentTitleList = new ArrayList<>();
     private final List<Fragment> mFragmentList = new ArrayList<>();
@@ -59,7 +59,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
         binding = DataBindingUtil.setContentView(this, R.layout.activity_p_unit);
         binding.header.headerTitle.setText(getResources().getString(R.string.gcc_p_unit));
 
-        stockDetailsResponsemain = null;
+        stockDetailsResponseMain = null;
         EssentialFragment.commonCommodities = null;
         DailyFragment.commonCommodities = null;
         EmptiesFragment.commonCommodities = null;
@@ -118,15 +118,15 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
             @Override
             public void onClick(View v) {
                 boolean existFlag = false;
-                stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
-                stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
-                stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
-                stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
-                stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
+                stockDetailsResponseMain.setEssential_commodities(EssentialFragment.commonCommodities);
+                stockDetailsResponseMain.setDialy_requirements(DailyFragment.commonCommodities);
+                stockDetailsResponseMain.setEmpties(EmptiesFragment.commonCommodities);
+                stockDetailsResponseMain.setMfp_commodities(MFPFragment.commonCommodities);
+                stockDetailsResponseMain.setProcessing_units(PUnitFragment.commonCommodities);
                 if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
 
-                    for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
-                        if (!TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
+                    for (int z = 0; z < stockDetailsResponseMain.getEssential_commodities().size(); z++) {
+                        if (!TextUtils.isEmpty(stockDetailsResponseMain.getEssential_commodities().get(z).getPhyQuant())) {
                             existFlag = true;
                             break;
                         }
@@ -134,8 +134,8 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                 }
                 if (!existFlag && DailyFragment.commonCommodities != null && DailyFragment.commonCommodities.size() > 0) {
 
-                    for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
-                        if (!TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
+                    for (int z = 0; z < stockDetailsResponseMain.getDialy_requirements().size(); z++) {
+                        if (!TextUtils.isEmpty(stockDetailsResponseMain.getDialy_requirements().get(z).getPhyQuant())) {
                             existFlag = true;
                             break;
                         }
@@ -144,8 +144,8 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
 
                 if (!existFlag && EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
 
-                    for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
-                        if (!TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
+                    for (int z = 0; z < stockDetailsResponseMain.getEmpties().size(); z++) {
+                        if (!TextUtils.isEmpty(stockDetailsResponseMain.getEmpties().get(z).getPhyQuant())) {
                             existFlag = true;
                             break;
                         }
@@ -154,8 +154,8 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
 
                 if (!existFlag && MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
 
-                    for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
-                        if (!TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
+                    for (int z = 0; z < stockDetailsResponseMain.getMfp_commodities().size(); z++) {
+                        if (!TextUtils.isEmpty(stockDetailsResponseMain.getMfp_commodities().get(z).getPhyQuant())) {
                             existFlag = true;
                             break;
                         }
@@ -164,8 +164,8 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
 
                 if (!existFlag && PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
 
-                    for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
-                        if (!TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
+                    for (int z = 0; z < stockDetailsResponseMain.getProcessing_units().size(); z++) {
+                        if (!TextUtils.isEmpty(stockDetailsResponseMain.getProcessing_units().get(z).getPhyQuant())) {
                             existFlag = true;
                             break;
                         }
@@ -174,7 +174,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
 
                 if (existFlag) {
                     Gson gson = new Gson();
-                    String stockData = gson.toJson(stockDetailsResponsemain);
+                    String stockData = gson.toJson(stockDetailsResponseMain);
                     try {
                         editor = TWDApplication.get(PUnitActivity.this).getPreferences().edit();
                     } catch (Exception e) {
@@ -202,7 +202,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
 
                         customProgressDialog.hide();
                         officesResponseLiveData.removeObservers(PUnitActivity.this);
-                        stockDetailsResponsemain = stockDetailsResponse;
+                        stockDetailsResponseMain = stockDetailsResponse;
 
                         if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
                             if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
@@ -348,7 +348,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
 
     @Override
     public void onBackPressed() {
-        if (stockDetailsResponsemain != null && stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)
+        if (stockDetailsResponseMain != null && stockDetailsResponseMain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)
                 && (ess_flag || dailyreq_flag || emp_flag || mfp_flag || punit_flag)) {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),

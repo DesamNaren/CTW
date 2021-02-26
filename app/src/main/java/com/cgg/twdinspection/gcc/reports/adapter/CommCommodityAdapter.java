@@ -17,24 +17,21 @@ import com.cgg.twdinspection.gcc.reports.source.ReportSubmitReqCommodities;
 import java.util.List;
 
 public class CommCommodityAdapter extends RecyclerView.Adapter<CommCommodityAdapter.ItemHolder> {
-    private Context context;
-    private List<ReportSubmitReqCommodities> commonCommodities;
-    private StockChildRowBinding stockChildRowBinding;
+    private final List<ReportSubmitReqCommodities> commonCommodities;
 
     public CommCommodityAdapter(Context context, List<ReportSubmitReqCommodities> commonCommodities) {
-        this.context = context;
         this.commonCommodities = commonCommodities;
     }
 
     @NonNull
     @Override
     public CommCommodityAdapter.ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        stockChildRowBinding = DataBindingUtil.inflate(
+        com.cgg.twdinspection.databinding.StockChildRowBinding stockChildRowBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 R.layout.stock_child_row, parent, false);
         stockChildRowBinding.llPhysAvailQty.setVisibility(View.VISIBLE);
         stockChildRowBinding.llPhyEntry.setVisibility(View.GONE);
-        return new CommCommodityAdapter.ItemHolder(stockChildRowBinding);
+        return new ItemHolder(stockChildRowBinding);
     }
 
 
@@ -63,7 +60,7 @@ public class CommCommodityAdapter extends RecyclerView.Adapter<CommCommodityAdap
         return commonCommodities != null && commonCommodities.size() > 0 ? commonCommodities.size() : 0;
     }
 
-    class ItemHolder extends RecyclerView.ViewHolder {
+    static class ItemHolder extends RecyclerView.ViewHolder {
 
         StockChildRowBinding stockChildRowBinding;
 

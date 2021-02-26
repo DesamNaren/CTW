@@ -203,7 +203,7 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
                 Utils.customWarningAlert(LPGActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
             }
         } else {
-            Utils.customErrorAlert(LPGActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            Utils.customErrorAlert(LPGActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
         }
 
 
@@ -245,7 +245,6 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
     public void handleError(Throwable e, Context context) {
         customProgressDialog.hide();
         String errMsg = ErrorHandler.handleError(e, context);
-        Log.i("MSG", "handleError: " + errMsg);
         callSnackBar(errMsg);
     }
 

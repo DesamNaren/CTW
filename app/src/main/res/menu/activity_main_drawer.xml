@@ -56,10 +56,43 @@
             android:icon="@drawable/gcc_icon"
             android:title="@string/gcc_reports_offline"
             app:iconTint="@color/colorPrimaryDark" />
-
-
     </group>
 
+    <item
+        android:id="@+id/menu_download"
+        android:title="@string/download_master">
+        <menu>
+            <group
+                android:id="@+id/download_group"
+                android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_download_school"
+                    android:icon="@drawable/schools_icon"
+                    android:title="@string/inst_master"
+                    app:iconTint="@color/colorPrimaryDark" />
+                <item
+                    android:id="@+id/nav_download_schemes"
+                    android:icon="@drawable/schemes_icon"
+                    android:title="@string/scheme_master"
+                    app:iconTint="@color/colorPrimaryDark" />
+                <item
+                    android:id="@+id/nav_download_gcc"
+                    android:icon="@drawable/gcc_icon"
+                    android:title="@string/gcc_master"
+                    app:iconTint="@color/colorPrimaryDark" />
+                <item
+                    android:id="@+id/nav_download_eng"
+                    android:icon="@drawable/engineering_works_icon"
+                    android:title="@string/eng_works_master"
+                    android:visible="false"
+                    app:iconTint="@color/colorPrimaryDark" />
+
+
+
+            </group>
+        </menu>
+    </item>
     <item
         android:id="@+id/menu_other"
         android:title="@string/info">

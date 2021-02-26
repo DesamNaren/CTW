@@ -25,8 +25,8 @@ import java.util.List;
 
 public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.ItemHolder> {
 
-    private Context context;
-    private List<ReportPhoto> list;
+    private final Context context;
+    private final List<ReportPhoto> list;
 
     public ViewPhotoAdapter(Context context, List<ReportPhoto> list) {
         this.context = context;
@@ -88,7 +88,7 @@ public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.Item
     }
 
 
-    class ItemHolder extends RecyclerView.ViewHolder {
+    static class ItemHolder extends RecyclerView.ViewHolder {
         AdapterViewPhotoBinding listItemBinding;
 
         ItemHolder(AdapterViewPhotoBinding listItemBinding) {

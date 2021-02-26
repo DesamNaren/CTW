@@ -18,9 +18,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SchemeReportsViewModel extends AndroidViewModel {
-    private MutableLiveData<SchemeReportResponse> schemeReportResponseMutableLiveData;
-    private Context context;
-    private ErrorHandlerInterface errorHandlerInterface;
+    private final MutableLiveData<SchemeReportResponse> schemeReportResponseMutableLiveData;
+    private final Context context;
+    private final ErrorHandlerInterface errorHandlerInterface;
 
     public SchemeReportsViewModel(Context context, Application application) {
         super(application);

@@ -90,7 +90,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     File file_repair, file_entrance, file_ceiling, file_floor, file_stock_arrang1, file_stock_arrang2, file_machinary;
     String FilePath, repairPath;
     private String officerID, divId, divName, socId, socName, inchName, suppType, suppId, godName;
-    public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
+    public static final String IMAGE_DIRECTORY_NAME = AppConstants.GCC_IMAGES;
     public static String IMAGE_DIRECTORY_NAME_MODE;
     private CustomProgressDialog customProgressDialog;
     SharedPreferences sharedPreferences;
@@ -427,7 +427,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 customProgressDialog.addText(getString(R.string.uploading_data));
                 viewModel.submitGCCDetails(request);
             } else {
-                Utils.customWarningAlert(GCCPhotoActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                Utils.customWarningAlert(GCCPhotoActivity.this, getResources().getString(R.string.app_name),  getString(R.string.plz_check_int));
             }
         }
     }
@@ -631,22 +631,22 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         boolean returnFlag = true;
         if (flag_entrance == 0) {
             returnFlag = false;
-            showSnackBar("Please capture entrance image");
+            showSnackBar(getString(R.string.cap_ent_image));
         } else if (flag_floor == 0) {
             returnFlag = false;
-            showSnackBar("Please capture floor image");
+            showSnackBar(getString(R.string.cap_floor_image));
         } else if (flag_ceiling == 0) {
             returnFlag = false;
-            showSnackBar("Please capture ceiling image");
+            showSnackBar(getString(R.string.cap_ceiling_image));
         } else if (flag_stock_arrang1 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture stock arrangement image");
+            showSnackBar(getString(R.string.cap_stock_arr_image));
         } else if (flag_stock_arrang2 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture stock arrangement image");
+            showSnackBar(getString(R.string.cap_stock_arr_image));
         } else if (flag_pUnits == 1 && flag_machinary == 0) {
             returnFlag = false;
-            showSnackBar("Please capture machinary image");
+            showSnackBar(getString(R.string.cap_mac_image));
         }
         return returnFlag;
     }
@@ -982,7 +982,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                Toast.makeText(this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.data_saved_successfully), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, GCCDashboardActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();

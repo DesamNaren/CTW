@@ -629,96 +629,96 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         if (TextUtils.isEmpty(rawStock)) {
             returnFlag = false;
             ScrollToView(binding.rgStock);
-            showSnackBar("Please check raw material stock register");
+            showSnackBar(getString(R.string.chk_raw));
         } else if (TextUtils.isEmpty(proReg)) {
             returnFlag = false;
             ScrollToView(binding.rgProcessing);
-            showSnackBar("Please check processing register");
+            showSnackBar(getString(R.string.chk_pro_reg));
         } else if (TextUtils.isEmpty(inwardReg)) {
             returnFlag = false;
             ScrollToView(binding.rgInward);
-            showSnackBar("Please check inward register");
+            showSnackBar(getString(R.string.chk_inward_reg));
         } else if (TextUtils.isEmpty(outwardReg)) {
             returnFlag = false;
             ScrollToView(binding.rgOutward);
-            showSnackBar("Please check outward register");
+            showSnackBar(getString(R.string.chk_outward_reg));
         } else if (TextUtils.isEmpty(saleReg)) {
             returnFlag = false;
             ScrollToView(binding.rgSaleInv);
-            showSnackBar("Please check sale/invoice register");
+            showSnackBar(getString(R.string.chk_sale_inv_reg));
         } else if (TextUtils.isEmpty(labAttReg)) {
             returnFlag = false;
             ScrollToView(binding.rgLabAtt);
-            showSnackBar("Please check labour attendance register");
+            showSnackBar(getString(R.string.chk_labour_att_reg));
         } else if (TextUtils.isEmpty(insCer)) {
             returnFlag = false;
             ScrollToView(binding.rgInsurance);
-            showSnackBar("Please check insurance certificate");
+            showSnackBar(getString(R.string.chk_ins_cer));
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(insComName)) {
             returnFlag = false;
-            ScrollToViewEditText(binding.etComName, "Enter insurance company name");
+            ScrollToViewEditText(binding.etComName, getString(R.string.ent_ins_com));
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && !insComDate.contains("/")) {
             returnFlag = false;
-            ScrollToViewEditText(binding.etInsDate, "Enter insurance validity");
+            ScrollToViewEditText(binding.etInsDate, getString(R.string.ent_ins_validity));
         } else if (TextUtils.isEmpty(fireNOC)) {
             returnFlag = false;
             ScrollToView(binding.rgFireNoc);
-            showSnackBar("Please check fire department NOC");
+            showSnackBar(getString(R.string.chk_fire_noc));
         } else if (TextUtils.isEmpty(weightMea)) {
             returnFlag = false;
             ScrollToView(binding.rgWeight);
-            showSnackBar("Please check weight measure by legal metrology");
+            showSnackBar(getString(R.string.chk_legal_metrology));
         } else if (weightMea.equalsIgnoreCase(AppConstants.Yes) && !weightDate.contains("/")) {
             returnFlag = false;
-            ScrollToViewEditText(binding.etLegalMetDate, "Enter weight measure validity date");
+            ScrollToViewEditText(binding.etLegalMetDate, getString(R.string.ent_wei_metrology_date));
         } else if (TextUtils.isEmpty(amcMac)) {
             returnFlag = false;
             ScrollToView(binding.rgAmc);
-            showSnackBar("Please check AMC machinery");
+            showSnackBar(getString(R.string.chk_amc_mac));
         } else if (TextUtils.isEmpty(agmarkCer)) {
             returnFlag = false;
             ScrollToView(binding.rgAgmark);
-            showSnackBar("Please check agmark certificate");
+            showSnackBar(getString(R.string.chk_agmark_cer));
         } else if (TextUtils.isEmpty(fsaaiCer)) {
             returnFlag = false;
             ScrollToView(binding.rgFsaai);
-            showSnackBar("Please check tray FSAAI certificate");
+            showSnackBar(getString(R.string.chk_fsaai_cer));
         } else if (TextUtils.isEmpty(empReg)) {
             returnFlag = false;
             ScrollToView(binding.rgEmpties);
-            showSnackBar("Please check empties register");
+            showSnackBar(getString(R.string.chk_emp_reg));
         } else if (TextUtils.isEmpty(barrelCans)) {
             returnFlag = false;
             ScrollToView(binding.rgBarrels);
-            showSnackBar("Please check Barrels / Aluminium cans");
+            showSnackBar(getString(R.string.chk_barr_cans));
         } else if (TextUtils.isEmpty(cashBook)) {
             returnFlag = false;
             ScrollToView(binding.rgCashBook);
-            showSnackBar("Please check cash book");
+            showSnackBar(getString(R.string.chk_cash_book));
         } else if (TextUtils.isEmpty(cashBankBal)) {
             returnFlag = false;
             ScrollToView(binding.rgCashBank);
-            showSnackBar("Please check cash and bank balance");
+            showSnackBar(getString(R.string.chk_cash_bank_bal));
         } else if (TextUtils.isEmpty(vehLogBook)) {
             returnFlag = false;
             ScrollToView(binding.rgVehLog);
-            showSnackBar("Please check vehicle log book");
+            showSnackBar(getString(R.string.chk_vec_log_book));
         } else if (TextUtils.isEmpty(qualityStock)) {
             returnFlag = false;
             ScrollToView(binding.rgStockQua);
-            showSnackBar("Please check quality of stock");
+            showSnackBar(getString(R.string.chk_qua_stock));
         } else if (TextUtils.isEmpty(godownHyg)) {
             returnFlag = false;
             ScrollToView(binding.rgGodownHyg);
-            showSnackBar("Please check godown is hygienic");
+            showSnackBar(getString(R.string.chk_godown_hygenic));
         } else if (TextUtils.isEmpty(repairsReq)) {
             returnFlag = false;
             ScrollToView(binding.rgRepairsReq);
-            showSnackBar("Please check repairs required");
+            showSnackBar(getString(R.string.chk_rep_req));
         } else if (TextUtils.isEmpty(remarks)) {
             returnFlag = false;
-            showSnackBar("Please enter remarks");
-            ScrollToViewEditText(binding.remarks.etRemarks, "Enter remarks");
+            showSnackBar(getString(R.string.enter_remarks));
+            ScrollToViewEditText(binding.remarks.etRemarks, getString(R.string.enter_remarks));
         }
         return returnFlag;
     }

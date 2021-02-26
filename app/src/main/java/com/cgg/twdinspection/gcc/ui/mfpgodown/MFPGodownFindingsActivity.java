@@ -66,7 +66,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
     String PIC_NAME, PIC_TYPE;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public Uri fileUri;
-    public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
+    public static final String IMAGE_DIRECTORY_NAME = AppConstants.GCC_IMAGES;
     String FilePath, checkUpDate;
     Bitmap bm;
     File file;
@@ -472,75 +472,75 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         boolean returnFlag = true;
         if (TextUtils.isEmpty(stockReg)) {
             returnFlag = false;
-            showSnackBar("Please check stock register");
+            showSnackBar(getString(R.string.chk_stock_reg_entries));
             ScrollToView(binding.rgStock);
         } else if (TextUtils.isEmpty(insCer)) {
             returnFlag = false;
-            showSnackBar("Please check insurance certificate");
+            showSnackBar(getString(R.string.chk_ins_cer));
             ScrollToView(binding.rgInsurance);
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(insComName)) {
             returnFlag = false;
             ScrollToView(binding.rgInsurance);
-            ScrollToViewEditText(binding.etComName, "Enter insurance company name");
+            ScrollToViewEditText(binding.etComName, getString(R.string.ent_ins_com));
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && !insComDate.contains("/")) {
             returnFlag = false;
-            showSnackBar("Enter insurance validity");
+            showSnackBar(getString(R.string.ent_ins_validity));
             ScrollToView(binding.rgInsurance);
         } else if (TextUtils.isEmpty(fireNOC)) {
             returnFlag = false;
-            showSnackBar("Please check fire department NOC");
+            showSnackBar(getString(R.string.chk_fire_noc));
             ScrollToView(binding.rgFireNoc);
         } else if (TextUtils.isEmpty(weightMea)) {
             returnFlag = false;
-            showSnackBar("Please check weight measure by legal metrology");
+            showSnackBar(getString(R.string.wei_val));
             ScrollToView(binding.rgWeight);
         } else if (weightMea.equalsIgnoreCase(AppConstants.Yes) && !weightDate.contains("/")) {
             returnFlag = false;
-            showSnackBar("Enter weight measure validity date");
+            showSnackBar(getString(R.string.wei_val));
             ScrollToView(binding.rgWeight);
         } else if (TextUtils.isEmpty(qualityStock)) {
             returnFlag = false;
             ScrollToView(binding.rgQualityStock);
-            showSnackBar("Please check quality of the stock");
+            showSnackBar(getString(R.string.chk_quality_stock));
         } else if (TextUtils.isEmpty(stockCards)) {
             returnFlag = false;
             ScrollToView(binding.rgStackCardsDisplayed);
-            showSnackBar("Please check stack cards displayed");
+            showSnackBar(getString(R.string.chk_stack_cards_displayed));
         } else if (TextUtils.isEmpty(godownHyg)) {
             returnFlag = false;
             ScrollToView(binding.rgGodownHyg);
-            showSnackBar("Please check godown hygienic condition");
+            showSnackBar(getString(R.string.chk_godown_hyg));
         } else if (TextUtils.isEmpty(driage)) {
             returnFlag = false;
             ScrollToView(binding.rgDraige);
-            showSnackBar("Please check driage praposal");
+            showSnackBar(getString(R.string.chk_dri_pro));
         } else if (TextUtils.isEmpty(genAvail)) {
             returnFlag = false;
             ScrollToView(binding.rgGodownGenAvail);
-            showSnackBar("Please check generator available");
+            showSnackBar(getString(R.string.chk_gen_ava));
         } else if (TextUtils.isEmpty(trayAvail)) {
             returnFlag = false;
             ScrollToView(binding.rgTray);
-            showSnackBar("Please check tray dryer available");
+            showSnackBar(getString(R.string.chk_tray_drier));
         } else if (TextUtils.isEmpty(lastInsDiv)) {
             returnFlag = false;
             ScrollToView(binding.rgInspDateDivManager);
-            showSnackBar("Please check last inspection date");
+            showSnackBar(getString(R.string.chk_last_insp_date));
         } else if (TextUtils.isEmpty(repairsReq)) {
             returnFlag = false;
             ScrollToView(binding.ivRepairs);
-            showSnackBar("Please check repairs required");
+            showSnackBar(getString(R.string.chk_rep_req));
         } else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(repairType)) {
             returnFlag = false;
-            ScrollToViewEditText(binding.etRepairType, "Enter repair type");
+            ScrollToViewEditText(binding.etRepairType, getString(R.string.ent_rep_type));
         } else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && repairsFlag == 0) {
             returnFlag = false;
-            showSnackBar("Please capture repairs required photo");
+            showSnackBar( getString(R.string.cap_rep_photo));
             ScrollToView(binding.ivRepairs);
         } else if (TextUtils.isEmpty(remarks)) {
             returnFlag = false;
-            showSnackBar("Please enter remarks");
-            ScrollToViewEditText(binding.etRemarks, "Please enter remarks");
+            showSnackBar( getString(R.string.plz_enter_remarks));
+            ScrollToViewEditText(binding.etRemarks,  getString(R.string.plz_enter_remarks));
         }
         return returnFlag;
     }

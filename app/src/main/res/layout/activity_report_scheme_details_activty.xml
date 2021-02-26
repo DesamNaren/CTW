@@ -41,7 +41,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -61,7 +61,7 @@
                             android:layout_gravity="center"
                             android:layout_margin="@dimen/dimen_5dp"
                             android:background="@drawable/schemes_icon"
-                            android:backgroundTint="@color/colorPrimary"
+                            app:backgroundTint="@color/colorPrimary"
                             android:visibility="gone" />
 
                         <ImageView
@@ -76,7 +76,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_margin"
                             android:gravity="center"
-                            android:text="Tribal Welfare Department"
+                            android:text="@string/twd"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimen_title"
                             android:textStyle="bold"
@@ -86,7 +86,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Government of Telangana"
+                            android:text="@string/government_of_telangana"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimen_text" />
@@ -96,7 +96,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_margin"
                             android:gravity="center"
-                            android:text="Inspection Report-Schemes"
+                            android:text="@string/inspection_report_schemes"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimen_header"
                             android:textStyle="bold"
@@ -147,7 +147,7 @@
                                         android:layout_weight="1"
                                         android:gravity="center"
                                         android:padding="@dimen/dimen_padding"
-                                        android:text="Beneficiary Details"
+                                        android:text="@string/beneficiary_details"
                                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_header"
@@ -169,7 +169,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="Beneficiary ID"
+                                        android:text="@string/beneficiary_id"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -204,7 +204,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="Beneficiary Name"
+                                        android:text="@string/beneficiary_name"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -239,7 +239,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="Activity"
+                                        android:text="@string/activity"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -274,7 +274,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="Scheme"
+                                        android:text="@string/scheme"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -309,7 +309,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="Unit Cost"
+                                        android:text="@string/unit_cost"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -343,7 +343,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="Subsidy"
+                                        android:text="@string/subsidy"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -378,7 +378,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="Bank Loan"
+                                        android:text="@string/bank_loan"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -413,7 +413,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="Contribution"
+                                        android:text="@string/contribution"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -448,7 +448,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="Status"
+                                        android:text="@string/status"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -545,7 +545,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="Remarks"
+                                        android:text="@string/remarks"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -675,7 +675,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="@dimen/dimen_10dp"
                         android:background="@drawable/schemes_icon"
-                        android:backgroundTint="@color/colorPrimary"
+                        app:backgroundTint="@color/colorPrimary"
                         android:visibility="visible" />
 
                     <LinearLayout
@@ -708,7 +708,7 @@
                                         android:layout_weight="1"
                                         android:gravity="center"
                                         android:padding="@dimen/dimen_10dp"
-                                        android:text="Beneficiary Details"
+                                        android:text="@string/beneficiary_details"
                                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                                         android:textStyle="bold" />
 
@@ -725,7 +725,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_5dp"
                                         android:layout_weight="1"
-                                        android:text="Beneficiary ID"
+                                        android:text="@string/beneficiary_id"
                                         android:textColor="@color/black" />
 
                                     <TextView
@@ -754,7 +754,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_5dp"
                                         android:layout_weight="1"
-                                        android:text="Beneficiary Name"
+                                        android:text="@string/beneficiary_name"
                                         android:textColor="@color/black" />
 
                                     <TextView
@@ -783,7 +783,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_5dp"
                                         android:layout_weight="1"
-                                        android:text="Activity"
+                                        android:text="@string/activity"
                                         android:textColor="@color/black" />
 
                                     <TextView
@@ -812,7 +812,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_5dp"
                                         android:layout_weight="1"
-                                        android:text="Scheme"
+                                        android:text="@string/scheme"
                                         android:textColor="@color/black" />
 
                                     <TextView
@@ -841,7 +841,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_5dp"
                                         android:layout_weight="1"
-                                        android:text="Unit Cost"
+                                        android:text="@string/unit_cost"
                                         android:textColor="@color/black" />
 
                                     <TextView
@@ -869,7 +869,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_5dp"
                                         android:layout_weight="1"
-                                        android:text="Subsidy"
+                                        android:text="@string/subsidy"
                                         android:textColor="@color/black" />
 
                                     <TextView
@@ -898,7 +898,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_5dp"
                                         android:layout_weight="1"
-                                        android:text="Bank Loan"
+                                        android:text="@string/bank_loan"
                                         android:textColor="@color/black" />
 
                                     <TextView
@@ -927,7 +927,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_5dp"
                                         android:layout_weight="1"
-                                        android:text="Contribution"
+                                        android:text="@string/contribution"
                                         android:textColor="@color/black" />
 
                                     <TextView
@@ -956,7 +956,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_5dp"
                                         android:layout_weight="1"
-                                        android:text="Status"
+                                        android:text="@string/status"
                                         android:textColor="@color/black" />
 
                                     <TextView
@@ -1027,7 +1027,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_5dp"
                                         android:layout_weight="1"
-                                        android:text="Remarks"
+                                        android:text="@string/remarks"
                                         android:textColor="@color/black" />
 
                                     <TextView
@@ -1125,7 +1125,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@drawable/btn_bg"
-            android:text="Go Back"
+            android:text="@string/go_back"
             android:textColor="@color/white" />
     </RelativeLayout>
 

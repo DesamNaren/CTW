@@ -81,7 +81,7 @@ public class EssentialAdapter extends RecyclerView.Adapter<EssentialAdapter.Item
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TextViewTextChangeEvent>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(@NotNull Disposable d) {
 
                     }
 
@@ -106,7 +106,7 @@ public class EssentialAdapter extends RecyclerView.Adapter<EssentialAdapter.Item
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NotNull Throwable e) {
 
                     }
 

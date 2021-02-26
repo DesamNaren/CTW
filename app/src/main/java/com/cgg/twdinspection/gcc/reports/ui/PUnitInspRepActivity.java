@@ -35,7 +35,7 @@ public class PUnitInspRepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityPunitInspRepBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_punit_insp_rep);
 
-        binding.bottomLl.btnNext.setText("Next");
+        binding.bottomLl.btnNext.setText(getString(R.string.next));
         binding.header.headerTitle.setText(getString(R.string.p_unit_ins_rep));
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +92,7 @@ public class PUnitInspRepActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(PUnitInspRepActivity.this, ViewPhotosActivity.class)
-                        .putExtra(AppConstants.PHOTO_TITLE, "PROCESSING UNIT PHOTOS"));
+                        .putExtra(AppConstants.PHOTO_TITLE, getString(R.string.p_unit_photos)));
             }
         });
 

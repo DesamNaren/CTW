@@ -61,7 +61,6 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
     private ArrayAdapter<String> selectAdapter;
     private GCCOfflineViewModel gccOfflineViewModel;
     private GCCOfflineRepository gccOfflineRepository;
-    private ArrayList<String> selectList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +106,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
             e.printStackTrace();
         }
 
-        selectList = new ArrayList<String>();
+        ArrayList<String> selectList = new ArrayList<String>();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -132,12 +131,12 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                             lpgLiveData.removeObservers(LPGSelActivity.this);
                             customProgressDialog.dismiss();
                             if (lpgSupplierInfos == null || lpgSupplierInfos.size() <= 0) {
-                                Utils.customGCCSyncAlert(LPGSelActivity.this, getString(R.string.app_name), "No LPG godowns found...\n Do you want sync LPG Godown master data to proceed further");
+                                Utils.customGCCSyncAlert(LPGSelActivity.this, getString(R.string.app_name), getString(R.string.no_lpg_sync));
                             }
                         }
                     });
                 } else {
-                    Utils.customGCCSyncAlert(LPGSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want sync division master data to proceed further?");
+                    Utils.customGCCSyncAlert(LPGSelActivity.this, getString(R.string.app_name), getString(R.string.no_div_sync));
                 }
             }
         });
@@ -331,7 +330,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
 
                 });
             } else {
-                Utils.customWarningAlert(LPGSelActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                Utils.customWarningAlert(LPGSelActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
             }
         }
     }
@@ -344,13 +343,13 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
 
     private boolean validateFields() {
         if (TextUtils.isEmpty(selectedDivId)) {
-            showSnackBar("Please select division");
+            showSnackBar(getString(R.string.sel_div));
             return false;
         } else if (TextUtils.isEmpty(selectedSocietyId)) {
-            showSnackBar("Please select society");
+            showSnackBar(getString(R.string.sel_soc));
             return false;
         } else if (TextUtils.isEmpty(selectLPGId)) {
-            showSnackBar("Please select LPG godown");
+            showSnackBar(getString(R.string.sel_lpg_godown));
             return false;
         }
         return true;
@@ -400,7 +399,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                                     } else {
                                         binding.spSociety.setAdapter(selectAdapter);
                                         binding.spLpg.setAdapter(selectAdapter);
-                                        showSnackBar("No societies found");
+                                        showSnackBar(getString(R.string.no_soc_found));
                                     }
                                 }
                             });
@@ -446,7 +445,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                                         binding.spLpg.setAdapter(adapter);
                                     } else {
                                         binding.spLpg.setAdapter(selectAdapter);
-                                        showSnackBar("No LPG godown found");
+                                        showSnackBar(getString(R.string.no_lpg_godown_found));
                                     }
                                 }
                             });
@@ -525,7 +524,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                 binding.btnDownload.setText(getString(R.string.re_download));
                 binding.btnRemove.setVisibility(View.VISIBLE);
                 Utils.customSyncSuccessAlert(LPGSelActivity.this, getResources().getString(R.string.app_name),
-                        "Data downloaded successfully");
+                        getString(R.string.data_downloaded_success));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -540,7 +539,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                 binding.btnDownload.setText(getString(R.string.download));
                 binding.btnRemove.setVisibility(View.GONE);
                 Utils.customSyncSuccessAlert(LPGSelActivity.this, getResources().getString(R.string.app_name),
-                        "Data deleted successfully");
+                        getString(R.string.data_del_success));
             }
         } catch (Exception e) {
             e.printStackTrace();

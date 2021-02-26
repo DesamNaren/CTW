@@ -61,7 +61,6 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
     private ArrayAdapter<String> selectAdapter;
     private GCCOfflineRepository gccOfflineRepository;
     private GCCOfflineViewModel gccOfflineViewModel;
-    private ArrayList<String> selectList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +106,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
             e.printStackTrace();
         }
 
-        selectList = new ArrayList<>();
+        ArrayList<String> selectList = new ArrayList<>();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -133,12 +132,12 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                             petrolLiveData.removeObservers(PetrolPumpSelActivity.this);
                             customProgressDialog.dismiss();
                             if (petrolSupplierInfos == null || petrolSupplierInfos.size() <= 0) {
-                                Utils.customGCCSyncAlert(PetrolPumpSelActivity.this, getString(R.string.app_name), "No Petrol pumps found...\n Do you want to sync petrol pump master data to proceed further?");
+                                Utils.customGCCSyncAlert(PetrolPumpSelActivity.this, getString(R.string.app_name), getString(R.string.no_petrol_sync));
                             }
                         }
                     });
                 } else {
-                    Utils.customGCCSyncAlert(PetrolPumpSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync division master data to proceed further?");
+                    Utils.customGCCSyncAlert(PetrolPumpSelActivity.this, getString(R.string.app_name), getString(R.string.no_div_sync));
                 }
             }
         });
@@ -284,7 +283,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
 
                 });
             } else {
-                Utils.customWarningAlert(PetrolPumpSelActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                Utils.customWarningAlert(PetrolPumpSelActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
             }
         }
     }
@@ -359,7 +358,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                                     } else {
                                         binding.spSociety.setAdapter(selectAdapter);
                                         binding.spPetrol.setAdapter(selectAdapter);
-                                        showSnackBar("No societies found");
+                                        showSnackBar(getString(R.string.no_soc_found));
                                     }
                                 }
                             });
@@ -405,7 +404,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                                         binding.spPetrol.setAdapter(adapter);
                                     } else {
                                         binding.spPetrol.setAdapter(selectAdapter);
-                                        showSnackBar("No Petrol pumps found");
+                                        showSnackBar(getString(R.string.no_petrol_found));
                                     }
                                 }
                             });
@@ -486,7 +485,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                 binding.btnDownload.setText(getString(R.string.re_download));
                 binding.btnRemove.setVisibility(View.VISIBLE);
                 Utils.customSyncSuccessAlert(PetrolPumpSelActivity.this, getResources().getString(R.string.app_name),
-                        "Data downloaded successfully");
+                        getString(R.string.data_downloaded_success));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -501,7 +500,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                 binding.btnDownload.setText(getString(R.string.download));
                 binding.btnRemove.setVisibility(View.GONE);
                 Utils.customSyncSuccessAlert(PetrolPumpSelActivity.this, getResources().getString(R.string.app_name),
-                        "Data deleted successfully");
+                        getString(R.string.data_del_success));
             }
         } catch (Exception e) {
             e.printStackTrace();

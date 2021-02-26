@@ -83,12 +83,26 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
     public Uri fileUri;
     Bitmap bm;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-    int flag_entrance = 0, flag_office2 = 0, flag_office1 = 0, flag_safety_equip1 = 0, flag_safety_equip2 = 0,
-            flag_machinary1 = 0, flag_machinary2 = 0, flag_repair = 0, flag_pUnits = 0;
-    File file_repair, file_entrance, file_office2, file_office1, file_safety_equip1, file_safety_equip2, file_machinary1, file_machinary2;
+    int flag_entrance = 0;
+    int flag_office2 = 0;
+    int flag_office1 = 0;
+    int flag_safety_equip1 = 0;
+    int flag_safety_equip2 = 0;
+    int flag_machinary1 = 0;
+    int flag_machinary2 = 0;
+    File file_repair, file_entrance, file_office2, file_office1, file_safety_equip1,
+            file_safety_equip2, file_machinary1, file_machinary2;
     String FilePath, repairPath;
-    private String officerID, divId, divName, socId, socName, inchName, suppType, suppId, godId, godName;
-    public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
+    private String officerID;
+    private String divId;
+    private String divName;
+    private String socId;
+    private String socName;
+    private String inchName;
+    private String suppType;
+    private String suppId;
+    private String godName;
+    public static final String IMAGE_DIRECTORY_NAME = AppConstants.GCC_IMAGES;
     public static String IMAGE_DIRECTORY_NAME_MODE;
     private CustomProgressDialog customProgressDialog;
     SharedPreferences sharedPreferences;
@@ -362,10 +376,10 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         } else {
             if (Utils.checkInternetConnection(PetrolPumpPhotoActivity.this)) {
                 customProgressDialog.show();
-                customProgressDialog.addText("Please wait...Uploading Data");
+                customProgressDialog.addText(getString(R.string.upload_photos));
                 viewModel.submitGCCDetails(request);
             } else {
-                Utils.customWarningAlert(PetrolPumpPhotoActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                Utils.customWarningAlert(PetrolPumpPhotoActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
             }
         }
     }
@@ -495,25 +509,25 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         boolean returnFlag = true;
         if (flag_entrance == 0) {
             returnFlag = false;
-            showSnackBar("Please capture entrance image");
+            showSnackBar(getString(R.string.cap_ent_image));
         } else if (flag_machinary1 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture machinary image");
+            showSnackBar(getString(R.string.cap_mac_image));
         } else if (flag_machinary2 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture machinary image");
+            showSnackBar(getString(R.string.cap_mac_image));
         } else if (flag_safety_equip1 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture safety equipment image");
+            showSnackBar(getString(R.string.cap_saf_eqp_image));
         } else if (flag_safety_equip2 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture safety equipment image");
+            showSnackBar(getString(R.string.cap_saf_eqp_image));
         } else if (flag_office1 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture office image");
+            showSnackBar(getString(R.string.cap_office_image));
         } else if (flag_office2 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture office image");
+            showSnackBar(getString(R.string.cap_office_image));
         }
         return returnFlag;
     }

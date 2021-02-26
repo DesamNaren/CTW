@@ -225,7 +225,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                                     binding.noDataTv.setVisibility(View.VISIBLE);
                                     binding.bottomLl.btnLayout.setVisibility(View.GONE);
                                     binding.noDataTv.setText(R.string.no_data_found);
-                                    callSnackBar("No data found");
+                                    callSnackBar(getString(R.string.no_data_found));
                                 }
 
 
@@ -256,7 +256,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                 Utils.customWarningAlert(MFPGodownActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
             }
         } else {
-            Utils.customWarningAlert(MFPGodownActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            Utils.customWarningAlert(MFPGodownActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
         }
     }
 

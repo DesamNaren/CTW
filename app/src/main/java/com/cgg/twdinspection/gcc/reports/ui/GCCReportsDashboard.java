@@ -107,7 +107,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                     editor.commit();
                     startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar(getString(R.string.no_data_found));
                 }
             }
         });
@@ -122,7 +122,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                     editor.commit();
                     startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar(getString(R.string.no_data_found));
                 }
             }
         });
@@ -137,7 +137,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                     editor.commit();
                     startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar(getString(R.string.no_data_found));
                 }
             }
         });
@@ -152,7 +152,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                     editor.commit();
                     startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar(getString(R.string.no_data_found));
                 }
             }
         });
@@ -167,7 +167,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                     editor.commit();
                     startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar(getString(R.string.no_data_found));
                 }
             }
         });
@@ -182,7 +182,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                     editor.commit();
                     startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar(getString(R.string.no_data_found));
                 }
             }
         });
@@ -248,7 +248,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                             editor.commit();
 
                         } else if (gccReportResponse.getData() != null && gccReportResponse.getData().size() == 0) {
-                            callSnackBar("No data available");
+                            callSnackBar(getString(R.string.no_data_available));
                         } else {
                             callSnackBar(getString(R.string.something));
                         }
@@ -258,7 +258,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                 }
             });
         } else {
-            Utils.customWarningAlert(GCCReportsDashboard.this, getResources().getString(R.string.app_name), "Please check internet");
+            Utils.customWarningAlert(GCCReportsDashboard.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
         }
     }
 
@@ -273,7 +273,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
     void callSnackBar(String msg) {
         Snackbar snackbar = Snackbar.make(binding.root, msg, Snackbar.LENGTH_INDEFINITE);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));
-        snackbar.setAction("OK", new View.OnClickListener() {
+        snackbar.setAction(getString(R.string.ok), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 snackbar.dismiss();

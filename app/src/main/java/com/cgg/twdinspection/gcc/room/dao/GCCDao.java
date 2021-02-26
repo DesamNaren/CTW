@@ -25,8 +25,6 @@ import java.util.List;
 
 @Dao
 public interface GCCDao {
-//    @Query("SELECT DISTINCT divisionName from Divisions")
-//    LiveData<List<String>> getDivisionsInfo();
 
     @Query("SELECT * from DR_GoDown where divisionId LIKE :divId AND societyId LIKE :socId")
     LiveData<List<DrGodowns>> getDrGoDowns(String divId, String socId);

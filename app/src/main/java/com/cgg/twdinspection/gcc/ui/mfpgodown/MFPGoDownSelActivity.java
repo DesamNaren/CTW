@@ -55,7 +55,6 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
     private DivisionSelectionViewModel viewModel;
     private String selectedDivId, selectedMfpID;
     private List<String> mfpGoDowns;
-    private ArrayList<String> selectList;
     private MFPGoDowns selectedMfpGoDowns;
     private ArrayAdapter<String> selectAdapter;
     private boolean mfp_flag, emp_flag;
@@ -104,7 +103,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
             e.printStackTrace();
         }
 
-        selectList = new ArrayList<>();
+        ArrayList<String> selectList = new ArrayList<>();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -129,12 +128,12 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                             drGodownLiveData.removeObservers(MFPGoDownSelActivity.this);
                             customProgressDialog.dismiss();
                             if (drGodowns == null || drGodowns.size() <= 0) {
-                                Utils.customGCCSyncAlert(MFPGoDownSelActivity.this, getString(R.string.app_name), "No MFP Godowns found...\n Do you want sync MFP Godown master data to proceed further?");
+                                Utils.customGCCSyncAlert(MFPGoDownSelActivity.this, getString(R.string.app_name), getString(R.string.no_mfp_sync));
                             }
                         }
                     });
                 } else {
-                    Utils.customGCCSyncAlert(MFPGoDownSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync division master data to proceed further?");
+                    Utils.customGCCSyncAlert(MFPGoDownSelActivity.this, getString(R.string.app_name),  getString(R.string.no_div_sync));
                 }
             }
         });
@@ -297,7 +296,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
 
                 });
             } else {
-                Utils.customWarningAlert(MFPGoDownSelActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                Utils.customWarningAlert(MFPGoDownSelActivity.this, getResources().getString(R.string.app_name),  getString(R.string.plz_check_int));
             }
         }
     }
@@ -316,10 +315,10 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
 
     private boolean validateFields() {
         if (TextUtils.isEmpty(selectedDivId)) {
-            showSnackBar("Please select division");
+            showSnackBar( getString(R.string.sel_div));
             return false;
         } else if (TextUtils.isEmpty(selectedMfpID)) {
-            showSnackBar("Please select MFP Godown");
+            showSnackBar(getString(R.string.sel_mfp_godown));
             return false;
         }
         return true;
@@ -366,7 +365,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                                     } else {
                                         binding.spMfp.setAdapter(selectAdapter);
                                         binding.spMfp.setAdapter(selectAdapter);
-                                        showSnackBar("No MFP Godowns found");
+                                        showSnackBar(getString(R.string.no_mfp_found));
                                     }
                                 }
                             });
@@ -449,7 +448,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                 binding.btnDownload.setText(getString(R.string.re_download));
                 binding.btnRemove.setVisibility(View.VISIBLE);
                 Utils.customSyncSuccessAlert(MFPGoDownSelActivity.this, getResources().getString(R.string.app_name),
-                        "Data downloaded successfully");
+                        getString(R.string.data_downloaded_success));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -464,7 +463,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                 binding.btnDownload.setText(getString(R.string.download));
                 binding.btnRemove.setVisibility(View.GONE);
                 Utils.customSyncSuccessAlert(MFPGoDownSelActivity.this, getResources().getString(R.string.app_name),
-                        "Data deleted successfully");
+                        getString(R.string.data_del_success));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -5,6 +5,8 @@ public class AppConstants {
     public static final String OFFLINE = "OFFLINE";
     public static final String ONLINE = "ONLINE";
     public static final String INSP_REP_DATA = "INSP_REP_DATA";
+    public static final String GCC_FOLDER = "GCC";
+    public static final String GCC_IMAGES = "GCC_IMAGES";
     public static int SL_NO = 0;
     public static final String LAT = "LAT";
     public static final String LNG = "LNG";

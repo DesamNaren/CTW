@@ -78,7 +78,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     String PIC_NAME, PIC_TYPE;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public Uri fileUri;
-    public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
+    public static final String IMAGE_DIRECTORY_NAME = AppConstants.GCC_IMAGES;
     String FilePath, checkUpDate;
     Bitmap bm;
     File file;
@@ -241,8 +241,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgEcsStock.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgEcsStock.getCheckedRadioButtonId();
-                if (selctedItem == R.id.ecs_stock_yes_rb)
+                int selectedItem = binding.rgEcsStock.getCheckedRadioButtonId();
+                if (selectedItem == R.id.ecs_stock_yes_rb)
                     ecsStock = AppConstants.Yes;
                 else
                     ecsStock = AppConstants.No;
@@ -252,8 +252,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgDrStock.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgDrStock.getCheckedRadioButtonId();
-                if (selctedItem == R.id.dr_stock_rb_yes)
+                int selectedItem = binding.rgDrStock.getCheckedRadioButtonId();
+                if (selectedItem == R.id.dr_stock_rb_yes)
                     drStock = AppConstants.Yes;
                 else
                     drStock = AppConstants.No;
@@ -263,8 +263,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgEmptiesStock.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgEmptiesStock.getCheckedRadioButtonId();
-                if (selctedItem == R.id.empties_stock_rb_yes)
+                int selectedItem = binding.rgEmptiesStock.getCheckedRadioButtonId();
+                if (selectedItem == R.id.empties_stock_rb_yes)
                     emptyStock = AppConstants.Yes;
                 else
                     emptyStock = AppConstants.No;
@@ -274,8 +274,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgAbstractSales.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgAbstractSales.getCheckedRadioButtonId();
-                if (selctedItem == R.id.abstract_sales_rb_yes)
+                int selectedItem = binding.rgAbstractSales.getCheckedRadioButtonId();
+                if (selectedItem == R.id.abstract_sales_rb_yes)
                     abstractSales = AppConstants.Yes;
                 else
                     abstractSales = AppConstants.No;
@@ -285,8 +285,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgDepotCashBook.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgDepotCashBook.getCheckedRadioButtonId();
-                if (selctedItem == R.id.depot_cash_book_yes_rb)
+                int selectedItem = binding.rgDepotCashBook.getCheckedRadioButtonId();
+                if (selectedItem == R.id.depot_cash_book_yes_rb)
                     depotCashBook = AppConstants.Yes;
                 else
                     depotCashBook = AppConstants.No;
@@ -296,8 +296,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgLiabilityReg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgLiabilityReg.getCheckedRadioButtonId();
-                if (selctedItem == R.id.liability_reg_rb_yes)
+                int selectedItem = binding.rgLiabilityReg.getCheckedRadioButtonId();
+                if (selectedItem == R.id.liability_reg_rb_yes)
                     liabilityReg = AppConstants.Yes;
                 else
                     liabilityReg = AppConstants.No;
@@ -307,8 +307,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgVisitBookDepot.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgVisitBookDepot.getCheckedRadioButtonId();
-                if (selctedItem == R.id.visit_book_depot_rb_yes)
+                int selectedItem = binding.rgVisitBookDepot.getCheckedRadioButtonId();
+                if (selectedItem == R.id.visit_book_depot_rb_yes)
                     visitorsBook = AppConstants.Yes;
                 else
                     visitorsBook = AppConstants.No;
@@ -318,8 +318,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgSaleBillBook.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgSaleBillBook.getCheckedRadioButtonId();
-                if (selctedItem == R.id.sale_bill_book_rb_yes)
+                int selectedItem = binding.rgSaleBillBook.getCheckedRadioButtonId();
+                if (selectedItem == R.id.sale_bill_book_rb_yes)
                     saleBook = AppConstants.Yes;
                 else
                     saleBook = AppConstants.No;
@@ -329,8 +329,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgDepotAuthCert.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgDepotAuthCert.getCheckedRadioButtonId();
-                if (selctedItem == R.id.depot_auth_cert_rb_yes)
+                int selectedItem = binding.rgDepotAuthCert.getCheckedRadioButtonId();
+                if (selectedItem == R.id.depot_auth_cert_rb_yes)
                     depotAuthCert = AppConstants.Yes;
                 else
                     depotAuthCert = AppConstants.No;
@@ -340,8 +340,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgMfpStock.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgMfpStock.getCheckedRadioButtonId();
-                if (selctedItem == R.id.mfp_stock_yes_rb)
+                int selectedItem = binding.rgMfpStock.getCheckedRadioButtonId();
+                if (selectedItem == R.id.mfp_stock_yes_rb)
                     mfpStock = AppConstants.Yes;
                 else
                     mfpStock = AppConstants.No;
@@ -351,8 +351,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgMfpPurchase.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgMfpPurchase.getCheckedRadioButtonId();
-                if (selctedItem == R.id.mfp_purchase_rb_yes)
+                int selectedItem = binding.rgMfpPurchase.getCheckedRadioButtonId();
+                if (selectedItem == R.id.mfp_purchase_rb_yes)
                     mfpPurchase = AppConstants.Yes;
                 else
                     mfpPurchase = AppConstants.No;
@@ -362,8 +362,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgBillAbstract.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgBillAbstract.getCheckedRadioButtonId();
-                if (selctedItem == R.id.bill_abstract_rb_yes)
+                int selectedItem = binding.rgBillAbstract.getCheckedRadioButtonId();
+                if (selectedItem == R.id.bill_abstract_rb_yes)
                     billAbstract = AppConstants.Yes;
                 else
                     billAbstract = AppConstants.No;
@@ -373,8 +373,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgAbstractAccntBook.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgAbstractAccntBook.getCheckedRadioButtonId();
-                if (selctedItem == R.id.abstract_accnt_book_rb_yes)
+                int selectedItem = binding.rgAbstractAccntBook.getCheckedRadioButtonId();
+                if (selectedItem == R.id.abstract_accnt_book_rb_yes)
                     abstractAccnt = AppConstants.Yes;
                 else
                     abstractAccnt = AppConstants.No;
@@ -384,8 +384,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgAdvanceAccntBook.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgAdvanceAccntBook.getCheckedRadioButtonId();
-                if (selctedItem == R.id.advance_accnt_book_yes_rb)
+                int selectedItem = binding.rgAdvanceAccntBook.getCheckedRadioButtonId();
+                if (selectedItem == R.id.advance_accnt_book_yes_rb)
                     advanceAccnt = AppConstants.Yes;
                 else
                     advanceAccnt = AppConstants.No;
@@ -395,8 +395,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgMfpLiabilityReg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgMfpLiabilityReg.getCheckedRadioButtonId();
-                if (selctedItem == R.id.mfp_liability_reg_rb_yes)
+                int selectedItem = binding.rgMfpLiabilityReg.getCheckedRadioButtonId();
+                if (selectedItem == R.id.mfp_liability_reg_rb_yes)
                     mfpLiability = AppConstants.Yes;
                 else
                     mfpLiability = AppConstants.No;
@@ -406,8 +406,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgDepotNameBoard.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgDepotNameBoard.getCheckedRadioButtonId();
-                if (selctedItem == R.id.depot_name_board_yes_rb)
+                int selectedItem = binding.rgDepotNameBoard.getCheckedRadioButtonId();
+                if (selectedItem == R.id.depot_name_board_yes_rb)
                     depotNameBoard = AppConstants.Yes;
                 else
                     depotNameBoard = AppConstants.No;
@@ -417,8 +417,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgObjPrinc.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgObjPrinc.getCheckedRadioButtonId();
-                if (selctedItem == R.id.obj_princ_rb_yes)
+                int selectedItem = binding.rgObjPrinc.getCheckedRadioButtonId();
+                if (selectedItem == R.id.obj_princ_rb_yes)
                     gccObjPrinc = AppConstants.Yes;
                 else
                     gccObjPrinc = AppConstants.No;
@@ -428,8 +428,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgDepotTimimg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgDepotTimimg.getCheckedRadioButtonId();
-                if (selctedItem == R.id.depot_timimg_rb_yes)
+                int selectedItem = binding.rgDepotTimimg.getCheckedRadioButtonId();
+                if (selectedItem == R.id.depot_timimg_rb_yes)
                     depotTimimg = AppConstants.Yes;
                 else
                     depotTimimg = AppConstants.No;
@@ -439,8 +439,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgCommRate.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgCommRate.getCheckedRadioButtonId();
-                if (selctedItem == R.id.comm_rate_rb_yes)
+                int selectedItem = binding.rgCommRate.getCheckedRadioButtonId();
+                if (selectedItem == R.id.comm_rate_rb_yes)
                     mfpComm = AppConstants.Yes;
                 else
                     mfpComm = AppConstants.No;
@@ -450,8 +450,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgEcCommRate.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgEcCommRate.getCheckedRadioButtonId();
-                if (selctedItem == R.id.ec_comm_rate_yes_rb)
+                int selectedItem = binding.rgEcCommRate.getCheckedRadioButtonId();
+                if (selectedItem == R.id.ec_comm_rate_yes_rb)
                     ecComm = AppConstants.Yes;
                 else
                     ecComm = AppConstants.No;
@@ -461,8 +461,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgDrCommRate.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgDrCommRate.getCheckedRadioButtonId();
-                if (selctedItem == R.id.dr_comm_rate_rb_yes)
+                int selectedItem = binding.rgDrCommRate.getCheckedRadioButtonId();
+                if (selectedItem == R.id.dr_comm_rate_rb_yes)
                     drComm = AppConstants.Yes;
                 else
                     drComm = AppConstants.No;
@@ -472,8 +472,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgStockBal.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgStockBal.getCheckedRadioButtonId();
-                if (selctedItem == R.id.stock_bal_rb_yes)
+                int selectedItem = binding.rgStockBal.getCheckedRadioButtonId();
+                if (selectedItem == R.id.stock_bal_rb_yes)
                     stockBal = AppConstants.Yes;
                 else
                     stockBal = AppConstants.No;
@@ -483,8 +483,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgValuesAsPerSalePrice.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgValuesAsPerSalePrice.getCheckedRadioButtonId();
-                if (selctedItem == R.id.values_as_per_sale_price_yes_rb)
+                int selectedItem = binding.rgValuesAsPerSalePrice.getCheckedRadioButtonId();
+                if (selectedItem == R.id.values_as_per_sale_price_yes_rb)
                     valuesAsPerSale = AppConstants.Yes;
                 else
                     valuesAsPerSale = AppConstants.No;
@@ -494,8 +494,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgValuesAsPerPurchasePrice.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgValuesAsPerPurchasePrice.getCheckedRadioButtonId();
-                if (selctedItem == R.id.values_as_per_purchase_price_rb_yes)
+                int selectedItem = binding.rgValuesAsPerPurchasePrice.getCheckedRadioButtonId();
+                if (selectedItem == R.id.values_as_per_purchase_price_rb_yes)
                     valuesAsPerPurchasePrice = AppConstants.Yes;
                 else
                     valuesAsPerPurchasePrice = AppConstants.No;
@@ -505,8 +505,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgQualVerified.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgQualVerified.getCheckedRadioButtonId();
-                if (selctedItem == R.id.qual_verified_rb_yes)
+                int selectedItem = binding.rgQualVerified.getCheckedRadioButtonId();
+                if (selectedItem == R.id.qual_verified_rb_yes)
                     qualVerified = AppConstants.Yes;
                 else
                     qualVerified = AppConstants.No;
@@ -516,8 +516,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.rgDepotMaintHygeine.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgDepotMaintHygeine.getCheckedRadioButtonId();
-                if (selctedItem == R.id.depot_maint_hygeine_rb_yes)
+                int selectedItem = binding.rgDepotMaintHygeine.getCheckedRadioButtonId();
+                if (selectedItem == R.id.depot_maint_hygeine_rb_yes)
                     depotMaintHygeine = AppConstants.Yes;
                 else
                     depotMaintHygeine = AppConstants.No;
@@ -644,7 +644,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     }
 
                     @Override
-                    public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
+                    public void onNext(@NotNull TextViewTextChangeEvent textViewTextChangeEvent) {
 
                         cashBal = textViewTextChangeEvent.text().toString();
                         if (!TextUtils.isEmpty(cashBal) && !cashBal.equals(".")) {
@@ -677,7 +677,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TextViewTextChangeEvent>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(@NotNull Disposable d) {
 
                     }
 
@@ -698,7 +698,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NotNull Throwable e) {
 
                     }
 
@@ -715,7 +715,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TextViewTextChangeEvent>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(@NotNull Disposable d) {
 
                     }
 
@@ -758,156 +758,156 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         boolean returnFlag = true;
         if (TextUtils.isEmpty(cashBal)) {
             returnFlag = false;
-            showSnackBar("Enter cash balance as per cash book");
-            ScrollToViewEditText(binding.etCashBal, "Enter cash balance as per cash book");
+            showSnackBar(getString(R.string.enter_cash));
+            ScrollToViewEditText(binding.etCashBal, getString(R.string.enter_cash));
         } else if (TextUtils.isEmpty(phyCash)) {
             returnFlag = false;
-            showSnackBar("Enter physical cash");
-            ScrollToViewEditText(binding.etPhysCash, "Enter physical cash");
+            showSnackBar(getString(R.string.enter_phy_cash));
+            ScrollToViewEditText(binding.etPhysCash, getString(R.string.enter_phy_cash));
         } else if (TextUtils.isEmpty(vocBills)) {
             returnFlag = false;
-            showSnackBar("Enter adjustment vouchers / bills");
-            ScrollToViewEditText(binding.etAdjVouch, "Enter adjustment vouchers / bills");
+            showSnackBar(getString(R.string.enter_adj));
+            ScrollToViewEditText(binding.etAdjVouch, getString(R.string.enter_adj));
         } else if (TextUtils.isEmpty(liaBal)) {
             returnFlag = false;
-            showSnackBar("Enter liability balance as per liability register");
-            ScrollToViewEditText(binding.etLiabBal, "Enter liability balance as per liability register");
+            showSnackBar(getString(R.string.enter_lia));
+            ScrollToViewEditText(binding.etLiabBal, getString(R.string.enter_lia));
         } else if (TextUtils.isEmpty(reason)) {
             returnFlag = false;
-            showSnackBar("Enter reason");
-            ScrollToViewEditText(binding.etReason, "Enter reason");
+            showSnackBar(getString(R.string.enter_reason));
+            ScrollToViewEditText(binding.etReason, getString(R.string.enter_reason));
         } else if (TextUtils.isEmpty(ecsStock)) {
             returnFlag = false;
-            showSnackBar("Please check Ecs stock register");
+            showSnackBar(getString(R.string.check_ecs));
             ScrollToView(binding.rgEcsStock);
         } else if (TextUtils.isEmpty(drStock)) {
             returnFlag = false;
-            showSnackBar("Please check DRs stock register");
+            showSnackBar(getString(R.string.check_drs));
             ScrollToView(binding.rgDrStock);
         } else if (TextUtils.isEmpty(emptyStock)) {
             returnFlag = false;
-            showSnackBar("Please check empties stock register");
+            showSnackBar(getString(R.string.check_empties));
             ScrollToView(binding.rgEmptiesStock);
         } else if (TextUtils.isEmpty(abstractSales)) {
             returnFlag = false;
-            showSnackBar("Please check abstract sales register");
+            showSnackBar(getString(R.string.check_abs_sales));
             ScrollToView(binding.rgAbstractSales);
         } else if (TextUtils.isEmpty(depotCashBook)) {
             returnFlag = false;
-            showSnackBar("Please check Cash book");
+            showSnackBar(getString(R.string.chk_cash_book));
             ScrollToView(binding.rgDepotCashBook);
         } else if (TextUtils.isEmpty(liabilityReg)) {
             returnFlag = false;
-            showSnackBar("Please check liability register");
+            showSnackBar(getString(R.string.chk_lia));
             ScrollToView(binding.rgDepotCashBook);
         } else if (TextUtils.isEmpty(visitorsBook)) {
             returnFlag = false;
-            showSnackBar("Please check visitors note book");
+            showSnackBar(getString(R.string.chk_vis));
             ScrollToView(binding.rgVisitBookDepot);
         } else if (TextUtils.isEmpty(saleBook)) {
             returnFlag = false;
-            showSnackBar("Please check sale bill book");
+            showSnackBar(getString(R.string.chk_sale));
             ScrollToView(binding.rgSaleBillBook);
         } else if (TextUtils.isEmpty(weightsMeasurements)) {
             returnFlag = false;
-            showSnackBar("Please check weights and measurements certificate issued by legal metrology");
+            showSnackBar(getString(R.string.chk_weight));
             ScrollToView(binding.rgWeightMeasCert);
         } else if (!TextUtils.isEmpty(weightsMeasurements) && weightsMeasurements.equals(AppConstants.Yes) && !binding.etWeightCertIssue.getText().toString().contains("/")) {
             returnFlag = false;
-            showSnackBar("Please select certificate issue date");
+            showSnackBar(getString(R.string.sel_certificate));
             ScrollToView(binding.etWeightCertIssue);
         } else if (TextUtils.isEmpty(depotAuthCert)) {
             returnFlag = false;
-            showSnackBar("Please check depot authorisation certificate issued by revenue authorities");
+            showSnackBar(getString(R.string.chk_depot));
             ScrollToView(binding.rgWeightMeasCert);
         } else if (TextUtils.isEmpty(mfpStock)) {
             returnFlag = false;
-            showSnackBar("Please check MFP stock register");
+            showSnackBar(getString(R.string.chk_mfp));
             ScrollToView(binding.rgMfpStock);
         } else if (TextUtils.isEmpty(mfpPurchase)) {
             returnFlag = false;
-            showSnackBar("Please check MFP purchase bill book");
+            showSnackBar(getString(R.string.chk_mfp_purchase));
             ScrollToView(binding.rgMfpPurchase);
         } else if (TextUtils.isEmpty(billAbstract)) {
             returnFlag = false;
-            showSnackBar("Please check bill abstract book");
+            showSnackBar(getString(R.string.chk_bill));
             ScrollToView(binding.rgBillAbstract);
         } else if (TextUtils.isEmpty(abstractAccnt)) {
             returnFlag = false;
-            showSnackBar("Please check abstract account book");
+            showSnackBar(getString(R.string.chk_absrtact));
             ScrollToView(binding.rgAbstractAccntBook);
         } else if (TextUtils.isEmpty(advanceAccnt)) {
             returnFlag = false;
-            showSnackBar("Please check advance  account book");
+            showSnackBar(getString(R.string.chk_advance));
             ScrollToView(binding.rgAdvanceAccntBook);
         } else if (TextUtils.isEmpty(mfpLiability)) {
             returnFlag = false;
-            showSnackBar("Please check MFP liability register");
+            showSnackBar(getString(R.string.chk_mfp_lia));
             ScrollToView(binding.rgMfpLiabilityReg);
         } else if (TextUtils.isEmpty(depotNameBoard)) {
             returnFlag = false;
-            showSnackBar("Please check depot name board");
+            showSnackBar(getString(R.string.chk_depot_name));
             ScrollToView(binding.rgDepotNameBoard);
         } else if (TextUtils.isEmpty(gccObjPrinc)) {
             returnFlag = false;
-            showSnackBar("Please check GCC objectives/principles board");
+            showSnackBar(getString(R.string.chk_gcc));
             ScrollToView(binding.rgObjPrinc);
         } else if (TextUtils.isEmpty(depotTimimg)) {
             returnFlag = false;
-            showSnackBar("Please check depot timing board");
+            showSnackBar(getString(R.string.chk_dep_timing));
             ScrollToView(binding.rgDepotTimimg);
         } else if (TextUtils.isEmpty(mfpComm)) {
             returnFlag = false;
-            showSnackBar("Please check MFP commodities rate board");
+            showSnackBar(getString(R.string.mfp_com_rate));
             ScrollToView(binding.rgCommRate);
         } else if (TextUtils.isEmpty(ecComm)) {
             returnFlag = false;
-            showSnackBar("Please check EC commodities rate board");
+            showSnackBar(getString(R.string.ec_com_rate_board));
             ScrollToView(binding.rgEcCommRate);
         } else if (TextUtils.isEmpty(drComm)) {
             returnFlag = false;
-            showSnackBar("Please check DR commodities rate board");
+            showSnackBar(getString(R.string.dr_com_board));
             ScrollToView(binding.rgDrCommRate);
         } else if (TextUtils.isEmpty(stockBal)) {
             returnFlag = false;
-            showSnackBar("Please check stock balance board");
+            showSnackBar(getString(R.string.stock_bal_board));
             ScrollToView(binding.rgStockBal);
         } else if (TextUtils.isEmpty(valuesAsPerSale)) {
             returnFlag = false;
-            showSnackBar("Please check whether the values are as per sale price");
+            showSnackBar(getString(R.string.purchase_price));
             ScrollToView(binding.rgValuesAsPerSalePrice);
         } else if (TextUtils.isEmpty(valuesAsPerPurchasePrice)) {
             returnFlag = false;
-            showSnackBar("Please check whether the values are as per purchase price");
+            showSnackBar(getString(R.string.purchase_price));
             ScrollToView(binding.rgValuesAsPerPurchasePrice);
         } else if (TextUtils.isEmpty(qualVerified)) {
             returnFlag = false;
-            showSnackBar("Please check the quality of the stocks was verified");
+            showSnackBar(getString(R.string.quality_of_stock));
             ScrollToView(binding.rgQualVerified);
         } else if (TextUtils.isEmpty(depotMaintHygeine)) {
             returnFlag = false;
-            showSnackBar("Please check whether the depot is maintained in hygienic condition");
+            showSnackBar(getString(R.string.depo_condition));
             ScrollToView(binding.rgDepotMaintHygeine);
         } else if (TextUtils.isEmpty(repairsReq)) {
             returnFlag = false;
-            showSnackBar("Please check any repairs required for Dr Godown");
+            showSnackBar(getString(R.string.chk_repairs));
             ScrollToView(binding.rgRepairsReq);
         } else if (!(TextUtils.isEmpty(repairsReq)) && repairsReq.equals(AppConstants.Yes) && TextUtils.isEmpty(binding.etRepairsType.getText().toString().trim())) {
             returnFlag = false;
-            showSnackBar("Please enter repair type");
+            showSnackBar(getString(R.string.ent_rep_type));
             ScrollToView(binding.etRepairsType);
         } else if (!TextUtils.isEmpty(repairsReq) && repairsReq.equals(AppConstants.Yes) && !TextUtils.isEmpty(binding.etRepairsType.getText().toString()) && repairsFlag == 0) {
             returnFlag = false;
-            showSnackBar("Please capture repair");
+            showSnackBar(getString(R.string.cap_repair));
             ScrollToView(binding.ivRepairsCam);
         } else if (TextUtils.isEmpty(binding.etFeedback.getText().toString().trim())) {
             returnFlag = false;
-            showSnackBar("Please enter feedback of card holders");
-            ScrollToViewEditText(binding.etFeedback, "Enter feedback");
+            showSnackBar(getString(R.string.enter_feedvback_holders));
+            ScrollToViewEditText(binding.etFeedback, getString(R.string.enter_feedback));
         } else if (TextUtils.isEmpty(binding.etRemarks.getText().toString().trim())) {
             returnFlag = false;
             showSnackBar("Please enter remarks");
-            ScrollToViewEditText(binding.etRemarks, "Enter remarks");
+            ScrollToViewEditText(binding.etRemarks, getString(R.string.enter_remarks));
         }
         return returnFlag;
     }
@@ -1150,11 +1150,11 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        getString(R.string.user_cancelled_cap), Toast.LENGTH_SHORT)
                         .show();
             } else {
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        getString(R.string.image_capture_failed), Toast.LENGTH_SHORT)
                         .show();
             }
         }

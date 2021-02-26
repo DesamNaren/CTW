@@ -28,8 +28,10 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityHomeBinding;
+import com.cgg.twdinspection.engineering_works.ui.EngSyncActivity;
 import com.cgg.twdinspection.engineering_works.ui.EngineeringDashboardActivity;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCDashboardActivity;
+import com.cgg.twdinspection.gcc.ui.gcc.GCCSyncActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportActivity;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
@@ -37,6 +39,7 @@ import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.offline.GCCOfflineDashboard;
 import com.cgg.twdinspection.offline.SchoolsOfflineDataActivity;
+import com.cgg.twdinspection.schemes.ui.SchemeSyncActivity;
 import com.cgg.twdinspection.schemes.ui.SchemesDMVActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -304,6 +307,66 @@ public class DashboardMenuActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 Utils.customCancelAlert(DashboardMenuActivity.this, getResources().getString(R.string.app_name),
                         getString(R.string.logout), editor);
+
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+
+                return true;
+            }
+        });
+
+        MenuItem navInstDownload = navigationView.getMenu().findItem(R.id.nav_download_school);
+        navInstDownload.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                startActivity(new Intent(DashboardMenuActivity.this, SchoolSyncActivity.class));
+                //do as you want with the button click
+
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+
+                return true;
+            }
+        });
+
+        MenuItem navSchemeDownload = navigationView.getMenu().findItem(R.id.nav_download_schemes);
+        navSchemeDownload.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                startActivity(new Intent(DashboardMenuActivity.this, SchemeSyncActivity.class));
+                //do as you want with the button click
+
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+
+                return true;
+            }
+        });
+
+        MenuItem navGCCDownload = navigationView.getMenu().findItem(R.id.nav_download_gcc);
+        navGCCDownload.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                startActivity(new Intent(DashboardMenuActivity.this, GCCSyncActivity.class));
+                //do as you want with the button click
+
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+
+                return true;
+            }
+        });
+
+        MenuItem navWorksDownload = navigationView.getMenu().findItem(R.id.nav_download_eng);
+        navWorksDownload.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                startActivity(new Intent(DashboardMenuActivity.this, EngSyncActivity.class));
+                //do as you want with the button click
 
                 DrawerLayout drawer = findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);

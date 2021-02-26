@@ -48,7 +48,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DRDepotSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, GCCOfflineInterface {
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     CustomProgressDialog customProgressDialog;
     ActivityDrDepotSelBinding binding;
@@ -63,7 +62,6 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
     private boolean dailyreq_flag, emp_flag, ess_flag;
     private GCCOfflineRepository gccOfflineRepository;
     private GCCOfflineViewModel gccOfflineViewModel;
-    private ArrayList<String> selectList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +95,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
         binding.executePendingBindings();
 
         try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
+            SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
@@ -109,7 +107,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
             e.printStackTrace();
         }
 
-        selectList = new ArrayList<String>();
+        ArrayList<String> selectList = new ArrayList<String>();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -135,12 +133,12 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                             drGodownLiveData.removeObservers(DRDepotSelActivity.this);
                             customProgressDialog.dismiss();
                             if (drGodowns == null || drGodowns.size() <= 0) {
-                                Utils.customGCCSyncAlert(DRDepotSelActivity.this, getString(R.string.app_name), "No DR Depots found...\n Do you want to sync DR Depot master data to proceed further");
+                                Utils.customGCCSyncAlert(DRDepotSelActivity.this, getString(R.string.app_name), getString(R.string.no_depos));
                             }
                         }
                     });
                 } else {
-                    Utils.customGCCSyncAlert(DRDepotSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync division master data to proceed further?");
+                    Utils.customGCCSyncAlert(DRDepotSelActivity.this, getString(R.string.app_name), getString(R.string.no_divisions));
                 }
             }
         });
@@ -326,13 +324,13 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
 
     private boolean validateFields() {
         if (TextUtils.isEmpty(selectedDivId)) {
-            showSnackBar("Please select division");
+            showSnackBar(getString(R.string.sel_div));
             return false;
         } else if (TextUtils.isEmpty(selectedSocietyId)) {
-            showSnackBar("Please select society");
+            showSnackBar(getString(R.string.sel_soc));
             return false;
         } else if (TextUtils.isEmpty(selectedDepotID)) {
-            showSnackBar("Please select depot");
+            showSnackBar(getString(R.string.sel_depot));
             return false;
         }
         return true;
@@ -382,7 +380,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                                     } else {
                                         binding.spSociety.setAdapter(selectAdapter);
                                         binding.spDepot.setAdapter(selectAdapter);
-                                        showSnackBar("No societies found");
+                                        showSnackBar(getString(R.string.no_soc_found));
                                     }
                                 }
                             });
@@ -428,7 +426,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                                         binding.spDepot.setAdapter(adapter);
                                     } else {
                                         binding.spDepot.setAdapter(selectAdapter);
-                                        showSnackBar("No DR Depots found");
+                                        showSnackBar(getString(R.string.no_dr_depo_found));
                                     }
                                 }
                             });
@@ -511,7 +509,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                 binding.btnDownload.setText(getString(R.string.re_download));
                 binding.btnRemove.setVisibility(View.VISIBLE);
                 Utils.customSyncSuccessAlert(DRDepotSelActivity.this, getResources().getString(R.string.app_name),
-                        "Data downloaded successfully");
+                        getString(R.string.data_downloaded_success));
             }
         } catch (Exception e) {
             e.printStackTrace();

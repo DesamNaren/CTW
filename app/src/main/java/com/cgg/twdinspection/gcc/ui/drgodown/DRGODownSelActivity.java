@@ -62,7 +62,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
     private GCCOfflineRepository gccOfflineRepository;
     ArrayAdapter<String> selectAdapter;
     private boolean dailyreq_flag, emp_flag, ess_flag;
-    private ArrayList<String> selectList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +107,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             e.printStackTrace();
         }
 
-        selectList = new ArrayList<>();
+        ArrayList<String> selectList = new ArrayList<>();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -132,12 +132,12 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                             drGodownLiveData.removeObservers(DRGODownSelActivity.this);
                             customProgressDialog.dismiss();
                             if (drGodowns == null || drGodowns.size() <= 0) {
-                                Utils.customGCCSyncAlert(DRGODownSelActivity.this, getString(R.string.app_name), "No DR Godowns found...\n Do you want to sync DR Godown master data to proceed further?");
+                                Utils.customGCCSyncAlert(DRGODownSelActivity.this, getString(R.string.app_name), getString(R.string.no_godown));
                             }
                         }
                     });
                 } else {
-                    Utils.customGCCSyncAlert(DRGODownSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync division master data to proceed further?");
+                    Utils.customGCCSyncAlert(DRGODownSelActivity.this, getString(R.string.app_name), getString(R.string.no_divisions));
                 }
             }
         });
@@ -313,7 +313,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
 
                 });
             } else {
-                Utils.customWarningAlert(DRGODownSelActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                Utils.customWarningAlert(DRGODownSelActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
             }
         }
     }
@@ -332,13 +332,13 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
 
     private boolean validateFields() {
         if (TextUtils.isEmpty(selectedDivId)) {
-            showSnackBar("Please select division");
+            showSnackBar(getString(R.string.sel_div));
             return false;
         } else if (TextUtils.isEmpty(selectedSocietyId)) {
-            showSnackBar("Please select society");
+            showSnackBar(getString(R.string.sel_soc));
             return false;
         } else if (TextUtils.isEmpty(selectedGoDownId)) {
-            showSnackBar("Please select godown");
+            showSnackBar(getString(R.string.sel_godown));
             return false;
         }
         return true;
@@ -388,7 +388,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                                     } else {
                                         binding.spSociety.setAdapter(selectAdapter);
                                         binding.spGodown.setAdapter(selectAdapter);
-                                        showSnackBar("No societies found");
+                                        showSnackBar(getString(R.string.no_soc_found));
                                     }
                                 }
                             });
@@ -434,7 +434,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                                         binding.spGodown.setAdapter(adapter);
                                     } else {
                                         binding.spGodown.setAdapter(selectAdapter);
-                                        showSnackBar("No DR Godowns found");
+                                        showSnackBar(getString(R.string.no_dr_godown_found));
                                     }
                                 }
                             });
@@ -514,7 +514,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                 binding.btnDownload.setText(getString(R.string.re_download));
                 binding.btnRemove.setVisibility(View.VISIBLE);
                 Utils.customSyncSuccessAlert(DRGODownSelActivity.this, getResources().getString(R.string.app_name),
-                        "Data downloaded successfully");
+                        getString(R.string.data_downloaded_success));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -529,7 +529,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                 binding.btnDownload.setText(getString(R.string.download));
                 binding.btnRemove.setVisibility(View.GONE);
                 Utils.customSyncSuccessAlert(DRGODownSelActivity.this, getResources().getString(R.string.app_name),
-                        "Data deleted successfully");
+                        getString(R.string.data_del_success));
             }
         } catch (Exception e) {
             e.printStackTrace();

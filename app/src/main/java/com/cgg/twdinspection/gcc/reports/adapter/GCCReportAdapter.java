@@ -25,10 +25,10 @@ import java.util.Random;
 
 public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.ItemHolder> implements Filterable {
 
-    private Context context;
     private List<ReportData> list;
     private List<ReportData> filterList;
     private ReportClickCallback reportClickCallback;
+    private Context context;
 
     public GCCReportAdapter(Context context, List<ReportData> list) {
         this.context = context;
@@ -61,24 +61,24 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
         setAnimation(holder.itemView, i);
 
         if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-            holder.listItemBinding.tvSuppType.setText("DR Godown");
+            holder.listItemBinding.tvSuppType.setText(context.getString(R.string.dr_godown));
         }
         if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
-            holder.listItemBinding.tvSuppType.setText("DR Depot");
+            holder.listItemBinding.tvSuppType.setText(context.getString(R.string.dr_depot));
         }
         if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
-            holder.listItemBinding.tvSuppType.setText("MFP Godown");
+            holder.listItemBinding.tvSuppType.setText(context.getString(R.string.mfp_godown));
             holder.listItemBinding.llSoc.setVisibility(View.GONE);
             holder.listItemBinding.vSoc.setVisibility(View.GONE);
         }
         if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
-            holder.listItemBinding.tvSuppType.setText("Processing Unit");
+            holder.listItemBinding.tvSuppType.setText(context.getString(R.string.p_unit));
         }
         if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
-            holder.listItemBinding.tvSuppType.setText("Petrol Pump");
+            holder.listItemBinding.tvSuppType.setText(context.getString(R.string.petrol_pump));
         }
         if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
-            holder.listItemBinding.tvSuppType.setText("LPG Godown");
+            holder.listItemBinding.tvSuppType.setText(context.getString(R.string.lpg_godown));
         }
 
         holder.listItemBinding.cvGccReport.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +137,7 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
         };
     }
 
-    class ItemHolder extends RecyclerView.ViewHolder {
+    static class ItemHolder extends RecyclerView.ViewHolder {
 
 
         AdapterGccReportBinding listItemBinding;

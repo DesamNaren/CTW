@@ -189,38 +189,38 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
 
                     if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
                         ess_flag = true;
-                        stockDetailsResponse.getEssential_commodities().get(0).setComHeader("Essential Commodities");
+                        stockDetailsResponse.getEssential_commodities().get(0).setComHeader(getString(R.string.ess_com));
                         EssentialFragment essentialFragment = new EssentialFragment();
                         Gson gson = new Gson();
                         String essentialComm = gson.toJson(stockDetailsResponse.getEssential_commodities());
                         Bundle bundle = new Bundle();
                         bundle.putString(AppConstants.essComm, essentialComm);
                         essentialFragment.setArguments(bundle);
-                        adapter.addFrag(essentialFragment, "Essential Commodities");
+                        adapter.addFrag(essentialFragment, getString(R.string.ess_com));
                     }
 
                     if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
                         dailyreq_flag = true;
-                        stockDetailsResponse.getDialy_requirements().get(0).setComHeader("Daily Requirements");
+                        stockDetailsResponse.getDialy_requirements().get(0).setComHeader(getString(R.string.dai_re));
                         DailyFragment dailyFragment = new DailyFragment();
                         Gson gson = new Gson();
                         String essentialComm = gson.toJson(stockDetailsResponse.getDialy_requirements());
                         Bundle bundle = new Bundle();
                         bundle.putString(AppConstants.dailyReq, essentialComm);
                         dailyFragment.setArguments(bundle);
-                        adapter.addFrag(dailyFragment, "Daily Requirements");
+                        adapter.addFrag(dailyFragment, getString(R.string.dai_re));
                     }
 
                     if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
                         emp_flag = true;
-                        stockDetailsResponse.getEmpties().get(0).setComHeader("Empties");
+                        stockDetailsResponse.getEmpties().get(0).setComHeader(getString(R.string.empties));
                         EmptiesFragment emptiesFragment = new EmptiesFragment();
                         Gson gson = new Gson();
                         String essentialComm = gson.toJson(stockDetailsResponse.getEmpties());
                         Bundle bundle = new Bundle();
                         bundle.putString(AppConstants.empties, essentialComm);
                         emptiesFragment.setArguments(bundle);
-                        adapter.addFrag(emptiesFragment, "Empties");
+                        adapter.addFrag(emptiesFragment, getString(R.string.empties));
                     }
 
                     if (ess_flag || dailyreq_flag || emp_flag) {
@@ -235,7 +235,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                         binding.tabs.setVisibility(View.GONE);
                         binding.noDataTv.setVisibility(View.VISIBLE);
                         binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                        binding.noDataTv.setText("No data found");
+                        binding.noDataTv.setText(getString(R.string.no_data_found));
                         callSnackBar("No data found");
                     }
 
@@ -279,7 +279,6 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
     public void handleError(Throwable e, Context context) {
         customProgressDialog.hide();
         String errMsg = ErrorHandler.handleError(e, context);
-        Log.i("MSG", "handleError: " + errMsg);
         callSnackBar(errMsg);
     }
 

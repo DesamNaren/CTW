@@ -18,9 +18,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class GCCReportsViewModel extends AndroidViewModel {
-    private MutableLiveData<GCCReportResponse> gccReportResponseMutableLiveData;
-    private Context context;
-    private ErrorHandlerInterface errorHandlerInterface;
+    private final MutableLiveData<GCCReportResponse> gccReportResponseMutableLiveData;
+    private final Context context;
+    private final ErrorHandlerInterface errorHandlerInterface;
 
     public GCCReportsViewModel(Context context, Application application) {
         super(application);

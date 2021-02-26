@@ -61,7 +61,7 @@ public class ViewPhotosActivity extends AppCompatActivity {
         } else {
             binding.recyclerView.setVisibility(View.GONE);
             binding.tvEmpty.setVisibility(View.VISIBLE);
-            binding.tvEmpty.setText("No photos found");
+            binding.tvEmpty.setText(getString(R.string.no_photos));
         }
 
 

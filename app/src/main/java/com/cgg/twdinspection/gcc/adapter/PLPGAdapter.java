@@ -80,7 +80,7 @@ public class PLPGAdapter extends RecyclerView.Adapter<PLPGAdapter.ItemHolder> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TextViewTextChangeEvent>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(@NotNull Disposable d) {
 
                     }
 
@@ -105,7 +105,7 @@ public class PLPGAdapter extends RecyclerView.Adapter<PLPGAdapter.ItemHolder> {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NotNull Throwable e) {
 
                     }
 

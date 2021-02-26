@@ -89,7 +89,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     String PIC_NAME, PIC_TYPE, officerID;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public Uri fileUri;
-    public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
+    public static final String IMAGE_DIRECTORY_NAME = AppConstants.GCC_IMAGES;
     public static String IMAGE_DIRECTORY_NAME_MODE;
     String FilePath;
     Bitmap bm;
@@ -303,38 +303,38 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
 
                                 if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
                                     ess_flag = true;
-                                    stockDetailsResponse.getEssential_commodities().get(0).setComHeader("Essential Commodities");
+                                    stockDetailsResponse.getEssential_commodities().get(0).setComHeader(getString(R.string.ess_com));
                                     EssentialFragment essentialFragment = new EssentialFragment();
                                     Gson gson = new Gson();
                                     String essentialComm = gson.toJson(stockDetailsResponse.getEssential_commodities());
                                     Bundle bundle = new Bundle();
                                     bundle.putString(AppConstants.essComm, essentialComm);
                                     essentialFragment.setArguments(bundle);
-                                    adapter.addFrag(essentialFragment, "Essential Commodities");
+                                    adapter.addFrag(essentialFragment, getString(R.string.ess_com));
                                 }
 
                                 if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
                                     dailyreq_flag = true;
-                                    stockDetailsResponse.getDialy_requirements().get(0).setComHeader("Daily Requirements");
+                                    stockDetailsResponse.getDialy_requirements().get(0).setComHeader(getString(R.string.dai_re));
                                     DailyFragment dailyFragment = new DailyFragment();
                                     Gson gson = new Gson();
                                     String essentialComm = gson.toJson(stockDetailsResponse.getDialy_requirements());
                                     Bundle bundle = new Bundle();
                                     bundle.putString(AppConstants.dailyReq, essentialComm);
                                     dailyFragment.setArguments(bundle);
-                                    adapter.addFrag(dailyFragment, "Daily Requirements");
+                                    adapter.addFrag(dailyFragment, getString(R.string.dai_re));
                                 }
 
                                 if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
                                     emp_flag = true;
-                                    stockDetailsResponse.getEmpties().get(0).setComHeader("Empties");
+                                    stockDetailsResponse.getEmpties().get(0).setComHeader(getString(R.string.empties));
                                     EmptiesFragment emptiesFragment = new EmptiesFragment();
                                     Gson gson = new Gson();
                                     String essentialComm = gson.toJson(stockDetailsResponse.getEmpties());
                                     Bundle bundle = new Bundle();
                                     bundle.putString(AppConstants.empties, essentialComm);
                                     emptiesFragment.setArguments(bundle);
-                                    adapter.addFrag(emptiesFragment, "Empties");
+                                    adapter.addFrag(emptiesFragment, getString(R.string.empties));
                                 }
 
                                 if (ess_flag || dailyreq_flag || emp_flag) {
@@ -452,7 +452,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                 customProgressDialog.show();
                 gccPhotoViewModel.UploadImageServiceCall(partList);
             } else {
-                Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
             }
         }
 
@@ -467,19 +467,19 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
             if (header.equalsIgnoreCase(mFragmentTitleList.get(x))) {
                 callSnackBar("Submit all records in " + header);
                 binding.viewPager.setCurrentItem(x);
-                if (header.contains("Essential Commodities")) {
+                if (header.contains(getString(R.string.ess_com))) {
                     ((EssentialFragment) mFragmentList.get(x)).setPos(pos);
                 }
-                if (header.equalsIgnoreCase("Daily Requirements")) {
+                if (header.equalsIgnoreCase(getString(R.string.dai_re))) {
                     ((DailyFragment) mFragmentList.get(x)).setPos(pos);
                 }
-                if (header.equalsIgnoreCase("Empties")) {
+                if (header.equalsIgnoreCase(getString(R.string.empties))) {
                     ((EmptiesFragment) mFragmentList.get(x)).setPos(pos);
                 }
-                if (header.equalsIgnoreCase("MFP Commodities")) {
+                if (header.equalsIgnoreCase(getString(R.string.mfp_com))) {
                     ((MFPFragment) mFragmentList.get(x)).setPos(pos);
                 }
-                if (header.equalsIgnoreCase("Processing Units")) {
+                if (header.equalsIgnoreCase(getString(R.string.p_units))) {
                     ((PUnitFragment) mFragmentList.get(x)).setPos(pos);
                 }
                 break;
