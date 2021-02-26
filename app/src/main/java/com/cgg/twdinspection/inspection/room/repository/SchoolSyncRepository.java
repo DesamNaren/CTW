@@ -4,9 +4,12 @@ import android.app.Application;
 
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.inspection.interfaces.SchoolDMVInterface;
+import com.cgg.twdinspection.inspection.interfaces.SchoolDietInterface;
 import com.cgg.twdinspection.inspection.interfaces.SchoolInstInterface;
 import com.cgg.twdinspection.inspection.room.Dao.SchoolSyncDao;
 import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
+import com.cgg.twdinspection.inspection.source.diet_issues.DietMasterResponse;
+import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolVillage;
@@ -90,6 +93,25 @@ public class SchoolSyncRepository {
                 try {
                     if (x > 0) {
                         schoolInstInterface.instCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
+    }
+
+    public void insertMasterDietList(final SchoolDietInterface schoolDietInterface, final List<MasterDietListInfo> masterDietInfos) {
+        TWDApplication.getExecutorService().execute(() -> {
+            syncDao.deleteMasterDietList();
+            syncDao.insertMasterDietList(masterDietInfos);
+            int x = syncDao.DietCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        schoolDietInterface.dietCount(x);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

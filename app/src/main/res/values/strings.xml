@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">TWD Inspection App</string>
+    <string name="app_name_release">TWD Inspection App</string>
+    <string name="app_name_demo">Demo-TWD</string>
+    <string name="app_name_qa">QA-TWD</string>
     <string name="font_name_source_opensans">OpenSans</string>
     <string name="districts">districts</string>
     <string name="verify_your_number">Verify your number</string>
@@ -1408,5 +1410,6 @@
     <string name="chk_vec_log_book">Please check vehicle log book</string>
     <string name="chk_qua_stock">Please check quality of stock</string>
     <string name="chk_godown_hygenic">Please check godown is hygienic</string>
-
+    <string name="diet_master">Diet Master</string>
+    <string name="diet_mas_syn">Diet master data downloaded successfully</string>
 </resources>

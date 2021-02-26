@@ -10,6 +10,7 @@ import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolVillage;
+import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 
 import java.util.List;
@@ -54,6 +55,10 @@ public class DMVRepository {
 
     public LiveData<List<MasterInstituteInfo>> getAllInstitutes() {
         return districtDao.getAllInstitutes();
+    }
+
+    public LiveData<List<MasterDietListInfo>> getAllDietList() {
+        return districtDao.getAllDietList();
     }
 
 

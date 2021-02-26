@@ -25,6 +25,7 @@ import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolPumpMasterRe
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnitMasterResponse;
 import com.cgg.twdinspection.inspection.reports.source.InspReportResponse;
 import com.cgg.twdinspection.inspection.reports.source.ReportCountsResponse;
+import com.cgg.twdinspection.inspection.source.diet_issues.DietMasterResponse;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.cgg.twdinspection.inspection.source.inst_master.InstMasterResponse;
 import com.cgg.twdinspection.inspection.source.login.LoginResponse;
@@ -149,6 +150,9 @@ public interface TWDService {
 
     @GET("CTWServiceDetails/getInstInfo")
     Call<InstMasterResponse> getInstMasterResponse();
+
+    @GET("CTWServiceDetails/getInstInfo")
+    Call<DietMasterResponse> getDietMasterResponse();
     //------------------- Login & Logout ----------------------------------------
 
 

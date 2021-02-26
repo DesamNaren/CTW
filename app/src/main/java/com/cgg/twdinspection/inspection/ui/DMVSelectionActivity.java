@@ -24,6 +24,7 @@ import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.DmvSelectionActivityBinding;
 import com.cgg.twdinspection.inspection.interfaces.InstSelInterface;
 import com.cgg.twdinspection.inspection.offline.SchoolsOfflineEntity;
+import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
@@ -145,6 +146,25 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                     );
                     dmvSelectionActivityBinding.spDist.setAdapter(adapter);
 
+                    viewModel.getAllInstitutes().observe(DMVSelectionActivity.this, new Observer<List<MasterInstituteInfo>>() {
+                        @Override
+                        public void onChanged(List<MasterInstituteInfo> masterInstituteInfos) {
+                            customProgressDialog.dismiss();
+                            if (masterInstituteInfos == null || masterInstituteInfos.size() == 0) {
+                                Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), "No institutes found...\n Do you want to sync institutes master?");
+                            } else {
+                                viewModel.getAllDietList().observe(DMVSelectionActivity.this, new Observer<List<MasterDietListInfo>>() {
+                                    @Override
+                                    public void onChanged(List<MasterDietListInfo> masterDietListInfos) {
+                                        customProgressDialog.dismiss();
+                                        if (masterDietListInfos == null || masterDietListInfos.size() == 0) {
+                                            Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), "No Diet List found...\n Do you want to sync Diet master?");
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
 
                 } else {
                     Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), "No districts found...\n Do you want to sync district master?");
@@ -152,15 +172,6 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
             }
         });
 
-        viewModel.getAllInstitutes().observe(this, new Observer<List<MasterInstituteInfo>>() {
-            @Override
-            public void onChanged(List<MasterInstituteInfo> masterInstituteInfos) {
-                customProgressDialog.dismiss();
-                if (masterInstituteInfos == null || masterInstituteInfos.size() == 0) {
-                    Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), "No institutes found...\n Do you want to sync institutes master?");
-                }
-            }
-        });
 
         dmvSelectionActivityBinding.spDist.setOnItemSelectedListener(this);
         dmvSelectionActivityBinding.spMandal.setOnItemSelectedListener(this);

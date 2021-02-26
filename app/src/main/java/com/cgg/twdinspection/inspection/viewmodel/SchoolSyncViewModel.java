@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.cgg.twdinspection.common.network.TWDService;
 import com.cgg.twdinspection.databinding.ActivitySchoolSyncBinding;
+import com.cgg.twdinspection.inspection.source.diet_issues.DietMasterResponse;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.cgg.twdinspection.inspection.source.inst_master.InstMasterResponse;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -22,6 +23,7 @@ import retrofit2.Response;
 public class SchoolSyncViewModel extends AndroidViewModel {
     private MutableLiveData<SchoolDMVResponse> schoolDMVResponseMutableLiveData;
     private MutableLiveData<InstMasterResponse> instMasterResponseMutableLiveData;
+    private MutableLiveData<DietMasterResponse> dietMasterResponseMutableLiveData;
     private Context context;
     private ErrorHandlerInterface errorHandlerInterface;
     private ActivitySchoolSyncBinding binding;
@@ -32,6 +34,7 @@ public class SchoolSyncViewModel extends AndroidViewModel {
         this.binding = binding;
         schoolDMVResponseMutableLiveData = new MutableLiveData<>();
         instMasterResponseMutableLiveData = new MutableLiveData<>();
+        dietMasterResponseMutableLiveData = new MutableLiveData<>();
         errorHandlerInterface = (ErrorHandlerInterface) context;
     }
 
@@ -84,6 +87,34 @@ public class SchoolSyncViewModel extends AndroidViewModel {
 
                 @Override
                 public void onFailure(@NotNull Call<InstMasterResponse> call, @NotNull Throwable t) {
+                    errorHandlerInterface.handleError(t, context);
+                }
+            });
+        } catch (Exception e) {
+            errorHandlerInterface.handleError(e, context);
+        }
+    }
+
+    public LiveData<DietMasterResponse> getDietMasterResponse() {
+        if (dietMasterResponseMutableLiveData != null) {
+            getDietMasterResponseCall();
+        }
+        return dietMasterResponseMutableLiveData;
+    }
+
+    private void getDietMasterResponseCall() {
+        try {
+            TWDService twdService = TWDService.Factory.create("school");
+            twdService.getDietMasterResponse().enqueue(new Callback<DietMasterResponse>() {
+                @Override
+                public void onResponse(@NotNull Call<DietMasterResponse> call, @NotNull Response<DietMasterResponse> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        dietMasterResponseMutableLiveData.setValue(response.body());
+                    }
+                }
+
+                @Override
+                public void onFailure(@NotNull Call<DietMasterResponse> call, @NotNull Throwable t) {
                     errorHandlerInterface.handleError(t, context);
                 }
             });

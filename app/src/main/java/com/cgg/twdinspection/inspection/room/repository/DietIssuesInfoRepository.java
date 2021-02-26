@@ -8,6 +8,7 @@ import com.cgg.twdinspection.inspection.room.Dao.DietIssuesInfoDao;
 import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietListEntity;
+import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +39,7 @@ public class DietIssuesInfoRepository {
 
     }
 
-    public LiveData<MasterInstituteInfo> getMasterDietList(String inst_id) {
+    public LiveData<MasterDietListInfo> getMasterDietList(String inst_id) {
         return dietIssuesInfoDao.getMasterDietList(inst_id);
     }
 

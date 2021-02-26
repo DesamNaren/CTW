@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolVillage;
@@ -59,5 +60,14 @@ public interface SchoolSyncDao {
 
     @Query("SELECT COUNT(*) FROM master_inst_info")
     int instCount();
+
+    @Query("DELETE FROM master_diet_info")
+    void deleteMasterDietList();
+
+    @Insert
+    void insertMasterDietList(List<MasterDietListInfo> masterDietListInfos);
+
+    @Query("SELECT COUNT(*) FROM master_diet_info")
+    int DietCount();
 
 }

@@ -61,8 +61,8 @@ import com.cgg.twdinspection.inspection.interfaces.DietInterface;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietListEntity;
+import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterDietInfo;
-import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
 import com.cgg.twdinspection.inspection.viewmodel.DietIssuesCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.DietIsuuesViewModel;
@@ -95,7 +95,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     List<DietListEntity> dietInfoEntityListMain, mandatoryList, tempList;
     List<String> itemsList;
     DietIssuesTempItemsAdapter adapter;
-    MasterInstituteInfo masterInstituteInfos;
+    MasterDietListInfo masterDietListInfo;
     String menu_chart_served, menu_chart_painted, menu_served,
             food_provisions, matching_with_samples, committee_exist, discussed_with_committee, maintaining_register;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
@@ -201,12 +201,12 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                     binding.recyclerView.setAdapter(adapter);
 
                 } else {
-                    LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = dietIsuuesViewModel.getMasterDietInfo(TWDApplication.get(DietIssuesActivity.this).getPreferences().getString(AppConstants.INST_ID, ""));
-                    masterInstituteInfoLiveData.observe(DietIssuesActivity.this, new Observer<MasterInstituteInfo>() {
+                    LiveData<MasterDietListInfo> masterInstituteInfoLiveData = dietIsuuesViewModel.getMasterDietInfo(TWDApplication.get(DietIssuesActivity.this).getPreferences().getString(AppConstants.INST_ID, ""));
+                    masterInstituteInfoLiveData.observe(DietIssuesActivity.this, new Observer<MasterDietListInfo>() {
                         @Override
-                        public void onChanged(MasterInstituteInfo masterInstituteInfos) {
-                            DietIssuesActivity.this.masterInstituteInfos = masterInstituteInfos;
-                            List<MasterDietInfo> masterDietInfos = masterInstituteInfos.getDietInfo();
+                        public void onChanged(MasterDietListInfo masterDietListInfos) {
+                            DietIssuesActivity.this.masterDietListInfo = masterDietListInfos;
+                            List<MasterDietInfo> masterDietInfos = masterDietListInfos.getDietInfo();
                             if (masterDietInfos != null && masterDietInfos.size() > 0) {
                                 for (int i = 0; i < masterDietInfos.size(); i++) {
                                     DietListEntity studAttendInfoEntity = new DietListEntity(masterDietInfos.get(i).getItemName(), String.valueOf(masterDietInfos.get(i).getGroundBal()), String.valueOf(masterDietInfos.get(i).getBookBal()), instID, officerID);

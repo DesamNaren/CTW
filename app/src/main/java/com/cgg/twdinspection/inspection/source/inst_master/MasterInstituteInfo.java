@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-@TypeConverters({ClassInfoConverter.class, DietInfoConverter.class, StaffInfoConverter.class})
+@TypeConverters({ClassInfoConverter.class, StaffInfoConverter.class})
 @Entity(tableName = "master_inst_info")
 public class MasterInstituteInfo {
     @PrimaryKey(autoGenerate = true)
@@ -21,10 +21,6 @@ public class MasterInstituteInfo {
     @SerializedName("Inst_Id")
     @Expose
     private Integer instId;
-
-    @SerializedName("Diet_Info")
-    @Expose
-    private List<MasterDietInfo> dietInfo = null;
 
     @SerializedName("Class_Info")
     @Expose
@@ -158,14 +154,6 @@ public class MasterInstituteInfo {
 
     public void setInstId(Integer instId) {
         this.instId = instId;
-    }
-
-    public List<MasterDietInfo> getDietInfo() {
-        return dietInfo;
-    }
-
-    public void setDietInfo(List<MasterDietInfo> dietInfo) {
-        this.dietInfo = dietInfo;
     }
 
     public List<MasterClassInfo> getClassInfo() {

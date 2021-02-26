@@ -39,6 +39,7 @@ android {
 
     buildTypes {
         release {
+            resValue "string", "app_name", "@string/app_name_release"
             debuggable true
             buildConfigField("String", "SERVER_URL", "\"http://ctwws.cgg.gov.in/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"https://tsobmms.cgg.gov.in/TSOBMMSWebServices/\"")
@@ -50,6 +51,8 @@ android {
         }
 
         debug {
+            resValue "string", "app_name", "@string/app_name_demo"
+            applicationIdSuffix ".debug"
             buildConfigField("String", "SERVER_URL", "\"http://dev2.cgg.gov.in/InspectionAppServices/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
             buildConfigField("String", "GCC_SERVER_URL", "\"http://dev7.cgg.gov.in/gccfms/ws/gcc/\"")
@@ -58,6 +61,8 @@ android {
         }
 
         qa {
+            resValue "string", "app_name", "@string/app_name_qa"
+            applicationIdSuffix ".qa"
             buildConfigField("String", "SERVER_URL", "\"http://qa2.cgg.gov.in/InspectionAppServices/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
             buildConfigField("String", "GCC_SERVER_URL", "\"http://dev7.cgg.gov.in/gccfms/ws/gcc/\"")
@@ -66,6 +71,8 @@ android {
             debuggable true
         }
         uat {
+            resValue "string", "app_name", "@string/app_name_demo"
+            applicationIdSuffix ".uat"
             buildConfigField("String", "SERVER_URL", "\"http://uat2.cgg.gov.in/InspectionAppServices/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
             buildConfigField("String", "GCC_SERVER_URL", "\"http://uat7.cgg.gov.in/gccfms/webservice/gcc/\"")

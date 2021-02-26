@@ -36,6 +36,7 @@ import com.cgg.twdinspection.inspection.source.cocurriular_activities.PlantsEnti
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietListEntity;
+import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolVillage;
@@ -67,7 +68,7 @@ import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
         , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class, MasterInstituteInfo.class, PlantsEntity.class
         , InstMenuInfoEntity.class, StudAchievementEntity.class, MedicalDetailsBean.class
         , CoCurricularEntity.class, UploadPhoto.class, AcademicGradeEntity.class
-        , InstSelectionInfo.class, SchoolsOfflineEntity.class}, version = 1, exportSchema = false)
+        , InstSelectionInfo.class, SchoolsOfflineEntity.class, MasterDietListInfo.class}, version = 1, exportSchema = false)
 public abstract class SchoolDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();
@@ -118,7 +119,7 @@ public abstract class SchoolDatabase extends RoomDatabase {
                             SchoolDatabase.class, "Schools.db")
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this codelab.
-                            .createFromAsset("database/Schools.db")
+//                            .createFromAsset("database/Schools.db")
                             .fallbackToDestructiveMigration()
                             .build();
                 }

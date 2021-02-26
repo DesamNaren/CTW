@@ -7,6 +7,7 @@ import androidx.room.Query;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolVillage;
+import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 
 import java.util.List;
@@ -45,6 +46,9 @@ public interface DistrictDao {
 
     @Query("SELECT * from master_inst_info ")
     LiveData<List<MasterInstituteInfo>> getAllInstitutes();
+
+    @Query("SELECT * from master_diet_info")
+    LiveData<List<MasterDietListInfo>> getAllDietList();
 
     @Query("SELECT count(*) from districts_info")
     int getCount();

@@ -9,6 +9,7 @@ import com.cgg.twdinspection.databinding.ActivityDietIssuesBinding;
 import com.cgg.twdinspection.inspection.room.repository.DietIssuesInfoRepository;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietListEntity;
+import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 
 import java.util.List;
@@ -25,8 +26,8 @@ public class DietIsuuesViewModel extends ViewModel {
         mRepository = new DietIssuesInfoRepository(application);
     }
 
-    public LiveData<MasterInstituteInfo> getMasterDietInfo(String inst_id) {
-        LiveData<MasterInstituteInfo> classIdsList = mRepository.getMasterDietList(inst_id);
+    public LiveData<MasterDietListInfo> getMasterDietInfo(String inst_id) {
+        LiveData<MasterDietListInfo> classIdsList = mRepository.getMasterDietList(inst_id);
         return classIdsList;
     }
 

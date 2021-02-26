@@ -10,6 +10,7 @@ import com.cgg.twdinspection.inspection.room.repository.DMVRepository;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolVillage;
+import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class DMVDetailsViewModel extends AndroidViewModel {
     private LiveData<List<SchoolVillage>> villages;
     private LiveData<List<MasterInstituteInfo>> inst_names;
     private LiveData<List<MasterInstituteInfo>> all_inst;
+    private LiveData<List<MasterDietListInfo>> all_diet;
     private DMVRepository mRepository;
 
     public DMVDetailsViewModel(Application application) {
@@ -29,6 +31,7 @@ public class DMVDetailsViewModel extends AndroidViewModel {
         villages = new MutableLiveData<>();
         inst_names = new MutableLiveData<>();
         all_inst = new MutableLiveData<>();
+        all_diet = new MutableLiveData<>();
         mRepository = new DMVRepository(application);
     }
 
@@ -44,6 +47,13 @@ public class DMVDetailsViewModel extends AndroidViewModel {
             all_inst = mRepository.getAllInstitutes();
         }
         return all_inst;
+    }
+
+     public LiveData<List<MasterDietListInfo>> getAllDietList() {
+        if (all_diet != null) {
+            all_diet = mRepository.getAllDietList();
+        }
+        return all_diet;
     }
 
     public LiveData<List<MasterInstituteInfo>> getInstitutes(int districtId) {

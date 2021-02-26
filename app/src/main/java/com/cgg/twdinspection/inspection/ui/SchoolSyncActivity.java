@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,11 +21,14 @@ import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivitySchoolSyncBinding;
 import com.cgg.twdinspection.inspection.interfaces.SchoolDMVInterface;
+import com.cgg.twdinspection.inspection.interfaces.SchoolDietInterface;
 import com.cgg.twdinspection.inspection.interfaces.SchoolInstInterface;
 import com.cgg.twdinspection.inspection.room.repository.SchoolSyncRepository;
+import com.cgg.twdinspection.inspection.source.diet_issues.DietMasterResponse;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.inst_master.InstMasterResponse;
+import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.viewmodel.DMVDetailsViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
@@ -36,10 +38,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVInterface, SchoolInstInterface, ErrorHandlerInterface {
+public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVInterface, SchoolInstInterface, SchoolDietInterface, ErrorHandlerInterface {
     private SchoolSyncRepository schoolSyncRepository;
     private SchoolDMVResponse schoolDMVResponse;
     private InstMasterResponse instMasterResponse;
+    private DietMasterResponse dietMasterResponse;
     ActivitySchoolSyncBinding binding;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -90,9 +93,20 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
             public void onChanged(List<MasterInstituteInfo> masterInstituteInfos) {
 
                 if (masterInstituteInfos != null && masterInstituteInfos.size() > 0) {
-                    binding.syncBtnYears.setText(getString(R.string.re_download));
+                    binding.btnInst.setText(getString(R.string.re_download));
                 } else {
-                    binding.syncBtnYears.setText(getString(R.string.download));
+                    binding.btnInst.setText(getString(R.string.download));
+                }
+            }
+        });
+        dmvViewModel.getAllDietList().observe(this, new Observer<List<MasterDietListInfo>>() {
+            @Override
+            public void onChanged(List<MasterDietListInfo> masterDietListInfos) {
+
+                if (masterDietListInfos != null && masterDietListInfos.size() > 0) {
+                    binding.btnDiet.setText(getString(R.string.re_download));
+                } else {
+                    binding.btnDiet.setText(getString(R.string.download));
                 }
             }
         });
@@ -143,7 +157,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
             }
         });
 
-        binding.syncBtnYears.setOnClickListener(new View.OnClickListener() {
+        binding.btnInst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(SchoolSyncActivity.this)) {
@@ -157,6 +171,34 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                             if (instMasterResponse != null) {
                                 if (instMasterResponse.getInstituteInfo() != null && instMasterResponse.getInstituteInfo().size() > 0) {
                                     schoolSyncRepository.insertMasterInstitutes(SchoolSyncActivity.this, instMasterResponse.getInstituteInfo());
+                                } else {
+                                    Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_insts));
+                                }
+                            } else {
+                                Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.server_not));
+                            }
+                        }
+                    });
+                } else {
+                    Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
+                }
+            }
+        });
+
+        binding.btnDiet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utils.checkInternetConnection(SchoolSyncActivity.this)) {
+                    customProgressDialog.show();
+                    LiveData<DietMasterResponse> instMasterResponseLiveData = viewModel.getDietMasterResponse();
+                    instMasterResponseLiveData.observe(SchoolSyncActivity.this, new Observer<DietMasterResponse>() {
+                        @Override
+                        public void onChanged(DietMasterResponse dietMasterResponse) {
+                            instMasterResponseLiveData.removeObservers(SchoolSyncActivity.this);
+                            SchoolSyncActivity.this.dietMasterResponse = dietMasterResponse;
+                            if (dietMasterResponse != null) {
+                                if (dietMasterResponse.getInstituteInfo() != null && dietMasterResponse.getInstituteInfo().size() > 0) {
+                                    schoolSyncRepository.insertMasterDietList(SchoolSyncActivity.this, dietMasterResponse.getInstituteInfo());
                                 } else {
                                     Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_insts));
                                 }
@@ -206,6 +248,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
             if (cnt > 0) {
                 schoolSyncRepository.insertSchoolMandals(SchoolSyncActivity.this, schoolDMVResponse.getMandals());
             } else {
+                customProgressDialog.hide();
                 Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_districts));
             }
         } catch (Exception e) {
@@ -219,6 +262,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
             if (cnt > 0) {
                 schoolSyncRepository.insertSchoolVillages(SchoolSyncActivity.this, schoolDMVResponse.getVillages());
             } else {
+                customProgressDialog.hide();
                 Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_mandals));
             }
         } catch (Exception e) {
@@ -228,9 +272,9 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
 
     @Override
     public void vilCount(int cnt) {
+        customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                customProgressDialog.hide();
                 Utils.customSyncSuccessAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name),
                         getString(R.string.dist_mas_sync));
             } else {
@@ -276,5 +320,20 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     @Override
     public void clstCount(int cnt) {
 
+    }
+
+    @Override
+    public void dietCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                Utils.customSyncSuccessAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name),
+                        getString(R.string.diet_mas_syn));
+            } else {
+                Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_insts));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
