@@ -103,7 +103,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     List<String> itemsList;
     DietIssuesTempItemsAdapter adapter;
     MasterDietListInfo masterDietListInfo;
-    String menu_chart_served, menu_chart_painted, menu_served,
+    String menu_chart_served, stock_reg_updated, menu_chart_painted, menu_served,
             food_provisions, matching_with_samples, committee_exist, discussed_with_committee, maintaining_register;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
@@ -195,6 +195,20 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                 }
             }
         });
+
+        dietIssuesBinding.rgStockRegisterUpdated.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = dietIssuesBinding.rgStockRegisterUpdated.getCheckedRadioButtonId();
+                if (selctedItem == R.id.rb_yes_stock_register_updated)
+                    stock_reg_updated = AppConstants.Yes;
+                else if (selctedItem == R.id.rb_no_stock_register_updated)
+                    stock_reg_updated = AppConstants.No;
+                else
+                    stock_reg_updated = null;
+            }
+        });
+
 
         dietIssuesBinding.rgMenuChartServed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -401,6 +415,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                     dietIssuesEntity.setOfficer_id(officerID);
                     dietIssuesEntity.setMenu_chart_served(menu_chart_served);
                     dietIssuesEntity.setMenu_chart_painted(menu_chart_painted);
+                    dietIssuesEntity.setStock_register_updated(stock_reg_updated);
                     dietIssuesEntity.setMenu_served(menu_served);
                     dietIssuesEntity.setFood_provisions(food_provisions);
                     dietIssuesEntity.setMatching_with_samples(matching_with_samples);
@@ -1210,8 +1225,8 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
     private void setAdapter(List<DietListEntity> dietInfoEntityListMain) {
         if (dietInfoEntityListMain != null && dietInfoEntityListMain.size() > 0) {
-            mandatoryList=new ArrayList<>();
-            tempList=new ArrayList<>();
+            mandatoryList = new ArrayList<>();
+            tempList = new ArrayList<>();
             tempList.addAll(dietInfoEntityListMain);
 
             for (int i = 0; i < itemsList.size(); i++) {

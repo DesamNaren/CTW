@@ -25,6 +25,9 @@ public class DietIssues {
     @SerializedName("menu_served")
     @Expose
     private String menuServed;
+    @SerializedName("stock_register_updated")
+    @Expose
+    private String stockRegisterUpdated;
     @SerializedName("institute_id")
     @Expose
     private String instituteId;
@@ -46,6 +49,14 @@ public class DietIssues {
     @SerializedName("id")
     @Expose
     private String id;
+
+    public String getStockRegisterUpdated() {
+        return stockRegisterUpdated;
+    }
+
+    public void setStockRegisterUpdated(String stockRegisterUpdated) {
+        this.stockRegisterUpdated = stockRegisterUpdated;
+    }
 
     public String getInspectionTime() {
         return inspectionTime;

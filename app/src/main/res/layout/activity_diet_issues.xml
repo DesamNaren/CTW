@@ -51,13 +51,13 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="@dimen/dimen_5dp"
                         android:paddingTop="@dimen/dimen_10dp"
                         android:paddingRight="@dimen/dimen_5dp"
                         android:paddingBottom="@dimen/dimen_10dp"
-                        android:id="@+id/slno1"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -147,10 +147,61 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/slno"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
+                            android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/date_to_which_the_stock_register_is_updated"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_stock_register_updated"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rb_yes_stock_register_updated"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stock_register_updated.equalsIgnoreCase(`Yes`)}"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_no_stock_register_updated"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stock_register_updated.equalsIgnoreCase(`No`)}"
+                                    android:text="@string/no" />
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
                             android:id="@+id/slno2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -245,10 +296,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/slno3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/slno3"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -306,10 +357,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/slno4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/slno4"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -412,10 +463,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/slno5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/slno5"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -518,10 +569,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/slno6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/slno6"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -576,15 +627,15 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
-                        android:visibility="gone"
-                        android:background="@color/black" />
+                        android:background="@color/black"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -647,10 +698,10 @@
                         android:visibility="visible">
 
                         <TextView
+                            android:id="@+id/slno7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/slno7"
                             android:textColor="@color/black" />
 
                         <LinearLayout

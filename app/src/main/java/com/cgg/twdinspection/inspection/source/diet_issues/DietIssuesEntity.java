@@ -36,6 +36,9 @@ public class DietIssuesEntity {
     private String menu_chart_painted;
 
     @ColumnInfo()
+    private String stock_register_updated;
+
+    @ColumnInfo()
     private String menu_served;
 
     @ColumnInfo()
@@ -62,6 +65,14 @@ public class DietIssuesEntity {
 
     public void setDietListEntities(List<DietListEntity> dietListEntities) {
         this.dietListEntities = dietListEntities;
+    }
+
+    public String getStock_register_updated() {
+        return stock_register_updated;
+    }
+
+    public void setStock_register_updated(String stock_register_updated) {
+        this.stock_register_updated = stock_register_updated;
     }
 
     public int getId() {

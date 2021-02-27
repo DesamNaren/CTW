@@ -928,6 +928,7 @@
     <string name="screened_by_call_health">No. of students screened by call health</string>
     <string name="left_for_screening">No. of students left for screening</string>
     <string name="weather_menu_chart_painted_on_wall">Whether latest menu chart painted on wall</string>
+    <string name="date_to_which_the_stock_register_is_updated">Date to which the stock register is updated</string>
     <string name="have_you_met_discussed_with_mess_committee"><![CDATA[Have you met & discussed with mess committee]]></string>
     <string name="are_you_maintaining_mess_register">Are you maintaining Daily Menu Register?</string>
     <string name="unauthorised_absent">Unauthorised Absent</string>
