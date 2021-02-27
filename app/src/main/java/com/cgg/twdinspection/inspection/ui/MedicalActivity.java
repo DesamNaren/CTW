@@ -264,7 +264,9 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     medicalInfoEntity.setMalariaCount(String.valueOf(m_cnt));
                     medicalInfoEntity.setOthersCount(String.valueOf(o_cnt));
                     medicalInfoEntity.setLast_medical_checkup_date(checkUpDate);
-                    medicalInfoEntity.setMedicalCheckUpDoneByWhom(checkUpDateAnm);
+                    medicalInfoEntity.setMedicalCheckUpDoneByWhom(medicalCheckUpDoneByWhom);
+                    medicalInfoEntity.setLast_medical_checkup_date_anm(checkUpDateAnm);
+                    medicalInfoEntity.setMedicalCheckUpDoneByWhom_anm(medicalCheckUpDoneByWhomAnm);
                     medicalInfoEntity.setAnmWeeklyUpdated(anmWeeklyUpdated);
                     medicalInfoEntity.setCallHealth100(callHealth100);
                     medicalInfoEntity.setScreenedByCallHealth(screened_by_call_health);

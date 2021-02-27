@@ -793,12 +793,12 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             binding.smcChiCtc.requestFocus();
             showSnackBar(getString(R.string.smc_cha_valid_ctc));
             returnFlag = false;
-        } else if (!TextUtils.isEmpty(smc_election_status) && smc_election_status.equals(AppConstants.Yes)
+        }/* else if (!TextUtils.isEmpty(smc_election_status) && smc_election_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(smc_resolution)) {
             binding.smcResolution.requestFocus();
             showSnackBar(getString(R.string.smc_res));
             returnFlag = false;
-        } else if (!TextUtils.isEmpty(smc_election_status) && smc_election_status.equals(AppConstants.Yes)
+        }*/ else if (!TextUtils.isEmpty(smc_election_status) && smc_election_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(smc_parents_meeting)) {
             ScrollToView(binding.rgParentMeeting);
             showSnackBar(getString(R.string.pare_meeting));
@@ -832,12 +832,12 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             binding.kitchenInchargeCtc.requestFocus();
             showSnackBar(getString(R.string.kit_valid_ctc));
             returnFlag = false;
-        } else if (!TextUtils.isEmpty(kitchen_garden_status) && kitchen_garden_status.equals(AppConstants.Yes)
+        }/* else if (!TextUtils.isEmpty(kitchen_garden_status) && kitchen_garden_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(plants_count)) {
             binding.etPlantsCnt.requestFocus();
             showSnackBar(getString(R.string.ent_num_plant));
             returnFlag = false;
-        } else if (TextUtils.isEmpty(student_council_ele_status)) {
+        }*/ else if (TextUtils.isEmpty(student_council_ele_status)) {
             ScrollToView(binding.rgStudCounElect);
             showSnackBar(getString(R.string.sel_stu_ele));
             returnFlag = false;

@@ -274,7 +274,7 @@
     <string name="resolution_noted">Resolution noted</string>
     <string name="whether_kitchen_garden_available">Whether kitchen garden available</string>
     <string name="event_of_kitchen_in_charge">Event of kitchen in charge</string>
-    <string name="types_of_kitchen_garden">Varieties of kitchen Garden</string>
+    <string name="types_of_kitchen_garden">No of vegetable varieties in the kitchen Garden</string>
     <string name="name_of_the_kitchen_garden_in_charge_teacher">Name of the kitchen garden in charge/ teacher</string>
     <string name="whether_haritha_haram_conducted_2019_2020">Whether haritha haram conducted 2019–2020</string>
     <string name="whether_students_council_elections_conducted_during_2019_2020">Whether students council elections conducted during 2019– 2020</string>
@@ -991,7 +991,7 @@
     <string name="smc_cha_valid_ctc">Enter valid SMC chairman mobile number</string>
     <string name="smc_res">Enter SMC resolution noted</string>
     <string name="pare_meeting">Select parents meeting conducted</string>
-    <string name="event_kit">Enter type of kitchen gardens</string>
+    <string name="event_kit">Enter No of vegetable varieties in the kitchen garden</string>
     <string name="kit_inc_name">Enter kitchen garden in charge / teacher name</string>
     <string name="kit_inc_ctc">Enter kitchen in charge contact number</string>
     <string name="kit_valid_ctc">Enter valid kitchen in charge contact number</string>
@@ -1410,12 +1410,12 @@
     <string name="medical_checkup">When was the last medical checkup done by Medical Officer?</string>
     <string name="medical_checkup_anm">When was the last medical checkup done by ANM?</string>
     <string name="count">Count</string>
-    <string name="repairs_required_to_toilets">No of toilets where repairs required</string>
-    <string name="repairs_required_to_bathrooms">No of bathrooms where repairs required</string>
-    <string name="select_repaired_toilets">Enter no of toilets where repairs required</string>
-    <string name="select_valid_repaired_toilets">Enter valid no of toilets where repairs required</string>
-    <string name="select_repaired_bathrooms">Enter no of bathrooms where repairs required</string>
-    <string name="select_valid_repaired_bathrooms">Enter valid no of bathrooms where repairs required</string>
+    <string name="repairs_required_to_toilets">No of toilets where repairs are required</string>
+    <string name="repairs_required_to_bathrooms">No of bathrooms where repairs are required</string>
+    <string name="select_repaired_toilets">Enter no of toilets where repairs are required</string>
+    <string name="select_valid_repaired_toilets">Enter valid no of toilets where repairs are required</string>
+    <string name="select_repaired_bathrooms">Enter no of bathrooms where repairs are required</string>
+    <string name="select_valid_repaired_bathrooms">Enter valid no of bathrooms where repairs are required</string>
     <string name="last_medical_date">Select last medical check up date by Medical Officer</string>
     <string name="last_medical_date_anm">Select last medical check up date by ANM</string>
     <string name="din_count">Additional Capacity</string>

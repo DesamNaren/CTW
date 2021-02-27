@@ -59,10 +59,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno1"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -427,10 +427,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno2"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -564,10 +564,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno3"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -625,10 +625,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno4"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -754,10 +754,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno5"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -911,10 +911,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno6"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1029,6 +1029,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textColorHint="@color/colorAccent"
+                                android:visibility="gone"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -1104,10 +1105,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno7"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1250,6 +1251,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textColorHint="@color/colorAccent"
+                                android:visibility="gone"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -1286,10 +1288,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno8"
                         android:textColor="@color/black" />
 
                     <LinearLayout

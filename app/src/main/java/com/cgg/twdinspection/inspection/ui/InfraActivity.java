@@ -1227,11 +1227,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             showSnackBar(getResources().getString(R.string.select_gate));
             return false;
         }
-        if (TextUtils.isEmpty(pathway_required)) {
-            ScrollToView(binding.rgPathwayRequired);
-            showSnackBar(getResources().getString(R.string.select_pathway));
-            return false;
-        }
+//        if (TextUtils.isEmpty(pathway_required)) {
+//            ScrollToView(binding.rgPathwayRequired);
+//            showSnackBar(getResources().getString(R.string.select_pathway));
+//            return false;
+//        }
         if (TextUtils.isEmpty(sump_required)) {
             ScrollToView(binding.rgSumpRequired);
             showSnackBar(getResources().getString(R.string.select_sump_req));

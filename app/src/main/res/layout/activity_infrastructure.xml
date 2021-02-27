@@ -2140,12 +2140,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
+                    android:visibility="gone"
                     android:background="@color/black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
