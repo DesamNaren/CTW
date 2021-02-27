@@ -404,6 +404,7 @@
     <string name="no_mandals">No mandals found</string>
     <string name="no_villages">No villages found</string>
     <string name="no_insts">No institutes data found</string>
+    <string name="no_diet">No Diet List data found</string>
     <string name="no_fin_year">No financial years found</string>
     <string name="plz_sel_dis">Please select district</string>
     <string name="plz_sel_man">Please select mandal</string>

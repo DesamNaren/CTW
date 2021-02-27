@@ -151,7 +151,7 @@ public interface TWDService {
     @GET("CTWServiceDetails/getInstInfo")
     Call<InstMasterResponse> getInstMasterResponse();
 
-    @GET("CTWServiceDetails/getInstInfo")
+    @GET("CTWServiceDetails/getDietInfo")
     Call<DietMasterResponse> getDietMasterResponse();
     //------------------- Login & Logout ----------------------------------------
 

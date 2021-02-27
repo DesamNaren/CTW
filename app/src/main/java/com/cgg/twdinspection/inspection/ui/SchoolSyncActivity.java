@@ -144,9 +144,11 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                                 if (schoolDMVResponse.getDistricts() != null && schoolDMVResponse.getDistricts().size() > 0) {
                                     schoolSyncRepository.insertSchoolDistricts(SchoolSyncActivity.this, schoolDMVResponse.getDistricts());
                                 } else {
+                                    customProgressDialog.hide();
                                     Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_districts));
                                 }
                             } else {
+                                customProgressDialog.hide();
                                 Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.server_not));
                             }
                         }
@@ -172,9 +174,11 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                                 if (instMasterResponse.getInstituteInfo() != null && instMasterResponse.getInstituteInfo().size() > 0) {
                                     schoolSyncRepository.insertMasterInstitutes(SchoolSyncActivity.this, instMasterResponse.getInstituteInfo());
                                 } else {
+                                    customProgressDialog.hide();
                                     Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_insts));
                                 }
                             } else {
+                                customProgressDialog.hide();
                                 Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.server_not));
                             }
                         }
@@ -200,9 +204,11 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                                 if (dietMasterResponse.getInstituteInfo() != null && dietMasterResponse.getInstituteInfo().size() > 0) {
                                     schoolSyncRepository.insertMasterDietList(SchoolSyncActivity.this, dietMasterResponse.getInstituteInfo());
                                 } else {
-                                    Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_insts));
+                                    customProgressDialog.hide();
+                                    Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_diet));
                                 }
                             } else {
+                                customProgressDialog.hide();
                                 Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.server_not));
                             }
                         }
@@ -252,6 +258,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                 Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_districts));
             }
         } catch (Exception e) {
+            customProgressDialog.hide();
             e.printStackTrace();
         }
     }
@@ -266,6 +273,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                 Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_mandals));
             }
         } catch (Exception e) {
+            customProgressDialog.hide();
             e.printStackTrace();
         }
     }
@@ -330,7 +338,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                 Utils.customSyncSuccessAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name),
                         getString(R.string.diet_mas_syn));
             } else {
-                Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_insts));
+                Utils.customErrorAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_diet));
             }
         } catch (Exception e) {
             e.printStackTrace();
