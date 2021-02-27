@@ -257,10 +257,19 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgHaircut.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_haircut)
+                if (selctedItem == R.id.rb_yes_haircut) {
                     hair_cut_complted = AppConstants.Yes;
-                else
+                    binding.llHaircutDate.setVisibility(View.VISIBLE);
+                } else if (selctedItem == R.id.rb_no_haircut) {
                     hair_cut_complted = AppConstants.No;
+                    binding.llHaircutDate.setVisibility(View.GONE);
+                } else if (selctedItem == R.id.rb_na_haircut) {
+                    hair_cut_complted = AppConstants.No;
+                    binding.llHaircutDate.setVisibility(View.GONE);
+                } else {
+                    hair_cut_complted = null;
+                    binding.llHaircutDate.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -401,7 +410,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
             ScrollToView(binding.rgHaircut);
             returnFlag = false;
             showSnackBar(getString(R.string.chk_haircut));
-        } else if (TextUtils.isEmpty(haircut_date)) {
+        } else if (hair_cut_complted.equalsIgnoreCase("Yes") && TextUtils.isEmpty(haircut_date)) {
             ScrollToView(binding.etEntitlementsHaircutDate);
             returnFlag = false;
             showSnackBar(getString(R.string.sel_last_hair_cut));
