@@ -270,7 +270,7 @@ public class SchoolsOfflineDataActivity extends LocBaseActivity implements Schoo
                         if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.STOREROOM)) {
                             file_storeroom = new File(uploadPhotos.get(z).getPhoto_path());
                         }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.VARANDAH)) {
+                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.SICKROOM)) {
                             file_varandah = new File(uploadPhotos.get(z).getPhoto_path());
                         }
                         if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.DORMITORY)) {

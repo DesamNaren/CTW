@@ -93,7 +93,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     LiveData<List<InstMenuInfoEntity>> sectionsData;
     private UploadPhotoViewModel viewModel;
     private InstSubmitRequest instSubmitRequest;
-    private File file_storeroom, file_varandah,
+    private File file_storeroom, file_sick_room,
             file_playGround, file_diningHall, file_dormitory,
             file_mainBulding, file_toilet, file_kitchen, file_classroom,
             file_tds, file_menu, file_officer;
@@ -193,8 +193,8 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                         if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.STOREROOM)) {
                             file_storeroom = new File(uploadPhotos.get(z).getPhoto_path());
                         }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.VARANDAH)) {
-                            file_varandah = new File(uploadPhotos.get(z).getPhoto_path());
+                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.SICKROOM)) {
+                            file_sick_room = new File(uploadPhotos.get(z).getPhoto_path());
                         }
                         if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.DORMITORY)) {
                             file_dormitory = new File(uploadPhotos.get(z).getPhoto_path());
@@ -366,9 +366,9 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         MultipartBody.Part body5 =
                 MultipartBody.Part.createFormData("image", file_toilet.getName(), requestFile5);
         RequestBody requestFile6 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_varandah);
+                RequestBody.create(MediaType.parse("multipart/form-data"), file_sick_room);
         MultipartBody.Part body6 =
-                MultipartBody.Part.createFormData("image", file_varandah.getName(), requestFile6);
+                MultipartBody.Part.createFormData("image", file_sick_room.getName(), requestFile6);
         RequestBody requestFile7 =
                 RequestBody.create(MediaType.parse("multipart/form-data"), file_dormitory);
         MultipartBody.Part body7 =

@@ -65,14 +65,13 @@ public class AppConstants {
     public static final String SUCCESS_STRING_CODE = "200";
     public static final String FAILURE_STRING_CODE = "201";
     public static final String STOREROOM = "StoreRoom";
-    public static final String VARANDAH = "Varandah";
+    public static final String SICKROOM = "SickRoom";
     public static final String PLAYGROUND = "PlayGround";
     public static final String DININGHALL = "Dining_Hall";
     public static final String DORMITORY = "Dormitory";
     public static final String MAINBUILDING = "Main_Building";
     public static final String TOILET = "Toilet";
     public static final String KITCHEN = "Kitchen";
-    public static final String Na = "NA";
 
     public static float DISTANCE;
     public static final String GCC_AUTH_USER = "gccinventory";

@@ -64,7 +64,8 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     private List<UploadPhoto> uploadPhotos;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     ActivityUploadedPhotoBinding binding;
-    int flag_classroom = 0, flag_storeroom = 0, flag_varandah = 0, flag_playGround = 0, flag_diningHall = 0, flag_dormitory = 0, flag_mainBuilding = 0, flag_toilet = 0, flag_kitchen = 0;
+    int flag_classroom = 0, flag_storeroom = 0, flag_sick_room = 0, flag_playGround = 0, flag_diningHall = 0,
+            flag_dormitory = 0, flag_mainBuilding = 0, flag_toilet = 0, flag_kitchen = 0, flag_menu = 0, flag_officer = 0;
     public Uri fileUri;
     String PIC_NAME, PIC_TYPE;
     UploadPhotoViewModel viewModel;
@@ -72,13 +73,13 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     Bitmap bm;
     String FilePath;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
-    File file_storeroom, file_varandah, file_playGround, file_diningHall, file_dormitory, file_mainBulding, file_toilet, file_kitchen, file_classroom, file_tds, file_menu, file_officer;
+    File file_storeroom, file_sick_room, file_playGround, file_diningHall, 
+            file_dormitory, file_mainBulding, file_toilet, file_kitchen, file_classroom, file_tds, file_menu, file_officer;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     private String instId;
     private String randomNo;
-    private InstSelectionViewModel selectionViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +106,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         } catch (Exception e) {
             e.printStackTrace();
         }
-        selectionViewModel = new InstSelectionViewModel(getApplication());
+        InstSelectionViewModel selectionViewModel = new InstSelectionViewModel(getApplication());
         LiveData<String> liveData = selectionViewModel.getRandomId(instId);
         liveData.observe(UploadedPhotoActivity.this, new Observer<String>() {
             @Override
@@ -131,12 +132,12 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                                 Glide.with(UploadedPhotoActivity.this).load(file_storeroom).into(binding.ivStoreRoom);
                             }
 
-                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.VARANDAH)) {
-                                flag_varandah = 1;
-                                file_varandah = new File(uploadPhotos.get(z).getPhoto_path());
-                                binding.ivVarandah.setPadding(0, 0, 0, 0);
-                                binding.ivVarandah.setBackgroundColor(getResources().getColor(R.color.white));
-                                Glide.with(UploadedPhotoActivity.this).load(file_varandah).into(binding.ivVarandah);
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.SICKROOM)) {
+                                flag_sick_room = 1;
+                                file_sick_room = new File(uploadPhotos.get(z).getPhoto_path());
+                                binding.ivSickRoom.setPadding(0, 0, 0, 0);
+                                binding.ivSickRoom.setBackgroundColor(getResources().getColor(R.color.white));
+                                Glide.with(UploadedPhotoActivity.this).load(file_sick_room).into(binding.ivSickRoom);
                             }
                             if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.DININGHALL)) {
                                 flag_diningHall = 1;
@@ -232,8 +233,8 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                 if (flag_storeroom != 0) {
                     addPhoto(instId, Utils.getCurrentDateTime(), AppConstants.STOREROOM, String.valueOf(file_storeroom));
                 }
-                if (flag_varandah != 0) {
-                    addPhoto(instId, Utils.getCurrentDateTime(), AppConstants.VARANDAH, String.valueOf(file_varandah));
+                if (flag_sick_room != 0) {
+                    addPhoto(instId, Utils.getCurrentDateTime(), AppConstants.SICKROOM, String.valueOf(file_sick_room));
                 }
                 if (flag_playGround != 0) {
                     addPhoto(instId, Utils.getCurrentDateTime(), AppConstants.PLAYGROUND, String.valueOf(file_playGround));
@@ -295,7 +296,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                 }
             }
         });
-        binding.ivVarandah.setOnClickListener(new View.OnClickListener() {
+        binding.ivSickRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -305,7 +306,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                     } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                         callSettings();
                     } else {
-                        PIC_TYPE = AppConstants.VARANDAH;
+                        PIC_TYPE = AppConstants.SICKROOM;
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
                         if (fileUri != null) {
@@ -314,7 +315,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                         }
                     }
                 } else {
-                    PIC_TYPE = AppConstants.VARANDAH;
+                    PIC_TYPE = AppConstants.SICKROOM;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
                     if (fileUri != null) {
@@ -760,12 +761,12 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                     file_storeroom = new File(FilePath);
                     Glide.with(UploadedPhotoActivity.this).load(file_storeroom).into(binding.ivStoreRoom);
 
-                } else if (PIC_TYPE.equals(AppConstants.VARANDAH)) {
-                    flag_varandah = 1;
-                    binding.ivVarandah.setPadding(0, 0, 0, 0);
-                    binding.ivVarandah.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_varandah = new File(FilePath);
-                    Glide.with(UploadedPhotoActivity.this).load(file_varandah).into(binding.ivVarandah);
+                } else if (PIC_TYPE.equals(AppConstants.SICKROOM)) {
+                    flag_sick_room = 1;
+                    binding.ivSickRoom.setPadding(0, 0, 0, 0);
+                    binding.ivSickRoom.setBackgroundColor(getResources().getColor(R.color.white));
+                    file_sick_room = new File(FilePath);
+                    Glide.with(UploadedPhotoActivity.this).load(file_sick_room).into(binding.ivSickRoom);
                 } else if (PIC_TYPE.equals(AppConstants.PLAYGROUND)) {
                     flag_playGround = 1;
                     binding.ivPlaygound.setPadding(0, 0, 0, 0);
@@ -809,7 +810,6 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                     file_classroom = new File(FilePath);
                     Glide.with(UploadedPhotoActivity.this).load(file_classroom).into(binding.ivClassroom);
                 }
-
                 editor.commit();
 
             } else if (resultCode == RESULT_CANCELED) {
