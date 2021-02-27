@@ -1405,7 +1405,7 @@
     <string name="chk_godown_hygenic">Please check godown is hygienic</string>
     <string name="diet_master">Diet Master</string>
     <string name="diet_mas_syn">Diet master data downloaded successfully</string>
-    <string name="no_map_dis_found">No mapping district found… Do you want to sync institutes master?</string>
+    <string name="no_map_dis_found">No mapping district found… Do you want to sync districts master?</string>
     <string name="no_diet_list_sound">No Diet List found…\n Do you want to sync Diet master?</string>
     <string name="no_ins_found">No institutes found…\n Do you want to sync institutes master?</string>
     <string name="medical_checkup">When was the last medical checkup done by Medical Officer?</string>
