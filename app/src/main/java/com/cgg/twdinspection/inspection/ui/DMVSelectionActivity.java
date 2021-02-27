@@ -168,7 +168,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                     });
 
                 } else {
-                    Utils.customErrorFinishAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_map_dis_found));
+                    Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_map_dis_found));
                 }
             }
         });

@@ -760,37 +760,6 @@ public class Utils {
         }
     }
 
-    public static void customErrorFinishAlert(Activity activity, String title, String msg) {
-        try {
-            final Dialog dialog = new Dialog(activity);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
-                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.setContentView(R.layout.custom_alert_error);
-                dialog.setCancelable(false);
-                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
-                dialogTitle.setText(title);
-                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
-                dialogMessage.setText(msg);
-                Button btnOK = dialog.findViewById(R.id.btDialogYes);
-                btnOK.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (dialog.isShowing()) {
-                            dialog.dismiss();
-                        }
-                        activity.finish();
-                    }
-                });
-                if (!dialog.isShowing())
-                    dialog.show();
-            }
-        } catch (Resources.NotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void customSplashErrorAlert(Activity activity, String title, String msg) {
         try {
             final Dialog dialog = new Dialog(activity);
