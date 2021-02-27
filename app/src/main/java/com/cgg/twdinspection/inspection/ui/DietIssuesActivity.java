@@ -3,6 +3,7 @@ package com.cgg.twdinspection.inspection.ui;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -44,7 +45,6 @@ import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.bumptech.glide.Glide;
@@ -53,23 +53,30 @@ import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.custom.CustomFontTextView;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDietIssuesBinding;
 import com.cgg.twdinspection.inspection.adapter.DietIssuesMandatoryItemsAdapter;
 import com.cgg.twdinspection.inspection.adapter.DietIssuesTempItemsAdapter;
 import com.cgg.twdinspection.inspection.interfaces.DietInterface;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
+import com.cgg.twdinspection.inspection.interfaces.SchoolInstInterface;
+import com.cgg.twdinspection.inspection.room.repository.SchoolSyncRepository;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietListEntity;
+import com.cgg.twdinspection.inspection.source.diet_issues.DietMasterResponse;
 import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterDietInfo;
 import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
-import com.cgg.twdinspection.inspection.viewmodel.DietIssuesCustomViewModel;
-import com.cgg.twdinspection.inspection.viewmodel.DietIsuuesViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.DietIssuesViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.SyncViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
+import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -82,10 +89,10 @@ import java.util.regex.Pattern;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class DietIssuesActivity extends BaseActivity implements SaveListener, DietInterface {
+public class DietIssuesActivity extends BaseActivity implements SaveListener, DietInterface, SchoolInstInterface, ErrorHandlerInterface {
 
-    ActivityDietIssuesBinding binding;
-    DietIsuuesViewModel dietIsuuesViewModel;
+    ActivityDietIssuesBinding dietIssuesBinding;
+    DietIssuesViewModel dietIssuesViewModel;
     InstMainViewModel instMainViewModel;
     DietIssuesEntity dietIssuesEntity;
     SharedPreferences sharedPreferences;
@@ -110,7 +117,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     SearchView mSearchView;
     Menu mMenu = null;
     TextView tv;
-
+    private CustomProgressDialog customProgressDialog;
     UploadPhotoViewModel viewModel;
     InstSelectionViewModel selectionViewModel;
     private final List<UploadPhoto> uploadPhotos = new ArrayList<>();
@@ -118,13 +125,14 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_diet_issues);
-
-        TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
-                binding.slno6, binding.slno7};
+        dietIssuesBinding = DataBindingUtil.setContentView(this, R.layout.activity_diet_issues);
+        customProgressDialog = new CustomProgressDialog(DietIssuesActivity.this);
+        TextView[] ids = new TextView[]{dietIssuesBinding.slno1, dietIssuesBinding.slno2, dietIssuesBinding.slno3, dietIssuesBinding.slno4, dietIssuesBinding.slno5,
+                dietIssuesBinding.slno6, dietIssuesBinding.slno7};
         BaseActivity.setIds(ids, 20);
 
         viewModel = new UploadPhotoViewModel(DietIssuesActivity.this);
+
 
         try {
             if (getSupportActionBar() != null) {
@@ -146,9 +154,8 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             e.printStackTrace();
         }
 
-        dietIsuuesViewModel = ViewModelProviders.of(DietIssuesActivity.this,
-                new DietIssuesCustomViewModel(binding, this, getApplication())).get(DietIsuuesViewModel.class);
-        binding.setViewModel(dietIsuuesViewModel);
+        dietIssuesViewModel = new DietIssuesViewModel(getApplication());
+        dietIssuesBinding.setViewModel(dietIssuesViewModel);
         instMainViewModel = new InstMainViewModel(getApplication());
         dietInfoEntityListMain = new ArrayList<>();
         mandatoryList = new ArrayList<>();
@@ -175,63 +182,24 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                 randomNo = value;
             }
         });
-        dietIsuuesViewModel.getDietInfo(TWDApplication.get(DietIssuesActivity.this).getPreferences().getString(AppConstants.INST_ID, "")).observe(DietIssuesActivity.this, new Observer<List<DietListEntity>>() {
+
+        LiveData<List<DietListEntity>> listLiveData = dietIssuesViewModel.getDietInfo(instID);
+        listLiveData.observe(DietIssuesActivity.this, new Observer<List<DietListEntity>>() {
             @Override
             public void onChanged(List<DietListEntity> dietIssuesEntities) {
                 if (dietIssuesEntities != null && dietIssuesEntities.size() > 0) {
                     dietInfoEntityListMain = dietIssuesEntities;
-                    tempList.addAll(dietIssuesEntities);
-
-                    for (int i = 0; i < itemsList.size(); i++) {
-                        for (int j = 0; j < dietInfoEntityListMain.size(); j++) {
-                            if (itemsList.get(i).trim().equalsIgnoreCase(dietInfoEntityListMain.get(j).getItem_name().trim())) {
-                                mandatoryList.add(dietInfoEntityListMain.get(j));
-                            }
-                        }
-                    }
-
-                    tempList.removeAll(mandatoryList);
-
-                    DietIssuesMandatoryItemsAdapter adapter1 = new DietIssuesMandatoryItemsAdapter(DietIssuesActivity.this, mandatoryList);
-                    binding.rvMandatory.setLayoutManager(new GridLayoutManager(DietIssuesActivity.this, 2));
-                    binding.rvMandatory.setAdapter(adapter1);
-
-                    adapter = new DietIssuesTempItemsAdapter(DietIssuesActivity.this, tempList);
-                    binding.recyclerView.setLayoutManager(new GridLayoutManager(DietIssuesActivity.this, 2));
-                    binding.recyclerView.setAdapter(adapter);
-
+                    setAdapter(dietInfoEntityListMain);
                 } else {
-                    LiveData<MasterDietListInfo> masterInstituteInfoLiveData = dietIsuuesViewModel.getMasterDietInfo(TWDApplication.get(DietIssuesActivity.this).getPreferences().getString(AppConstants.INST_ID, ""));
-                    masterInstituteInfoLiveData.observe(DietIssuesActivity.this, new Observer<MasterDietListInfo>() {
-                        @Override
-                        public void onChanged(MasterDietListInfo masterDietListInfos) {
-                            DietIssuesActivity.this.masterDietListInfo = masterDietListInfos;
-                            List<MasterDietInfo> masterDietInfos = masterDietListInfos.getDietInfo();
-                            if (masterDietInfos != null && masterDietInfos.size() > 0) {
-                                for (int i = 0; i < masterDietInfos.size(); i++) {
-                                    DietListEntity studAttendInfoEntity = new DietListEntity(masterDietInfos.get(i).getItemName(), String.valueOf(masterDietInfos.get(i).getGroundBal()), String.valueOf(masterDietInfos.get(i).getBookBal()), instID, officerID);
-                                    dietInfoEntityListMain.add(studAttendInfoEntity);
-                                }
-                            }
-
-                            if (dietInfoEntityListMain != null && dietInfoEntityListMain.size() > 0) {
-                                dietIsuuesViewModel.insertDietInfo(dietInfoEntityListMain);
-                            } else {
-                                binding.emptyView.setVisibility(View.VISIBLE);
-                                binding.recyclerView.setVisibility(View.GONE);
-                            }
-                        }
-                    });
-
+                    getMasterDietInfo();
                 }
-
             }
         });
 
-        binding.rgMenuChartServed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        dietIssuesBinding.rgMenuChartServed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgMenuChartServed.getCheckedRadioButtonId();
+                int selctedItem = dietIssuesBinding.rgMenuChartServed.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_yes_menu_chart_served)
                     menu_chart_served = AppConstants.Yes;
                 else if (selctedItem == R.id.rb_no_menu_chart_served)
@@ -242,7 +210,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         });
 
 
-        binding.ivMenu.setOnClickListener(new View.OnClickListener() {
+        dietIssuesBinding.ivMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -271,7 +239,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                 }
             }
         });
-        binding.ivInspOfficer.setOnClickListener(new View.OnClickListener() {
+        dietIssuesBinding.ivInspOfficer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -301,35 +269,35 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             }
         });
 
-        binding.rgMenuChartPainted.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        dietIssuesBinding.rgMenuChartPainted.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgMenuChartPainted.getCheckedRadioButtonId();
+                int selctedItem = dietIssuesBinding.rgMenuChartPainted.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_yes_menu_chart_painted) {
                     file_menu = null;
                     flag_menu = 0;
                     menu_chart_painted = AppConstants.Yes;
-                    binding.llMenuChart.setVisibility(View.VISIBLE);
+                    dietIssuesBinding.llMenuChart.setVisibility(View.VISIBLE);
                 } else if (selctedItem == R.id.rb_no_menu_chart_painted) {
                     file_menu = null;
                     flag_menu = 0;
-                    binding.ivMenu.setPadding(0, 0, 0, 0);
-                    binding.ivMenu.setBackgroundColor(getResources().getColor(R.color.white));
-                    Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivMenu);
-                    binding.ivMenu.setBackground(getResources().getDrawable(R.drawable.ic_menu_camera));
+                    dietIssuesBinding.ivMenu.setPadding(0, 0, 0, 0);
+                    dietIssuesBinding.ivMenu.setBackgroundColor(getResources().getColor(R.color.white));
+                    Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(dietIssuesBinding.ivMenu);
+                    dietIssuesBinding.ivMenu.setBackground(getResources().getDrawable(R.drawable.ic_menu_camera));
                     menu_chart_painted = AppConstants.No;
-                    binding.llMenuChart.setVisibility(View.GONE);
+                    dietIssuesBinding.llMenuChart.setVisibility(View.GONE);
                 } else {
                     menu_chart_painted = null;
-                    binding.llMenuChart.setVisibility(View.GONE);
+                    dietIssuesBinding.llMenuChart.setVisibility(View.GONE);
                 }
             }
         });
 
-        binding.rgPrescribedMenuServed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        dietIssuesBinding.rgPrescribedMenuServed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgPrescribedMenuServed.getCheckedRadioButtonId();
+                int selctedItem = dietIssuesBinding.rgPrescribedMenuServed.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_menu_served_yes)
                     menu_served = AppConstants.Yes;
                 else if (selctedItem == R.id.rb_menu_served_no)
@@ -339,30 +307,30 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             }
         });
 
-        binding.rgFoodProvisions.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        dietIssuesBinding.rgFoodProvisions.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgFoodProvisions.getCheckedRadioButtonId();
+                int selctedItem = dietIssuesBinding.rgFoodProvisions.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_food_provisions_yes) {
                     food_provisions = AppConstants.Yes;
-                    binding.llMatchingWithSamples.setVisibility(View.VISIBLE);
+                    dietIssuesBinding.llMatchingWithSamples.setVisibility(View.VISIBLE);
                 } else if (selctedItem == R.id.rb_food_provisions_no) {
                     matching_with_samples = "";
-                    binding.rgMatchingWithSamples.clearCheck();
+                    dietIssuesBinding.rgMatchingWithSamples.clearCheck();
                     food_provisions = AppConstants.No;
-                    binding.llMatchingWithSamples.setVisibility(View.GONE);
+                    dietIssuesBinding.llMatchingWithSamples.setVisibility(View.GONE);
                 } else {
-                    binding.rgMatchingWithSamples.clearCheck();
-                    binding.llMatchingWithSamples.setVisibility(View.GONE);
+                    dietIssuesBinding.rgMatchingWithSamples.clearCheck();
+                    dietIssuesBinding.llMatchingWithSamples.setVisibility(View.GONE);
                     food_provisions = null;
                 }
             }
         });
 
-        binding.rgMatchingWithSamples.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        dietIssuesBinding.rgMatchingWithSamples.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgMatchingWithSamples.getCheckedRadioButtonId();
+                int selctedItem = dietIssuesBinding.rgMatchingWithSamples.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_matching_with_samples_yes)
                     matching_with_samples = AppConstants.Yes;
                 else if (selctedItem == R.id.rb_matching_with_samples_no)
@@ -372,33 +340,33 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             }
         });
 
-        binding.rgCommitteeExist.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        dietIssuesBinding.rgCommitteeExist.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgCommitteeExist.getCheckedRadioButtonId();
+                int selctedItem = dietIssuesBinding.rgCommitteeExist.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_committee_exist_yes) {
                     committee_exist = AppConstants.Yes;
-                    binding.llDiscussWithComm.setVisibility(View.VISIBLE);
+                    dietIssuesBinding.llDiscussWithComm.setVisibility(View.VISIBLE);
                 } else if (selctedItem == R.id.rb_committee_exist_no) {
-                    binding.rgDiscussedWithCommittee.clearCheck();
+                    dietIssuesBinding.rgDiscussedWithCommittee.clearCheck();
                     discussed_with_committee = "";
                     committee_exist = AppConstants.No;
-                    binding.llDiscussWithComm.setVisibility(View.GONE);
+                    dietIssuesBinding.llDiscussWithComm.setVisibility(View.GONE);
                     discussed_with_committee = null;
                 } else {
-                    binding.rgDiscussedWithCommittee.clearCheck();
+                    dietIssuesBinding.rgDiscussedWithCommittee.clearCheck();
                     discussed_with_committee = "";
                     committee_exist = null;
-                    binding.llDiscussWithComm.setVisibility(View.GONE);
+                    dietIssuesBinding.llDiscussWithComm.setVisibility(View.GONE);
                 }
             }
         });
 
 
-        binding.rgDiscussedWithCommittee.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        dietIssuesBinding.rgDiscussedWithCommittee.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgDiscussedWithCommittee.getCheckedRadioButtonId();
+                int selctedItem = dietIssuesBinding.rgDiscussedWithCommittee.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_discussed_with_committee_yes)
                     discussed_with_committee = AppConstants.Yes;
                 else if (selctedItem == R.id.rb_discussed_with_committee_no)
@@ -408,10 +376,10 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             }
         });
 
-        binding.rgMaintainingRegister.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        dietIssuesBinding.rgMaintainingRegister.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgMaintainingRegister.getCheckedRadioButtonId();
+                int selctedItem = dietIssuesBinding.rgMaintainingRegister.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_maintaining_register_yes)
                     maintaining_register = AppConstants.Yes;
                 else if (selctedItem == R.id.rb_maintaining_register_no)
@@ -422,7 +390,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         });
 
 
-        binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
+        dietIssuesBinding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -446,7 +414,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                         }
                     }
                     dietIssuesEntity.setDietListEntities(selectedList);
-                    dietIsuuesViewModel.insertDietInfo(dietInfoEntityListMain);
+                    dietIssuesViewModel.insertDietInfo(dietInfoEntityListMain, instID);
                     Utils.customSaveAlert(DietIssuesActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
                 }
             }
@@ -463,8 +431,8 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                     public void onChanged(DietIssuesEntity dietIssuesEntity) {
                         dietInfoData.removeObservers(DietIssuesActivity.this);
                         if (dietIssuesEntity != null) {
-                            binding.setInspData(dietIssuesEntity);
-                            binding.executePendingBindings();
+                            dietIssuesBinding.setInspData(dietIssuesEntity);
+                            dietIssuesBinding.executePendingBindings();
 
                             LiveData<UploadPhoto> uploadPhotoLiveData = viewModel.getPhotoData(AppConstants.MENU, instID);
                             uploadPhotoLiveData.observe(DietIssuesActivity.this, new Observer<UploadPhoto>() {
@@ -473,10 +441,10 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                                     uploadPhotoLiveData.removeObservers(DietIssuesActivity.this);
                                     if (uploadPhoto != null && !TextUtils.isEmpty(uploadPhoto.getPhoto_path())) {
                                         file_menu = new File(uploadPhoto.getPhoto_path());
-                                        Glide.with(DietIssuesActivity.this).load(file_menu).into(binding.ivMenu);
+                                        Glide.with(DietIssuesActivity.this).load(file_menu).into(dietIssuesBinding.ivMenu);
                                         flag_menu = 1;
                                     } else {
-                                        Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivMenu);
+                                        Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(dietIssuesBinding.ivMenu);
                                         flag_menu = 0;
                                     }
                                 }
@@ -489,10 +457,10 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                                     uploadPhotoLiveData1.removeObservers(DietIssuesActivity.this);
                                     if (uploadPhoto != null && !TextUtils.isEmpty(uploadPhoto.getPhoto_path())) {
                                         file_officer = new File(uploadPhoto.getPhoto_path());
-                                        Glide.with(DietIssuesActivity.this).load(file_officer).into(binding.ivInspOfficer);
+                                        Glide.with(DietIssuesActivity.this).load(file_officer).into(dietIssuesBinding.ivInspOfficer);
                                         flag_officer = 1;
                                     } else {
-                                        Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivInspOfficer);
+                                        Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(dietIssuesBinding.ivInspOfficer);
                                         flag_officer = 0;
                                     }
                                 }
@@ -529,6 +497,10 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         mMenu = menu;
         MenuItem item = mMenu.findItem(R.id.mi_filter);
         item.setVisible(false);
+
+        MenuItem itemSync = mMenu.findItem(R.id.mi_sync);
+        itemSync.setVisible(true);
+
         MenuItem mSearch = mMenu.findItem(R.id.action_search);
         mSearchView = (SearchView) mSearch.getActionView();
         mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_hint_diet) + "</font>"));
@@ -537,6 +509,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         TextView textView = mSearchView.findViewById(id);
         textView.setTextColor(Color.WHITE);
         mSearchView.setGravity(Gravity.CENTER);
+        mSearch.setVisible(false);
 
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -569,6 +542,13 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                 }
 
                 break;
+            case R.id.mi_sync:
+                if (!mSearchView.isIconified()) {
+                    mSearchView.onActionViewCollapsed();
+                }
+                customSyncAlert(DietIssuesActivity.this, getString(R.string.app_name),
+                        getString(R.string.data_lost_diet));
+                break;
 
             case android.R.id.home:
                 finish();
@@ -593,7 +573,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     }
 
     private void callSettings() {
-        Snackbar snackbar = Snackbar.make(binding.cl, getString(R.string.all_cam_per_setting), Snackbar.LENGTH_INDEFINITE);
+        Snackbar snackbar = Snackbar.make(dietIssuesBinding.cl, getString(R.string.all_cam_per_setting), Snackbar.LENGTH_INDEFINITE);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));
         snackbar.setAction("Settings", new View.OnClickListener() {
             @Override
@@ -629,7 +609,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
         if (TextUtils.isEmpty(menu_chart_painted)) {
             showSnackBar(getResources().getString(R.string.sel_menu_chart_painted));
-            ScrollToView(binding.rgMenuChartPainted);
+            ScrollToView(dietIssuesBinding.rgMenuChartPainted);
             return false;
         }
         if (menu_chart_painted.equalsIgnoreCase(AppConstants.Yes) && flag_menu == 0) {
@@ -638,35 +618,35 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         }
         if (TextUtils.isEmpty(menu_served)) {
             showSnackBar(getResources().getString(R.string.sel_menu_served));
-            ScrollToView(binding.rgPrescribedMenuServed);
+            ScrollToView(dietIssuesBinding.rgPrescribedMenuServed);
             return false;
         }
 
         if (TextUtils.isEmpty(food_provisions)) {
             showSnackBar(getResources().getString(R.string.sel_food_provisions));
-            ScrollToView(binding.rgFoodProvisions);
+            ScrollToView(dietIssuesBinding.rgFoodProvisions);
             return false;
         }
         if (food_provisions.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(matching_with_samples)) {
             showSnackBar(getResources().getString(R.string.sel_matching_with_samples));
-            ScrollToView(binding.rgMatchingWithSamples);
+            ScrollToView(dietIssuesBinding.rgMatchingWithSamples);
             return false;
         }
         if (TextUtils.isEmpty(committee_exist)) {
             showSnackBar(getResources().getString(R.string.sel_committee_exist));
-            ScrollToView(binding.rgCommitteeExist);
+            ScrollToView(dietIssuesBinding.rgCommitteeExist);
             return false;
         }
 
         if (committee_exist.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(discussed_with_committee)) {
             showSnackBar(getResources().getString(R.string.sel_discussed_with_committee));
-            ScrollToView(binding.rgDiscussedWithCommittee);
+            ScrollToView(dietIssuesBinding.rgDiscussedWithCommittee);
             return false;
         }
 
         if (TextUtils.isEmpty(maintaining_register)) {
             showSnackBar(getResources().getString(R.string.sel_maintaining_register));
-            ScrollToView(binding.rgMaintainingRegister);
+            ScrollToView(dietIssuesBinding.rgMaintainingRegister);
             return false;
         }
         if (flag_officer == 0) {
@@ -690,7 +670,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
         long y = viewModel.insertPhotos(uploadPhotos);
         if (y >= 0) {
-            long x = dietIsuuesViewModel.updateDietIssuesInfo(dietIssuesEntity);
+            long x = dietIssuesViewModel.updateDietIssuesInfo(dietIssuesEntity);
             if (x >= 0) {
                 final long[] z = {0};
                 try {
@@ -720,7 +700,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     }
 
     private void showSnackBar(String str) {
-        Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(dietIssuesBinding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
 
     public Uri getOutputMediaFileUri(int type) {
@@ -881,7 +861,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
     public String getFilename() {
         FilePath = getExternalFilesDir(null)
-                + "/" + IMAGE_DIRECTORY_NAME+ "/" + instID;
+                + "/" + IMAGE_DIRECTORY_NAME + "/" + instID;
 
         String Image_name = PIC_NAME;
         FilePath = FilePath + "/" + Image_name;
@@ -935,7 +915,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             if (resultCode == RESULT_OK) {
 
                 FilePath = getExternalFilesDir(null)
-                        + "/" + IMAGE_DIRECTORY_NAME+ "/" + instID;
+                        + "/" + IMAGE_DIRECTORY_NAME + "/" + instID;
 
                 String Image_name = PIC_TYPE + ".png";
                 FilePath = FilePath + "/" + Image_name;
@@ -944,16 +924,16 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
                 if (PIC_TYPE.equals(AppConstants.MENU)) {
                     flag_menu = 1;
-                    binding.ivMenu.setPadding(0, 0, 0, 0);
-                    binding.ivMenu.setBackgroundColor(getResources().getColor(R.color.white));
+                    dietIssuesBinding.ivMenu.setPadding(0, 0, 0, 0);
+                    dietIssuesBinding.ivMenu.setBackgroundColor(getResources().getColor(R.color.white));
                     file_menu = new File(FilePath);
-                    Glide.with(DietIssuesActivity.this).load(file_menu).into(binding.ivMenu);
+                    Glide.with(DietIssuesActivity.this).load(file_menu).into(dietIssuesBinding.ivMenu);
                 } else if (PIC_TYPE.equals(AppConstants.OFFICER)) {
                     flag_officer = 1;
-                    binding.ivInspOfficer.setPadding(0, 0, 0, 0);
-                    binding.ivInspOfficer.setBackgroundColor(getResources().getColor(R.color.white));
+                    dietIssuesBinding.ivInspOfficer.setPadding(0, 0, 0, 0);
+                    dietIssuesBinding.ivInspOfficer.setBackgroundColor(getResources().getColor(R.color.white));
                     file_officer = new File(FilePath);
-                    Glide.with(DietIssuesActivity.this).load(file_officer).into(binding.ivInspOfficer);
+                    Glide.with(DietIssuesActivity.this).load(file_officer).into(dietIssuesBinding.ivInspOfficer);
                 }
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -1082,6 +1062,175 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void customSyncAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_exit);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button exit = dialog.findViewById(R.id.btDialogExit);
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        callService();
+                    }
+                });
+
+                Button cancel = dialog.findViewById(R.id.btDialogCancel);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void callService() {
+        if (Utils.checkInternetConnection(DietIssuesActivity.this)) {
+
+            customProgressDialog.show();
+            SyncViewModel viewModel = new SyncViewModel(DietIssuesActivity.this, getApplication());
+            SchoolSyncRepository schoolSyncRepository = new SchoolSyncRepository(getApplication());
+            LiveData<DietMasterResponse> instMasterResponseLiveData = viewModel.getDietInstMasterResponse(instID);
+            instMasterResponseLiveData.observe(DietIssuesActivity.this, new Observer<DietMasterResponse>() {
+                @Override
+                public void onChanged(DietMasterResponse dietMasterResponse) {
+                    if (dietMasterResponse != null) {
+                        if (dietMasterResponse.getInstituteInfo() != null && dietMasterResponse.getInstituteInfo().size() > 0) {
+                            String str = new Gson().toJson(dietMasterResponse.getInstituteInfo().get(0).getDietInfo());
+                            schoolSyncRepository.updateDietMasterInstitutes(DietIssuesActivity.this, str, instID);
+                        } else {
+                            customProgressDialog.hide();
+                            Utils.customErrorAlert(DietIssuesActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_insts));
+                        }
+                    } else {
+                        customProgressDialog.hide();
+                        Utils.customErrorAlert(DietIssuesActivity.this, getResources().getString(R.string.app_name), getString(R.string.server_not));
+                    }
+                }
+            });
+        } else {
+            Utils.customErrorAlert(DietIssuesActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
+        }
+    }
+
+    @Override
+    public void instCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                getMasterDietInfo();
+
+                Utils.customStudentSyncSuccessAlert(DietIssuesActivity.this, getResources().getString(R.string.app_name),
+                        getString(R.string.cls_mas_syn));
+            } else {
+                Utils.customErrorAlert(DietIssuesActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_insts));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void clstCount(int cnt) {
+
+    }
+
+    @Override
+    public void handleError(Throwable e, Context context) {
+        customProgressDialog.hide();
+        String errMsg = ErrorHandler.handleError(e, context);
+        Utils.customErrorAlert(DietIssuesActivity.this, getResources().getString(R.string.app_name), errMsg);
+    }
+
+    private void getMasterDietInfo() {
+        LiveData<MasterDietListInfo> masterInstituteInfoLiveData = dietIssuesViewModel.getMasterDietInfo(
+                instID);
+        masterInstituteInfoLiveData.observe(DietIssuesActivity.this, new Observer<MasterDietListInfo>() {
+            @Override
+            public void onChanged(MasterDietListInfo masterDietListInfo) {
+                setDietData(masterDietListInfo);
+            }
+        });
+    }
+
+
+    private void setDietData(MasterDietListInfo masterDietListInfo) {
+        if (masterDietListInfo != null) {
+            dietInfoEntityListMain = new ArrayList<>();
+            DietIssuesActivity.this.masterDietListInfo = masterDietListInfo;
+
+            List<MasterDietInfo> masterDietInfos = masterDietListInfo.getDietInfo();
+            if (masterDietInfos != null && masterDietInfos.size() > 0) {
+                for (int i = 0; i < masterDietInfos.size(); i++) {
+                    DietListEntity studAttendInfoEntity =
+                            new DietListEntity(masterDietInfos.get(i).getItemName(),
+                                    String.valueOf(masterDietInfos.get(i).getGroundBal()),
+                                    String.valueOf(masterDietInfos.get(i).getBookBal()), instID, officerID);
+                    dietInfoEntityListMain.add(studAttendInfoEntity);
+                }
+            }
+
+            dietIssuesViewModel.insertDietInfo(dietInfoEntityListMain, instID);
+
+            if (!(dietInfoEntityListMain != null && dietInfoEntityListMain.size() > 0)) {
+                dietIssuesBinding.emptyView.setVisibility(View.VISIBLE);
+                dietIssuesBinding.recyclerView.setVisibility(View.GONE);
+            } else {
+                setAdapter(dietInfoEntityListMain);
+            }
+
+        } else {
+            dietIssuesBinding.emptyView.setVisibility(View.VISIBLE);
+            dietIssuesBinding.recyclerView.setVisibility(View.GONE);
+        }
+    }
+
+    private void setAdapter(List<DietListEntity> dietInfoEntityListMain) {
+        if (dietInfoEntityListMain != null && dietInfoEntityListMain.size() > 0) {
+            mandatoryList=new ArrayList<>();
+            tempList=new ArrayList<>();
+            tempList.addAll(dietInfoEntityListMain);
+
+            for (int i = 0; i < itemsList.size(); i++) {
+                for (int j = 0; j < dietInfoEntityListMain.size(); j++) {
+                    if (itemsList.get(i).trim().equalsIgnoreCase(dietInfoEntityListMain.get(j).getItem_name().trim())) {
+                        mandatoryList.add(dietInfoEntityListMain.get(j));
+                    }
+                }
+            }
+
+            tempList.removeAll(mandatoryList);
+
+            DietIssuesMandatoryItemsAdapter adapter1 = new DietIssuesMandatoryItemsAdapter(DietIssuesActivity.this, mandatoryList);
+            dietIssuesBinding.rvMandatory.setLayoutManager(new GridLayoutManager(DietIssuesActivity.this, 2));
+            dietIssuesBinding.rvMandatory.setAdapter(adapter1);
+
+            adapter = new DietIssuesTempItemsAdapter(DietIssuesActivity.this, tempList);
+            dietIssuesBinding.recyclerView.setLayoutManager(new GridLayoutManager(DietIssuesActivity.this, 2));
+            dietIssuesBinding.recyclerView.setAdapter(adapter);
         }
     }
 }

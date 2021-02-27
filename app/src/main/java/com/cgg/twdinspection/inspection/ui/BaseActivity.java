@@ -16,7 +16,7 @@ import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActionBarLayoutBinding;
 
 public class BaseActivity extends AppCompatActivity {
-    private ActionBarLayoutBinding binding;
+    public ActionBarLayoutBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

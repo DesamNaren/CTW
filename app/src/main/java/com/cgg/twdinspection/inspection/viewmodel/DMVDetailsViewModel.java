@@ -35,6 +35,14 @@ public class DMVDetailsViewModel extends AndroidViewModel {
         mRepository = new DMVRepository(application);
     }
 
+    public LiveData<List<SchoolDistrict>> getSelectedDistricts(String distId) {
+        if (districts != null) {
+            districts = mRepository.getSelectedDistricts(distId);
+        }
+        return districts;
+    }
+
+
     public LiveData<List<SchoolDistrict>> getAllDistricts() {
         if (districts != null) {
             districts = mRepository.getDistricts();

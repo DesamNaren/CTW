@@ -81,11 +81,11 @@ public class DietIssuesInfoRepository {
         return x;
     }
 
-    public void insertDietInfo(List<DietListEntity> dietListEntities) {
+    public void insertDietInfo(List<DietListEntity> dietListEntities, String instId) {
         Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
-                dietIssuesInfoDao.deleteDietInfo(dietListEntities.get(0).getInstitute_id());
+                dietIssuesInfoDao.deleteDietInfo(instId);
                 dietIssuesInfoDao.insertDietInfo(dietListEntities);
             }
         });

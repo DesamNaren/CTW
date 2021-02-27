@@ -28,7 +28,7 @@ public interface DietIssuesInfoDao {
     @Query("DELETE FROM diet_list_info where institute_id LIKE :inst_id")
     void deleteDietInfo(String inst_id);
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert
     void insertDietInfo(List<DietListEntity> dietListEntities);
 
     @Query("delete from diet_list_info where institute_id LIKE :inst_id")

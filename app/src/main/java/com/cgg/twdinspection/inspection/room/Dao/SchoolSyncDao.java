@@ -3,12 +3,16 @@ package com.cgg.twdinspection.inspection.room.Dao;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolVillage;
+import com.cgg.twdinspection.inspection.source.inst_master.MasterClassInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
+import com.cgg.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
+import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 
 import java.util.List;
 
@@ -69,5 +73,14 @@ public interface SchoolSyncDao {
 
     @Query("SELECT COUNT(*) FROM master_diet_info")
     int DietCount();
+
+    @Query("UPDATE master_inst_info SET classInfo = :masterClassInfos WHERE instId LIKE :inst_id")
+    int updateStudentMasterInfo(String masterClassInfos, String inst_id);
+
+    @Query("UPDATE master_inst_info SET staffInfo = :masterStaffInfos WHERE instId LIKE :inst_id")
+    void updateStaffMasterInfo(String masterStaffInfos, String inst_id);
+
+    @Query("UPDATE master_diet_info SET dietInfo = :masterDietInfos WHERE instId LIKE :inst_id")
+    void updateDietMasterInfo(String masterDietInfos, String inst_id);
 
 }

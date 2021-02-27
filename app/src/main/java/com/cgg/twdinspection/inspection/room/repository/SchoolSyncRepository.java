@@ -14,6 +14,7 @@ import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolVillage;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -87,6 +88,67 @@ public class SchoolSyncRepository {
         TWDApplication.getExecutorService().execute(() -> {
             syncDao.deleteMasterInst();
             syncDao.insertMasterInst(masterInstituteInfos);
+            int x = syncDao.instCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        schoolInstInterface.instCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
+    }
+
+    public void updateStudentMasterInstitutes(final SchoolInstInterface schoolInstInterface, final String masterInstituteInfos, String inst_id) {
+        try {
+            TWDApplication.getExecutorService().execute(() -> {
+
+                int x =syncDao.updateStudentMasterInfo(masterInstituteInfos, inst_id);
+                //Background work here
+                TWDApplication.getHandler().post(() -> {
+                    try {
+                        if (x > 0) {
+                            schoolInstInterface.instCount(x);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //UI Thread work here
+                });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void updateStaffMasterInstitutes(final SchoolInstInterface schoolInstInterface, final String masterInstituteInfos, String inst_id) {
+        TWDApplication.getExecutorService().execute(() -> {
+
+            syncDao.updateStaffMasterInfo(masterInstituteInfos, inst_id);
+            int x = syncDao.instCount();
+            //Background work here
+            TWDApplication.getHandler().post(() -> {
+                try {
+                    if (x > 0) {
+                        schoolInstInterface.instCount(x);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //UI Thread work here
+            });
+        });
+    }
+
+    public void updateDietMasterInstitutes(final SchoolInstInterface schoolInstInterface, final String masterInstituteInfos, String inst_id) {
+        TWDApplication.getExecutorService().execute(() -> {
+
+            syncDao.updateDietMasterInfo(masterInstituteInfos, inst_id);
             int x = syncDao.instCount();
             //Background work here
             TWDApplication.getHandler().post(() -> {

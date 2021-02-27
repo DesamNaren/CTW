@@ -26,6 +26,9 @@ public interface DistrictDao {
     @Query("SELECT * from districts_info")
     LiveData<List<SchoolDistrict>> getDistricts();
 
+    @Query("SELECT * from districts_info where distId LIKE :distId")
+    LiveData<List<SchoolDistrict>> getSelectedDistricts(String distId);
+
     @Query("SELECT * from mandal_info where distId LIKE :dist_id")
     LiveData<List<SchoolMandal>> getMandals(int dist_id);
 

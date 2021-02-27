@@ -215,6 +215,7 @@ public class InstMainViewModel extends AndroidViewModel {
         return mRepository.updateSectionInfo(time, id, instId);
     }
 
+
     public LiveData<Integer> getMenuRecordsCount() {
         return mRepository.getMenuRecordsCount();
     }

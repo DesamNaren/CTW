@@ -44,8 +44,8 @@ public class StudentsAttndViewModel extends ViewModel {
         return mRepository.updateClassInfo(studAttendInfoEntity);
     }
 
-    public void insertClassInfo(List<StudAttendInfoEntity> studAttendInfoEntityList) {
-        mRepository.insertClassInfo(studAttendInfoEntityList);
+    public void insertClassInfo(List<StudAttendInfoEntity> studAttendInfoEntityList, String inst_id) {
+        mRepository.insertClassInfo(studAttendInfoEntityList, inst_id);
     }
 
 }

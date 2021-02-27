@@ -54,7 +54,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     SchoolsOfflineViewModel schoolsOfflineViewModel;
     private InstSelectionViewModel selectionViewModel;
     private ArrayAdapter<String> selectAdapter;
-    private ArrayList<String> selectList;
+    private String loginDistId;
 
     @Override
     public void onBackPressed() {
@@ -120,18 +120,19 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
             String curTime = Utils.getCurrentDateTimeDisplay();
             editor.putString(AppConstants.INSP_TIME, curTime);
             editor.commit();
+            loginDistId = sharedPreferences.getString(AppConstants.LOGIN_DIST_ID, "");
             dmvSelectionActivityBinding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        selectList = new ArrayList<String>();
+        ArrayList<String> selectList = new ArrayList<String>();
         selectList.add("-Select-");
         selectAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
         instNames = new ArrayList<>();
         institutesEntityList = new ArrayList<>();
-        viewModel.getAllDistricts().observe(this, new Observer<List<SchoolDistrict>>() {
+        viewModel.getSelectedDistricts(loginDistId).observe(this, new Observer<List<SchoolDistrict>>() {
             @Override
             public void onChanged(List<SchoolDistrict> schoolDistricts) {
                 customProgressDialog.dismiss();
@@ -151,14 +152,14 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                         public void onChanged(List<MasterInstituteInfo> masterInstituteInfos) {
                             customProgressDialog.dismiss();
                             if (masterInstituteInfos == null || masterInstituteInfos.size() == 0) {
-                                Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), "No institutes found...\n Do you want to sync institutes master?");
+                                Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_ins_found));
                             } else {
                                 viewModel.getAllDietList().observe(DMVSelectionActivity.this, new Observer<List<MasterDietListInfo>>() {
                                     @Override
                                     public void onChanged(List<MasterDietListInfo> masterDietListInfos) {
                                         customProgressDialog.dismiss();
                                         if (masterDietListInfos == null || masterDietListInfos.size() == 0) {
-                                            Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), "No Diet List found...\n Do you want to sync Diet master?");
+                                            Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_diet_list_sound));
                                         }
                                     }
                                 });
@@ -167,7 +168,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                     });
 
                 } else {
-                    Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), "No districts found...\n Do you want to sync district master?");
+                    Utils.customErrorFinishAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_map_dis_found));
                 }
             }
         });

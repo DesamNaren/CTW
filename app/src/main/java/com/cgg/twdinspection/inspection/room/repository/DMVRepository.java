@@ -36,6 +36,10 @@ public class DMVRepository {
         return districtDao.getDistricts();
     }
 
+    public LiveData<List<SchoolDistrict>> getSelectedDistricts(String distId) {
+        return districtDao.getSelectedDistricts(distId);
+    }
+
     public LiveData<List<SchoolMandal>> getMandals(int dist_id) {
         return districtDao.getMandals(dist_id);
     }

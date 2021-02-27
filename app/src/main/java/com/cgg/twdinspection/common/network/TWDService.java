@@ -151,8 +151,14 @@ public interface TWDService {
     @GET("CTWServiceDetails/getInstInfo")
     Call<InstMasterResponse> getInstMasterResponse();
 
+    @GET("CTWServiceDetails/getInstInfo")
+    Call<InstMasterResponse> getStudentInstMasterResponse(@Query("institute_id") String institute_id);
+
     @GET("CTWServiceDetails/getDietInfo")
     Call<DietMasterResponse> getDietMasterResponse();
+
+    @GET("CTWServiceDetails/getDietInfo")
+    Call<DietMasterResponse> getDietInstMasterResponse(@Query("institute_id") String institute_id);
     //------------------- Login & Logout ----------------------------------------
 
 

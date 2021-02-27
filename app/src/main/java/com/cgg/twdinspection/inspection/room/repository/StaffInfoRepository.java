@@ -44,11 +44,11 @@ public class StaffInfoRepository {
         return staffInfoDao.getStaffInfoList(inst_id);
     }
 
-    public void insertStaffInfo(List<StaffAttendanceEntity> staffAttendanceEntities) {
+    public void insertStaffInfo(List<StaffAttendanceEntity> staffAttendanceEntities, String inst_id) {
         Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
-                staffInfoDao.deleteStaffInfo(staffAttendanceEntities.get(0).getInstitute_id());
+                staffInfoDao.deleteStaffInfo(inst_id);
                 staffInfoDao.insertStaffAttendInfo(staffAttendanceEntities);
             }
         });

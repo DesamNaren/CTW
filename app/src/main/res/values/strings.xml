@@ -800,6 +800,9 @@
     <string name="change_insp">Do you want to change the institute? On click of yes your inspection data will be lost</string>
     <string name="logout">Do you want to Logout from app?</string>
     <string name="data_lost">Do you want to go back? On click of yes entered data will be lost</string>
+    <string name="data_lost_classes">Do you want sync classes? On click of yes entered data will be lost</string>
+    <string name="data_lost_staff">Do you want sync staff? On click of yes entered data will be lost</string>
+    <string name="data_lost_diet">Do you want sync diet items? On click of yes entered data will be lost</string>
 
 
     <string-array name="buildings">
@@ -971,6 +974,7 @@
     <string name="stock_exceed">Physical available quantity should not exceed system quantity</string>
     <string name="dist_mas_sync">District master data downloaded successfully</string>
     <string name="ins_mas_syn">Institute master data downloaded successfully</string>
+    <string name="cls_mas_syn">Class master data downloaded successfully</string>
     <string name="no_ins_rem">No inspection remarks found</string>
     <string name="punadi_reason">Enter punadi-2 program reason</string>
     <string name="sel_spo_mat">Select sports material received</string>
@@ -1413,4 +1417,7 @@
     <string name="chk_godown_hygenic">Please check godown is hygienic</string>
     <string name="diet_master">Diet Master</string>
     <string name="diet_mas_syn">Diet master data downloaded successfully</string>
+    <string name="no_map_dis_found">No mapping district found…</string>
+    <string name="no_diet_list_sound">No Diet List found…\n Do you want to sync Diet master?</string>
+    <string name="no_ins_found">No institutes found…\n Do you want to sync institutes master?</string>
 </resources>

@@ -71,12 +71,12 @@ public class ClassInfoRepository {
         return x;
     }
 
-    public void insertClassInfo(List<StudAttendInfoEntity> studAttendInfoEntityList) {
+    public void insertClassInfo(List<StudAttendInfoEntity> studAttendInfoEntityList, String inst_id) {
 
         Observable<Long> observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(@NotNull ObservableEmitter<Long> emitter) throws Exception {
-                classInfoDao.deleteClassInfo(studAttendInfoEntityList.get(0).getInstitute_id());
+                classInfoDao.deleteClassInfo(inst_id);
                 classInfoDao.insertStudAttendInfo(studAttendInfoEntityList);
             }
         });

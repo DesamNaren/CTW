@@ -39,8 +39,8 @@ public class StaffViewModel extends ViewModel {
         return staffIdsList;
     }
 
-    public void insertStaffInfo(List<StaffAttendanceEntity> staffAttendanceEntities) {
-        staffInfoRepository.insertStaffInfo(staffAttendanceEntities);
+    public void insertStaffInfo(List<StaffAttendanceEntity> staffAttendanceEntities, String inst_id) {
+        staffInfoRepository.insertStaffInfo(staffAttendanceEntities, inst_id);
     }
 
 }

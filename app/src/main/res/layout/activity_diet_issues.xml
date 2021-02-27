@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.cgg.twdinspection.inspection.viewmodel.DietIsuuesViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.DietIssuesViewModel" />
 
         <variable
             name="inspData"

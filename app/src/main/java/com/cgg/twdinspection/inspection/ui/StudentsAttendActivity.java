@@ -1,12 +1,20 @@
 package com.cgg.twdinspection.inspection.ui;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -19,26 +27,34 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityStudentsAttendanceBinding;
 import com.cgg.twdinspection.databinding.BottomSheetBinding;
 import com.cgg.twdinspection.inspection.adapter.StudentsAttAdapter;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
+import com.cgg.twdinspection.inspection.interfaces.SchoolInstInterface;
 import com.cgg.twdinspection.inspection.interfaces.StudAttendInterface;
+import com.cgg.twdinspection.inspection.room.repository.SchoolSyncRepository;
+import com.cgg.twdinspection.inspection.source.inst_master.InstMasterResponse;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterClassInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StudAttndCustomViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.SyncViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
+import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentsAttendActivity extends BaseActivity implements StudAttendInterface, SaveListener {
-    ActivityStudentsAttendanceBinding binding;
+public class StudentsAttendActivity extends BaseActivity implements StudAttendInterface, SaveListener, SchoolInstInterface, ErrorHandlerInterface {
+    ActivityStudentsAttendanceBinding attendanceBinding;
     StudentsAttAdapter adapter;
     BottomSheetDialog dialog;
     StudentsAttndViewModel studentsAttndViewModel;
@@ -49,87 +65,103 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
     SharedPreferences sharedPreferences;
     String instId, officerId;
     private BottomSheetBinding bs_binding;
+    private CustomProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = putContentView(R.layout.activity_students_attendance, getResources().getString(R.string.stu_att));
-
+        attendanceBinding = putContentView(R.layout.activity_students_attendance, getResources().getString(R.string.stu_att));
+        customProgressDialog = new CustomProgressDialog(StudentsAttendActivity.this);
         studentsAttndViewModel =
                 ViewModelProviders.of(StudentsAttendActivity.this,
-                        new StudAttndCustomViewModel(binding, this, getApplication())).get(StudentsAttndViewModel.class);
+                        new StudAttndCustomViewModel(attendanceBinding, this, getApplication())).get(StudentsAttndViewModel.class);
         instMainViewModel = new InstMainViewModel(getApplication());
         studAttendInfoEntityListMain = new ArrayList<>();
-        binding.setViewModel(studentsAttndViewModel);
-        binding.btnLayout.btnPrevious.setVisibility(View.GONE);
+        attendanceBinding.setViewModel(studentsAttndViewModel);
+        attendanceBinding.btnLayout.btnPrevious.setVisibility(View.GONE);
         sharedPreferences = TWDApplication.get(this).getPreferences();
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+        binding.syncIv.setVisibility(View.VISIBLE);
+        binding.syncIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customSyncAlert(StudentsAttendActivity.this, getString(R.string.app_name), getString(R.string.data_lost_classes));
+            }
+        });
 
-
-        studentsAttndViewModel.getClassInfo(instId).observe(StudentsAttendActivity.this, new Observer<List<StudAttendInfoEntity>>() {
+        LiveData<List<StudAttendInfoEntity>> listLiveData = studentsAttndViewModel.getClassInfo(instId);
+        listLiveData.observe(StudentsAttendActivity.this, new Observer<List<StudAttendInfoEntity>>() {
             @Override
             public void onChanged(List<StudAttendInfoEntity> studAttendInfoEntityList) {
                 if (studAttendInfoEntityList != null && studAttendInfoEntityList.size() > 0) {
                     studAttendInfoEntityListMain = studAttendInfoEntityList;
-                    adapter = new StudentsAttAdapter(StudentsAttendActivity.this, studAttendInfoEntityListMain);
-                    binding.recyclerView.setLayoutManager(new LinearLayoutManager(StudentsAttendActivity.this));
-                    binding.recyclerView.setAdapter(adapter);
+                    setAdapter();
                 } else {
-                    LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = studentsAttndViewModel.getMasterClassInfo(
-                            instId);
-                    masterInstituteInfoLiveData.observe(StudentsAttendActivity.this, new Observer<MasterInstituteInfo>() {
-                        @Override
-                        public void onChanged(MasterInstituteInfo masterInstituteInfos) {
-                            masterInstituteInfoLiveData.removeObservers(StudentsAttendActivity.this);
-                            if (masterInstituteInfos != null) {
-                                StudentsAttendActivity.this.masterInstituteInfos = masterInstituteInfos;
-                                List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
-                                if (masterClassInfos != null && masterClassInfos.size() > 0) {
-                                    for (int i = 0; i < masterClassInfos.size(); i++) {
-                                        if (masterClassInfos.get(i).getStudentCount() > 0) {
-                                            StudAttendInfoEntity studAttendInfoEntity = new StudAttendInfoEntity(officerId, 0,
-                                                    instId, masterClassInfos.get(i).getType(),
-                                                    String.valueOf(masterClassInfos.get(i).getClassId()),
-                                                    String.valueOf(masterClassInfos.get(i).getStudentCount()));
-                                            studAttendInfoEntityListMain.add(studAttendInfoEntity);
-                                        }
-                                    }
-                                }
-
-                                if (studAttendInfoEntityListMain != null && studAttendInfoEntityListMain.size() > 0) {
-                                    studentsAttndViewModel.insertClassInfo(studAttendInfoEntityListMain);
-                                } else {
-                                    binding.emptyView.setVisibility(View.VISIBLE);
-                                    binding.recyclerView.setVisibility(View.GONE);
-                                }
-
-                            } else {
-                                binding.emptyView.setVisibility(View.VISIBLE);
-                                binding.recyclerView.setVisibility(View.GONE);
-                            }
-                        }
-                    });
+                    getMasterClassInfo();
                 }
-
             }
         });
 
 
-        binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
+        attendanceBinding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (studAttendInfoEntityListMain.size() == 0) {
-//                    startActivity(new Intent(StudentsAttendActivity.this, StaffAttendActivity.class));
-//                } else {
-                    if (validateSubmit()) {
-                        Utils.customSaveAlert(StudentsAttendActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
-                    } else {
-                        showSnackBar("Please inspect all the classes");
-                    }
-//                }
+                if (validateSubmit()) {
+                    Utils.customSaveAlert(StudentsAttendActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
+                } else {
+                    showSnackBar("Please inspect all the classes");
+                }
             }
         });
+    }
+
+    private void getMasterClassInfo() {
+        LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = studentsAttndViewModel.getMasterClassInfo(
+                instId);
+        masterInstituteInfoLiveData.observe(StudentsAttendActivity.this, new Observer<MasterInstituteInfo>() {
+            @Override
+            public void onChanged(MasterInstituteInfo masterInstituteInfos) {
+                setClassData(masterInstituteInfos);
+            }
+        });
+    }
+
+    private void setAdapter(){
+        adapter = new StudentsAttAdapter(StudentsAttendActivity.this, studAttendInfoEntityListMain);
+        attendanceBinding.recyclerView.setLayoutManager(new LinearLayoutManager(StudentsAttendActivity.this));
+        attendanceBinding.recyclerView.setAdapter(adapter);
+    }
+
+    private void setClassData(MasterInstituteInfo masterInstituteInfos) {
+        if (masterInstituteInfos != null) {
+            studAttendInfoEntityListMain = new ArrayList<>();
+            StudentsAttendActivity.this.masterInstituteInfos = masterInstituteInfos;
+            List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
+            if (masterClassInfos != null && masterClassInfos.size() > 0) {
+                for (int i = 0; i < masterClassInfos.size(); i++) {
+                    if (masterClassInfos.get(i).getStudentCount() > 0) {
+                        StudAttendInfoEntity studAttendInfoEntity = new StudAttendInfoEntity(officerId, 0,
+                                instId, masterClassInfos.get(i).getType(),
+                                String.valueOf(masterClassInfos.get(i).getClassId()),
+                                String.valueOf(masterClassInfos.get(i).getStudentCount()));
+                        studAttendInfoEntityListMain.add(studAttendInfoEntity);
+                    }
+                }
+            }
+            studentsAttndViewModel.insertClassInfo(studAttendInfoEntityListMain,instId);
+
+            if (!(studAttendInfoEntityListMain != null && studAttendInfoEntityListMain.size() > 0) ){
+                attendanceBinding.emptyView.setVisibility(View.VISIBLE);
+                attendanceBinding.recyclerView.setVisibility(View.GONE);
+            }else {
+                setAdapter();
+            }
+
+        } else {
+            attendanceBinding.emptyView.setVisibility(View.VISIBLE);
+            attendanceBinding.recyclerView.setVisibility(View.GONE);
+        }
     }
 
     private boolean validateSubmit() {
@@ -142,7 +174,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
     }
 
     private void showSnackBar(String str) {
-        Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(attendanceBinding.root, str, Snackbar.LENGTH_SHORT).show();
     }
 
     private void showBottomSheetSnackBar(String str) {
@@ -372,4 +404,104 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
         super.callBack();
     }
 
+    private void customSyncAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_exit);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button exit = dialog.findViewById(R.id.btDialogExit);
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        callService();
+                    }
+                });
+
+                Button cancel = dialog.findViewById(R.id.btDialogCancel);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void callService() {
+        if (Utils.checkInternetConnection(StudentsAttendActivity.this)) {
+
+            customProgressDialog.show();
+            SyncViewModel viewModel = new SyncViewModel(StudentsAttendActivity.this, getApplication());
+            SchoolSyncRepository schoolSyncRepository = new SchoolSyncRepository(getApplication());
+            LiveData<InstMasterResponse> instMasterResponseLiveData = viewModel.getStudentsInstMasterResponse(instId);
+            instMasterResponseLiveData.observe(StudentsAttendActivity.this, new Observer<InstMasterResponse>() {
+                @Override
+                public void onChanged(InstMasterResponse instMasterResponse) {
+                    if (instMasterResponse != null) {
+                        if (instMasterResponse.getInstituteInfo() != null && instMasterResponse.getInstituteInfo().size() > 0) {
+                            String str = new Gson().toJson(instMasterResponse.getInstituteInfo().get(0).getClassInfo());
+                            schoolSyncRepository.updateStudentMasterInstitutes(StudentsAttendActivity.this, str, instId);
+                        } else {
+                            customProgressDialog.hide();
+                            Utils.customErrorAlert(StudentsAttendActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_insts));
+                        }
+                    } else {
+                        customProgressDialog.hide();
+                        Utils.customErrorAlert(StudentsAttendActivity.this, getResources().getString(R.string.app_name), getString(R.string.server_not));
+                    }
+                }
+            });
+        } else {
+            Utils.customErrorAlert(StudentsAttendActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
+        }
+    }
+
+    @Override
+    public void instCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                getMasterClassInfo();
+
+                Utils.customStudentSyncSuccessAlert(StudentsAttendActivity.this, getResources().getString(R.string.app_name),
+                        getString(R.string.cls_mas_syn));
+            } else {
+                Utils.customErrorAlert(StudentsAttendActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_insts));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void clstCount(int cnt) {
+
+    }
+
+    @Override
+    public void handleError(Throwable e, Context context) {
+        customProgressDialog.hide();
+        String errMsg = ErrorHandler.handleError(e, context);
+        Utils.customErrorAlert(StudentsAttendActivity.this, getResources().getString(R.string.app_name), errMsg);
+    }
 }
