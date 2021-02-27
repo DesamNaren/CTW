@@ -380,7 +380,7 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
             ScrollToView(binding.rgAcqReg);
             returnFlag = false;
             showSnackBar(getString(R.string.reg_acq));
-        } else if (TextUtils.isEmpty(acqDress)) {
+        }/* else if (TextUtils.isEmpty(acqDress)) {
             ScrollToView(binding.rgAcqDress);
             returnFlag = false;
             showSnackBar(getString(R.string.reg_dress));
@@ -388,7 +388,7 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
             ScrollToView(binding.rgAcqCos);
             returnFlag = false;
             showSnackBar(getString(R.string.reg_cos));
-        } else if (TextUtils.isEmpty(payBill)) {
+        }*/ else if (TextUtils.isEmpty(payBill)) {
             ScrollToView(binding.rgPayBill);
             returnFlag = false;
             showSnackBar(getString(R.string.reg_pay_bill));
@@ -404,11 +404,11 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
             ScrollToView(binding.rgDailyMove);
             returnFlag = false;
             showSnackBar(getString(R.string.reg_daily_movement));
-        } else if (TextUtils.isEmpty(teaMove)) {
+        } /*else if (TextUtils.isEmpty(teaMove)) {
             ScrollToView(binding.rgTeaMove);
             returnFlag = false;
             showSnackBar(getString(R.string.reg_tea_movement));
-        } else if (TextUtils.isEmpty(clAcc)) {
+        } */else if (TextUtils.isEmpty(clAcc)) {
             ScrollToView(binding.rgClAcc);
             returnFlag = false;
             showSnackBar(getString(R.string.reg_cl_acc));

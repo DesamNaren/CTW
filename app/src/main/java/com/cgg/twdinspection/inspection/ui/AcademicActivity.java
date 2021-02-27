@@ -535,13 +535,16 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 if (selctedItem == R.id.rb_mana_tv_lessons_shown_yes) {
                     binding.etManaTvLessonsReason.setText(null);
                     binding.llManaTvLessonsReason.setVisibility(View.GONE);
+                    binding.llManaTvLessons.setVisibility(View.VISIBLE);
                     mana_tv_lessons_shown = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_mana_tv_lessons_shown_no) {
                     binding.llManaTvLessonsReason.setVisibility(View.VISIBLE);
+                    binding.llManaTvLessons.setVisibility(View.GONE);
                     mana_tv_lessons_shown = AppConstants.No;
                 } else {
                     binding.etManaTvLessonsReason.setText(null);
                     binding.llManaTvLessonsReason.setVisibility(View.GONE);
+                    binding.llManaTvLessons.setVisibility(View.GONE);
                     mana_tv_lessons_shown = null;
                 }
             }
@@ -917,8 +920,8 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                                 highClassStrength = masterClassInfos.get(i - 1).getStudentCount();
                                 binding.highClassStrength.setText(getString(R.string.high_class) + masterClassInfos.get(i - 1).getClassId() + getString(R.string.strength) + highClassStrength);
                                 break;
-                            }else {
-                                binding.highClassStrength.setText( "Highest Class: Not Found" + getString(R.string.strength) + " 0");
+                            } else {
+                                binding.highClassStrength.setText("Highest Class: Not Found" + getString(R.string.strength) + " 0");
                             }
                         }
                         try {
@@ -1160,24 +1163,24 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.mana_tv_reason));
             return false;
         }
-        if (TextUtils.isEmpty(manaTvInchargeName)) {
+        if (mana_tv_lessons_shown.equals(AppConstants.Yes) && TextUtils.isEmpty(manaTvInchargeName)) {
             binding.etManaTvInchargeName.requestFocus();
             showSnackBar(getString(R.string.mana_tv_incharge));
             return false;
         }
-        if (TextUtils.isEmpty(manaTvMobileNo)) {
+        if (mana_tv_lessons_shown.equals(AppConstants.Yes) && TextUtils.isEmpty(manaTvMobileNo)) {
             binding.etManaTvMobileNo.requestFocus();
             showSnackBar(getString(R.string.mana_tv_mob_num));
             return false;
         }
 
-        if (manaTvMobileNo.length() != 10) {
+        if (mana_tv_lessons_shown.equals(AppConstants.Yes) && manaTvMobileNo.length() != 10) {
             binding.etManaTvMobileNo.requestFocus();
             showSnackBar(getString(R.string.valid_mana_tv_mob_num));
             return false;
         }
 
-        if (!(manaTvMobileNo.startsWith("9") || manaTvMobileNo.startsWith("8") || manaTvMobileNo.startsWith("7") ||
+        if (mana_tv_lessons_shown.equals(AppConstants.Yes) &&!(manaTvMobileNo.startsWith("9") || manaTvMobileNo.startsWith("8") || manaTvMobileNo.startsWith("7") ||
                 manaTvMobileNo.startsWith("6"))) {
             binding.etManaTvMobileNo.requestFocus();
             showSnackBar(getString(R.string.valid_mana_tv_mob_num));

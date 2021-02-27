@@ -144,7 +144,7 @@
     <string name="tre_reg">Treasury Bill Register</string>
     <string name="con_bill">Contingent Bill Register</string>
     <string name="ta_bill">TA Bill Register</string>
-    <string name="daily_move">Daily Movement Register</string>
+    <string name="daily_move">Staff/HM Movement Register</string>
     <string name="tea_move">Teacher Movement Register</string>
     <string name="cl_acc">CL Account Register</string>
     <string name="par_meet">Parents Meeting Register</string>
@@ -1022,7 +1022,7 @@
     <string name="reg_par_meet">Check whether parent meeting register is updated</string>
     <string name="reg_cl_acc">Check whether CL account register is updated</string>
     <string name="reg_tea_movement">Check whether teacher movement register is updated</string>
-    <string name="reg_daily_movement">Check whether daily movement register is updated</string>
+    <string name="reg_daily_movement">Check whether Staff/HM movement register is updated</string>
     <string name="reg_contigent">Check whether contingent bill register is updated</string>
     <string name="reg_tre_bill">Check whether treasury bill register is updated</string>
     <string name="reg_pay_bill">Check whether pay bill register is updated</string>
