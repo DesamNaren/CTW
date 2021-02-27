@@ -31,6 +31,7 @@ public class AppConstants {
     public static final String SCHEME_VIL_NAME = "SCHEME_VIL_NAME";
     public static final String SCHEME_FIN_ID = "SCHEME_FIN_ID";
     public static final String SCHEME_FIN_YEAR = "SCHEME_FIN_YEAR";
+    public static final String Na = "NA";
 
 
     public static final String MAN_ID = "MAN_ID";
