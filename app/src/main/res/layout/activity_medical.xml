@@ -465,49 +465,211 @@
                         android:padding="@dimen/dimen_5dp"
                         android:textColor="@color/black" />
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/iv_cal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/dimen_5dp"
-                            android:background="@android:drawable/ic_menu_my_calendar"
-                            android:backgroundTint="@color/colorPrimary" />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/t_medical_checkup_date"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_5dp"
-                            android:layout_marginTop="@dimen/dimen_10dp"
-                            android:textColorHint="@color/colorAccent"
-                            app:errorEnabled="true">
+                            android:orientation="vertical">
 
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/et_medical_checkup_date"
-                                android:layout_width="match_parent"
+                            <TextView
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:focusableInTouchMode="false"
-                                android:hint="@string/medical_checkup"
-                                android:imeOptions="actionNext"
-                                android:paddingLeft="@dimen/dimen_30dp"
-                                android:paddingTop="@dimen/dimen_10dp"
-                                android:paddingRight="@dimen/dimen_5dp"
-                                android:paddingBottom="@dimen/dimen_10dp"
-                                android:singleLine="true"
-                                android:text="@{medical.last_medical_checkup_date}" />
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/medical_check_up_done_by_whom"
+                                android:textColor="@color/black" />
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                            <RadioGroup
+                                android:id="@+id/rg_medical_check_up_done_by_whom"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
 
-                    </RelativeLayout>
+                                <RadioButton
+                                    android:id="@+id/rb_medical_officer_checkup_done_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+
+                                    android:id="@+id/rb_medical_officer_checkup_done_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`No`) ? true : false}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_medical_officer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/medical_checkup"
+                                android:textColor="@color/black" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:id="@+id/iv_cal"
+                                    android:layout_width="@dimen/dimen_25dp"
+                                    android:layout_height="@dimen/dimen_25dp"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/dimen_10dp"
+                                    android:background="@drawable/calendar"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:paddingRight="@dimen/dimen_5dp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/t_medical_checkup_date"
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dimen_5dp"
+                                    android:textColorHint="@color/colorAccent"
+                                    app:errorEnabled="true">
+
+
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_medical_checkup_date"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:focusableInTouchMode="false"
+                                        android:gravity="bottom"
+                                        android:hint="@string/date"
+                                        android:imeOptions="actionNext"
+                                        android:paddingLeft="@dimen/dimen_40dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
+                                        android:singleLine="true"
+                                        android:text="@{medical.last_medical_checkup_date}" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/medical_check_up_done_by_whom_anm"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_medical_check_up_done_by_whom_anm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rb_anm_checkup_done_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{medical.medicalCheckUpDoneByWhom_anm.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_anm_checkup_done_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{medical.medicalCheckUpDoneByWhom_anm.equalsIgnoreCase(`No`) ? true : false}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_anm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{medical.medicalCheckUpDoneByWhom_anm.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/medical_checkup_anm"
+                                android:textColor="@color/black" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen_25dp"
+                                    android:layout_height="@dimen/dimen_25dp"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/dimen_10dp"
+                                    android:background="@drawable/calendar"
+                                    android:backgroundTint="@color/colorPrimary"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:paddingRight="@dimen/dimen_5dp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dimen_5dp"
+                                    android:textColorHint="@color/colorAccent"
+                                    app:errorEnabled="true">
+
+
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_medical_checkup_date_anm"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:focusableInTouchMode="false"
+                                        android:gravity="bottom"
+                                        android:hint="@string/date"
+                                        android:imeOptions="actionNext"
+                                        android:paddingLeft="@dimen/dimen_40dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
+                                        android:singleLine="true"
+                                        android:text="@{medical.last_medical_checkup_date_anm}" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -534,46 +696,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/medical_check_up_done_by_whom"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_medical_check_up_done_by_whom"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-
-                                    android:id="@+id/rb_medical_officer"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`MEDICAL OFFICER`) ? true : false}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/medical_officer" />
-
-                                <RadioButton
-
-                                    android:id="@+id/rb_anm"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`ANM`) ? true : false}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/anm" />
-
-                            </RadioGroup>
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"

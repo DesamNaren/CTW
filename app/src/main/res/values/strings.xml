@@ -34,8 +34,6 @@
     <string name="hwo_head_quarters">Whether the HWO/Deputy warden maintaining headquarters</string>
     <string name="name_of_the_institution">Name of the institution</string>
     <string name="mandal">Mandal</string>
-    <string name="medical_checkup">When was the last medical checkup done?</string>
-
     <string name="yesterday_supervision_duty_allotted">Yesterday supervision duty allotted</string>
     <string name="last_week">Last week turn duties teacher attended</string>
     <string name="present">Present</string>
@@ -179,7 +177,7 @@
     <string name="_30_weather_prescribed_menu_served">Whether prescribed menu served?</string>
     <string name="_31_picture_of_the_inspecting_officer">Picture of the inspecting officer</string>
     <string name="_79_store_room">Store Room</string>
-    <string name="_80_varandah">Varandah</string>
+    <string name="_80_varandah">Sick Room</string>
     <string name="_81_playground">Playground</string>
     <string name="_82_dining_hall">Dining Hall</string>
     <string name="_83_dormitory">Dormitory</string>
@@ -304,8 +302,6 @@
     <string name="pvt_building">Pvt. Building</string>
     <string name="in_school_building">in School Building</string>
     <string name="in_staff_quarters">in Staff Quarters</string>
-    <string name="medical_check_up_done_by_whom">Medical checkup done by whom</string>
-    <string name="sel_medical_check_up_done_by_whom">Select medical check up done by whom</string>
     <string name="tabs_of_anm_weekly_updated">Whether part time health coordinator health condition being monitored by them through tab or not?</string>
     <string name="sel_tabs_of_anm_weekly_updated">Select part time health coordinator health condition being monitored by them through tab or not</string>
     <string name="medical_officer">Medical Officer</string>
@@ -329,8 +325,6 @@
     <string name="no_of_bath_rooms">No of bathrooms</string>
     <string name="no_of_functioning_toilets">No of functioning toilets</string>
     <string name="no_of_functioning_bathrooms">No of functioning bathrooms</string>
-    <string name="repairs_required_to_toilets">Repairs required to toilets</string>
-    <string name="repairs_required_to_bathrooms">Repairs required to bathrooms</string>
     <string name="select_src_running_water">Select source of running water</string>
     <string name="painting_coloring_of_the_building">How is painting / coloring of the building</string>
     <string name="suggest_for_coloring">suggest for coloring</string>
@@ -503,10 +497,6 @@
     <string name="select_valid_functioning_toilets">Enter valid no of functioning toilets</string>
     <string name="select_functioning_bathrooms">Enter no of functioning bathrooms</string>
     <string name="select_valid_functioning_bathrooms">Enter valid no of functioning bathrooms</string>
-    <string name="select_repaired_toilets">Enter repairs required to toilets</string>
-    <string name="select_valid_repaired_toilets">Enter valid count of repairs required to toilets</string>
-    <string name="select_repaired_bathrooms">Enter repairs required to bathrooms</string>
-    <string name="select_valid_repaired_bathrooms">Enter valid count of repairs required to bathrooms</string>
     <string name="select_door">Select door and window repairs</string>
     <string name="select_painting">Select painting, coloring of the building</string>
     <string name="select_color">Enter suggest for coloring</string>
@@ -541,7 +531,6 @@
     <string name="go_back">Are you sure you want to go back?</string>
     <string name="inst_loc">Selected institute location details not found. So, you cannot complete the inspection, still do you want to proceed?</string>
     <string name="diet_issues">Diet Issues</string>
-    <string name="last_medical_date">Select last medical check up date</string>
     <string name="select_menu_chart_served">Select link to latest approved menu chart to be served</string>
     <string name="sel_menu_chart_painted">Select whether menu chart painted on wall</string>
     <string name="sel_menu_served">Select whether prescribed menu served</string>
@@ -602,8 +591,6 @@
     <string name="sel_construction_part_type">Select construction part type</string>
     <string name="compwall_count">Construction part (in meters)</string>
     <string name="sel_compwall_count">Enter construction part (in meters)</string>
-    <string name="din_count">Dining hall count</string>
-    <string name="sel_din_count">Enter Dining hall count</string>
     <string name="dor_count">Dormitories count</string>
     <string name="toilets_count">Toilets count</string>
     <string name="bathrooms_count">Bathrooms count</string>
@@ -1420,4 +1407,23 @@
     <string name="no_map_dis_found">No mapping district found…</string>
     <string name="no_diet_list_sound">No Diet List found…\n Do you want to sync Diet master?</string>
     <string name="no_ins_found">No institutes found…\n Do you want to sync institutes master?</string>
+    <string name="medical_checkup">When was the last medical checkup done by Medical Officer?</string>
+    <string name="medical_checkup_anm">When was the last medical checkup done by ANM?</string>
+    <string name="count">Count</string>
+    <string name="repairs_required_to_toilets">No of toilets where repairs required</string>
+    <string name="repairs_required_to_bathrooms">No of bathrooms where repairs required</string>
+    <string name="select_repaired_toilets">Enter no of toilets where repairs required</string>
+    <string name="select_valid_repaired_toilets">Enter valid no of toilets where repairs required</string>
+    <string name="select_repaired_bathrooms">Enter no of bathrooms where repairs required</string>
+    <string name="select_valid_repaired_bathrooms">Enter valid no of bathrooms where repairs required</string>
+    <string name="last_medical_date">Select last medical check up date by Medical Officer</string>
+    <string name="last_medical_date_anm">Select last medical check up date by ANM</string>
+    <string name="din_count">Additional Capacity</string>
+    <string name="sel_din_count">Enter Additional Capacity</string>
+    <string name="date">Date</string>
+    <string name="medical_check_up_done_by_whom">Medical checkup done by Medical Officer</string>
+    <string name="medical_check_up_done_by_whom_anm">Medical checkup done by ANM</string>
+    <string name="sel_medical_check_up_done_by_whom">Select medical check up done by Medical Officer</string>
+    <string name="sel_medical_check_up_done_by_whom_anm">Select medical check up done by ANM</string>
+
 </resources>

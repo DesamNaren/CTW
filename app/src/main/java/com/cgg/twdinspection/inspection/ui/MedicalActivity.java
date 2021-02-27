@@ -49,12 +49,12 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
     ActivityMedicalBinding binding;
     MedicalViewModel medicalViewModel;
     MedicalInfoEntity medicalInfoEntity;
-    String recorderedInRegister, medicalCheckUpDoneByWhom, anmWeeklyUpdated, callHealth100;
+    String recorderedInRegister, medicalCheckUpDoneByWhom, medicalCheckUpDoneByWhomAnm, anmWeeklyUpdated, callHealth100;
     private int slNoCnt = 0;
     private int tot_cnt;
     private MedicalDetailsViewModel medicalDetailsViewModel;
     private int feverCount, coldCount, headacheCount, diarrheaCount, malariaCount, othersCount;
-    private String checkUpDate;
+    private String checkUpDate, checkUpDateAnm;
     private List<MedicalDetailsBean> medicalDetailsBeans;
     private List<CallHealthInfoEntity> callHealthInfoEntities;
     private CallHealthViewModel callHealthViewModel;
@@ -108,7 +108,14 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
         binding.etMedicalCheckupDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                medicalCheckupDateSelection();
+                medicalCheckupDateSelection(true);
+            }
+        });
+
+        binding.etMedicalCheckupDateAnm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                medicalCheckupDateSelection(false);
             }
         });
 
@@ -134,15 +141,38 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             }
         });
 
+
         binding.rgMedicalCheckUpDoneByWhom.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgMedicalCheckUpDoneByWhom.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_medical_officer)
-                    medicalCheckUpDoneByWhom = "MEDICAL OFFICER";
-                else if (selctedItem == R.id.rb_anm)
-                    medicalCheckUpDoneByWhom = "ANM";
-                else medicalCheckUpDoneByWhom = null;
+                if (selctedItem == R.id.rb_medical_officer_checkup_done_yes) {
+                    medicalCheckUpDoneByWhom = "YES";
+                    binding.llMedicalOfficer.setVisibility(View.VISIBLE);
+                } else if (selctedItem == R.id.rb_medical_officer_checkup_done_no) {
+                    medicalCheckUpDoneByWhom = "NO";
+                    binding.llMedicalOfficer.setVisibility(View.GONE);
+                } else {
+                    medicalCheckUpDoneByWhom = null;
+                    binding.llMedicalOfficer.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        binding.rgMedicalCheckUpDoneByWhomAnm.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgMedicalCheckUpDoneByWhomAnm.getCheckedRadioButtonId();
+                if (selctedItem == R.id.rb_anm_checkup_done_yes) {
+                    medicalCheckUpDoneByWhomAnm = "YES";
+                    binding.llAnm.setVisibility(View.VISIBLE);
+                } else if (selctedItem == R.id.rb_anm_checkup_done_no) {
+                    medicalCheckUpDoneByWhomAnm = "NO";
+                    binding.llAnm.setVisibility(View.GONE);
+                } else {
+                    medicalCheckUpDoneByWhomAnm = null;
+                    binding.llAnm.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -154,7 +184,8 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     anmWeeklyUpdated = "YES";
                 else if (selctedItem == R.id.rb_no_anm_weekly_updated)
                     anmWeeklyUpdated = "NO";
-                else anmWeeklyUpdated = null;
+                else
+                    anmWeeklyUpdated = null;
             }
         });
 
@@ -220,7 +251,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                 tot_cnt = f_cnt + c_cnt + h_cnt + d_cnt + m_cnt + o_cnt;
 
 
-                if (validateData(tot_cnt)) {
+                if (validateData()) {
 
                     medicalInfoEntity = new MedicalInfoEntity();
                     medicalInfoEntity.setInspection_time(Utils.getCurrentDateTime());
@@ -233,7 +264,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     medicalInfoEntity.setMalariaCount(String.valueOf(m_cnt));
                     medicalInfoEntity.setOthersCount(String.valueOf(o_cnt));
                     medicalInfoEntity.setLast_medical_checkup_date(checkUpDate);
-                    medicalInfoEntity.setMedicalCheckUpDoneByWhom(medicalCheckUpDoneByWhom);
+                    medicalInfoEntity.setMedicalCheckUpDoneByWhom(checkUpDateAnm);
                     medicalInfoEntity.setAnmWeeklyUpdated(anmWeeklyUpdated);
                     medicalInfoEntity.setCallHealth100(callHealth100);
                     medicalInfoEntity.setScreenedByCallHealth(screened_by_call_health);
@@ -555,7 +586,6 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                                 if (medicalInfoEntity != null) {
                                     binding.setMedical(medicalInfoEntity);
                                     binding.executePendingBindings();
-                                    checkUpDate = binding.etMedicalCheckupDate.getText().toString();
                                 }
                             }
                         });
@@ -568,7 +598,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
         });
     }
 
-    private boolean validateData(int tot_cnt) {
+    private boolean validateData() {
 
         if (TextUtils.isEmpty(sickboarders)) {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_no_of_sick_boarders));
@@ -578,13 +608,21 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_no_of_sick_boarders_area));
             binding.etSickboardersArea.requestFocus();
             return false;
-        }  else if (TextUtils.isEmpty(checkUpDate)) {
-            ScrollToView(binding.etMedicalCheckupDate);
+        } else if (TextUtils.isEmpty(medicalCheckUpDoneByWhom)) {
+            showBottomSheetSnackBar(getResources().getString(R.string.sel_medical_check_up_done_by_whom));
+            ScrollToView(binding.rgMedicalCheckUpDoneByWhom);
+            return false;
+        } else if (medicalCheckUpDoneByWhom.equalsIgnoreCase("Yes") && TextUtils.isEmpty(checkUpDate)) {
+            binding.etMedicalCheckupDate.requestFocus();
             showBottomSheetSnackBar(getResources().getString(R.string.last_medical_date));
             return false;
-        } else if (TextUtils.isEmpty(medicalCheckUpDoneByWhom)) {
-            ScrollToView(binding.rgMedicalCheckUpDoneByWhom);
-            showBottomSheetSnackBar(getResources().getString(R.string.sel_medical_check_up_done_by_whom));
+        } else if (TextUtils.isEmpty(medicalCheckUpDoneByWhomAnm)) {
+            showBottomSheetSnackBar(getResources().getString(R.string.sel_medical_check_up_done_by_whom_anm));
+            ScrollToView(binding.rgMedicalCheckUpDoneByWhomAnm);
+            return false;
+        } else if (medicalCheckUpDoneByWhomAnm.equalsIgnoreCase("Yes") && TextUtils.isEmpty(checkUpDateAnm)) {
+            binding.etMedicalCheckupDateAnm.requestFocus();
+            showBottomSheetSnackBar(getResources().getString(R.string.last_medical_date_anm));
             return false;
         } else if (TextUtils.isEmpty(anmWeeklyUpdated)) {
             ScrollToView(binding.rgAnmWeeklyUpdated);
@@ -598,27 +636,13 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_screened_by_call_health));
             binding.etScreenedByCallHealth.requestFocus();
             return false;
-        } else if (callHealth100.equalsIgnoreCase("Yes") && screened_by_call_health.equals("0")) {
-            showBottomSheetSnackBar(getResources().getString(R.string.sel_screened_by_call_health_zero));
-            binding.etScreenedByCallHealth.setText("");
-            binding.etScreenedByCallHealth.requestFocus();
-            return false;
         } else if (callHealth100.equalsIgnoreCase("No") && TextUtils.isEmpty(left_for_screening)) {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_left_for_screening));
-            binding.etLeftForScreening.requestFocus();
-            return false;
-        } else if (callHealth100.equalsIgnoreCase("No") && left_for_screening.equals("0")) {
-            showBottomSheetSnackBar(getResources().getString(R.string.sel_left_for_screening_zero));
-            binding.etLeftForScreening.setText("");
             binding.etLeftForScreening.requestFocus();
             return false;
         } else if (TextUtils.isEmpty(recorderedInRegister)) {
             ScrollToView(binding.rgMedicalCheckupDetails);
             showBottomSheetSnackBar(getResources().getString(R.string.sel_visitor_register));
-            return false;
-        } else if (recorderedInRegister.equals(AppConstants.Yes) && tot_cnt == 0) {
-            ScrollToView(binding.etFever);
-            showBottomSheetSnackBar(getResources().getString(R.string.enter_suffering_count));
             return false;
         }
         return true;
@@ -726,7 +750,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
         return flag;
     }
 
-    private void medicalCheckupDateSelection() {
+    private void medicalCheckupDateSelection(boolean flag) {
         // Get Current Date
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
@@ -740,8 +764,14 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-                        checkUpDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                        binding.etMedicalCheckupDate.setText(checkUpDate);
+
+                        if (flag) {
+                            checkUpDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                            binding.etMedicalCheckupDate.setText(checkUpDate);
+                        } else {
+                            checkUpDateAnm = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                            binding.etMedicalCheckupDateAnm.setText(checkUpDateAnm);
+                        }
 
                     }
                 }, mYear, mMonth, mDay);

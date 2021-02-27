@@ -31,12 +31,30 @@ public class MedicalInfoEntity {
     private String malariaCount;
     private String othersCount;
     private String last_medical_checkup_date;
+    private String last_medical_checkup_date_anm;
     private String recorded_in_register;
     private String medicalCheckUpDoneByWhom;
+    private String medicalCheckUpDoneByWhom_anm;
     private String anmWeeklyUpdated;
     private String callHealth100;
     private String screenedByCallHealth;
     private String leftForscreening;
+
+    public String getLast_medical_checkup_date_anm() {
+        return last_medical_checkup_date_anm;
+    }
+
+    public void setLast_medical_checkup_date_anm(String last_medical_checkup_date_anm) {
+        this.last_medical_checkup_date_anm = last_medical_checkup_date_anm;
+    }
+
+    public String getMedicalCheckUpDoneByWhom_anm() {
+        return medicalCheckUpDoneByWhom_anm;
+    }
+
+    public void setMedicalCheckUpDoneByWhom_anm(String medicalCheckUpDoneByWhom_anm) {
+        this.medicalCheckUpDoneByWhom_anm = medicalCheckUpDoneByWhom_anm;
+    }
 
     public String getScreenedByCallHealth() {
         return screenedByCallHealth;

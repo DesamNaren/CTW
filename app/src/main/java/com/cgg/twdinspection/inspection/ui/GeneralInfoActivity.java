@@ -121,6 +121,18 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                     binding.llHmOdCaptureType.setVisibility(View.GONE);
                     binding.llHmLeaveCaptureType.setVisibility(View.GONE);
                     binding.llHmMovementRegisterEntry.setVisibility(View.GONE);
+                } else if (selctedItem == R.id.rb_na_hm_present_time) {
+                    hmPresentTime = AppConstants.Na;
+
+                    binding.rgHmLeavetype.clearCheck();
+                    binding.rgHmCapturetype.clearCheck();
+                    binding.rgHmLeavecapturetype.clearCheck();
+                    binding.rgHmMovementRegisterEntry.clearCheck();
+
+                    binding.llHmLeavetype.setVisibility(View.GONE);
+                    binding.llHmOdCaptureType.setVisibility(View.GONE);
+                    binding.llHmLeaveCaptureType.setVisibility(View.GONE);
+                    binding.llHmMovementRegisterEntry.setVisibility(View.GONE);
                 } else {
                     hmPresentTime = null;
                 }
@@ -250,6 +262,19 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
 
                 } else if (selctedItem == R.id.rb_yes_present_time) {
                     hwopresentTime = AppConstants.Yes;
+
+                    binding.rgLeavetype.clearCheck();
+                    binding.rgCapturetype.clearCheck();
+                    binding.rgLeavecapturetype.clearCheck();
+                    binding.rgMovementRegisterEntry.clearCheck();
+
+                    binding.llLeavetype.setVisibility(View.GONE);
+                    binding.llOdCaptureType.setVisibility(View.GONE);
+                    binding.llLeaveCaptureType.setVisibility(View.GONE);
+                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
+
+                } else if (selctedItem == R.id.rb_na_present_time) {
+                    hwopresentTime = AppConstants.Na;
 
                     binding.rgLeavetype.clearCheck();
                     binding.rgCapturetype.clearCheck();

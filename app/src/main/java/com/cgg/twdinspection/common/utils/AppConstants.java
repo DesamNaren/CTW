@@ -72,6 +72,7 @@ public class AppConstants {
     public static final String MAINBUILDING = "Main_Building";
     public static final String TOILET = "Toilet";
     public static final String KITCHEN = "Kitchen";
+    public static final String Na = "NA";
 
     public static float DISTANCE;
     public static final String GCC_AUTH_USER = "gccinventory";

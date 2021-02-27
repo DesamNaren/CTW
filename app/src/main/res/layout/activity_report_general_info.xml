@@ -81,10 +81,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/slno1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/slno1"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -123,10 +123,10 @@
 
 
                         <TextView
+                            android:id="@+id/slno2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/slno2"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -163,10 +163,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/slno3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/slno3"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -206,10 +206,10 @@
 
 
                         <TextView
+                            android:id="@+id/slno4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/slno4"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -253,6 +253,15 @@
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_na_hm_present_time"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.hmPresence.equalsIgnoreCase(`NA`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/na" />
 
                                 </RadioGroup>
                             </LinearLayout>
@@ -533,10 +542,10 @@
                         android:padding="@dimen/dimen_5dp">
 
                         <TextView
+                            android:id="@+id/slno5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/slno5"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -580,6 +589,15 @@
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_na_present_time"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.hwoPresence.equalsIgnoreCase(`NA`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/na" />
 
                                 </RadioGroup>
 
@@ -843,10 +861,10 @@
 
 
                         <TextView
+                            android:id="@+id/slno6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/slno6"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -1013,10 +1031,10 @@
 
 
                         <TextView
+                            android:id="@+id/slno7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/slno7"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -1192,10 +1210,10 @@
 
 
                         <TextView
+                            android:id="@+id/slno8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/slno8"
                             android:textColor="@color/black" />
 
                         <LinearLayout

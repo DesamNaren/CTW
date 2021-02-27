@@ -109,10 +109,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno1"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -247,10 +247,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno2"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -369,10 +369,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno3"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -470,14 +470,14 @@
 
 
                                 <RadioButton
-                                    android:visibility="gone"
                                     android:id="@+id/runningWater_source_hand_pump"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:checked="@{inspData.runningWater_source.equalsIgnoreCase(`Hand pump`)}"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/hand_pump" />
+                                    android:text="@string/hand_pump"
+                                    android:visibility="gone" />
 
 
                             </RadioGroup>
@@ -499,10 +499,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno4"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -605,10 +605,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno5"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -670,10 +670,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno6"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1039,10 +1039,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno7"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1424,37 +1424,50 @@
 
 
                     <TextView
+                        android:id="@+id/slno8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno8"
                         android:textColor="@color/black" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <LinearLayout
+                        android:id="@+id/ll_medical_officer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dimen_5dp"
-                        android:textColorHint="@color/colorAccent"
-                        app:errorEnabled="true">
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/how_many_buildings"
+                            android:textColor="@color/black" />
 
-                        <com.cgg.twdinspection.common.custom.CustomFontEditText
-                            android:id="@+id/et_how_many_buildings"
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/how_many_buildings"
-                            android:imeOptions="actionNext"
-                            android:inputType="number"
-                            android:paddingLeft="@dimen/dimen_5dp"
-                            android:paddingTop="@dimen/dimen_10dp"
-                            android:paddingRight="@dimen/dimen_5dp"
-                            android:paddingBottom="@dimen/dimen_10dp"
-                            android:singleLine="true"
-                            android:text="@{inspData.how_many_buildings}" />
+                            android:padding="@dimen/dimen_5dp"
+                            android:textColorHint="@color/colorAccent"
+                            app:errorEnabled="true">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_how_many_buildings"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/count"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
+                                android:singleLine="true"
+                                android:text="@{inspData.how_many_buildings}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -1470,10 +1483,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno9"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1532,10 +1545,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno10"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1594,10 +1607,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno11"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1657,10 +1670,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno12"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1720,10 +1733,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno13"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1858,10 +1871,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno14"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1916,10 +1929,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno15"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1974,10 +1987,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno16"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2076,10 +2089,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno17"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2136,10 +2149,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno18"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2199,10 +2212,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno19"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno19"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2260,10 +2273,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno20"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2372,10 +2385,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno21"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno21"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2435,10 +2448,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno22"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno22"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2547,10 +2560,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno23"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno23"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2730,10 +2743,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno24"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno24"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2790,10 +2803,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno25"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno25"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2850,10 +2863,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno26"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno26"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2928,10 +2941,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno26_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno26_1"
                         android:textColor="@color/black" />
 
                     <LinearLayout

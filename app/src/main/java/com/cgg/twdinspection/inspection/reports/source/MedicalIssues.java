@@ -38,6 +38,12 @@ public class MedicalIssues {
     @SerializedName("medicalCheckUpDoneByWhom")
     @Expose
     private String medicalCheckUpDoneByWhom;
+    @SerializedName("last_medical_checkup_date_anm")
+    @Expose
+    private String lastMedicalCheckupDateAnm;
+    @SerializedName("medicalCheckUpDoneByWhom_anm")
+    @Expose
+    private String medicalCheckUpDoneByWhomAnm;
     @SerializedName("recorded_in_register")
     @Expose
     private String recordedInRegister;
@@ -62,6 +68,22 @@ public class MedicalIssues {
     @SerializedName("malariaCount")
     @Expose
     private String malariaCount;
+
+    public String getLastMedicalCheckupDateAnm() {
+        return lastMedicalCheckupDateAnm;
+    }
+
+    public void setLastMedicalCheckupDateAnm(String lastMedicalCheckupDateAnm) {
+        this.lastMedicalCheckupDateAnm = lastMedicalCheckupDateAnm;
+    }
+
+    public String getMedicalCheckUpDoneByWhomAnm() {
+        return medicalCheckUpDoneByWhomAnm;
+    }
+
+    public void setMedicalCheckUpDoneByWhomAnm(String medicalCheckUpDoneByWhomAnm) {
+        this.medicalCheckUpDoneByWhomAnm = medicalCheckUpDoneByWhomAnm;
+    }
 
     public String getInspectionTime() {
         return inspectionTime;
