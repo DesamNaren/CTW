@@ -35,7 +35,7 @@ public class InstLatestTimeRepository {
 
     public void insertLatestTime(InstLatestTimeInfo instLatestTimeInfo) {
         TWDApplication.getExecutorService().execute(() -> {
-//            instSelectionDao.deleteInstSelection();
+            instLastestTimeDao.deleteTimeInfo(instLatestTimeInfo.getInst_id());
             instLastestTimeDao.insertInstLatestTime(instLatestTimeInfo);
         });
     }

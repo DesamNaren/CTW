@@ -141,15 +141,16 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                         String curTime = Utils.getOfflineTime();
                         //Compare time diff
                         //if diff>48 then take each inst id and remove all tables
+                        if (offlineTIme != null) {
+                            Date offlineDate = Utils.strToDate(offlineTIme);
+                            Date curDate = Utils.strToDate(curTime);
 
-                        Date offlineDate = Utils.strToDate(offlineTIme);
-                        Date curDate = Utils.strToDate(curTime);
+                            long millis = curDate.getTime() - offlineDate.getTime();
+                            int hours = (int) (millis / (1000 * 60 * 60));
 
-                        long millis = curDate.getTime() - offlineDate.getTime();
-                        int hours = (int) (millis / (1000 * 60 * 60));
-
-                        if (hours > 48) {
-                            offlineInsts.add(instLatestTimeInfos.get(x).getInst_id());
+                            if (hours > 48) {
+                                offlineInsts.add(instLatestTimeInfos.get(x).getInst_id());
+                            }
                         }
                     }
 
