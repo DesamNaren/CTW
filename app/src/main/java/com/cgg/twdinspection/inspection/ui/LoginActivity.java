@@ -72,7 +72,10 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
                         editor.putString(AppConstants.OFFICER_NAME, employeeResponses.getUserName());
                         editor.putString(AppConstants.OFFICER_DES, employeeResponses.getDesignation());
                         editor.putString(AppConstants.OFF_PLACE_OF_WORK, employeeResponses.getPlaceOfWork());
-                        editor.putString(AppConstants.LOGIN_DIST_ID, "19");
+                        editor.putLong(AppConstants.LOGIN_DIST_ID,  employeeResponses.getDistrictId());
+                        editor.putLong(AppConstants.LOGIN_DIV_ID,  employeeResponses.getDivisionId());
+                        editor.putString(AppConstants.LOGIN_DIST_NAME,  employeeResponses.getDistrictName());
+                        editor.putString(AppConstants.LOGIN_DIV_NAME,  employeeResponses.getDivisionName());
                         editor.commit();
 
                         startActivity(new Intent(LoginActivity.this, GenerateMPINActivity.class));

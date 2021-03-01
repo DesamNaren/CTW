@@ -54,7 +54,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     SchoolsOfflineViewModel schoolsOfflineViewModel;
     private InstSelectionViewModel selectionViewModel;
     private ArrayAdapter<String> selectAdapter;
-    private String loginDistId;
+    private long loginDistId;
 
     @Override
     public void onBackPressed() {
@@ -120,7 +120,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
             String curTime = Utils.getCurrentDateTimeDisplay();
             editor.putString(AppConstants.INSP_TIME, curTime);
             editor.commit();
-            loginDistId = sharedPreferences.getString(AppConstants.LOGIN_DIST_ID, "");
+            loginDistId = sharedPreferences.getLong(AppConstants.LOGIN_DIST_ID, -1);
             dmvSelectionActivityBinding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,7 +132,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
 
         instNames = new ArrayList<>();
         institutesEntityList = new ArrayList<>();
-        viewModel.getSelectedDistricts(loginDistId).observe(this, new Observer<List<SchoolDistrict>>() {
+        viewModel.getSelectedDistricts(String.valueOf(loginDistId)).observe(this, new Observer<List<SchoolDistrict>>() {
             @Override
             public void onChanged(List<SchoolDistrict> schoolDistricts) {
                 customProgressDialog.dismiss();

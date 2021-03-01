@@ -23,6 +23,50 @@ public class LoginResponse {
     @SerializedName("Status_Code")
     @Expose
     private String statusCode;
+    @SerializedName("district_name")
+    @Expose
+    private String districtName;
+    @SerializedName("division_name")
+    @Expose
+    private String divisionName;
+    @SerializedName("division_id")
+    @Expose
+    private long divisionId;
+    @SerializedName("district_id")
+    @Expose
+    private long districtId;
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
+    public String getDivisionName() {
+        return divisionName;
+    }
+
+    public void setDivisionName(String divisionName) {
+        this.divisionName = divisionName;
+    }
+
+    public long getDivisionId() {
+        return divisionId;
+    }
+
+    public void setDivisionId(long divisionId) {
+        this.divisionId = divisionId;
+    }
+
+    public long getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(long districtId) {
+        this.districtId = districtId;
+    }
 
     public String getStatusMessage() {
         return statusMessage;

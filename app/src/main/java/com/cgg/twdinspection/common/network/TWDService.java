@@ -78,7 +78,7 @@ public interface TWDService {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASEURL)
                     .addConverterFactory(GsonConverterFactory.create())
-//                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                  .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(httpClient.build())
                     .build();
             return retrofit.create(TWDService.class);
@@ -87,8 +87,10 @@ public interface TWDService {
     }
 
     @GET("CTWServiceDetails/validateLogin")
-    Call<LoginResponse> getLoginResponse(@Query("username") String username, @Query("password") String password, @Query("Device_Id") String deviceId, @Query("Version_No") String versionNo);
-
+    Call<LoginResponse> getLoginResponse(@Query("username") String username,
+                                         @Query("password") String password,
+                                         @Query("Device_Id") String deviceId,
+                                         @Query("Version_No") String versionNo);
 
     @GET("CTWServiceDetails/getAppVersion")
     Call<VersionResponse> getVersionCheck();
