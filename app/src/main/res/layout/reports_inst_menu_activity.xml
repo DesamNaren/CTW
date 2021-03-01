@@ -1193,45 +1193,6 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
 
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:text="@string/medical_checkup"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{medical.lastMedicalCheckupDate}"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/slno4_5"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/dimen_margin"
-                                    android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/dimen_text" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
@@ -1256,6 +1217,101 @@
                                             android:textSize="@dimen/dimen_text" />
 
                                     </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/medical_checkup"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{medical.lastMedicalCheckupDate}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/medical_check_up_done_by_whom_anm"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{medical.medicalCheckUpDoneByWhomAnm}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{medical.medicalCheckUpDoneByWhomAnm.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/medical_checkup_anm"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{medical.lastMedicalCheckupDateAnm}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/slno4_5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
@@ -1464,6 +1520,46 @@
                                 android:layout_height="wrap_content"
                                 android:background="@color/white"
                                 android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/slno5_0"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/date_to_which_the_stock_register_is_updated"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{diet.stockRegisterUpdated}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -3315,7 +3411,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
 
 
                                 <TextView
@@ -5338,48 +5435,55 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:orientation="vertical">
+                                        android:orientation="vertical"
+                                        android:visibility="@{academic.manaTvLessonsShown.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
-                                        <TextView
+                                        <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:text="@string/mana_tv_incharge_teacher_name"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
+                                            android:orientation="vertical">
 
-                                        <TextView
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:text="@string/mana_tv_incharge_teacher_name"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="@{academic.manaTvInchargeName}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:paddingLeft="@dimen/dimen_padding_left"
-                                            android:text="@{academic.manaTvInchargeName}"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
+                                            android:orientation="vertical">
 
-                                    </LinearLayout>
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:text="@string/mobile_number"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:text="@string/mobile_number"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:paddingLeft="@dimen/dimen_padding_left"
-                                            android:text="@{academic.manaTvMobileNo}"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="@{academic.manaTvMobileNo}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+                                        </LinearLayout>
 
                                     </LinearLayout>
 
@@ -6841,7 +6945,8 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:orientation="vertical">
+                                            android:orientation="vertical"
+                                            android:visibility="gone">
 
                                             <TextView
                                                 android:layout_width="match_parent"
@@ -7017,7 +7122,8 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:orientation="vertical">
+                                            android:orientation="vertical"
+                                            android:visibility="gone">
 
                                             <TextView
                                                 android:layout_width="match_parent"
@@ -7815,7 +7921,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="@{entitlements.hairCutComplted.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                 <TextView
                                     android:id="@+id/slno9_6"
@@ -8397,7 +8504,8 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
 
 
                                     <TextView
@@ -8437,7 +8545,8 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
 
 
                                     <TextView
@@ -8484,7 +8593,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="O."
+                                        android:text="M."
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -8523,7 +8632,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="P."
+                                        android:text="N."
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -8562,7 +8671,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="Q."
+                                        android:text="O."
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -8626,7 +8735,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="R."
+                                    android:text="P."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -8658,7 +8767,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -8705,7 +8815,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="T."
+                                    android:text="Q."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -8744,7 +8854,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="U."
+                                    android:text="R."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -8784,7 +8894,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="V."
+                                    android:text="S."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -8823,7 +8933,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="W."
+                                    android:text="T."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 

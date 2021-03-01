@@ -104,15 +104,15 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 binding.slno46, binding.slno47};
         BaseActivity.setIds(ids4, 13);
 
-        TextView[] ids5 = new TextView[]{binding.slno51, binding.slno52, binding.slno53, binding.slno54, binding.slno55};
+        TextView[] ids5 = new TextView[]{binding.slno50,binding.slno51, binding.slno52, binding.slno53, binding.slno54, binding.slno55};
         BaseActivity.setIds(ids5, 21);
 
         TextView[] ids6 = new TextView[]{binding.slno61, binding.slno62, binding.slno63, binding.slno64, binding.slno65,
                 binding.slno66, binding.slno67, binding.slno68, binding.slno69, binding.slno610, binding.slno611,
                 binding.slno612, binding.slno613, binding.slno614, binding.slno615, binding.slno616, binding.slno617,
-                binding.slno618, binding.slno619, binding.slno620, binding.slno621, binding.slno622, binding.slno623,
+                binding.slno619, binding.slno620, binding.slno621, binding.slno622, binding.slno623,
                 binding.slno624, binding.slno625, binding.slno626};
-        BaseActivity.setIds(ids6, 27);
+        BaseActivity.setIds(ids6, 28);
         binding.slno6261.setText(binding.slno626.getText().toString() + "1.");
 
         TextView[] ids7 = new TextView[]{binding.slno71, binding.slno72, binding.slno73, binding.slno74, binding.slno75,
