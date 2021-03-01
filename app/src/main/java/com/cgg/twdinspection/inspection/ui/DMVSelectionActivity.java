@@ -216,46 +216,90 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
 
         instNames = new ArrayList<>();
         institutesEntityList = new ArrayList<>();
-        viewModel.getSelectedDistricts(String.valueOf(loginDistId)).observe(this, new Observer<List<SchoolDistrict>>() {
-            @Override
-            public void onChanged(List<SchoolDistrict> schoolDistricts) {
-                customProgressDialog.dismiss();
-                if (schoolDistricts != null && schoolDistricts.size() > 0) {
-                    ArrayList<String> distNames = new ArrayList<>();
-                    distNames.add("-Select-");
-                    for (int i = 0; i < schoolDistricts.size(); i++) {
-                        distNames.add(schoolDistricts.get(i).getDistName());
-                    }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                            android.R.layout.simple_spinner_dropdown_item, distNames
-                    );
-                    dmvSelectionActivityBinding.spDist.setAdapter(adapter);
 
-                    viewModel.getAllInstitutes().observe(DMVSelectionActivity.this, new Observer<List<MasterInstituteInfo>>() {
-                        @Override
-                        public void onChanged(List<MasterInstituteInfo> masterInstituteInfos) {
-                            customProgressDialog.dismiss();
-                            if (masterInstituteInfos == null || masterInstituteInfos.size() == 0) {
-                                Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_ins_found));
-                            } else {
-                                viewModel.getAllDietList().observe(DMVSelectionActivity.this, new Observer<List<MasterDietListInfo>>() {
-                                    @Override
-                                    public void onChanged(List<MasterDietListInfo> masterDietListInfos) {
-                                        customProgressDialog.dismiss();
-                                        if (masterDietListInfos == null || masterDietListInfos.size() == 0) {
-                                            Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_diet_list_sound));
-                                        }
-                                    }
-                                });
-                            }
+        if (loginDistId != 1000) {
+            viewModel.getSelectedDistricts(String.valueOf(loginDistId)).observe(this, new Observer<List<SchoolDistrict>>() {
+                @Override
+                public void onChanged(List<SchoolDistrict> schoolDistricts) {
+                    customProgressDialog.dismiss();
+                    if (schoolDistricts != null && schoolDistricts.size() > 0) {
+                        ArrayList<String> distNames = new ArrayList<>();
+                        distNames.add("-Select-");
+                        for (int i = 0; i < schoolDistricts.size(); i++) {
+                            distNames.add(schoolDistricts.get(i).getDistName());
                         }
-                    });
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                                android.R.layout.simple_spinner_dropdown_item, distNames
+                        );
+                        dmvSelectionActivityBinding.spDist.setAdapter(adapter);
 
-                } else {
-                    Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_map_dis_found));
+                        viewModel.getAllInstitutes().observe(DMVSelectionActivity.this, new Observer<List<MasterInstituteInfo>>() {
+                            @Override
+                            public void onChanged(List<MasterInstituteInfo> masterInstituteInfos) {
+                                customProgressDialog.dismiss();
+                                if (masterInstituteInfos == null || masterInstituteInfos.size() == 0) {
+                                    Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_ins_found));
+                                } else {
+                                    viewModel.getAllDietList().observe(DMVSelectionActivity.this, new Observer<List<MasterDietListInfo>>() {
+                                        @Override
+                                        public void onChanged(List<MasterDietListInfo> masterDietListInfos) {
+                                            customProgressDialog.dismiss();
+                                            if (masterDietListInfos == null || masterDietListInfos.size() == 0) {
+                                                Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_diet_list_sound));
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                    } else {
+                        Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_map_dis_found));
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            viewModel.getAllDistricts().observe(this, new Observer<List<SchoolDistrict>>() {
+                @Override
+                public void onChanged(List<SchoolDistrict> schoolDistricts) {
+                    customProgressDialog.dismiss();
+                    if (schoolDistricts != null && schoolDistricts.size() > 0) {
+                        ArrayList<String> distNames = new ArrayList<>();
+                        distNames.add("-Select-");
+                        for (int i = 0; i < schoolDistricts.size(); i++) {
+                            distNames.add(schoolDistricts.get(i).getDistName());
+                        }
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                                android.R.layout.simple_spinner_dropdown_item, distNames
+                        );
+                        dmvSelectionActivityBinding.spDist.setAdapter(adapter);
+
+                        viewModel.getAllInstitutes().observe(DMVSelectionActivity.this, new Observer<List<MasterInstituteInfo>>() {
+                            @Override
+                            public void onChanged(List<MasterInstituteInfo> masterInstituteInfos) {
+                                customProgressDialog.dismiss();
+                                if (masterInstituteInfos == null || masterInstituteInfos.size() == 0) {
+                                    Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_ins_found));
+                                } else {
+                                    viewModel.getAllDietList().observe(DMVSelectionActivity.this, new Observer<List<MasterDietListInfo>>() {
+                                        @Override
+                                        public void onChanged(List<MasterDietListInfo> masterDietListInfos) {
+                                            customProgressDialog.dismiss();
+                                            if (masterDietListInfos == null || masterDietListInfos.size() == 0) {
+                                                Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_diet_list_sound));
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                    } else {
+                        Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.no_map_dis_found));
+                    }
+                }
+            });
+        }
 
 
         dmvSelectionActivityBinding.spDist.setOnItemSelectedListener(this);

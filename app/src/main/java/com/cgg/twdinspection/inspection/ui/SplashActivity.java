@@ -130,7 +130,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                         @Override
                                         public void run() {
                                             try {
-                                                if (versionResponse.getRadius() != null && versionResponse.getTimer()!=null) {
+                                                if (versionResponse.getRadius() != null ) {
                                                     AppConstants.DISTANCE = Float.parseFloat(versionResponse.getRadius());
                                                     AppConstants.TIMER = versionResponse.getTimer();
                                                 } else {

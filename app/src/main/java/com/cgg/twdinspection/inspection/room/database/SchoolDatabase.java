@@ -123,7 +123,7 @@ public abstract class SchoolDatabase extends RoomDatabase {
                             SchoolDatabase.class, "Schools.db")
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this codelab.
-//                            .createFromAsset("database/Schools.db")
+                            .createFromAsset("database/Schools.db")
                             .fallbackToDestructiveMigration()
                             .build();
                 }
