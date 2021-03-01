@@ -88,15 +88,9 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             academicFlag = false, cocurricularFlag = true,
             entitlementsFlag = false, regFlag = false, generalCommentsFlag = false, photoFlag = false;
     InstMainViewModel instMainViewModel;
-    private String desLat, desLng;
     private CustomProgressDialog customProgressDialog;
     LiveData<List<InstMenuInfoEntity>> sectionsData;
-    private UploadPhotoViewModel viewModel;
     private InstSubmitRequest instSubmitRequest;
-    private File file_storeroom, file_sick_room,
-            file_playGround, file_diningHall, file_dormitory,
-            file_mainBulding, file_toilet, file_kitchen, file_classroom,
-            file_tds, file_menu, file_officer;
     private String randomNo;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
     private SchoolsOfflineViewModel schoolsOfflineViewModel;
@@ -110,7 +104,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         binding.appbar.header.syncIv.setVisibility(View.GONE);
         binding.appbar.header.headerTitle.setText(getString(R.string.dashboard));
         binding.appbar.header.backBtn.setVisibility(View.GONE);
-        viewModel = new UploadPhotoViewModel(InstMenuMainActivity.this);
+        UploadPhotoViewModel viewModel = new UploadPhotoViewModel(InstMenuMainActivity.this);
         schoolsOfflineViewModel = new SchoolsOfflineViewModel(getApplication());
 
         binding.appbar.header.ivChange.setVisibility(View.VISIBLE);
@@ -139,7 +133,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                     }
                 } else {
                     clearSharedPref();
-                    Log.i("DELETE", "onBackPressed: DELETE INonBackPressed ");
                     instMainViewModel.deleteMenuData(instId);
                     startActivity(new Intent(InstMenuMainActivity.this, DashboardMenuActivity.class)
                             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
@@ -158,8 +151,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
         instMainViewModel = new InstMainViewModel(getApplication(), InstMenuMainActivity.this);
         binding.setViewmodel(instMainViewModel);
-
-
         sharedPreferences = TWDApplication.get(this).getPreferences();
         editor = sharedPreferences.edit();
         instName = sharedPreferences.getString(AppConstants.INST_NAME, "");
@@ -171,8 +162,8 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         dist_id = String.valueOf(sharedPreferences.getInt(AppConstants.DIST_ID, 0));
         mand_id = String.valueOf(sharedPreferences.getInt(AppConstants.MAN_ID, 0));
         vill_id = String.valueOf(sharedPreferences.getInt(AppConstants.VILL_ID, 0));
-        desLat = sharedPreferences.getString(AppConstants.LAT, "");
-        desLng = sharedPreferences.getString(AppConstants.LNG, "");
+        String desLat = sharedPreferences.getString(AppConstants.LAT, "");
+        String desLng = sharedPreferences.getString(AppConstants.LNG, "");
 
         InstSelectionViewModel selectionViewModel = new InstSelectionViewModel(getApplication());
         LiveData<String> liveData = selectionViewModel.getRandomId(instId);
@@ -183,54 +174,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             }
         });
 
-        LiveData<List<UploadPhoto>> listLiveData = viewModel.getPhotos(instId);
-        listLiveData.observe(InstMenuMainActivity.this, new Observer<List<UploadPhoto>>() {
-            @Override
-            public void onChanged(List<UploadPhoto> uploadPhotos) {
-                listLiveData.removeObservers(InstMenuMainActivity.this);
-                if (uploadPhotos != null && uploadPhotos.size() > 0) {
-                    for (int z = 0; z < uploadPhotos.size(); z++) {
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.STOREROOM)) {
-                            file_storeroom = new File(uploadPhotos.get(z).getPhoto_path());
-                        }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.SICKROOM)) {
-                            file_sick_room = new File(uploadPhotos.get(z).getPhoto_path());
-                        }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.DORMITORY)) {
-                            file_dormitory = new File(uploadPhotos.get(z).getPhoto_path());
-                        }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.DININGHALL)) {
-                            file_diningHall = new File(uploadPhotos.get(z).getPhoto_path());
-                        }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.MAINBUILDING)) {
-                            file_mainBulding = new File(uploadPhotos.get(z).getPhoto_path());
-                        }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.TOILET)) {
-                            file_toilet = new File(uploadPhotos.get(z).getPhoto_path());
-                        }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.KITCHEN)) {
-                            file_kitchen = new File(uploadPhotos.get(z).getPhoto_path());
-                        }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.CLASSROOM)) {
-                            file_classroom = new File(uploadPhotos.get(z).getPhoto_path());
-                        }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.PLAYGROUND)) {
-                            file_playGround = new File(uploadPhotos.get(z).getPhoto_path());
-                        }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.TDS)) {
-                            file_tds = new File(uploadPhotos.get(z).getPhoto_path());
-                        }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.MENU)) {
-                            file_menu = new File(uploadPhotos.get(z).getPhoto_path());
-                        }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.OFFICER)) {
-                            file_officer = new File(uploadPhotos.get(z).getPhoto_path());
-                        }
-
-                    }
-                }
-            }
-        });
         sectionsData = instMainViewModel.getAllSections(instId);
         sectionsData.observe(this, new Observer<List<InstMenuInfoEntity>>() {
             @Override
@@ -286,141 +229,13 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                         }
                     }
                     if (flag) {
-
                         submitCall();
-
-//                        if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
-//                            getLocationData();
-//                        } else {
-//                            Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
-//                        }
                     } else {
                         Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_insp_all));
                     }
                 }
             }
         });
-    }
-
-    private void getLocationData() {
-
-        Location cLocation = null, dLocation = null;
-
-        if (!TextUtils.isEmpty(desLat) && !TextUtils.isEmpty(desLng)) {
-            dLocation = new Location("dLoc");
-            dLocation.setLatitude(Double.parseDouble(desLat));
-            dLocation.setLongitude(Double.parseDouble(desLng));
-        }
-
-        if (mCurrentLocation != null && mCurrentLocation.getLatitude() != 0 && mCurrentLocation.getLongitude() != 0) {
-            cLocation = new Location("cLoc");
-            cLocation.setLatitude(mCurrentLocation.getLatitude());
-            cLocation.setLongitude(mCurrentLocation.getLongitude());
-        }
-
-        if (cLocation == null) {
-            Snackbar.make(binding.appbar.root, getString(R.string.loc_not_ava), Snackbar.LENGTH_SHORT).show();
-            return;
-        }
-
-
-        if (dLocation != null && dLocation.getLatitude() > 0 && dLocation.getLongitude() > 0) {
-            float distance = Utils.calcDistance(cLocation, dLocation);
-
-            if (distance <= AppConstants.DISTANCE) {
-                submitCall();
-            } else {
-                Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name),
-                        getString(R.string.ins_not_allowed) + " "
-                                + AppConstants.DISTANCE + " " + getString(R.string.radius_not_in_range));
-            }
-        } else {
-            Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.ins_not_submitted));
-        }
-    }
-
-    private void callPhotoSubmit(InstSubmitRequest instSubmitRequest) {
-
-        RequestBody requestFile =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_classroom);
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("image", file_classroom.getName(), requestFile);
-        RequestBody requestFile1 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_diningHall);
-        MultipartBody.Part body1 =
-                MultipartBody.Part.createFormData("image", file_diningHall.getName(), requestFile1);
-        RequestBody requestFile2 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_kitchen);
-        MultipartBody.Part body2 =
-                MultipartBody.Part.createFormData("image", file_kitchen.getName(), requestFile2);
-        RequestBody requestFile3 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_mainBulding);
-        MultipartBody.Part body3 =
-                MultipartBody.Part.createFormData("image", file_mainBulding.getName(), requestFile3);
-        RequestBody requestFile4 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_playGround);
-        MultipartBody.Part body4 =
-                MultipartBody.Part.createFormData("image", file_playGround.getName(), requestFile4);
-        RequestBody requestFile5 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_toilet);
-        MultipartBody.Part body5 =
-                MultipartBody.Part.createFormData("image", file_toilet.getName(), requestFile5);
-        RequestBody requestFile6 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_sick_room);
-        MultipartBody.Part body6 =
-                MultipartBody.Part.createFormData("image", file_sick_room.getName(), requestFile6);
-        RequestBody requestFile7 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_dormitory);
-        MultipartBody.Part body7 =
-                MultipartBody.Part.createFormData("image", file_dormitory.getName(), requestFile7);
-        RequestBody requestFile8 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_storeroom);
-        MultipartBody.Part body8 =
-                MultipartBody.Part.createFormData("image", file_storeroom.getName(), requestFile8);
-        MultipartBody.Part body9 = null;
-        if (file_tds != null && !file_tds.getPath().equalsIgnoreCase("null")) {
-            RequestBody requestFile9 =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), file_tds);
-
-            body9 = MultipartBody.Part.createFormData("image", file_tds.getName(), requestFile9);
-        }
-        MultipartBody.Part body10 = null;
-        if (file_menu != null && !file_menu.getPath().equalsIgnoreCase("null")) {
-            RequestBody requestFile10 =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), file_menu);
-
-            body10 = MultipartBody.Part.createFormData("image", file_menu.getName(), requestFile10);
-        }
-
-        RequestBody requestFile11 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_officer);
-        MultipartBody.Part body11 =
-                MultipartBody.Part.createFormData("image", file_officer.getName(), requestFile11);
-
-        customProgressDialog.show();
-        customProgressDialog.addText("Please wait...Uploading Photos");
-
-
-        List<MultipartBody.Part> partList = new ArrayList<>();
-        partList.add(body);
-        partList.add(body1);
-        partList.add(body2);
-        partList.add(body3);
-        partList.add(body4);
-        partList.add(body5);
-        partList.add(body6);
-        partList.add(body7);
-        partList.add(body8);
-        if (body9 != null) {
-            partList.add(body9);
-        }
-        if (body10 != null) {
-            partList.add(body10);
-        }
-        partList.add(body11);
-
-
-        viewModel.UploadImageServiceCall(partList, instSubmitRequest);
     }
 
     private void setAdapter(List<InstMenuInfoEntity> menuInfoEntities) {
@@ -611,8 +426,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     public void getSubmitData(InstSubmitResponse schemeSubmitResponse) {
         customProgressDialog.hide();
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
-            Log.i("DELETE", "getSubmitData");
-//            instMainViewModel.deleteAllInspectionData(instId);
             clearSharedPref();
             CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
@@ -663,8 +476,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
     @Override
     public void onBackPressed() {
-
-
         if (sectionsData != null && sectionsData.getValue() != null && sectionsData.getValue().size() > 0) {
             boolean flag = false;
             for (int i = 0; i < sectionsData.getValue().size(); i++) {
@@ -680,14 +491,12 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 finish();
             } else {
-
                 startActivity(new Intent(this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 finish();
             }
         } else {
             clearSharedPref();
-            Log.i("DELETE", "onBackPressed: DELETE INonBackPressed ");
             instMainViewModel.deleteMenuData(instId);
             startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
@@ -707,7 +516,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         editor.putString(AppConstants.LAT, "");
         editor.putString(AppConstants.LNG, "");
         editor.putString(AppConstants.ADDRESS, "");
-
         editor.commit();
     }
 
@@ -816,7 +624,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         SchoolsOfflineEntity schoolsOfflineEntity = new SchoolsOfflineEntity();
         schoolsOfflineEntity.setInst_id(instId);
         schoolsOfflineEntity.setInst_name(instName);
-        schoolsOfflineEntity.setInst_time(Utils.getCurrentDate());
+        schoolsOfflineEntity.setInst_time(Utils.getOfflineTime());
         schoolsOfflineEntity.setDist_id(dist_id);
         schoolsOfflineEntity.setDist_name(distName);
         schoolsOfflineEntity.setMan_id(mand_id);

@@ -112,12 +112,10 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
 
                     PDFUtil.getInstance(SchemeReportDetailsActivity.this).generatePDF(views,
                             filePath_temp, SchemeReportDetailsActivity.this);
-                    Log.i(TAG, "onClick: try");
 
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
                         customProgressDialog.hide();
-
                     Toast.makeText(SchemeReportDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                 }
 

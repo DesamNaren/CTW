@@ -65,6 +65,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -361,6 +362,21 @@ public class Utils {
         return new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss", Locale.getDefault()).format(new Date());
     }
 
+    public static String getOfflineTime() {
+        return new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault()).format(new Date());
+    }
+
+    public static Date strToDate(String time) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        Date date=null;
+        try {
+            date = format.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
     public static String getCurrentDateTimeFormat() {
         return new SimpleDateFormat("yyyy-MM-dd_hh-mm-ss", Locale.getDefault()).format(new Date());
     }
@@ -479,7 +495,7 @@ public class Utils {
 
 
     public static void customChangeAppAlert(Activity activity, String title, String msg, InstMainViewModel instMainViewModel,
-                                            SharedPreferences.Editor editor,String inst_id) {
+                                            SharedPreferences.Editor editor, String inst_id) {
         try {
             final Dialog dialog = new Dialog(activity);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -921,7 +937,7 @@ public class Utils {
                             dialog.dismiss();
                         }
 
-                        activity.startActivity(activity.getIntent().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
+                        activity.startActivity(activity.getIntent().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                         activity.finish();
                     }
                 });

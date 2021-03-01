@@ -94,6 +94,7 @@ public class SchoolsOfflineDataActivity extends LocBaseActivity implements Schoo
             file_tds, file_menu, file_officer;
     private String randomNo;
     public Location mCurrentLocation;
+    private String curTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +103,7 @@ public class SchoolsOfflineDataActivity extends LocBaseActivity implements Schoo
         customProgressDialog = new CustomProgressDialog(this);
         sharedPreferences = TWDApplication.get(this).getPreferences();
         editor = sharedPreferences.edit();
+        curTime = Utils.getOfflineTime();
 
         offlineReportBinding = DataBindingUtil.setContentView(this, R.layout.activity_schools_offline_report);
         offlineReportBinding.executePendingBindings();
@@ -136,6 +138,7 @@ public class SchoolsOfflineDataActivity extends LocBaseActivity implements Schoo
                 public void onChanged(List<SchoolsOfflineEntity> offlineEntities) {
                     listLiveData.removeObservers(SchoolsOfflineDataActivity.this);
                     if (offlineEntities != null && offlineEntities.size() > 0) {
+
                         offlineReportBinding.tvEmpty.setVisibility(View.GONE);
                         offlineReportBinding.recyclerView.setVisibility(View.VISIBLE);
 
@@ -161,18 +164,6 @@ public class SchoolsOfflineDataActivity extends LocBaseActivity implements Schoo
             onBackPressed();
         }
         return true;
-    }
-
-    void callSnackBar(String msg) {
-        Snackbar snackbar = Snackbar.make(offlineReportBinding.root, msg, Snackbar.LENGTH_INDEFINITE);
-        snackbar.setActionTextColor(getResources().getColor(R.color.white));
-        snackbar.setAction("OK", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                snackbar.dismiss();
-            }
-        });
-        snackbar.show();
     }
 
     @Override

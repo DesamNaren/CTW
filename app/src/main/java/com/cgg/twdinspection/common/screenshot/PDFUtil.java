@@ -1,6 +1,7 @@
 package com.cgg.twdinspection.common.screenshot;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -28,17 +29,16 @@ import java.util.List;
 
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class PDFUtil {
-
-    public static final double PDF_PAGE_WIDTH = 8.3 * 72;
-    public static final double PDF_PAGE_HEIGHT = 11.7 * 72;
     private static PDFUtil sInstance;
     private Exception mException;
     private File savedPDFFile;
+    Activity context;
 
-    private PDFUtil(Context context) {
+    private PDFUtil(Activity context) {
+        this.context=context;
     }
 
-    public static PDFUtil getInstance(Context context) {
+    public static PDFUtil getInstance(Activity context) {
         if (sInstance == null) {
             sInstance = new PDFUtil(context);
         }
@@ -57,9 +57,22 @@ public class PDFUtil {
                     // Create PDF Document.
                     PdfDocument pdfDocument = new PdfDocument();
                     // Write content to PDFDocument.
-                    writePDFDocument(pdfDocument, contentViews);
+
+                    context.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                writePDFDocument(pdfDocument, contentViews);
+                                savedPDFFile = savePDFDocumentToStorage(pdfDocument, filePath);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+
                     // Save document to file.
-                    savedPDFFile = savePDFDocumentToStorage(pdfDocument, filePath);
+
                 } catch (Exception exception) {
                     mException = exception;
                 }

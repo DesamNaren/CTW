@@ -36,6 +36,7 @@ import com.cgg.twdinspection.offline.SchoolsOfflineDataActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DMVSelectionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, InstSelInterface {
@@ -92,17 +93,36 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
             }
         });
 
-        String curDate = Utils.getCurrentDate();
 
-        LiveData<List<String>> schoolsOfflineRecord = schoolsOfflineViewModel.getPreviousDayInsts(curDate);
-        schoolsOfflineRecord.observe(DMVSelectionActivity.this, new Observer<List<String>>() {
+        LiveData<List<SchoolsOfflineEntity>> listLiveData = schoolsOfflineViewModel.getSchoolsOffline();
+        listLiveData.observe(DMVSelectionActivity.this, new Observer<List<SchoolsOfflineEntity>>() {
             @Override
-            public void onChanged(List<String> instList) {
-                schoolsOfflineRecord.removeObservers(DMVSelectionActivity.this);
-                if (instList != null && instList.size() > 0) {
-                    for (int i = 0; i < instList.size(); i++) {
-                        schoolsOfflineViewModel.deleteSchoolsRecord(instList.get(i));
-                        instMainViewModel.deleteAllInspectionData(instList.get(i));
+            public void onChanged(List<SchoolsOfflineEntity> offlineEntities) {
+                listLiveData.removeObservers(DMVSelectionActivity.this);
+                if (offlineEntities != null && offlineEntities.size() > 0) {
+                    List<String> offlineInsts = new ArrayList<>();
+                    for (int x = 0; x < offlineEntities.size(); x++) {
+                        String offlineTIme = offlineEntities.get(x).getInst_time();
+                        String curTime = Utils.getOfflineTime();
+                        //Compare time diff
+                        //if diff>48 then take each inst id and remove all tables
+
+                        Date offlineDate = Utils.strToDate(offlineTIme);
+                        Date curDate = Utils.strToDate(curTime);
+
+                        long millis = curDate.getTime() - offlineDate.getTime();
+                        int hours = (int) (millis / (1000 * 60 * 60));
+
+                        if (hours > 48) {
+                            offlineInsts.add(offlineEntities.get(x).getInst_id());
+                        }
+                    }
+
+                    if (offlineInsts != null && offlineInsts.size() > 0) {
+                        for (int i = 0; i < offlineInsts.size(); i++) {
+                            schoolsOfflineViewModel.deleteSchoolsRecord(offlineInsts.get(i));
+                            instMainViewModel.deleteAllInspectionData(offlineInsts.get(i));
+                        }
                     }
                 }
             }

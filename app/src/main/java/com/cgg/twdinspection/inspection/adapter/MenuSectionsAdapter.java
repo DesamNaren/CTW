@@ -101,24 +101,9 @@ public class MenuSectionsAdapter extends RecyclerView.Adapter<MenuSectionsAdapte
                         break;
                     case 12:
                         callActivity(UploadedPhotoActivity.class, dataModel.getFlag_completed());
-
-//                            boolean flag = true;
-//                            for (int i = 0; i < list.size()-1; i++) {
-//                                if (list.get(i).getFlag_completed() == 0) {
-//                                    flag = false;
-//                                    break;
-//                                }
-//                            }
-//                            if (flag) {
-//                                callActivity(UploadedPhotoActivity.class, dataModel.getFlag_completed());
-//                            } else {
-//                                Utils.customWarningAlert(context, context.getResources().getString(R.string.app_name), "Please complete other sections and submit photos");
-//                            }
                         break;
                 }
             }
-
-//            }
         });
         holder.bind(dataModel);
     }
@@ -135,7 +120,7 @@ public class MenuSectionsAdapter extends RecyclerView.Adapter<MenuSectionsAdapte
         return list != null && list.size() > 0 ? list.size() : 0;
     }
 
-    class ItemHolder extends RecyclerView.ViewHolder {
+    static class ItemHolder extends RecyclerView.ViewHolder {
 
 
         public InstMainRowBinding listItemBinding;
