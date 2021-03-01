@@ -114,8 +114,6 @@ public class InstMainViewModel extends AndroidViewModel {
             TWDService twdService = TWDService.Factory.create("school");
             Gson gson = new Gson();
             String request = gson.toJson(instSubmitRequest);
-            Log.i("request", "" + request);
-            Log.i("request_inst_id", "" + instSubmitRequest.getInstitute_id());
             twdService.getInstSubmitResponse(instSubmitRequest).enqueue(new Callback<InstSubmitResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<InstSubmitResponse> call, @NotNull Response<InstSubmitResponse> response) {

@@ -34,9 +34,9 @@ public class InstSelectionViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<InstSelectionInfo> getSelectedInst() {
+    public LiveData<InstSelectionInfo> getSelectedInst(String instId) {
         if (infoLiveData != null) {
-            infoLiveData = mRepository.getSelectedInst();
+            infoLiveData = mRepository.getSelectedInst(instId);
         }
         return infoLiveData;
     }

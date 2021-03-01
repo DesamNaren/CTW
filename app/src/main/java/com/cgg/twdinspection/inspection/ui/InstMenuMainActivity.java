@@ -174,6 +174,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             }
         });
 
+
         sectionsData = instMainViewModel.getAllSections(instId);
         sectionsData.observe(this, new Observer<List<InstMenuInfoEntity>>() {
             @Override

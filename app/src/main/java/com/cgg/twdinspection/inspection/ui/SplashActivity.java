@@ -45,20 +45,20 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
     private CustomLayoutForPermissionsBinding customBinding;
     private Context context;
     private String appVersion;
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private SplashViewModel splashViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
         context = SplashActivity.this;
         appVersion = Utils.getVersionName(this);
         splashViewModel = new SplashViewModel(this, getApplication());
-        sharedPreferences = TWDApplication.get(context).getPreferences();
+        SharedPreferences sharedPreferences = TWDApplication.get(context).getPreferences();
         editor = sharedPreferences.edit();
 
-        String version = sharedPreferences.getString("VERSION", "");
+        String version = sharedPreferences.getString(AppConstants.VERSION, "");
         String mPIN = sharedPreferences.getString(AppConstants.MPIN, "");
 
         if (TextUtils.isEmpty(version)) {
@@ -93,7 +93,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                 Button btnNo = dialog.findViewById(R.id.btDialogNo);
                 btnYes.setVisibility(View.GONE);
                 btnNo.setVisibility(View.VISIBLE);
-                btnNo.setText("Update");
+                btnNo.setText(getString(R.string.update));
                 btnNo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -122,7 +122,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                         if (versionResponse.getStatusCode() != null && versionResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                             if (appVersion != null) {
                                 if (versionResponse.getCurrentVersion() != null && versionResponse.getCurrentVersion().equalsIgnoreCase(appVersion)) {
-                                    editor.putString("VERSION", versionResponse.getCurrentVersion());
+                                    editor.putString(AppConstants.VERSION, versionResponse.getCurrentVersion());
                                     editor.commit();
                                     AppConstants.VERSION_DATE = versionResponse.getVersionDate();
 
@@ -130,8 +130,9 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                         @Override
                                         public void run() {
                                             try {
-                                                if (versionResponse.getRadius() != null) {
+                                                if (versionResponse.getRadius() != null && versionResponse.getTimer()!=null) {
                                                     AppConstants.DISTANCE = Float.parseFloat(versionResponse.getRadius());
+                                                    AppConstants.TIMER = versionResponse.getTimer();
                                                 } else {
                                                     handleError(SplashActivity.this);
                                                     return;
@@ -142,7 +143,6 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                                         SplashActivity.this, Manifest.permission.CAMERA);
                                                 int permissionCheck3 = ContextCompat.checkSelfPermission(
                                                         SplashActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
 
                                                 if ((permissionCheck1 != PackageManager.PERMISSION_GRANTED)
                                                         && (permissionCheck2 != PackageManager.PERMISSION_GRANTED)
@@ -159,7 +159,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }, 1000);
+                                    }, 3000);
 
                                 } else if (versionResponse.getStatusMessage() != null) {
                                     Utils.ShowPlayAlert(SplashActivity.this, getResources().getString(R.string.app_name), versionResponse.getStatusMessage());

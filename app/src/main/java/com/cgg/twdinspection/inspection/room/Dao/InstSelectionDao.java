@@ -21,14 +21,14 @@ import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 @Dao
 public interface InstSelectionDao {
 
-    @Query("DELETE FROM inst_selection_info")
-    void deleteInstSelection();
+    @Query("DELETE FROM inst_selection_info where inst_id LIKE :instId")
+    void deleteInstSelection(String instId);
 
     @Insert
     void insertInstSelection(InstSelectionInfo instSelectionInfo);
 
-    @Query("SELECT * from inst_selection_info")
-    LiveData<InstSelectionInfo> getInstSelection();
+    @Query("SELECT * from inst_selection_info where inst_id LIKE :instId")
+    LiveData<InstSelectionInfo> getInstSelection(String instId);
 
     @Query("SELECT randomNo from inst_selection_info where inst_id LIKE :instid")
     LiveData<String> getRandomNo(String instid);

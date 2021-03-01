@@ -127,7 +127,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         super.onCreate(savedInstanceState);
         dietIssuesBinding = DataBindingUtil.setContentView(this, R.layout.activity_diet_issues);
         customProgressDialog = new CustomProgressDialog(DietIssuesActivity.this);
-        TextView[] ids = new TextView[]{dietIssuesBinding.slno1, dietIssuesBinding.slno2, dietIssuesBinding.slno3, dietIssuesBinding.slno4, dietIssuesBinding.slno5,
+        TextView[] ids = new TextView[]{dietIssuesBinding.slno, dietIssuesBinding.slno1, dietIssuesBinding.slno2, dietIssuesBinding.slno3, dietIssuesBinding.slno4, dietIssuesBinding.slno5,
                 dietIssuesBinding.slno6, dietIssuesBinding.slno7};
         BaseActivity.setIds(ids, 20);
 

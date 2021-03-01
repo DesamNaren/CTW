@@ -110,10 +110,10 @@ public class InfraActivity extends BaseActivity implements SaveListener {
 
         TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
                 binding.slno6, binding.slno7, binding.slno8, binding.slno9, binding.slno10, binding.slno11, binding.slno12,
-                binding.slno13, binding.slno14, binding.slno15, binding.slno16, binding.slno17, binding.slno18,
+                binding.slno13, binding.slno14, binding.slno15, binding.slno16, binding.slno17,
                 binding.slno19, binding.slno20, binding.slno21, binding.slno22, binding.slno23, binding.slno24,
                 binding.slno25, binding.slno26};
-        BaseActivity.setIds(ids, 27);
+        BaseActivity.setIds(ids, 28);
         binding.slno261.setText(binding.slno26.getText().toString() + "1.");
 
         binding.header.headerTitle.setText(getResources().getString(R.string.title_infra));

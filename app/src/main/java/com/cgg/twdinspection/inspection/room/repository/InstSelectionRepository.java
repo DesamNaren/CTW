@@ -6,11 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.cgg.twdinspection.common.application.TWDApplication;
-import com.cgg.twdinspection.inspection.interfaces.InstLatestTimeInterface;
 import com.cgg.twdinspection.inspection.interfaces.InstSelInterface;
 import com.cgg.twdinspection.inspection.room.Dao.InstSelectionDao;
 import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
-import com.cgg.twdinspection.inspection.source.inst_menu_info.InstLatestTimeInfo;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 
 public class InstSelectionRepository {
@@ -24,12 +22,13 @@ public class InstSelectionRepository {
         instSelectionDao = db.instSelectionDao();
     }
 
-    public LiveData<InstSelectionInfo> getSelectedInst() {
+    public LiveData<InstSelectionInfo> getSelectedInst(String instId) {
         if (infoLiveData != null) {
-            infoLiveData = instSelectionDao.getInstSelection();
+            infoLiveData = instSelectionDao.getInstSelection(instId);
         }
         return infoLiveData;
     }
+
 
     public LiveData<String> getRandomNo(String inst_id) {
         if (randomNoLivedata != null) {
@@ -40,7 +39,7 @@ public class InstSelectionRepository {
 
     public void insertSelInst(InstSelInterface instSelInterface, InstSelectionInfo instSelectionInfo) {
         TWDApplication.getExecutorService().execute(() -> {
-            instSelectionDao.deleteInstSelection();
+            instSelectionDao.deleteInstSelection(instSelectionInfo.getInst_id());
             instSelectionDao.insertInstSelection(instSelectionInfo);
             int x = instSelectionDao.instSelCount();
             //Background work here

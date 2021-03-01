@@ -17,9 +17,20 @@ public class VersionResponse {
     @SerializedName("radius")
     @Expose
     private String radius;
+    @SerializedName("timer")
+    @Expose
+    private String timer;
     @SerializedName("version_date")
     @Expose
     private String versionDate;
+
+    public String getTimer() {
+        return timer;
+    }
+
+    public void setTimer(String timer) {
+        this.timer = timer;
+    }
 
     public String getVersionDate() {
         return versionDate;

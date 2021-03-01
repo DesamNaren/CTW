@@ -36,6 +36,7 @@ import com.cgg.twdinspection.inspection.viewmodel.SchoolsOfflineViewModel;
 import com.cgg.twdinspection.offline.SchoolsOfflineDataActivity;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -57,6 +58,8 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     private InstSelectionViewModel selectionViewModel;
     private ArrayAdapter<String> selectAdapter;
     private long loginDistId;
+    public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
+    private String timer;
 
     @Override
     public void onBackPressed() {
@@ -77,6 +80,8 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         instMainViewModel = new InstMainViewModel(getApplication());
         schoolsOfflineViewModel = new SchoolsOfflineViewModel(getApplication());
         selectionViewModel = new InstSelectionViewModel(getApplication());
+
+        timer = AppConstants.TIMER;
 
         dmvSelectionActivityBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,13 +119,24 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                         long millis = curDate.getTime() - offlineDate.getTime();
                         int hours = (int) (millis / (1000 * 60 * 60));
 
-                        if (hours > 48) {
+                        if (hours > Integer.parseInt(timer)) {
                             offlineInsts.add(offlineEntities.get(x).getInst_id());
                         }
                     }
 
                     if (offlineInsts != null && offlineInsts.size() > 0) {
                         for (int i = 0; i < offlineInsts.size(); i++) {
+
+                            File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME
+                                    + "/" + offlineEntities.get(i).getInst_id());
+
+                            if (mediaStorageDir.isDirectory()) {
+                                String[] children = mediaStorageDir.list();
+                                for (String child : children)
+                                    new File(mediaStorageDir, child).delete();
+                                mediaStorageDir.delete();
+                            }
+
                             schoolsOfflineViewModel.deleteSchoolsRecord(offlineInsts.get(i));
                             instMainViewModel.deleteAllInspectionData(offlineInsts.get(i));
                         }
@@ -148,7 +164,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                             long millis = curDate.getTime() - offlineDate.getTime();
                             int hours = (int) (millis / (1000 * 60 * 60));
 
-                            if (hours > 48) {
+                            if (hours > Integer.parseInt(timer)) {
                                 offlineInsts.add(instLatestTimeInfos.get(x).getInst_id());
                             }
                         }
@@ -156,6 +172,18 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
 
                     if (offlineInsts != null && offlineInsts.size() > 0) {
                         for (int i = 0; i < offlineInsts.size(); i++) {
+
+
+                            File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME
+                                    + "/" + instLatestTimeInfos.get(i).getInst_id());
+
+                            if (mediaStorageDir.isDirectory()) {
+                                String[] children = mediaStorageDir.list();
+                                for (String child : children)
+                                    new File(mediaStorageDir, child).delete();
+                                mediaStorageDir.delete();
+                            }
+
                             instMainViewModel.deleteAllInspectionData(offlineInsts.get(i));
                             instSelectionViewModel.deleteTimeInfo(offlineInsts.get(i));
                         }
@@ -427,7 +455,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void getCount(int cnt) {
         if (cnt != -1) {
-            LiveData<InstSelectionInfo> liveData = selectionViewModel.getSelectedInst();
+            LiveData<InstSelectionInfo> liveData = selectionViewModel.getSelectedInst(selectedInstId);
             liveData.observe(DMVSelectionActivity.this, new Observer<InstSelectionInfo>() {
                 @Override
                 public void onChanged(InstSelectionInfo instSelectionInfo) {

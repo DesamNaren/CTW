@@ -40,7 +40,7 @@ public class ReportsDietIssuesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_diet_issues);
 
-        TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
+        TextView[] ids = new TextView[]{binding.slno, binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
                 binding.slno6, binding.slno7};
         BaseActivity.setIds(ids, 20);
 

@@ -1426,5 +1426,6 @@
     <string name="medical_check_up_done_by_whom_anm">Medical checkup done by ANM</string>
     <string name="sel_medical_check_up_done_by_whom">Select medical check up done by Medical Officer</string>
     <string name="sel_medical_check_up_done_by_whom_anm">Select medical check up done by ANM</string>
+    <string name="update">Update</string>
 
 </resources>
