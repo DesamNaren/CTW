@@ -19,6 +19,7 @@ import com.cgg.twdinspection.databinding.ActivityRegistersBinding;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.RegistersCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.RegistersViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -479,6 +480,8 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
+                InstSelectionViewModel instSelectionViewModel = new InstSelectionViewModel(getApplication());
+                instSelectionViewModel.updateTimeInfo(Utils.getOfflineTime(), instId);
                 Utils.customSectionSaveAlert(RegistersActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));

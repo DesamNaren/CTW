@@ -702,6 +702,8 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                     e.printStackTrace();
                 }
                 if (z[0] >= 0) {
+                    InstSelectionViewModel instSelectionViewModel = new InstSelectionViewModel(getApplication());
+                    instSelectionViewModel.updateTimeInfo(Utils.getOfflineTime(), instID);
                     Utils.customSectionSaveAlert(DietIssuesActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
                 } else {
                     showSnackBar(getString(R.string.failed));

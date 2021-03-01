@@ -23,6 +23,7 @@ import com.cgg.twdinspection.inspection.source.entitlements_distribution.Entitle
 import com.cgg.twdinspection.inspection.viewmodel.EntitilementsCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.EntitlementsViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
@@ -492,6 +493,8 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
+                InstSelectionViewModel instSelectionViewModel = new InstSelectionViewModel(getApplication());
+                instSelectionViewModel.updateTimeInfo(Utils.getOfflineTime(), instId);
                 Utils.customSectionSaveAlert(EntitlementsActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));

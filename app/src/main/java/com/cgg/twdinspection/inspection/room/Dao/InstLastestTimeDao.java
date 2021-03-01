@@ -6,7 +6,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstLatestTimeInfo;
-import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
+
+import java.util.List;
 
 /**
  * The Room Magic is in this file, where you map file_provider_paths Java method call to an SQL query.
@@ -19,20 +20,17 @@ import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 //
 
 @Dao
-public interface InstSelectionDao {
-
-    @Query("DELETE FROM inst_selection_info")
-    void deleteInstSelection();
+public interface InstLastestTimeDao {
 
     @Insert
-    void insertInstSelection(InstSelectionInfo instSelectionInfo);
+    void insertInstLatestTime(InstLatestTimeInfo instLatestTimeInfo);
 
-    @Query("SELECT * from inst_selection_info")
-    LiveData<InstSelectionInfo> getInstSelection();
+    @Query("Update inst_latest_time_info set  inst_time=:time where  inst_id=:instId")
+    void updateTimeInfo(String time, String instId);
 
-    @Query("SELECT randomNo from inst_selection_info where inst_id LIKE :instid")
-    LiveData<String> getRandomNo(String instid);
+    @Query("SELECT * from inst_latest_time_info")
+    LiveData<List<InstLatestTimeInfo>> getLatestTimeInfo();
 
-    @Query("SELECT COUNT(*) FROM inst_selection_info")
-    int instSelCount();
+    @Query("DELETE  from inst_latest_time_info where  inst_id=:instId")
+    void deleteTimeInfo(String instId);
 }

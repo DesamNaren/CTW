@@ -37,6 +37,7 @@ import com.cgg.twdinspection.inspection.source.cocurriular_activities.StudAchiev
 import com.cgg.twdinspection.inspection.viewmodel.CocurricularCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.CocurricularViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -913,6 +914,8 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
+                InstSelectionViewModel instSelectionViewModel = new InstSelectionViewModel(getApplication());
+                instSelectionViewModel.updateTimeInfo(Utils.getOfflineTime(), instId);
                 Utils.customSectionSaveAlert(CoCurricularActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));

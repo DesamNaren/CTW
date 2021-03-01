@@ -26,6 +26,7 @@ import com.cgg.twdinspection.inspection.source.general_comments.GeneralCommentsE
 import com.cgg.twdinspection.inspection.viewmodel.GenCommentsCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.GenCommentsViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
@@ -546,6 +547,8 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
+                InstSelectionViewModel instSelectionViewModel = new InstSelectionViewModel(getApplication());
+                instSelectionViewModel.updateTimeInfo(Utils.getOfflineTime(), instID);
                 Utils.customSectionSaveAlert(GeneralCommentsActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));

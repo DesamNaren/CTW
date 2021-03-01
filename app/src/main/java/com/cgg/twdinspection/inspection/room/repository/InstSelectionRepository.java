@@ -6,9 +6,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.cgg.twdinspection.common.application.TWDApplication;
+import com.cgg.twdinspection.inspection.interfaces.InstLatestTimeInterface;
 import com.cgg.twdinspection.inspection.interfaces.InstSelInterface;
 import com.cgg.twdinspection.inspection.room.Dao.InstSelectionDao;
 import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
+import com.cgg.twdinspection.inspection.source.inst_menu_info.InstLatestTimeInfo;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 
 public class InstSelectionRepository {
@@ -29,7 +31,7 @@ public class InstSelectionRepository {
         return infoLiveData;
     }
 
-   public LiveData<String> getRandomNo(String inst_id) {
+    public LiveData<String> getRandomNo(String inst_id) {
         if (randomNoLivedata != null) {
             randomNoLivedata = instSelectionDao.getRandomNo(inst_id);
         }
@@ -54,4 +56,5 @@ public class InstSelectionRepository {
             });
         });
     }
+
 }

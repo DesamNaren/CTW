@@ -27,6 +27,7 @@ import com.cgg.twdinspection.inspection.offline.SchoolsOfflineEntity;
 import com.cgg.twdinspection.inspection.source.diet_issues.MasterDietListInfo;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
+import com.cgg.twdinspection.inspection.source.inst_menu_info.InstLatestTimeInfo;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.viewmodel.DMVDetailsViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
@@ -127,6 +128,40 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                 }
             }
         });
+        InstSelectionViewModel instSelectionViewModel = new InstSelectionViewModel(getApplication());
+        LiveData<List<InstLatestTimeInfo>> timelistLiveData = instSelectionViewModel.getLatestTimeInfo();
+        timelistLiveData.observe(DMVSelectionActivity.this, new Observer<List<InstLatestTimeInfo>>() {
+            @Override
+            public void onChanged(List<InstLatestTimeInfo> instLatestTimeInfos) {
+                timelistLiveData.removeObservers(DMVSelectionActivity.this);
+                if (instLatestTimeInfos != null && instLatestTimeInfos.size() > 0) {
+                    List<String> offlineInsts = new ArrayList<>();
+                    for (int x = 0; x < instLatestTimeInfos.size(); x++) {
+                        String offlineTIme = instLatestTimeInfos.get(x).getInst_time();
+                        String curTime = Utils.getOfflineTime();
+                        //Compare time diff
+                        //if diff>48 then take each inst id and remove all tables
+
+                        Date offlineDate = Utils.strToDate(offlineTIme);
+                        Date curDate = Utils.strToDate(curTime);
+
+                        long millis = curDate.getTime() - offlineDate.getTime();
+                        int hours = (int) (millis / (1000 * 60 * 60));
+
+                        if (hours > 48) {
+                            offlineInsts.add(instLatestTimeInfos.get(x).getInst_id());
+                        }
+                    }
+
+                    if (offlineInsts != null && offlineInsts.size() > 0) {
+                        for (int i = 0; i < offlineInsts.size(); i++) {
+                            instMainViewModel.deleteAllInspectionData(offlineInsts.get(i));
+                            instSelectionViewModel.deleteTimeInfo(offlineInsts.get(i));
+                        }
+                    }
+                }
+            }
+        });
 
         viewModel = new DMVDetailsViewModel(getApplication());
         dmvSelectionActivityBinding.setViewModel(viewModel);
@@ -209,6 +244,9 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                             selectedDistName, selectedManName, selectedVilName, lat, lng, address, randomno);
 
                     selectionViewModel.insertInstitutes(DMVSelectionActivity.this, instSelectionInfo);
+
+                    InstLatestTimeInfo instLatestTimeInfo = new InstLatestTimeInfo(selectedInstId, selInstName, Utils.getOfflineTime());
+                    selectionViewModel.insertLatestTime(instLatestTimeInfo);
                 }
             }
         });

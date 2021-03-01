@@ -42,6 +42,7 @@ import com.cgg.twdinspection.inspection.source.inst_master.MasterClassInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StudAttndCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.SyncViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
@@ -393,6 +394,8 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
             }
         });
         if (z[0] >= 0) {
+            InstSelectionViewModel instSelectionViewModel = new InstSelectionViewModel(getApplication());
+            instSelectionViewModel.updateTimeInfo(Utils.getOfflineTime(), instId);
             Utils.customSectionSaveAlert(StudentsAttendActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
         } else {
             showSnackBar(getString(R.string.failed));

@@ -19,6 +19,7 @@ import com.cgg.twdinspection.inspection.room.Dao.EntitlementsInfoDao;
 import com.cgg.twdinspection.inspection.room.Dao.GenCommentsInfoDao;
 import com.cgg.twdinspection.inspection.room.Dao.GeneralInfoDao;
 import com.cgg.twdinspection.inspection.room.Dao.InfraStructureInfoDao;
+import com.cgg.twdinspection.inspection.room.Dao.InstLastestTimeDao;
 import com.cgg.twdinspection.inspection.room.Dao.InstSelectionDao;
 import com.cgg.twdinspection.inspection.room.Dao.MedicalInfoDao;
 import com.cgg.twdinspection.inspection.room.Dao.MenuSectionsDao;
@@ -45,6 +46,7 @@ import com.cgg.twdinspection.inspection.source.general_comments.GeneralCommentsE
 import com.cgg.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.cgg.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
+import com.cgg.twdinspection.inspection.source.inst_menu_info.InstLatestTimeInfo;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
@@ -67,7 +69,7 @@ import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
         RegistersEntity.class, GeneralCommentsEntity.class, GeneralInfoEntity.class, CallHealthInfoEntity.class
         , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class, MasterInstituteInfo.class, PlantsEntity.class
         , InstMenuInfoEntity.class, StudAchievementEntity.class, MedicalDetailsBean.class
-        , CoCurricularEntity.class, UploadPhoto.class, AcademicGradeEntity.class
+        , CoCurricularEntity.class, UploadPhoto.class, AcademicGradeEntity.class, InstLatestTimeInfo.class
         , InstSelectionInfo.class, SchoolsOfflineEntity.class, MasterDietListInfo.class}, version = 1, exportSchema = false)
 public abstract class SchoolDatabase extends RoomDatabase {
 
@@ -106,6 +108,8 @@ public abstract class SchoolDatabase extends RoomDatabase {
     public abstract SchoolSyncDao schoolSyncDao();
 
     public abstract InstSelectionDao instSelectionDao();
+
+    public abstract InstLastestTimeDao instLastestTimeDao();
 
     public abstract PhotoDao photoDao();
 

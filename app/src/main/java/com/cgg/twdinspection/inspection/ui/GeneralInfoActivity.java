@@ -19,6 +19,7 @@ import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.cgg.twdinspection.inspection.viewmodel.GeneralInfoViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 public class GeneralInfoActivity extends BaseActivity implements SaveListener {
@@ -674,7 +675,8 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
-
+                InstSelectionViewModel instSelectionViewModel = new InstSelectionViewModel(getApplication());
+                instSelectionViewModel.updateTimeInfo(Utils.getOfflineTime(), instID);
                 Utils.customSectionSaveAlert(GeneralInfoActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));

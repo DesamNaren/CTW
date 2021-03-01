@@ -38,6 +38,7 @@ import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.viewmodel.AcademicCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.AcademicViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -1397,6 +1398,8 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
+                InstSelectionViewModel instSelectionViewModel = new InstSelectionViewModel(getApplication());
+                instSelectionViewModel.updateTimeInfo(Utils.getOfflineTime(), instId);
                 Utils.customSectionSaveAlert(AcademicActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));

@@ -35,6 +35,7 @@ import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterStaffInfo;
 import com.cgg.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StaffAttendCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StaffViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.SyncViewModel;
@@ -281,6 +282,8 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener, S
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
+                InstSelectionViewModel instSelectionViewModel = new InstSelectionViewModel(getApplication());
+                instSelectionViewModel.updateTimeInfo(Utils.getOfflineTime(), instId);
                 Utils.customSectionSaveAlert(StaffAttendActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));
