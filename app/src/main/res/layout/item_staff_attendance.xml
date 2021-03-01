@@ -262,7 +262,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_2dp"
                     android:orientation="horizontal"
-                    android:visibility="visible">
+                    android:visibility="@{staff.is_teaching_staff? View.VISIBLE : View.GONE, default = gone}">
+
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="wrap_content"
@@ -438,7 +439,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_2dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="@{staff.is_teaching_staff? View.VISIBLE : View.GONE, default = gone}">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -510,7 +512,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_2dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="@{staff.is_teaching_staff? View.VISIBLE : View.GONE, default = gone}">
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="match_parent"

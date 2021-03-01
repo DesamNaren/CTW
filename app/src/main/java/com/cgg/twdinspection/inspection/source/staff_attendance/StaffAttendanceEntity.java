@@ -68,10 +68,32 @@ public class StaffAttendanceEntity {
     private String acad_panel_grade;
 
     @ColumnInfo()
+    private boolean is_teaching_staff;
+
+    @ColumnInfo()
+    private String role_name;
+
+    @ColumnInfo()
     private int acad_panel_grade_pos;
 
     @ColumnInfo()
     private int categ_pos;
+
+    public boolean getIs_teaching_staff() {
+        return is_teaching_staff;
+    }
+
+    public void setIs_teaching_staff(boolean is_teaching_staff) {
+        this.is_teaching_staff = is_teaching_staff;
+    }
+
+    public String getRole_name() {
+        return role_name;
+    }
+
+    public void setRole_name(String role_name) {
+        this.role_name = role_name;
+    }
 
     public int getAcad_panel_grade_pos() {
         return acad_panel_grade_pos;
@@ -139,13 +161,16 @@ public class StaffAttendanceEntity {
     private boolean leavesFlag;
 
 
-    public StaffAttendanceEntity(String officer_id, String institute_id, String inst_name, String emp_id, String emp_name, String designation) {
+    public StaffAttendanceEntity(String officer_id, String institute_id, String inst_name, String emp_id,
+                                 String emp_name, String designation, boolean is_teaching_staff, String role_name) {
         this.officer_id = officer_id;
         this.institute_id = institute_id;
         this.inst_name = inst_name;
         this.emp_id = emp_id;
         this.emp_name = emp_name;
         this.designation = designation;
+        this.is_teaching_staff = is_teaching_staff;
+        this.role_name = role_name;
     }
 
     public boolean isLeavesFlag() {

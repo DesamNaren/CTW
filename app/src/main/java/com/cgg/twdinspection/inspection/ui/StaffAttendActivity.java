@@ -193,7 +193,9 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener, S
                     StaffAttendanceEntity staffAttendanceEntity = new StaffAttendanceEntity(officerId,
                             String.valueOf(masterStaffInfos.get(i).getHostelId()),
                             instName, String.valueOf(masterStaffInfos.get(i).getEmpId()),
-                            masterStaffInfos.get(i).getEmpName(), masterStaffInfos.get(i).getDesignation());
+                            masterStaffInfos.get(i).getEmpName(), masterStaffInfos.get(i).getDesignation(),
+                            masterStaffInfos.get(i).getIsTeachingStaff(), masterStaffInfos.get(i).getRoleName()
+                    );
                     staffAttendanceEntitiesmain.add(staffAttendanceEntity);
                 }
             }
@@ -230,18 +232,22 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener, S
                     || staffAttendanceEntitiesmain.get(i).isOndepFlag() || staffAttendanceEntitiesmain.get(i).isLeavesFlag())) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.mark_att_emp));
+                staffAttBinding.staffRv.scrollToPosition(i);
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getYday_duty_allotted())) {
+            } else if (staffAttendanceEntitiesmain.get(i).getIs_teaching_staff() && TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getYday_duty_allotted())) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.yes_duty_alloted));
+                staffAttBinding.staffRv.scrollToPosition(i);
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended())) {
+            } else if (staffAttendanceEntitiesmain.get(i).getIs_teaching_staff() && TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended())) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.last_week_turn_att));
+                staffAttBinding.staffRv.scrollToPosition(i);
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getAcad_panel_grade()) || staffAttendanceEntitiesmain.get(i).getAcad_panel_grade_pos() == 0) {
+            } else if (staffAttendanceEntitiesmain.get(i).getIs_teaching_staff() && (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getAcad_panel_grade()) || staffAttendanceEntitiesmain.get(i).getAcad_panel_grade_pos() == 0)) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.last_yr_acad_panel));
+                staffAttBinding.staffRv.scrollToPosition(i);
                 break;
             }
 

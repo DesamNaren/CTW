@@ -27,6 +27,28 @@ public class MasterStaffInfo {
     @SerializedName("Inst_Name")
     @Expose
     private String instName;
+    @SerializedName("is_teaching_staff")
+    @Expose
+    private boolean isTeachingStaff;
+    @SerializedName("role_name")
+    @Expose
+    private String roleName;
+
+    public boolean getIsTeachingStaff() {
+        return isTeachingStaff;
+    }
+
+    public void setIsTeachingStaff(boolean isTeachingStaff) {
+        this.isTeachingStaff = isTeachingStaff;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
     public Integer getInstId() {
         return instId;
