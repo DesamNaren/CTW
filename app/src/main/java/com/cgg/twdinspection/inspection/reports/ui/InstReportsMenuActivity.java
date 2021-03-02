@@ -280,7 +280,8 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
                             String academic = gson.toJson(inspReportData.getAcademicOverview());
                             if (!TextUtils.isEmpty(academic) && !academic.equalsIgnoreCase("{}")
-                                    && inspReportData.getAcademicOverview().getInstituteId() != null) {
+                                    && inspReportData.getAcademicOverview().getInstituteId() != null
+                                    && inspReportData.getAcademicOverview().getHighestClassSyllabusCompleted() != null) {
                                 views.add(binding.academicPdf1);
                                 views.add(binding.academicPdf2);
                                 views.add(binding.academicPdf3);
