@@ -85,7 +85,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     String instName, distName, mandalName, villageName;
     boolean submitFlag = false, generalInfoFlag = false, studAttendFlag = false,
             staffAttendFlag = false, medicalFlag = false, dietFlag = false, infraFlag = false,
-            academicFlag = false, cocurricularFlag = true,
+            academicFlag = true, cocurricularFlag = true,
             entitlementsFlag = false, regFlag = false, generalCommentsFlag = false, photoFlag = false;
     InstMainViewModel instMainViewModel;
     private CustomProgressDialog customProgressDialog;
@@ -184,7 +184,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 if (sectionsData.getValue() != null && sectionsData.getValue().size() > 0) {
                     boolean flag = true;
                     for (int i = 0; i < sectionsData.getValue().size(); i++) {
-                        if (i != 7 && sectionsData.getValue().get(i).getFlag_completed() == 0) {
+                        if (i != 6 && i != 7 && sectionsData.getValue().get(i).getFlag_completed() == 0) {
                             flag = false;
                             break;
                         }
@@ -224,7 +224,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 if (sectionsData.getValue() != null && sectionsData.getValue().size() > 0) {
                     boolean flag = true;
                     for (int i = 0; i < sectionsData.getValue().size(); i++) {
-                        if (i != 7 && sectionsData.getValue().get(i).getFlag_completed() == 0) {
+                        if (i != 6 && i != 7 && sectionsData.getValue().get(i).getFlag_completed() == 0) {
                             flag = false;
                             break;
                         }
@@ -447,7 +447,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         dietFlag = false;
         infraFlag = false;
         cocurricularFlag = true;
-        academicFlag = false;
+        academicFlag = true;
         entitlementsFlag = false;
         regFlag = false;
         generalCommentsFlag = false;

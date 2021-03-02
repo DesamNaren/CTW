@@ -72,6 +72,16 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
         StaffAttendanceEntity employeeResponse = staffAttendanceEntities.get(position);
         holder.binding.setStaff(employeeResponse);
 
+        if(employeeResponse.getDesignation()!=null && employeeResponse.getDesignation().contains("Class IV")){
+            holder.binding.llOndep.setVisibility(View.GONE);
+            holder.binding.llLeaves.setVisibility(View.GONE);
+            holder.binding.llAbsent.setVisibility(View.VISIBLE);
+        }else {
+            holder.binding.llOndep.setVisibility(View.VISIBLE);
+            holder.binding.llLeaves.setVisibility(View.VISIBLE);
+            holder.binding.llAbsent.setVisibility(View.GONE);
+        }
+
         holder.bind(employeeResponse);
         setAnimation(holder.itemView, position);
 

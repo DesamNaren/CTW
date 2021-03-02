@@ -277,11 +277,15 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                             views.add(binding.infraPdf1);
                             views.add(binding.infraPdf2);
                             views.add(binding.infraPdf3);
-                            views.add(binding.academicPdf1);
-                            views.add(binding.academicPdf2);
-                            views.add(binding.academicPdf3);
-                            views.add(binding.academicPdf4);
 
+                            String academic = gson.toJson(inspReportData.getAcademicOverview());
+                            if (!TextUtils.isEmpty(academic) && !academic.equalsIgnoreCase("{}")
+                                    && inspReportData.getAcademicOverview().getInstituteId() != null) {
+                                views.add(binding.academicPdf1);
+                                views.add(binding.academicPdf2);
+                                views.add(binding.academicPdf3);
+                                views.add(binding.academicPdf4);
+                            }
                             String cocurricular = gson.toJson(inspReportData.getCoCurricularInfo());
                             if (!TextUtils.isEmpty(cocurricular) && !cocurricular.equalsIgnoreCase("{}")
                                     && inspReportData.getCoCurricularInfo().getInstituteId() != null) {
