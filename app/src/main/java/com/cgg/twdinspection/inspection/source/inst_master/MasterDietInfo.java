@@ -26,6 +26,18 @@ public class MasterDietInfo {
     @Expose
     private String instName;
 
+    @SerializedName("item_no")
+    @Expose
+    private int itemNo;
+
+    public int getItemNo() {
+        return itemNo;
+    }
+
+    public void setItemNo(int itemNo) {
+        this.itemNo = itemNo;
+    }
+
     public Integer getInstId() {
         return instId;
     }
