@@ -909,6 +909,15 @@
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
+                                    <RadioButton
+                                        android:id="@+id/rb_na_hm_head_quarters"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.hmheadquarters.equalsIgnoreCase(`NA`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/na" />
+
                                 </RadioGroup>
                             </LinearLayout>
 

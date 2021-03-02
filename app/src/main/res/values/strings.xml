@@ -2,6 +2,7 @@
     <string name="app_name_release">TWD Inspection App</string>
     <string name="app_name_demo">Demo-TWD</string>
     <string name="app_name_qa">QA-TWD</string>
+    <string name="app_name_dev">Dev-TWD</string>
     <string name="font_name_source_opensans">OpenSans</string>
     <string name="districts">districts</string>
     <string name="verify_your_number">Verify your number</string>
