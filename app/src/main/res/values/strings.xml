@@ -365,7 +365,6 @@
         <item>Registers Up to date</item>
         <item>General Comments</item>
         <item>Uploaded Photographs</item>
-        <!--        <item>Following escalation matrix was defined </item>-->
     </string-array>
     <string-array name="inst_sections_names">
         <item>GI</item>

@@ -173,13 +173,13 @@
                                     android:textColor="@color/black" />
 
 
-                                <RadioGroup
-                                    android:id="@+id/rg_source_of_drinking_water"
+                                <LinearLayout
+                                    android:orientation="vertical"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp">
 
-                                    <RadioButton
+                                    <CheckBox
                                         android:id="@+id/drinking_water_ro_plant"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -188,7 +188,7 @@
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/ro_plant" />
 
-                                    <RadioButton
+                                    <CheckBox
                                         android:id="@+id/drinking_water_source_open_well"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -197,7 +197,7 @@
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/open_well" />
 
-                                    <RadioButton
+                                    <CheckBox
                                         android:id="@+id/drinking_water_source_bore_well"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -206,7 +206,7 @@
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/bore_well" />
 
-                                    <RadioButton
+                                    <CheckBox
                                         android:id="@+id/drinking_water_source_municipal"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -216,7 +216,7 @@
                                         android:text="@string/municipal" />
 
 
-                                    <RadioButton
+                                    <CheckBox
                                         android:id="@+id/drinking_water_source_hand_pump"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -226,7 +226,7 @@
                                         android:text="@string/hand_pump" />
 
 
-                                </RadioGroup>
+                                </LinearLayout>
                             </LinearLayout>
 
                         </LinearLayout>

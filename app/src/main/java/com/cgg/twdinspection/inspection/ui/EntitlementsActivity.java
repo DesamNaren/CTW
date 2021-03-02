@@ -40,7 +40,6 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     String instId, officerID;
-    private int localFlag = -1;
 
     private void ScrollToView(View view) {
         view.getParent().requestChildFocus(view, view);
@@ -74,8 +73,8 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         binding.rgBedsheets.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgBedsheets.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_bedsheets)
+                int selectedItem = binding.rgBedsheets.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_bedsheets)
                     bedSheets = AppConstants.Yes;
                 else
                     bedSheets = AppConstants.No;
@@ -85,8 +84,8 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         binding.rgCarpets.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgCarpets.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_carpets)
+                int selectedItem = binding.rgCarpets.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_carpets)
                     carpets = AppConstants.Yes;
                 else
                     carpets = AppConstants.No;
@@ -96,18 +95,29 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         binding.rgUniforms.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgUniforms.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_uniforms)
+                int selectedItem = binding.rgUniforms.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_uniforms) {
                     uniforms = AppConstants.Yes;
-                else
+                    binding.slno3View.setVisibility(View.VISIBLE);
+                    binding.slno3Ll.setVisibility(View.VISIBLE);
+
+                    binding.slno4View.setVisibility(View.VISIBLE);
+                    binding.slno4Ll.setVisibility(View.VISIBLE);
+                } else {
                     uniforms = AppConstants.No;
+                    binding.slno3View.setVisibility(View.GONE);
+                    binding.slno3Ll.setVisibility(View.GONE);
+
+                    binding.slno4View.setVisibility(View.GONE);
+                    binding.slno4Ll.setVisibility(View.GONE);
+                }
             }
         });
         binding.rgSportsDress.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgSportsDress.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_sports_dress)
+                int selectedItem = binding.rgSportsDress.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_sports_dress)
                     sportsDress = AppConstants.Yes;
                 else
                     sportsDress = AppConstants.No;
@@ -116,8 +126,8 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         binding.rgSlippers.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgSlippers.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_slippers)
+                int selectedItem = binding.rgSlippers.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_slippers)
                     slippers = AppConstants.Yes;
                 else
                     slippers = AppConstants.No;
@@ -127,8 +137,8 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         binding.rgNightDress.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgNightDress.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_night_dress)
+                int selectedItem = binding.rgNightDress.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_night_dress)
                     nightDress = AppConstants.Yes;
                 else
                     nightDress = AppConstants.No;
@@ -138,8 +148,8 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         binding.rgSchoolBags.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgSchoolBags.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_school_bags)
+                int selectedItem = binding.rgSchoolBags.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_school_bags)
                     schoolBags = AppConstants.Yes;
                 else
                     schoolBags = AppConstants.No;
@@ -149,15 +159,15 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         binding.rgSanitaryNapkins.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgSanitaryNapkins.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_sanitary_napkins) {
+                int selectedItem = binding.rgSanitaryNapkins.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_sanitary_napkins) {
                     sanitary_napkins_supplied = AppConstants.Yes;
 
                     binding.llSanitaryNapkins.setVisibility(View.VISIBLE);
                     binding.llSanitary.setVisibility(View.VISIBLE);
                     binding.llSanitaryReason.setVisibility(View.GONE);
                     binding.etSanitaryReason.setText("");
-                } else if (selctedItem == R.id.rb_no_sanitary_napkins) {
+                } else if (selectedItem == R.id.rb_no_sanitary_napkins) {
                     sanitary_napkins_supplied = AppConstants.No;
 
                     binding.llSanitaryNapkins.setVisibility(View.VISIBLE);
@@ -173,10 +183,10 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         binding.rgSanitary.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgSanitary.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_sanitary)
+                int selectedItem = binding.rgSanitary.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_sanitary)
                     sanitaryNapkins = AppConstants.GOOD;
-                else if (selctedItem == R.id.rb_no_sanitary)
+                else if (selectedItem == R.id.rb_no_sanitary)
                     sanitaryNapkins = AppConstants.BAD;
                 else
                     sanitaryNapkins = null;
@@ -186,14 +196,14 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         binding.rgNotesSupplied.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgNotesSupplied.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_notes_supplied) {
+                int selectedItem = binding.rgNotesSupplied.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_notes_supplied) {
                     notesSupplied = AppConstants.Yes;
                     binding.llNotesSupplied.setVisibility(View.VISIBLE);
                     binding.llNotes.setVisibility(View.VISIBLE);
                     binding.llNotesReason.setVisibility(View.GONE);
                     binding.etNotesReason.setText("");
-                } else if (selctedItem == R.id.rb_no_notes_supplied) {
+                } else if (selectedItem == R.id.rb_no_notes_supplied) {
                     notesSupplied = AppConstants.No;
                     binding.llNotesSupplied.setVisibility(View.VISIBLE);
                     binding.llNotes.setVisibility(View.GONE);
@@ -207,10 +217,10 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         binding.rgNotes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgNotes.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_notes)
+                int selectedItem = binding.rgNotes.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_notes)
                     notes = AppConstants.GOOD;
-                else if (selctedItem == R.id.rb_no_notes)
+                else if (selectedItem == R.id.rb_no_notes)
                     notes = AppConstants.BAD;
                 else
                     notes = null;
@@ -219,13 +229,13 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         binding.rgCosmetics.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgCosmetics.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_cosmetics) {
+                int selectedItem = binding.rgCosmetics.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_cosmetics) {
                     cosmetics = AppConstants.Yes;
                     binding.llCosmeticsUptoMonth.setVisibility(View.VISIBLE);
                     binding.llCosmeticsReason.setVisibility(View.GONE);
                     binding.etCosmeticsReason.setText("");
-                } else if (selctedItem == R.id.rb_no_cosmetics) {
+                } else if (selectedItem == R.id.rb_no_cosmetics) {
                     cosmetics = AppConstants.No;
                     binding.llCosmeticsUptoMonth.setVisibility(View.GONE);
                     binding.llCosmeticsReason.setVisibility(View.VISIBLE);
@@ -246,25 +256,26 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         binding.rgEntitlementsUniforms.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgEntitlementsUniforms.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_entitlements_uniforms)
+                int selectedItem = binding.rgEntitlementsUniforms.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_entitlements_uniforms) {
                     entitlementsUniforms = AppConstants.Yes;
-                else
+                } else {
                     entitlementsUniforms = AppConstants.No;
+                }
             }
         });
 
         binding.rgHaircut.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgHaircut.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_haircut) {
+                int selectedItem = binding.rgHaircut.getCheckedRadioButtonId();
+                if (selectedItem == R.id.rb_yes_haircut) {
                     hair_cut_complted = AppConstants.Yes;
                     binding.llHaircutDate.setVisibility(View.VISIBLE);
-                } else if (selctedItem == R.id.rb_no_haircut) {
+                } else if (selectedItem == R.id.rb_no_haircut) {
                     hair_cut_complted = AppConstants.No;
                     binding.llHaircutDate.setVisibility(View.GONE);
-                } else if (selctedItem == R.id.rb_na_haircut) {
+                } else if (selectedItem == R.id.rb_na_haircut) {
                     hair_cut_complted = AppConstants.No;
                     binding.llHaircutDate.setVisibility(View.GONE);
                 } else {
@@ -293,7 +304,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
 
 
         try {
-            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            int localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
             if (localFlag == 1) {
                 //get local record & set to data binding
                 LiveData<EntitlementsEntity> entitlementInfoData = instMainViewModel.getEntitlementInfoData(instId);
@@ -399,11 +410,11 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
             returnFlag = false;
             binding.etCosmeticsReason.requestFocus();
             showSnackBar(getString(R.string.ent_reason));
-        } else if (TextUtils.isEmpty(binding.etPairOfDressDistributed.getText().toString())) {
+        } else if (uniforms.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(binding.etPairOfDressDistributed.getText().toString())) {
             binding.etPairOfDressDistributed.requestFocus();
             returnFlag = false;
             showSnackBar(getString(R.string.num_pair));
-        } else if (TextUtils.isEmpty(entitlementsUniforms)) {
+        } else if (uniforms.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(entitlementsUniforms)) {
             ScrollToView(binding.rgEntitlementsUniforms);
             returnFlag = false;
             showSnackBar(getString(R.string.chk_uniform));

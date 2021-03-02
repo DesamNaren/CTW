@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ import com.cgg.twdinspection.common.custom.CustomFontTextView;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityInfrastructureBinding;
+import com.cgg.twdinspection.gcc.reports.source.ReportSubmitReqCommodities;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
 import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
@@ -53,13 +55,18 @@ import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -67,21 +74,64 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     ActivityInfrastructureBinding binding;
     InfraViewModel infraViewModel;
     SharedPreferences sharedPreferences;
-    InfraStructureEntity infrastuctureEntity;
-    String drinkingWaterFacility, runningWaterFacility, bigSchoolNameBoard, roPlant,
-            sourceOfDrinkingWater, sourceOfRunningWater, inverter_available, inverterWorkingStatus,
-            electricity_wiring, enough_fans, dining_hall, dining_hall_used, dining_hall_avail_construction, dining_hall_add_req,
-            separate_kitchen_room_available, construct_kitchen_room, is_it_in_good_condition,
-            transformer_available, powerConnectionType, individual_connection, road_required,
-            compWall_required, construction_part_type, compWall_cnt, cc_cameras, steam_cooking, bunker_beds, bunker_beds_cnt,
-            gate_required, pathway_required,
-            sump_required, sewage_allowed, sewage_raise_req, drainage_functioning, heater_available, heater_workingStatus,
-            repairs_to_door, painting, electricity_wiring_reason,
-            roplant_reason, ceilingFansWorking, ceilingFansNonWorking, ceilingFansReq,
-            mountedFansWorking, mountedFansNonWorking, mountedFansReq,
-            lightsWorking,  lightsNonWorking,  lightsReq,
-            repair_required, how_many_buildings, totalToilets, totalBathrooms, functioningBathrooms,
-            functioningToilets, repairsReqToilets, repairsReqBathrooms, add_req;
+    InfraStructureEntity infraStructureEntity;
+    private String sourceOfDrinkingWater ;
+    String drinkingWaterFacility;
+    String runningWaterFacility;
+    String bigSchoolNameBoard;
+    String roPlant;
+    String sourceOfRunningWater;
+    String inverter_available;
+    String inverterWorkingStatus;
+    String electricity_wiring;
+    String enough_fans;
+    String dining_hall;
+    String dining_hall_used;
+    String dining_hall_avail_construction;
+    String dining_hall_add_req;
+    String separate_kitchen_room_available;
+    String construct_kitchen_room;
+    String is_it_in_good_condition;
+    String transformer_available;
+    String powerConnectionType;
+    String individual_connection;
+    String road_required;
+    String compWall_required;
+    String construction_part_type;
+    String compWall_cnt;
+    String cc_cameras;
+    String steam_cooking;
+    String bunker_beds;
+    String bunker_beds_cnt;
+    String gate_required;
+    String pathway_required;
+    String sump_required;
+    String sewage_allowed;
+    String sewage_raise_req;
+    String drainage_functioning;
+    String heater_available;
+    String heater_workingStatus;
+    String repairs_to_door;
+    String painting;
+    String roplant_reason;
+    String ceilingFansWorking;
+    String ceilingFansNonWorking;
+    String ceilingFansReq;
+    String mountedFansWorking;
+    String mountedFansNonWorking;
+    String mountedFansReq;
+    String lightsWorking;
+    String lightsNonWorking;
+    String lightsReq;
+    String repair_required;
+    String how_many_buildings;
+    String totalToilets;
+    String totalBathrooms;
+    String functioningBathrooms;
+    String functioningToilets;
+    String repairsReqToilets;
+    String repairsReqBathrooms;
+    String add_req;
 
     InstMainViewModel instMainViewModel;
     private String officerID;
@@ -96,7 +146,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     File file_tds;
     int flag_tds = 0;
     SharedPreferences.Editor editor;
-    private InstSelectionViewModel selectionViewModel;
+    private Set<String> drinkingWaterSources;
 
     private void ScrollToView(View view) {
         view.getParent().requestChildFocus(view, view);
@@ -107,7 +157,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_infrastructure);
-
+        drinkingWaterSources= new HashSet<>();
         TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
                 binding.slno6, binding.slno7, binding.slno8, binding.slno9, binding.slno10, binding.slno11, binding.slno12,
                 binding.slno13, binding.slno14, binding.slno15, binding.slno16, binding.slno17,
@@ -142,7 +192,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             e.printStackTrace();
         }
 
-        selectionViewModel = new InstSelectionViewModel(getApplication());
+        InstSelectionViewModel selectionViewModel = new InstSelectionViewModel(getApplication());
         LiveData<String> liveData = selectionViewModel.getRandomId(instID);
         liveData.observe(InfraActivity.this, new Observer<String>() {
             @Override
@@ -174,28 +224,60 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 } else if (selctedItem == R.id.drinking_water_facility_no) {
                     drinkingWaterFacility = "NO";
                     binding.llDrinkingWater.setVisibility(View.GONE);
-                    binding.rgSourceOfDrinkingWater.clearCheck();
                 } else
                     drinkingWaterFacility = null;
             }
         });
 
-        binding.rgSourceOfDrinkingWater.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        binding.drinkingWaterRoPlant.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgSourceOfDrinkingWater.getCheckedRadioButtonId();
-                if (selctedItem == R.id.drinking_water_ro_plant)
-                    sourceOfDrinkingWater = getResources().getString(R.string.ro_plant);
-                else if (selctedItem == R.id.drinking_water_source_open_well)
-                    sourceOfDrinkingWater = getResources().getString(R.string.open_well);
-                else if (selctedItem == R.id.drinking_water_source_bore_well)
-                    sourceOfDrinkingWater = getResources().getString(R.string.bore_well);
-                else if (selctedItem == R.id.drinking_water_source_municipal)
-                    sourceOfDrinkingWater = getResources().getString(R.string.municipal);
-                else if (selctedItem == R.id.drinking_water_source_hand_pump)
-                    sourceOfDrinkingWater = getResources().getString(R.string.hand_pump);
-                else
-                    sourceOfDrinkingWater = null;
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    drinkingWaterSources.add(getResources().getString(R.string.ro_plant));
+                }else {
+                    drinkingWaterSources.remove(getResources().getString(R.string.ro_plant));
+                }
+
+            }
+        });
+        binding.drinkingWaterSourceOpenWell.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    drinkingWaterSources.add(getResources().getString(R.string.open_well));
+                }else {
+                    drinkingWaterSources.remove(getResources().getString(R.string.open_well));
+                }
+            }
+        });
+        binding.drinkingWaterSourceBoreWell.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    drinkingWaterSources.add(getResources().getString(R.string.bore_well));
+                }else {
+                    drinkingWaterSources.remove(getResources().getString(R.string.bore_well));
+                }
+            }
+        });
+        binding.drinkingWaterSourceMunicipal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    drinkingWaterSources.add(getResources().getString(R.string.municipal));
+                }else {
+                    drinkingWaterSources.remove(getResources().getString(R.string.municipal));
+                }
+            }
+        });
+        binding.drinkingWaterSourceHandPump.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    drinkingWaterSources.add(getResources().getString(R.string.hand_pump));
+                }else {
+                    drinkingWaterSources.remove(getResources().getString(R.string.hand_pump));
+                }
             }
         });
 
@@ -815,78 +897,83 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 add_bathrooms_cnt = binding.addBathroomsCnt.getText().toString().trim();
                 compWall_cnt = binding.etCompoundwallCnt.getText().toString().trim();
                 bunker_beds_cnt = binding.etBunkerBedsCnt.getText().toString().trim();
+                if(drinkingWaterSources.size()>0) {
+                    sourceOfDrinkingWater = new Gson().toJson(drinkingWaterSources);
+                }else {
+                    sourceOfDrinkingWater=null;
+                }
 
                 if (validateData()) {
-                    infrastuctureEntity = new InfraStructureEntity();
-                    infrastuctureEntity.setOfficer_id(officerID);
-                    infrastuctureEntity.setInspection_time(Utils.getCurrentDateTime());
-                    infrastuctureEntity.setInstitute_id(instID);
-                    infrastuctureEntity.setDrinking_water_facility(drinkingWaterFacility);
-                    infrastuctureEntity.setBigSchoolNameBoard(bigSchoolNameBoard);
-                    infrastuctureEntity.setRo_plant_woking(roPlant);
-                    infrastuctureEntity.setRo_plant_reason(roplant_reason);
-                    infrastuctureEntity.setDrinking_water_source(sourceOfDrinkingWater);
-                    infrastuctureEntity.setRunning_water_facility(runningWaterFacility);
-                    infrastuctureEntity.setRunningWater_source(sourceOfRunningWater);
-                    infrastuctureEntity.setInverter_available(inverter_available);
-                    infrastuctureEntity.setInverterWorkingStatus(inverterWorkingStatus);
-                    infrastuctureEntity.setElectricity_wiring(electricity_wiring);
-                    infrastuctureEntity.setEnough_fans(enough_fans);
-                    infrastuctureEntity.setCeilingfans_working(ceilingFansWorking);
-                    infrastuctureEntity.setCeilingfans_nonworking(ceilingFansNonWorking);
-                    infrastuctureEntity.setCeilingfans_required(ceilingFansReq);
-                    infrastuctureEntity.setMountedfans_working(mountedFansWorking);
-                    infrastuctureEntity.setMountedfans_nonworking(mountedFansNonWorking);
-                    infrastuctureEntity.setMountedfans_required(mountedFansReq);
+                    infraStructureEntity = new InfraStructureEntity();
+                    infraStructureEntity.setOfficer_id(officerID);
+                    infraStructureEntity.setInspection_time(Utils.getCurrentDateTime());
+                    infraStructureEntity.setInstitute_id(instID);
+                    infraStructureEntity.setDrinking_water_facility(drinkingWaterFacility);
+                    infraStructureEntity.setBigSchoolNameBoard(bigSchoolNameBoard);
+                    infraStructureEntity.setRo_plant_woking(roPlant);
+                    infraStructureEntity.setRo_plant_reason(roplant_reason);
+                    infraStructureEntity.setDrinking_water_source(sourceOfDrinkingWater);
+                    infraStructureEntity.setRunning_water_facility(runningWaterFacility);
+                    infraStructureEntity.setRunningWater_source(sourceOfRunningWater);
+                    infraStructureEntity.setInverter_available(inverter_available);
+                    infraStructureEntity.setInverterWorkingStatus(inverterWorkingStatus);
+                    infraStructureEntity.setElectricity_wiring(electricity_wiring);
+                    infraStructureEntity.setEnough_fans(enough_fans);
+                    infraStructureEntity.setCeilingfans_working(ceilingFansWorking);
+                    infraStructureEntity.setCeilingfans_nonworking(ceilingFansNonWorking);
+                    infraStructureEntity.setCeilingfans_required(ceilingFansReq);
+                    infraStructureEntity.setMountedfans_working(mountedFansWorking);
+                    infraStructureEntity.setMountedfans_nonworking(mountedFansNonWorking);
+                    infraStructureEntity.setMountedfans_required(mountedFansReq);
 
-                    infrastuctureEntity.setLights_working(lightsWorking);
-                    infrastuctureEntity.setLights_nonworking(lightsNonWorking);
-                    infrastuctureEntity.setLights_required(lightsReq);
+                    infraStructureEntity.setLights_working(lightsWorking);
+                    infraStructureEntity.setLights_nonworking(lightsNonWorking);
+                    infraStructureEntity.setLights_required(lightsReq);
 
 
-                    infrastuctureEntity.setDininghall_available(dining_hall);
-                    infrastuctureEntity.setDininghall_used(dining_hall_used);
-                    infrastuctureEntity.setDininghall_add_req(dining_hall_add_req);
-                    infrastuctureEntity.setDininghall_avail_construction(dining_hall_avail_construction);
-                    infrastuctureEntity.setSeparate_kitchen_room_available(separate_kitchen_room_available);
-                    infrastuctureEntity.setConstruct_kitchen_room(construct_kitchen_room);
-                    infrastuctureEntity.setIs_it_in_good_condition(is_it_in_good_condition);
-                    infrastuctureEntity.setKitchen_repair_required(repair_required);
-                    infrastuctureEntity.setHow_many_buildings(how_many_buildings);
-                    infrastuctureEntity.setTransformer_available(transformer_available);
-                    infrastuctureEntity.setPowerConnection_type(powerConnectionType);
-                    infrastuctureEntity.setIndividual_connection(individual_connection);
-                    infrastuctureEntity.setRunningWater_source(sourceOfRunningWater);
-                    infrastuctureEntity.setRoad_required(road_required);
-                    infrastuctureEntity.setCompWall_required(compWall_required);
-                    infrastuctureEntity.setConstruction_part_type(construction_part_type);
-                    infrastuctureEntity.setCompWall_cnt(compWall_cnt);
-                    infrastuctureEntity.setGate_required(gate_required);
-                    infrastuctureEntity.setPathway_required(pathway_required);
-                    infrastuctureEntity.setSump_required(sump_required);
-                    infrastuctureEntity.setSewage_allowed(sewage_allowed);
-                    infrastuctureEntity.setDrainage_functioning(drainage_functioning);
-                    infrastuctureEntity.setHeater_available(heater_available);
-                    infrastuctureEntity.setHeater_workingStatus(heater_workingStatus);
-                    infrastuctureEntity.setTotal_toilets(totalToilets);
-                    infrastuctureEntity.setTotal_bathrooms(totalBathrooms);
-                    infrastuctureEntity.setFunctioning_toilets(functioningToilets);
-                    infrastuctureEntity.setFunctioning_bathrooms(functioningBathrooms);
-                    infrastuctureEntity.setRepairs_req_toilets(repairsReqToilets);
-                    infrastuctureEntity.setRepairs_req_bathrooms(repairsReqBathrooms);
-                    infrastuctureEntity.setDoor_window_repairs(repairs_to_door);
-                    infrastuctureEntity.setPainting(painting);
-                    infrastuctureEntity.setCc_cameras(cc_cameras);
-                    infrastuctureEntity.setSteam_cooking(steam_cooking);
-                    infrastuctureEntity.setBunker_beds(bunker_beds);
-                    infrastuctureEntity.setBunker_beds_cnt(bunker_beds_cnt);
-                    infrastuctureEntity.setAdd_req(add_req);
-                    infrastuctureEntity.setAdd_class_required_cnt(add_cls_cnt);
-                    infrastuctureEntity.setAdd_dining_required_cnt(add_din_cnt);
-                    infrastuctureEntity.setAdd_dormitory_required_cnt(add_dom_cnt);
-                    infrastuctureEntity.setAdd_toilets_required_cnt(add_toilets_cnt);
-                    infrastuctureEntity.setAdd_bathrooms_required_cnt(add_bathrooms_cnt);
-                    infrastuctureEntity.setSewage_raise_request(sewage_raise_req);
+                    infraStructureEntity.setDininghall_available(dining_hall);
+                    infraStructureEntity.setDininghall_used(dining_hall_used);
+                    infraStructureEntity.setDininghall_add_req(dining_hall_add_req);
+                    infraStructureEntity.setDininghall_avail_construction(dining_hall_avail_construction);
+                    infraStructureEntity.setSeparate_kitchen_room_available(separate_kitchen_room_available);
+                    infraStructureEntity.setConstruct_kitchen_room(construct_kitchen_room);
+                    infraStructureEntity.setIs_it_in_good_condition(is_it_in_good_condition);
+                    infraStructureEntity.setKitchen_repair_required(repair_required);
+                    infraStructureEntity.setHow_many_buildings(how_many_buildings);
+                    infraStructureEntity.setTransformer_available(transformer_available);
+                    infraStructureEntity.setPowerConnection_type(powerConnectionType);
+                    infraStructureEntity.setIndividual_connection(individual_connection);
+                    infraStructureEntity.setRunningWater_source(sourceOfRunningWater);
+                    infraStructureEntity.setRoad_required(road_required);
+                    infraStructureEntity.setCompWall_required(compWall_required);
+                    infraStructureEntity.setConstruction_part_type(construction_part_type);
+                    infraStructureEntity.setCompWall_cnt(compWall_cnt);
+                    infraStructureEntity.setGate_required(gate_required);
+                    infraStructureEntity.setPathway_required(pathway_required);
+                    infraStructureEntity.setSump_required(sump_required);
+                    infraStructureEntity.setSewage_allowed(sewage_allowed);
+                    infraStructureEntity.setDrainage_functioning(drainage_functioning);
+                    infraStructureEntity.setHeater_available(heater_available);
+                    infraStructureEntity.setHeater_workingStatus(heater_workingStatus);
+                    infraStructureEntity.setTotal_toilets(totalToilets);
+                    infraStructureEntity.setTotal_bathrooms(totalBathrooms);
+                    infraStructureEntity.setFunctioning_toilets(functioningToilets);
+                    infraStructureEntity.setFunctioning_bathrooms(functioningBathrooms);
+                    infraStructureEntity.setRepairs_req_toilets(repairsReqToilets);
+                    infraStructureEntity.setRepairs_req_bathrooms(repairsReqBathrooms);
+                    infraStructureEntity.setDoor_window_repairs(repairs_to_door);
+                    infraStructureEntity.setPainting(painting);
+                    infraStructureEntity.setCc_cameras(cc_cameras);
+                    infraStructureEntity.setSteam_cooking(steam_cooking);
+                    infraStructureEntity.setBunker_beds(bunker_beds);
+                    infraStructureEntity.setBunker_beds_cnt(bunker_beds_cnt);
+                    infraStructureEntity.setAdd_req(add_req);
+                    infraStructureEntity.setAdd_class_required_cnt(add_cls_cnt);
+                    infraStructureEntity.setAdd_dining_required_cnt(add_din_cnt);
+                    infraStructureEntity.setAdd_dormitory_required_cnt(add_dom_cnt);
+                    infraStructureEntity.setAdd_toilets_required_cnt(add_toilets_cnt);
+                    infraStructureEntity.setAdd_bathrooms_required_cnt(add_bathrooms_cnt);
+                    infraStructureEntity.setSewage_raise_request(sewage_raise_req);
 
                     Utils.customSaveAlert(InfraActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
                 }
@@ -905,6 +992,34 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                         if (infraStructureEntity != null) {
                             binding.setInspData(infraStructureEntity);
                             binding.executePendingBindings();
+
+                            Type type = new TypeToken<Set<String>>() {}.getType();
+                            drinkingWaterSources = new Gson().fromJson(infraStructureEntity.getDrinking_water_source(), type);
+
+                            if(drinkingWaterSources!=null && drinkingWaterSources.size()>0){
+                                for(int z=0;z<drinkingWaterSources.size();z++){
+                                    if(drinkingWaterSources.contains(getString(R.string.ro_plant))){
+                                        binding.drinkingWaterRoPlant.setChecked(true);
+                                    }
+
+                                    if(drinkingWaterSources.contains(getString(R.string.open_well))){
+                                        binding.drinkingWaterSourceOpenWell.setChecked(true);
+                                    }
+
+                                    if(drinkingWaterSources.contains(getString(R.string.bore_well))){
+                                        binding.drinkingWaterSourceBoreWell.setChecked(true);
+                                    }
+
+                                    if(drinkingWaterSources.contains(getString(R.string.municipal))){
+                                        binding.drinkingWaterSourceMunicipal.setChecked(true);
+                                    }
+
+                                    if(drinkingWaterSources.contains(getString(R.string.hand_pump))){
+                                        binding.drinkingWaterSourceHandPump.setChecked(true);
+                                    }
+                                }
+
+                            }
 
                             LiveData<UploadPhoto> uploadPhotoLiveData = viewModel.getPhotoData(AppConstants.RO_PLANT, instID);
                             uploadPhotoLiveData.observe(InfraActivity.this, new Observer<UploadPhoto>() {
@@ -1385,7 +1500,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     }
 
     private void insertSectionData() {
-        long x = infraViewModel.insertInfraStructureInfo(infrastuctureEntity);
+        long x = infraViewModel.insertInfraStructureInfo(infraStructureEntity);
         if (x >= 0) {
             final long[] z = {0};
             try {
@@ -1562,7 +1677,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
 
     public String getFilename() {
         FilePath = getExternalFilesDir(null)
-                + "/" + IMAGE_DIRECTORY_NAME+ "/" + instID;
+                + "/" + IMAGE_DIRECTORY_NAME + "/" + instID;
 
         String Image_name = PIC_NAME;
         FilePath = FilePath + "/" + Image_name;
@@ -1615,7 +1730,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             if (resultCode == RESULT_OK) {
 
                 FilePath = getExternalFilesDir(null)
-                        + "/" + IMAGE_DIRECTORY_NAME+ "/" + instID;
+                        + "/" + IMAGE_DIRECTORY_NAME + "/" + instID;
 
                 String Image_name = PIC_TYPE + ".png";
                 FilePath = FilePath + "/" + Image_name;
