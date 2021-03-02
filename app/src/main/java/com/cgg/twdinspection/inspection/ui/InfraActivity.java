@@ -271,7 +271,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                         callSettings();
                     } else {
-                        PIC_TYPE = AppConstants.TDS;
+                        PIC_TYPE = AppConstants.RO_PLANT;
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
                         if (fileUri != null) {
@@ -280,7 +280,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                         }
                     }
                 } else {
-                    PIC_TYPE = AppConstants.TDS;
+                    PIC_TYPE = AppConstants.RO_PLANT;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
                     if (fileUri != null) {
@@ -906,7 +906,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                             binding.setInspData(infraStructureEntity);
                             binding.executePendingBindings();
 
-                            LiveData<UploadPhoto> uploadPhotoLiveData = viewModel.getPhotoData(AppConstants.TDS, instID);
+                            LiveData<UploadPhoto> uploadPhotoLiveData = viewModel.getPhotoData(AppConstants.RO_PLANT, instID);
                             uploadPhotoLiveData.observe(InfraActivity.this, new Observer<UploadPhoto>() {
                                 @Override
                                 public void onChanged(UploadPhoto uploadPhoto) {
@@ -1362,7 +1362,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         uploadPhoto.setInstitute_id(instID);
         uploadPhoto.setSection_id("12");
         uploadPhoto.setTimeStamp(currentDateTime);
-        uploadPhoto.setPhoto_name(AppConstants.TDS);
+        uploadPhoto.setPhoto_name(AppConstants.RO_PLANT);
         uploadPhoto.setPhoto_path(valueOfImage);
         uploadPhotos.add(uploadPhoto);
     }

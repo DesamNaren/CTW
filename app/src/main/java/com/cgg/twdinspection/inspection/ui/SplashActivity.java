@@ -130,13 +130,13 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                         @Override
                                         public void run() {
                                             try {
-                                                if (versionResponse.getRadius() != null ) {
-                                                    AppConstants.DISTANCE = Float.parseFloat(versionResponse.getRadius());
-                                                    AppConstants.TIMER = versionResponse.getTimer();
-                                                } else {
-                                                    handleError(SplashActivity.this);
-                                                    return;
-                                                }
+//                                                if (versionResponse.getRadius() != null ) {
+//                                                    AppConstants.DISTANCE = Float.parseFloat(versionResponse.getRadius());
+//                                                    AppConstants.TIMER = versionResponse.getTimer();
+//                                                } else {
+//                                                    handleError(SplashActivity.this);
+//                                                    return;
+//                                                }
                                                 int permissionCheck1 = ContextCompat.checkSelfPermission(
                                                         SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
                                                 int permissionCheck2 = ContextCompat.checkSelfPermission(

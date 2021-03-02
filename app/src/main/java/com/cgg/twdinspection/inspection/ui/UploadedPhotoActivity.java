@@ -64,8 +64,15 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     private List<UploadPhoto> uploadPhotos;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     ActivityUploadedPhotoBinding binding;
-    int flag_classroom = 0, flag_storeroom = 0, flag_sick_room = 0, flag_playGround = 0, flag_diningHall = 0,
-            flag_dormitory = 0, flag_mainBuilding = 0, flag_toilet = 0, flag_kitchen = 0, flag_menu = 0, flag_officer = 0;
+    int flag_classroom = 0;
+    int flag_storeroom = 0;
+    int flag_sick_room = 0;
+    int flag_playGround = 0;
+    int flag_diningHall = 0;
+    int flag_dormitory = 0;
+    int flag_mainBuilding = 0;
+    int flag_toilet = 0;
+    int flag_kitchen = 0;
     public Uri fileUri;
     String PIC_NAME, PIC_TYPE;
     UploadPhotoViewModel viewModel;
@@ -73,7 +80,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     Bitmap bm;
     String FilePath;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
-    File file_storeroom, file_sick_room, file_playGround, file_diningHall, 
+    File file_storeroom, file_sick_room, file_playGround, file_diningHall,
             file_dormitory, file_mainBulding, file_toilet, file_kitchen, file_classroom, file_tds, file_menu, file_officer;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
@@ -191,7 +198,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                                 Glide.with(UploadedPhotoActivity.this).load(file_playGround).into(binding.ivPlaygound);
                             }
 
-                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.TDS)) {
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.RO_PLANT)) {
                                 file_tds = new File(uploadPhotos.get(z).getPhoto_path());
                             }
                             if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.MENU)) {
@@ -876,39 +883,79 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
 
     @Override
     public void submitData() {
-//        viewModel.deleteMenuData(instId);
         long x = viewModel.insertPhotos(uploadPhotos);
-        if (x >= 0 && uploadPhotos.size() == 9) {
-            final long[] z = {0};
-            try {
-                LiveData<Integer> liveData = instMainViewModel.getSectionId("Photos");
-                liveData.observe(UploadedPhotoActivity.this, new Observer<Integer>() {
-                    @Override
-                    public void onChanged(Integer id) {
-                        if (id != null) {
+        if (x >= 0 && uploadPhotos.size() > 0) {
+            boolean storeRoom = false, sickRoom = false, playGround = false, diningHall = false, dormitory = false, mainBuilding = false, toilet = false, kitchen = false;
+            for (int y = 0; y < uploadPhotos.size(); y++) {
+                if (uploadPhotos.get(y).getPhoto_name().contains(AppConstants.STOREROOM)) {
+                    storeRoom = true;
+                }
 
-                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instId);
+                if (uploadPhotos.get(y).getPhoto_name().contains(AppConstants.SICKROOM)) {
+                    sickRoom = true;
+                }
+
+                if (uploadPhotos.get(y).getPhoto_name().contains(AppConstants.PLAYGROUND)) {
+                    playGround = true;
+                }
+
+                if (uploadPhotos.get(y).getPhoto_name().contains(AppConstants.DININGHALL)) {
+                    diningHall = true;
+                }
+
+                if (uploadPhotos.get(y).getPhoto_name().contains(AppConstants.DORMITORY)) {
+                    dormitory = true;
+                }
+
+                if (uploadPhotos.get(y).getPhoto_name().contains(AppConstants.MAINBUILDING)) {
+                    mainBuilding = true;
+                }
+                if (uploadPhotos.get(y).getPhoto_name().contains(AppConstants.TOILET)) {
+                    toilet = true;
+                }
+                if (uploadPhotos.get(y).getPhoto_name().contains(AppConstants.KITCHEN)) {
+                    kitchen = true;
+                }
+                if (storeRoom && sickRoom && playGround && diningHall && dormitory && mainBuilding && toilet && kitchen) {
+                    break;
+                }
+
+            }
+
+            if (storeRoom && sickRoom && playGround && diningHall && dormitory && mainBuilding && toilet && kitchen) {
+                final long[] z = {0};
+                try {
+                    LiveData<Integer> liveData = instMainViewModel.getSectionId("Photos");
+                    liveData.observe(UploadedPhotoActivity.this, new Observer<Integer>() {
+                        @Override
+                        public void onChanged(Integer id) {
+                            if (id != null) {
+
+                                z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instId);
+                            }
                         }
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (z[0] >= 0) {
-                InstSelectionViewModel instSelectionViewModel = new InstSelectionViewModel(getApplication());
-                instSelectionViewModel.updateTimeInfo(Utils.getOfflineTime(), instId);
-                Utils.customSectionSaveAlert(UploadedPhotoActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
-            } else {
-                showSnackBar(getString(R.string.failed));
-            }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (z[0] >= 0) {
+                    InstSelectionViewModel instSelectionViewModel = new InstSelectionViewModel(getApplication());
+                    instSelectionViewModel.updateTimeInfo(Utils.getOfflineTime(), instId);
+                    Utils.customSectionSaveAlert(UploadedPhotoActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
+                } else {
+                    showSnackBar(getString(R.string.failed));
+                }
 
-        } else {
-            if (x >= 0) {
-                Utils.customSectionSaveAlert(UploadedPhotoActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
-                showSnackBar(getString(R.string.failed));
+                if (x >= 0) {
+                    Utils.customSectionSaveAlert(UploadedPhotoActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
+                } else {
+                    showSnackBar(getString(R.string.failed));
+                }
             }
         }
+
+
     }
 
     @Override

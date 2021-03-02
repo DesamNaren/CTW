@@ -12,16 +12,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -294,7 +291,7 @@ public class SchoolsOfflineDataActivity extends LocBaseActivity implements Schoo
                         if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.PLAYGROUND)) {
                             file_playGround = new File(uploadPhotos.get(z).getPhoto_path());
                         }
-                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.TDS)) {
+                        if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.RO_PLANT)) {
                             file_tds = new File(uploadPhotos.get(z).getPhoto_path());
                         }
                         if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.MENU)) {

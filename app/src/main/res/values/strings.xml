@@ -77,7 +77,8 @@
     <string name="bore_well">Bore well</string>
     <string name="municipal">Municipal / GP Tap</string>
     <string name="hand_pump">Hand pump</string>
-    <string name="capture_tds_meter_reading">Capture TDS meter reading</string>
+    <string name="capture_tds_meter_reading">Capture RO Plant</string>
+    <string name="capture_tds_image">Please capture RO Plant image</string>
     <string name="enter_reason">Enter reason</string>
     <string name="how_is_light">How is lighting facility</string>
     <string name="does_this_institute">Does the institute have enough Fans or Wall mounts available for all inmates</string>
@@ -1107,7 +1108,6 @@
     <string name="insp_officer_image">Please capture inspector officer image</string>
     <string name="user_cancelled">User cancelled image capture</string>
     <string name="image_capture_failed">Sorry! Failed to capture image</string>
-    <string name="capture_tds_image">Please capture TDS image</string>
     <string name="plant_type">Please enter plant type</string>
     <string name="no_of_plants">Please enter no of plants</string>
     <string name="count_greater_than_zero">Count should be greater than zero</string>

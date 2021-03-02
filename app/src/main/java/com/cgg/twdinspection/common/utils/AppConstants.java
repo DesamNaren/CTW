@@ -8,7 +8,7 @@ public class AppConstants {
     public static final String GCC_FOLDER = "GCC";
     public static final String GCC_IMAGES = "GCC_IMAGES";
     public static final String VERSION = "VERSION";
-    public static String TIMER = "TIMER";
+    public static String TIMER = "48";
     public static String LOGIN_DIST_ID = "LOGIN_DIST_ID";
     public static String LOGIN_DIV_ID = "LOGIN_DIV_ID";
     public static String LOGIN_DIST_NAME = "LOGIN_DIST_NAME";
@@ -17,7 +17,7 @@ public class AppConstants {
     public static final String LAT = "LAT";
     public static final String LNG = "LNG";
     public static final String ADDRESS = "ADDRESS";
-    public static final String TDS = "TDS";
+    public static final String RO_PLANT = "RO Plant";
     public static final String MENU = "MENU";
     public static final String OFFICER = "OFFICER";
     public static final String SIGN = "SIGN";
@@ -79,7 +79,7 @@ public class AppConstants {
     public static final String TOILET = "Toilet";
     public static final String KITCHEN = "Kitchen";
 
-    public static float DISTANCE;
+    public static float DISTANCE = 200;
     public static final String GCC_AUTH_USER = "gccinventory";
     public static final String GCC_AUTH_PWD = "gcc@wsdata";
     public static final String ENTRANCE = "ENTRANCE";

@@ -119,7 +119,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                         long millis = curDate.getTime() - offlineDate.getTime();
                         int hours = (int) (millis / (1000 * 60 * 60));
 
-                        if (hours > Integer.parseInt(timer)) {
+                        if (!TextUtils.isEmpty(timer) && hours > Integer.parseInt(timer)) {
                             offlineInsts.add(offlineEntities.get(x).getInst_id());
                         }
                     }
@@ -164,7 +164,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                             long millis = curDate.getTime() - offlineDate.getTime();
                             int hours = (int) (millis / (1000 * 60 * 60));
 
-                            if (hours > Integer.parseInt(timer)) {
+                            if (!TextUtils.isEmpty(timer) && hours > Integer.parseInt(timer)) {
                                 offlineInsts.add(instLatestTimeInfos.get(x).getInst_id());
                             }
                         }
