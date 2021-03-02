@@ -14,23 +14,10 @@ public class VersionResponse {
     @SerializedName("Status_Message")
     @Expose
     private String statusMessage;
-    @SerializedName("radius")
-    @Expose
-    private String radius;
-    @SerializedName("timer")
-    @Expose
-    private String timer;
+
     @SerializedName("version_date")
     @Expose
     private String versionDate;
-
-    public String getTimer() {
-        return timer;
-    }
-
-    public void setTimer(String timer) {
-        this.timer = timer;
-    }
 
     public String getVersionDate() {
         return versionDate;
@@ -38,14 +25,6 @@ public class VersionResponse {
 
     public void setVersionDate(String versionDate) {
         this.versionDate = versionDate;
-    }
-
-    public String getRadius() {
-        return radius;
-    }
-
-    public void setRadius(String radius) {
-        this.radius = radius;
     }
 
     public String getStatusCode() {

@@ -35,6 +35,40 @@ public class LoginResponse {
     @SerializedName("district_id")
     @Expose
     private long districtId;
+    @SerializedName("radius")
+    @Expose
+    private String radius;
+    @SerializedName("timer")
+    @Expose
+    private String timer;
+
+    @SerializedName("role_id")
+    @Expose
+    private long roleId;
+
+    public long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(long roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getTimer() {
+        return timer;
+    }
+
+    public void setTimer(String timer) {
+        this.timer = timer;
+    }
+
+    public String getRadius() {
+        return radius;
+    }
+
+    public void setRadius(String radius) {
+        this.radius = radius;
+    }
 
     public String getDistrictName() {
         return districtName;

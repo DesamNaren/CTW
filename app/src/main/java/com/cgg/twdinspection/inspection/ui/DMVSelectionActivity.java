@@ -57,7 +57,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     SchoolsOfflineViewModel schoolsOfflineViewModel;
     private InstSelectionViewModel selectionViewModel;
     private ArrayAdapter<String> selectAdapter;
-    private long loginDistId;
+    private long loginDistId, roleId;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
     private String timer;
 
@@ -205,6 +205,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
             editor.putString(AppConstants.INSP_TIME, curTime);
             editor.commit();
             loginDistId = sharedPreferences.getLong(AppConstants.LOGIN_DIST_ID, -1);
+            roleId = sharedPreferences.getLong(AppConstants.ROLEID, -1);
             dmvSelectionActivityBinding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
         } catch (Exception e) {
             e.printStackTrace();
@@ -217,7 +218,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         instNames = new ArrayList<>();
         institutesEntityList = new ArrayList<>();
 
-        if (loginDistId != 1000) {
+        if (!TextUtils.isEmpty(String.valueOf(roleId)) && roleId != 3) {
             viewModel.getSelectedDistricts(String.valueOf(loginDistId)).observe(this, new Observer<List<SchoolDistrict>>() {
                 @Override
                 public void onChanged(List<SchoolDistrict> schoolDistricts) {
