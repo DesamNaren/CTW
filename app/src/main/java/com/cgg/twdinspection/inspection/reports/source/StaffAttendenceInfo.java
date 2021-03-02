@@ -66,6 +66,18 @@ public class StaffAttendenceInfo {
     @Expose
     private String leavesTaken;
 
+    @SerializedName("is_teaching_staff")
+    @Expose
+    private boolean isTeachingStaff;
+
+    public boolean getIsTeachingStaff() {
+        return isTeachingStaff;
+    }
+
+    public void setIsTeachingStaff(boolean isTeachingStaff) {
+        this.isTeachingStaff = isTeachingStaff;
+    }
+
     public String getInspectionTime() {
         return inspectionTime;
     }

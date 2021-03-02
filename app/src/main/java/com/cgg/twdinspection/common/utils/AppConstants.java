@@ -51,7 +51,8 @@ public class AppConstants {
     public static final String WIN = "Win";
     public static final String CLASSROOM = "Classroom";
     public static final String PRESENT = "Present";
-    public static final String ABSENT = "Unauthorised Absent";
+    public static final String UNAUTHORISED_ABSENT = "Unauthorised Absent";
+    public static final String ABSENT = "Absent";
     public static final String ONDEPUTATION = "On Deputation";
     public static final String LEAVES = "Leaves";
     public static final String Yes = "YES";

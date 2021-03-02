@@ -156,6 +156,8 @@ public class StaffAttendanceEntity {
     @Ignore
     private boolean absentFlag;
     @Ignore
+    private boolean unauthorisedAbsentFlag;
+    @Ignore
     private boolean ondepFlag;
     @Ignore
     private boolean leavesFlag;
@@ -171,6 +173,14 @@ public class StaffAttendanceEntity {
         this.designation = designation;
         this.is_teaching_staff = is_teaching_staff;
         this.role_name = role_name;
+    }
+
+    public boolean isAbsentFlag() {
+        return absentFlag;
+    }
+
+    public void setAbsentFlag(boolean absentFlag) {
+        this.absentFlag = absentFlag;
     }
 
     public boolean isLeavesFlag() {
@@ -197,12 +207,12 @@ public class StaffAttendanceEntity {
         this.presentFlag = presentFlag;
     }
 
-    public boolean isAbsentFlag() {
-        return absentFlag;
+    public boolean isUnauthorisedAbsentFlag() {
+        return unauthorisedAbsentFlag;
     }
 
-    public void setAbsentFlag(boolean absentFlag) {
-        this.absentFlag = absentFlag;
+    public void setUnauthorisedAbsentFlag(boolean unauthorisedAbsentFlag) {
+        this.unauthorisedAbsentFlag = unauthorisedAbsentFlag;
     }
 
     public boolean isOndepFlag() {

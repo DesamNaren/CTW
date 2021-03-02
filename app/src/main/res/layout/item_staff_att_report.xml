@@ -6,6 +6,8 @@
 
         <import type="android.text.TextUtils" />
 
+        <import type="android.view.View" />
+
         <variable
             name="staff"
             type="com.cgg.twdinspection.inspection.reports.source.StaffAttendenceInfo" />
@@ -204,28 +206,26 @@
                             android:text="@string/leaves" />
                     </LinearLayout>
 
-                    <!--
-                                        <LinearLayout
-                                            android:id="@+id/ll_ondep"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="1">
+                    <LinearLayout
+                        android:id="@+id/ll_absent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
 
-                                            <ImageView
-                                                android:id="@+id/iv_ondep"
-                                                android:layout_width="25dp"
-                                                android:layout_height="25dp"
-                                                android:src="@{staff.empPresence.equalsIgnoreCase(`On Deputation`)? @drawable/ondep: @drawable/ondep_init}" />
+                        <ImageView
+                            android:id="@+id/iv_absent"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@{staff.empPresence.equalsIgnoreCase(`Absent`)? @drawable/absent: @drawable/absent_init}" />
 
-                                            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                                android:id="@+id/tv_ondep"
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_gravity="center"
-                                                android:layout_marginLeft="4dp"
-                                                android:text="@string/dep" />
-                                        </LinearLayout>
-                    -->
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:id="@+id/tv_absent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:text="@string/absent" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -240,19 +240,19 @@
                     android:paddingRight="@dimen/dimen_10dp">
 
                     <LinearLayout
-                        android:id="@+id/ll_absent"
+                        android:id="@+id/ll_unauthorised_absent"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <ImageView
-                            android:id="@+id/iv_absent"
+                            android:id="@+id/iv_unauthorised_absent"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:src="@{staff.empPresence.equalsIgnoreCase(`Unauthorised Absent`)? @drawable/absent: @drawable/absent_init}" />
 
                         <com.cgg.twdinspection.common.custom.CustomFontTextView
-                            android:id="@+id/tv_absent"
+                            android:id="@+id/tv_unauthorised_absent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -288,7 +288,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
                     android:orientation="horizontal"
-                    android:visibility="visible">
+                    android:visibility="@{staff.isTeachingStaff? View.VISIBLE : View.GONE, default = gone}">
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="wrap_content"
@@ -478,7 +478,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="@{staff.isTeachingStaff? View.VISIBLE : View.GONE, default = gone}">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -512,15 +513,14 @@
                             android:text="@string/no" />
 
                     </RadioGroup>
-
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="@{staff.isTeachingStaff? View.VISIBLE : View.GONE, default = gone}">
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="0dp"

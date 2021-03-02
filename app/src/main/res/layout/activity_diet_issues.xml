@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -165,28 +166,45 @@
                                 android:text="@string/date_to_which_the_stock_register_is_updated"
                                 android:textColor="@color/black" />
 
-                            <RadioGroup
-                                android:id="@+id/rg_stock_register_updated"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:orientation="horizontal">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                                <RadioButton
-                                    android:id="@+id/rb_yes_stock_register_updated"
+                                <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{inspData.stock_register_updated.equalsIgnoreCase(`Yes`)}"
-                                    android:text="@string/yes" />
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/dimen_5dp"
+                                    android:background="@android:drawable/ic_menu_my_calendar"
+                                    android:backgroundTint="@color/colorPrimaryDark"/>
 
-                                <RadioButton
-                                    android:id="@+id/rb_no_stock_register_updated"
-                                    android:layout_width="wrap_content"
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{inspData.stock_register_updated.equalsIgnoreCase(`No`)}"
-                                    android:text="@string/no" />
-                            </RadioGroup>
+                                    android:layout_marginLeft="@dimen/dimen_5dp"
+                                    android:layout_marginTop="@dimen/dimen_5dp"
+                                    android:textColorHint="@color/colorAccent"
+                                    app:errorEnabled="true">
 
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_stock_reg_date"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:focusableInTouchMode="false"
+                                        android:hint="@string/date"
+                                        android:imeOptions="actionNext"
+                                        android:paddingLeft="@dimen/dimen_30dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
+                                        android:singleLine="true"
+                                        android:text="@{inspData.stock_register_updated}" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+
+                            </RelativeLayout>
                         </LinearLayout>
 
                     </LinearLayout>

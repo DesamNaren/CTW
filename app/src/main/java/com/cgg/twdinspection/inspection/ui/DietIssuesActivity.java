@@ -2,6 +2,7 @@ package com.cgg.twdinspection.inspection.ui;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -84,6 +86,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -196,19 +200,12 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             }
         });
 
-        dietIssuesBinding.rgStockRegisterUpdated.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        dietIssuesBinding.etStockRegDate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = dietIssuesBinding.rgStockRegisterUpdated.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_stock_register_updated)
-                    stock_reg_updated = AppConstants.Yes;
-                else if (selctedItem == R.id.rb_no_stock_register_updated)
-                    stock_reg_updated = AppConstants.No;
-                else
-                    stock_reg_updated = null;
+            public void onClick(View view) {
+                dateSelection();
             }
         });
-
 
         dietIssuesBinding.rgMenuChartServed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -1080,6 +1077,29 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void dateSelection() {
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        stock_reg_updated = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        dietIssuesBinding.etStockRegDate.setText(stock_reg_updated);
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+        datePickerDialog.show();
     }
 
     private void customSyncAlert(Activity activity, String title, String msg) {

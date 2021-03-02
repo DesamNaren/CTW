@@ -418,6 +418,14 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                     binding.llCaptureDistance.setVisibility(View.VISIBLE);
                     binding.llCaptureStayingFacilitiesType.setVisibility(View.GONE);
 
+                }else if (selctedItem == R.id.rb_na_head_quarters) {
+                    hwoheadQuarters = AppConstants.Na;
+
+                    binding.rgCaptureStayingFacilitiesType.clearCheck();
+                    binding.rgCaptureDistance.clearCheck();
+
+                    binding.llCaptureDistance.setVisibility(View.GONE);
+                    binding.llCaptureStayingFacilitiesType.setVisibility(View.GONE);
                 } else {
                     hwoheadQuarters = null;
                 }
@@ -474,6 +482,15 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                     binding.rgHmCaptureStayingFacilitiesType.clearCheck();
 
                     binding.llHmCaptureDistance.setVisibility(View.VISIBLE);
+                    binding.llHmCaptureStayingFacilitiesType.setVisibility(View.GONE);
+
+                } else if (selctedItem == R.id.rb_na_hm_head_quarters) {
+                    hmheadQuarters = AppConstants.Na;
+
+                    binding.rgHmCaptureStayingFacilitiesType.clearCheck();
+                    binding.rgHmCaptureDistance.clearCheck();
+
+                    binding.llHmCaptureDistance.setVisibility(View.GONE);
                     binding.llHmCaptureStayingFacilitiesType.setVisibility(View.GONE);
 
                 } else {

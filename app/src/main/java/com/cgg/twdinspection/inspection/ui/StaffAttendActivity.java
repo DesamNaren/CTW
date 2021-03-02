@@ -229,8 +229,8 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener, S
     private boolean validate() {
         boolean returnFlag = true;
         for (int i = 0; i < staffAttendanceEntitiesmain.size(); i++) {
-            if (localFlag != 1 && !(staffAttendanceEntitiesmain.get(i).isAbsentFlag() || staffAttendanceEntitiesmain.get(i).isPresentFlag()
-                    || staffAttendanceEntitiesmain.get(i).isOndepFlag() || staffAttendanceEntitiesmain.get(i).isLeavesFlag())) {
+            if (localFlag != 1 && !(staffAttendanceEntitiesmain.get(i).isUnauthorisedAbsentFlag() || staffAttendanceEntitiesmain.get(i).isPresentFlag()
+                    || staffAttendanceEntitiesmain.get(i).isOndepFlag() || staffAttendanceEntitiesmain.get(i).isLeavesFlag()|| staffAttendanceEntitiesmain.get(i).isAbsentFlag())) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.mark_att_emp));
                 staffAttBinding.staffRv.scrollToPosition(i);
