@@ -63,7 +63,6 @@ public class ReportGeneralCommentsActivity extends BaseActivity {
         String jsonObject = gson.toJson(inspReportData.getGeneralComments());
         if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
             binding.setComments(inspReportData.getGeneralComments());
-            binding.etAnaemicStudCnt.setText(inspReportData.getAcademicOverview().getLastYrSscPercent());
             binding.executePendingBindings();
         }
 

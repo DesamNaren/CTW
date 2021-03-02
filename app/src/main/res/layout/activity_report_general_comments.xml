@@ -982,6 +982,7 @@
                                     android:paddingLeft="@dimen/dimen_30dp"
                                     android:paddingTop="@dimen/dimen_10dp"
                                     android:paddingRight="@dimen/dimen_5dp"
+                                    android:text="@{comments.anemicStudCnt}"
                                     android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true" />
 

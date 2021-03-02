@@ -388,10 +388,10 @@ public class SchoolsOfflineDataActivity extends LocBaseActivity implements Schoo
             }
         });
 
-        if(mCurrentLocation!=null){
+        if (mCurrentLocation != null) {
             instSubmitRequest.setLatitude(String.valueOf(mCurrentLocation.getLatitude()));
             instSubmitRequest.setLongitude(String.valueOf(mCurrentLocation.getLongitude()));
-        }else{
+        } else {
             instSubmitRequest.setLatitude(null);
             instSubmitRequest.setLongitude(null);
         }
@@ -401,10 +401,13 @@ public class SchoolsOfflineDataActivity extends LocBaseActivity implements Schoo
 
     private void callPhotoSubmit() {
         if (Utils.checkInternetConnection(SchoolsOfflineDataActivity.this)) {
-            RequestBody requestFile =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), file_classroom);
-            MultipartBody.Part body =
-                    MultipartBody.Part.createFormData("image", file_classroom.getName(), requestFile);
+            MultipartBody.Part body = null;
+            if (file_classroom != null && !file_classroom.getPath().equalsIgnoreCase("null")) {
+                RequestBody requestFile =
+                        RequestBody.create(MediaType.parse("multipart/form-data"), file_classroom);
+                body =
+                        MultipartBody.Part.createFormData("image", file_classroom.getName(), requestFile);
+            }
             RequestBody requestFile1 =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file_diningHall);
             MultipartBody.Part body1 =
@@ -462,7 +465,8 @@ public class SchoolsOfflineDataActivity extends LocBaseActivity implements Schoo
 
 
             List<MultipartBody.Part> partList = new ArrayList<>();
-            partList.add(body);
+            if (body != null)
+                partList.add(body);
             partList.add(body1);
             partList.add(body2);
             partList.add(body3);
@@ -508,7 +512,6 @@ public class SchoolsOfflineDataActivity extends LocBaseActivity implements Schoo
             instSubmitRequest.setPhoto_key_id(randomNo);
             instSubmitRequest.setDevice_Id(Utils.getDeviceID(this));
             instSubmitRequest.setVersion_No(Utils.getVersionName(this));
-            instSubmitRequest.getAcademic_overview().setLast_yr_ssc_percent(instSubmitRequest.getGeneral_comments().getAnemic_stud_cnt());
 
             if (Utils.checkInternetConnection(SchoolsOfflineDataActivity.this)) {
                 customProgressDialog.show();

@@ -168,6 +168,8 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setAbsentFlag(false);
 
                     employeeResponse.setEmp_presence(AppConstants.PRESENT);
+                    employeeResponse.setIs_teaching_staff(staffAttendanceEntities.get(position).getIs_teaching_staff());
+
                     Animation animSlide = AnimationUtils.loadAnimation(context,
                             R.anim.item_animation_fall_down);
 
@@ -189,6 +191,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setAbsentFlag(false);
 
                     employeeResponse.setEmp_presence(AppConstants.UNAUTHORISED_ABSENT);
+                    employeeResponse.setIs_teaching_staff(staffAttendanceEntities.get(position).getIs_teaching_staff());
 
                     Animation animSlide = AnimationUtils.loadAnimation(context,
                             R.anim.item_animation_fall_down);
@@ -209,6 +212,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setAbsentFlag(true);
 
                     employeeResponse.setEmp_presence(AppConstants.ABSENT);
+                    employeeResponse.setIs_teaching_staff(staffAttendanceEntities.get(position).getIs_teaching_staff());
 
                     Animation animSlide = AnimationUtils.loadAnimation(context,
                             R.anim.item_animation_fall_down);
@@ -229,6 +233,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setAbsentFlag(false);
 
                     employeeResponse.setEmp_presence(AppConstants.ONDEPUTATION);
+                    employeeResponse.setIs_teaching_staff(staffAttendanceEntities.get(position).getIs_teaching_staff());
 
                     Animation animSlide = AnimationUtils.loadAnimation(context,
                             R.anim.item_animation_fall_down);
@@ -249,6 +254,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setAbsentFlag(false);
 
                     employeeResponse.setEmp_presence(AppConstants.LEAVES);
+                    employeeResponse.setIs_teaching_staff(staffAttendanceEntities.get(position).getIs_teaching_staff());
 
                     Animation animSlide = AnimationUtils.loadAnimation(context,
                             R.anim.item_animation_fall_down);
