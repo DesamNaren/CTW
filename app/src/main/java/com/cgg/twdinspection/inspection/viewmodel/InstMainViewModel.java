@@ -113,7 +113,6 @@ public class InstMainViewModel extends AndroidViewModel {
         try {
             TWDService twdService = TWDService.Factory.create("school");
             Gson gson = new Gson();
-            String request = gson.toJson(instSubmitRequest);
             twdService.getInstSubmitResponse(instSubmitRequest).enqueue(new Callback<InstSubmitResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<InstSubmitResponse> call, @NotNull Response<InstSubmitResponse> response) {

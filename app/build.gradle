@@ -7,7 +7,7 @@ android {
         applicationId "com.cgg.twdinspection"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 5
+        versionCode 6
         versionName "2"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -43,7 +43,7 @@ android {
             buildConfigField("String", "SERVER_URL", "\"http://ctwws.cgg.gov.in/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"https://tsobmms.cgg.gov.in/TSOBMMSWebServices/\"")
             buildConfigField("String", "GCC_SERVER_URL", "\"http://gccfms.cgg.gov.in/webservice/gcc/\"")
-            versionNameSuffix ".1"
+            versionNameSuffix ".2"
             signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

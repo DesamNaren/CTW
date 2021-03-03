@@ -88,7 +88,7 @@ public class SchoolsOfflineDataActivity extends LocBaseActivity implements Schoo
     private File file_storeroom, file_varandah,
             file_playGround, file_diningHall, file_dormitory,
             file_mainBulding, file_toilet, file_kitchen, file_classroom,
-            file_tds, file_menu, file_officer;
+            file_ro_plant, file_menu, file_officer;
     private String randomNo;
     public Location mCurrentLocation;
 
@@ -292,7 +292,7 @@ public class SchoolsOfflineDataActivity extends LocBaseActivity implements Schoo
                             file_playGround = new File(uploadPhotos.get(z).getPhoto_path());
                         }
                         if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.RO_PLANT)) {
-                            file_tds = new File(uploadPhotos.get(z).getPhoto_path());
+                            file_ro_plant = new File(uploadPhotos.get(z).getPhoto_path());
                         }
                         if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.MENU)) {
                             file_menu = new File(uploadPhotos.get(z).getPhoto_path());
@@ -441,11 +441,11 @@ public class SchoolsOfflineDataActivity extends LocBaseActivity implements Schoo
             MultipartBody.Part body8 =
                     MultipartBody.Part.createFormData("image", file_storeroom.getName(), requestFile8);
             MultipartBody.Part body9 = null;
-            if (file_tds != null && !file_tds.getPath().equalsIgnoreCase("null")) {
+            if (file_ro_plant != null && !file_ro_plant.getPath().equalsIgnoreCase("null")) {
                 RequestBody requestFile9 =
-                        RequestBody.create(MediaType.parse("multipart/form-data"), file_tds);
+                        RequestBody.create(MediaType.parse("multipart/form-data"), file_ro_plant);
 
-                body9 = MultipartBody.Part.createFormData("image", file_tds.getName(), requestFile9);
+                body9 = MultipartBody.Part.createFormData("image", file_ro_plant.getName(), requestFile9);
             }
             MultipartBody.Part body10 = null;
             if (file_menu != null && !file_menu.getPath().equalsIgnoreCase("null")) {
