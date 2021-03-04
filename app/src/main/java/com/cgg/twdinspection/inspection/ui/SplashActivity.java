@@ -63,53 +63,11 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
 
         if (TextUtils.isEmpty(version)) {
             callService();
-        } else if (!version.equalsIgnoreCase(Utils.getVersionName(context))) {
-            if (Utils.checkInternetConnection(this)) {
-                callService();
-            } else
-                showAlert(SplashActivity.this, getResources().getString(R.string.app_name), getString(R.string.update_msg));
-        } else if (!TextUtils.isEmpty(mPIN)) {
+        }  else if (!TextUtils.isEmpty(mPIN)) {
             startActivity(new Intent(SplashActivity.this, ValidateMPINActivity.class));
             finish();
         } else {
             callService();
-        }
-    }
-
-    private void showAlert(Activity activity, String title, String msg) {
-        try {
-            final Dialog dialog = new Dialog(activity);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
-                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.setContentView(R.layout.custom_alert_information);
-                dialog.setCancelable(false);
-                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
-                dialogTitle.setText(title);
-                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
-                dialogMessage.setText(msg);
-                Button btnYes = dialog.findViewById(R.id.btDialogYes);
-                Button btnNo = dialog.findViewById(R.id.btDialogNo);
-                btnYes.setVisibility(View.GONE);
-                btnNo.setVisibility(View.VISIBLE);
-                btnNo.setText(getString(R.string.update));
-                btnNo.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        try {
-                            callService();
-                        } catch (Exception e) {
-                            Toast.makeText(activity, activity.getString(R.string.google_play), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                if (!dialog.isShowing())
-                    dialog.show();
-            }
-        } catch (Resources.NotFoundException e) {
-            e.printStackTrace();
         }
     }
 
@@ -181,10 +139,6 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
         }
     }
 
-    private void handleError(Activity context) {
-        Utils.customSplashErrorAlert(context, getResources().getString(R.string.app_name), getString(R.string.radius_not_found));
-    }
-
     View.OnClickListener onBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -227,7 +181,6 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
         }
     }
 
-
     private void customAlert() {
         try {
             final Dialog dialog = new Dialog(context);
@@ -267,7 +220,6 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
             e.printStackTrace();
         }
     }
-
 
     @Override
     public void handleError(Throwable e, Context context) {

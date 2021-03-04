@@ -44,7 +44,7 @@ android {
             buildConfigField("String", "SERVER_URL", "\"http://ctwws.cgg.gov.in/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"https://tsobmms.cgg.gov.in/TSOBMMSWebServices/\"")
             buildConfigField("String", "GCC_SERVER_URL", "\"http://gccfms.cgg.gov.in/webservice/gcc/\"")
-            versionNameSuffix ".2"
+            versionNameSuffix ".0"
             signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
