@@ -306,9 +306,9 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener, S
                 getMasterStaffInfo();
 
                 Utils.customStudentSyncSuccessAlert(StaffAttendActivity.this, getResources().getString(R.string.app_name),
-                        getString(R.string.cls_mas_syn));
+                        getString(R.string.staff_mas_syn));
             } else {
-                Utils.customErrorAlert(StaffAttendActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_insts));
+                Utils.customErrorAlert(StaffAttendActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_staff));
             }
         } catch (Exception e) {
             e.printStackTrace();

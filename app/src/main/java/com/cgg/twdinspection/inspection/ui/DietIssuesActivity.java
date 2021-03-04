@@ -1181,9 +1181,9 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                 getMasterDietInfo();
 
                 Utils.customStudentSyncSuccessAlert(DietIssuesActivity.this, getResources().getString(R.string.app_name),
-                        getString(R.string.cls_mas_syn));
+                        getString(R.string.diet_mas_syn));
             } else {
-                Utils.customErrorAlert(DietIssuesActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_insts));
+                Utils.customErrorAlert(DietIssuesActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_diet));
             }
         } catch (Exception e) {
             e.printStackTrace();
