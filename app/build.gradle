@@ -39,12 +39,11 @@ android {
 
     buildTypes {
         release {
-            debuggable true
             resValue "string", "app_name", "@string/app_name_release"
             buildConfigField("String", "SERVER_URL", "\"http://ctwws.cgg.gov.in/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"https://tsobmms.cgg.gov.in/TSOBMMSWebServices/\"")
             buildConfigField("String", "GCC_SERVER_URL", "\"http://gccfms.cgg.gov.in/webservice/gcc/\"")
-            versionNameSuffix ".0"
+            versionNameSuffix ".2"
             signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
