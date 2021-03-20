@@ -203,8 +203,42 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NotNull String permissions[], @NotNull int @NotNull [] grantResults) {
+
         try {
+
             if (requestCode == REQUEST_PERMISSION_CODE) {
+                boolean flag = false;
+
+                for (int i = 0, len = permissions.length; i < len; i++) {
+                    String permission = permissions[i];
+                    if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                        boolean showRationale = false;
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                            showRationale = shouldShowRequestPermissionRationale(permission);
+                        }
+                        if (!showRationale) {
+                            // user denied flagging NEVER ASK AGAIN
+                            // you can either enable some fall back,
+                            // disable features of your app
+                            // or open another dialog explaining
+                            // again the permission and directing to
+                            // the app setting
+                            Utils.openSettings(SplashActivity.this);
+                            return;
+                        } else if (Manifest.permission.ACCESS_FINE_LOCATION.equals(permission) ||
+                                Manifest.permission.CAMERA.equals(permission) ||
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permission)) {
+                            customAlert();
+                            return;
+                            // user denied WITHOUT never ask again
+                            // this is a good place to explain the user
+                            // why you need the permission and ask if he want
+                            // to accept it (the rationale)
+                        }
+                    }
+                }
+
+
                 if ((grantResults[0] == PackageManager.PERMISSION_GRANTED)
                         && (grantResults[1] == PackageManager.PERMISSION_GRANTED)
                         && (grantResults[2] == PackageManager.PERMISSION_GRANTED)) {
@@ -218,13 +252,15 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
 
                         }
                     }, 1000);
-                } else {
-                    customAlert();
                 }
+
+
             }
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             e.printStackTrace();
         }
+
     }
 
 
