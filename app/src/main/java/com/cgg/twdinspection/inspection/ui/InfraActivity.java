@@ -45,7 +45,6 @@ import com.cgg.twdinspection.common.custom.CustomFontTextView;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityInfrastructureBinding;
-import com.cgg.twdinspection.gcc.reports.source.ReportSubmitReqCommodities;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
 import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
@@ -143,8 +142,8 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     String PIC_NAME, PIC_TYPE;
     public Uri fileUri;
     String FilePath;
-    File file_tds;
-    int flag_tds = 0;
+    File file_ro_plant;
+    int flag_ro_plant = 0;
     SharedPreferences.Editor editor;
     private Set<String> drinkingWaterSources;
 
@@ -287,8 +286,8 @@ public class InfraActivity extends BaseActivity implements SaveListener {
 
                 int selctedItem = binding.rgRoPlant.getCheckedRadioButtonId();
                 if (selctedItem == R.id.ro_plant_yes) {
-                    flag_tds = 0;
-                    file_tds = null;
+                    flag_ro_plant = 0;
+                    file_ro_plant = null;
                     roPlant = "YES";
                     binding.llReason.setVisibility(View.GONE);
                     binding.llTdsMeterReading.setVisibility(View.VISIBLE);
@@ -297,7 +296,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     binding.ivTds.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));
 
                 } else if (selctedItem == R.id.ro_plant_no) {
-                    file_tds = null;
+                    file_ro_plant = null;
                     roPlant = "NO";
                     binding.llReason.setVisibility(View.VISIBLE);
                     binding.llTdsMeterReading.setVisibility(View.GONE);
@@ -1027,12 +1026,12 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                                 public void onChanged(UploadPhoto uploadPhoto) {
                                     uploadPhotoLiveData.removeObservers(InfraActivity.this);
                                     if (uploadPhoto != null && !TextUtils.isEmpty(uploadPhoto.getPhoto_path())) {
-                                        file_tds = new File(uploadPhoto.getPhoto_path());
-                                        Glide.with(InfraActivity.this).load(file_tds).into(binding.ivTds);
-                                        flag_tds = 1;
+                                        file_ro_plant = new File(uploadPhoto.getPhoto_path());
+                                        Glide.with(InfraActivity.this).load(file_ro_plant).into(binding.ivTds);
+                                        flag_ro_plant = 1;
                                     } else {
                                         Glide.with(InfraActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivTds);
-                                        flag_tds = 0;
+                                        flag_ro_plant = 0;
                                     }
                                 }
                             });
@@ -1040,7 +1039,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     }
                 });
             } else {
-                flag_tds = 0;
+                flag_ro_plant = 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1138,7 +1137,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             showSnackBar(getResources().getString(R.string.select_roPlant));
             return false;
         }
-        if (roPlant.equals(AppConstants.Yes) && flag_tds == 0) {
+        if (roPlant.equals(AppConstants.Yes) && flag_ro_plant == 0) {
             ScrollToView(binding.ivTds);
             showSnackBar(getString(R.string.capture_tds_image));
             return false;
@@ -1488,10 +1487,10 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     @Override
     public void submitData() {
         if (roPlant.equalsIgnoreCase("yes")) {
-            addPhoto(instID, Utils.getCurrentDateTime(), String.valueOf(file_tds));
+            addPhoto(instID, Utils.getCurrentDateTime(), String.valueOf(file_ro_plant));
         } else {
-            file_tds = null;
-            addPhoto(instID, Utils.getCurrentDateTime(), String.valueOf(file_tds));
+            file_ro_plant = null;
+            addPhoto(instID, Utils.getCurrentDateTime(), String.valueOf(file_ro_plant));
         }
         long y = viewModel.insertPhotos(uploadPhotos);
         if (y >= 0) {
@@ -1737,11 +1736,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
 
                 FilePath = compressImage(FilePath);
 
-                flag_tds = 1;
+                flag_ro_plant = 1;
                 binding.ivTds.setPadding(0, 0, 0, 0);
                 binding.ivTds.setBackgroundColor(getResources().getColor(R.color.white));
-                file_tds = new File(FilePath);
-                Glide.with(InfraActivity.this).load(file_tds).into(binding.ivTds);
+                file_ro_plant = new File(FilePath);
+                Glide.with(InfraActivity.this).load(file_ro_plant).into(binding.ivTds);
 
             } else if (resultCode == RESULT_CANCELED) {
                 binding.ivTds.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));

@@ -489,7 +489,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
                 Utils.customStudentSyncSuccessAlert(StudentsAttendActivity.this, getResources().getString(R.string.app_name),
                         getString(R.string.cls_mas_syn));
             } else {
-                Utils.customErrorAlert(StudentsAttendActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_insts));
+                Utils.customErrorAlert(StudentsAttendActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_class));
             }
         } catch (Exception e) {
             e.printStackTrace();

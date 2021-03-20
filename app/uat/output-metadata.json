@@ -4,14 +4,14 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.cgg.twdinspection",
+  "applicationId": "com.cgg.twdinspection.uat",
   "variantName": "processUatResources",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 4,
-      "versionName": "1.0",
+      "versionCode": 5,
+      "versionName": "2.0",
       "outputFile": "app-uat.apk"
     }
   ]

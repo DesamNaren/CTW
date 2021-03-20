@@ -81,7 +81,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     String FilePath;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
     File file_storeroom, file_sick_room, file_playGround, file_diningHall,
-            file_dormitory, file_mainBulding, file_toilet, file_kitchen, file_classroom, file_tds, file_menu, file_officer;
+            file_dormitory, file_mainBulding, file_toilet, file_kitchen, file_classroom, file_ro_plant, file_menu, file_officer;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -199,7 +199,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                             }
 
                             if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.RO_PLANT)) {
-                                file_tds = new File(uploadPhotos.get(z).getPhoto_path());
+                                file_ro_plant = new File(uploadPhotos.get(z).getPhoto_path());
                             }
                             if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.MENU)) {
                                 file_menu = new File(uploadPhotos.get(z).getPhoto_path());

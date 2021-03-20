@@ -79,7 +79,7 @@ public class ReportsInfraActivity extends BaseActivity {
 
             if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
                 for (int z = 0; z < reportData.getPhotos().size(); z++) {
-                    if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("TDS.png")) {
+                    if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("ROPlant.png")) {
 
                         binding.pbar.setVisibility(View.VISIBLE);
 

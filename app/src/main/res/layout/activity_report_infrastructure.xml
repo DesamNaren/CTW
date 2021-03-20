@@ -185,9 +185,9 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:checked="@{inspData.drinkingWaterSource.equalsIgnoreCase(`RO Plant`)}"
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
+                                        android:checked="@{inspData.drinkingWaterSource.contains(`RO Plant`)}"
                                         android:text="@string/ro_plant" />
 
                                     <CheckBox
@@ -195,7 +195,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:checked="@{inspData.drinkingWaterSource.equalsIgnoreCase(`Open well`)}"
+                                        android:checked="@{inspData.drinkingWaterSource.contains(`Open well`)}"
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/open_well" />
@@ -205,7 +205,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:checked="@{inspData.drinkingWaterSource.equalsIgnoreCase(`Bore well`)}"
+                                        android:checked="@{inspData.drinkingWaterSource.contains(`Bore well`)}"
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/bore_well" />
@@ -215,7 +215,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:checked="@{inspData.drinkingWaterSource.equalsIgnoreCase(`Municipal / GP Tap`)}"
+                                        android:checked="@{inspData.drinkingWaterSource.contains(`Municipal / GP Tap`)}"
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/municipal" />
@@ -226,7 +226,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:checked="@{inspData.drinkingWaterSource.equalsIgnoreCase(`Hand pump`)}"
+                                        android:checked="@{inspData.drinkingWaterSource.contains(`Hand pump`)}"
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/hand_pump" />
