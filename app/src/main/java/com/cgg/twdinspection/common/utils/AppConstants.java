@@ -184,4 +184,7 @@ public class AppConstants {
     public static String SAMPLE2;
 
     public static String SAMPLE4;
+
+
+    public static String SAMPLE6;
 }
