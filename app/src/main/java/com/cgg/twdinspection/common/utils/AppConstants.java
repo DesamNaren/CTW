@@ -182,4 +182,5 @@ public class AppConstants {
     public static final String OFFLINE_LPG = "lpg_godown";
     public static final String MPIN = "MPIN";
     public static final String SAMPLE2 = "SAMPLE2";
+    public static final String SAMPLE4 = "SAMPLE4";
 }
