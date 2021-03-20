@@ -181,5 +181,5 @@ public class AppConstants {
     public static final String OFFLINE_PETROL = "petrol_godown";
     public static final String OFFLINE_LPG = "lpg_godown";
     public static final String MPIN = "MPIN";
-    public static final String SAMPLE = "SAMPLE";
+    public static final String SAMPLE2 = "SAMPLE2";
 }
